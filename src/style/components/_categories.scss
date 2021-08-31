@@ -1,0 +1,19 @@
+.categories {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  padding: 4rem 2rem;
+
+  div {
+    border-radius: 4px;
+    background-color: $primary;
+    padding: 2rem;
+    color: $very-light-grey;
+    cursor: pointer;
+
+    .icon {
+      width: 10rem;
+    }
+  }
+}
