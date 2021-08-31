@@ -2,26 +2,18 @@ import React from "react";
 
 // import dog from "../icons/dog1.png";
 
+const iconNames = ["dog", "cat", "crow", "fish", "dragon"];
+
 const Categories = () => {
-  return (
-    <div className="container categories">
-      <div>
-        <i class="fas fa-dog fa-3x"></i>
+  const renderButtons = iconNames.map((item) => {
+    return (
+      <div key={item}>
+        <i className={`fas fa-${item} fa-3x`}></i>
       </div>
-      <div>
-        <i class="fas fa-cat fa-3x"></i>
-      </div>
-      <div>
-        <i class="fas fa-crow fa-3x"></i>
-      </div>
-      <div>
-        <i class="fas fa-fish fa-3x"></i>
-      </div>
-      <div>
-        <i class="fas fa-dragon fa-3x"></i>
-      </div>
-    </div>
-  );
+    );
+  });
+
+  return <div className="container categories">{renderButtons}</div>;
 };
 
 export default Categories;
