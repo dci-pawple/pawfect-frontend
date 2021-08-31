@@ -2,7 +2,8 @@ import React from 'react'
 
 const PetCard = () => {
     return (
-        <div>
+        <div className="pet-card-container">
+            <h1>PET CARD</h1>
             
         </div>
     )
