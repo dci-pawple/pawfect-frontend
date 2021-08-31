@@ -1,5 +1,4 @@
-.card__container {
-   
+.card {
     background-color: rgba(180, 175, 175, 0.541);
     margin: 0 auto;
     display: grid;
@@ -9,6 +8,8 @@
 
     &__image {
         background-image: url('../../images/charles-deluvio-pOUA8Xay514-unsplash.jpg');
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
     }
 
     &__content {
@@ -20,6 +21,10 @@
     &__title {
 
     }
+    &__like--icon {
+        width: 2rem;
+        height: 2rem;
+    }
     &__description {
 
     }
@@ -27,7 +32,8 @@
 
     }
     &__location--icon {
-
+        width: 2rem;
+        height: 2rem;
     }
     &__location--name {
 
