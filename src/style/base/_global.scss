@@ -17,6 +17,11 @@ body {
     line-height: 1;
 }
 
+a, a:visited {
+  color: $very-dark-grey;
+  text-decoration: none;
+}
+
 
 footer,
 header,

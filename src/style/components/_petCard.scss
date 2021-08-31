@@ -1,0 +1,36 @@
+.card__container {
+   
+    background-color: rgba(180, 175, 175, 0.541);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 300px 1fr auto;
+    border-radius: 20px;
+
+    &__image {
+        background-image: url('../../images/charles-deluvio-pOUA8Xay514-unsplash.jpg');
+    }
+
+    &__content {
+        
+    }
+    &__content--top {
+
+    }
+    &__title {
+
+    }
+    &__description {
+
+    }
+    &__location {
+
+    }
+    &__location--icon {
+
+    }
+    &__location--name {
+
+    }
+    
+}
