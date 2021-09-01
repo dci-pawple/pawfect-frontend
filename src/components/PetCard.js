@@ -27,8 +27,7 @@ const PetCard = ({src}) => {
                         <p>Berlin, Germany</p>
                     </div>
                 </div>  
-            </div> 
-                 
+            </div>           
         </a>
     )
 }
