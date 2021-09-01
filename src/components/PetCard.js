@@ -4,8 +4,8 @@ import { Heart, Location } from '../icons/icons'
 
 const PetCard = () => {
     return (
-        <div className="container">
-        {/* eslint-disable-next-line */}
+        // <div className="container">
+        //eslint-disable-next-line
         <a href="#" className="card">
             <div className="card__image">
                 {/* <img src={Dog1} alt="dog wearing a rainjacket"/> */}
@@ -31,7 +31,7 @@ const PetCard = () => {
                  </div>
             </div>       
         </a>
-        </div>
+        /* </div> */
     )
 }
 

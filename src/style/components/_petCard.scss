@@ -1,17 +1,30 @@
+.cards {
+     display: grid;
+     gap: 1rem;   
+}
+
+button {
+    outline: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
 .card {
     background-color: rgba(180, 175, 175, 0.541);
     margin: 0 auto;
-    // width: 30vw;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 300px 1fr auto;
     border-radius: 20px;
 
-    button {
-        outline: 0;
-        border: none;
-        background: transparent;
+    // DESKTOP:
+    @media (min-width: 56em) {
+        grid-template-columns: 300px repeat(2, 1fr);
+        grid-template-rows: 1fr auto;
     }
+
+    
 
     &__image {
         grid-column: 1 / 3;
@@ -20,6 +33,11 @@
         background-size: cover;
         background-position: center center;
         border-radius: 20px;
+
+        @media (min-width: 56em) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
     }
 
     &__content {
