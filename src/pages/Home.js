@@ -10,10 +10,10 @@ const Home = () => {
       <Categories />
       <div className="container">
         <h2>Newest pets</h2>
-      <CarouselPets/>
+        <CarouselPets />
       </div>
     </>
-  )
+  );
 };
 
 export default Home;
