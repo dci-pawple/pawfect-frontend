@@ -13,9 +13,9 @@ const PetCard = () => {
             <div className="card__content">
                 <div className="card__content--top">
                     <div className="card__title">Lily</div>
-                    <div className="card__like--icon">
+                    <button className="card__like--icon">
                         <Heart/>
-                    </div>
+                    </button>
                 </div>
                 <div className="card__description">
                     <p>Female</p>
@@ -23,9 +23,9 @@ const PetCard = () => {
                 </div>
             </div> 
             <div className="card__location">
-                 <div className="card__location--icon">
+                 <button className="card__location--icon">
                     <Location/>
-                 </div>
+                 </button>
                 <div className="card__location--name">
                       <p>Berlin, Germany</p>
                  </div>

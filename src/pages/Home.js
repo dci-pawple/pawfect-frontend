@@ -1,11 +1,11 @@
 import React from "react";
-import PetCard from "../components/PetCard";
+import CarouselPets from "../components/CarouselPets";
 
 const Home = () => {
   return (
     <>
       <div>HomePAGE</div>
-          <PetCard/>
+          <CarouselPets/>
       </>
     )
 };

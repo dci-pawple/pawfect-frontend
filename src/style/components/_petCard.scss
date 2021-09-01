@@ -1,11 +1,17 @@
 .card {
     background-color: rgba(180, 175, 175, 0.541);
     margin: 0 auto;
-    width: 30vw;
+    // width: 30vw;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 300px 1fr auto;
     border-radius: 20px;
+
+    button {
+        outline: 0;
+        border: none;
+        background: transparent;
+    }
 
     &__image {
         grid-column: 1 / 3;
@@ -19,30 +25,45 @@
     &__content {
         grid-column:  1 / 3;
         grid-row: 2 / 3;
+        padding: 1.5rem;
+
     }
-    // &__content--top {
+    &__content--top {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        line-height: 1.1;
 
-    // }
-    // &__title {
-
-    // }
+    }
     &__like--icon {
         width: 1.3rem;
         height: 1.3rem;
     }
     &__description {
-
+        font-size: 1rem;
+        line-height: 1.5;
     }
+
     &__location {
-        // display: flex;
-        // justify-content: space-between;
+        padding: 1.5rem;
+        display: flex;                      
+        font-size: .9rem;
+        line-height: 1;
     }
     &__location--icon {
-        width: 1.3rem;
-        height: 1.3rem;
+        grid-column: 1/2;
+        grid-row: 3/4;
+        width: .9rem;
+        height: .9rem;
     }
     &__location--name {
-
+        grid-column: 2/3;
+        grid-row: 3/4;
+        padding-left: .9rem;
     }
     
 }
