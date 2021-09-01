@@ -5,6 +5,13 @@
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
+    
+    button {
+        outline: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      }
 
     &__image {
         aspect-ratio: 1;
@@ -51,7 +58,6 @@
     &__location--icon {
         width: .9rem;
         height: .9rem;
-
        
     }
     &__location--name {
