@@ -1,14 +1,24 @@
 .rec {
     .rec-carousel-item {
         margin: 1rem;
-        // height: 20rem;
     }
-    .rec-arrow {
+    /// Carousel Arrow styling: 
+    .rec-arrow, 
+    .rec-arrow-right,
+    .rec-arrow-left {
       background-color: $primary;
-      border-radius: 50%;
-      &:hover {
-        background-color: lighten($primary, 10%);
-      }
+      border-radius: 15%;
+    }
+
+    .khvUfi:hover:enabled, .khvUfi:focus:enabled {
+      background-color: $primary-light;
+    }
+
+    //Pagination Styling (3 dots under the Carousel)
+
+    .jJKuoL:hover, .jJKuoL:focus,
+    .gQIqMI:hover, .gQIqMI:focus {
+      box-shadow: 0 0 1px 3px lighten($primary, 10%);
     }
 
     .ejXxNI {
@@ -16,6 +26,7 @@
       box-shadow: 0 0 1px 3px $very-dark-grey;
 
       &:hover {
+        background-color: lighten($primary, 10%);
         box-shadow: 0 0 1px 3px lighten($primary, 10%);
       }
     }
@@ -24,13 +35,11 @@
         background-color: $primary;
         box-shadow: 0 0 1px 3px $primary-light;
     }
-
-    // .rec-item-wrapper {
-    //   height: 100%;
-    // }
     .rec-pagination {
       @media (max-width: 710px) {
         display: none;
       }
     }
+
+    
   }
