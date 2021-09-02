@@ -1,45 +1,46 @@
 .rec {
-    .rec-carousel-item {
-        margin: 1rem;
-    }
-    /// Carousel Arrow styling: 
-    .rec-arrow, 
-    .rec-arrow-right,
-    .rec-arrow-left {
-      background-color: $primary;
-      border-radius: 15%;
-    }
+  .rec-carousel-item {
+    margin: 1rem;
+  }
+  /// Carousel Arrow styling:
+  .rec-arrow,
+  .rec-arrow-right,
+  .rec-arrow-left {
+    background-color: $primary;
+    border-radius: 10px;
+  }
 
-    .khvUfi:hover:enabled, .khvUfi:focus:enabled {
-      background-color: $primary-light;
-    }
+  .khvUfi:hover:enabled,
+  .khvUfi:focus:enabled {
+    background-color: $primary-light;
+  }
 
-    //Pagination Styling (3 dots under the Carousel)
+  //Pagination Styling (3 dots under the Carousel)
 
-    .jJKuoL:hover, .jJKuoL:focus,
-    .gQIqMI:hover, .gQIqMI:focus {
+  .jJKuoL:hover,
+  .jJKuoL:focus,
+  .gQIqMI:hover,
+  .gQIqMI:focus {
+    box-shadow: 0 0 1px 3px lighten($primary, 10%);
+  }
+
+  .ejXxNI {
+    background-color: $primary;
+    box-shadow: 0 0 1px 3px $very-dark-grey;
+
+    &:hover {
+      background-color: lighten($primary, 10%);
       box-shadow: 0 0 1px 3px lighten($primary, 10%);
     }
-
-    .ejXxNI {
-      background-color: $primary;
-      box-shadow: 0 0 1px 3px $very-dark-grey;
-
-      &:hover {
-        background-color: lighten($primary, 10%);
-        box-shadow: 0 0 1px 3px lighten($primary, 10%);
-      }
-    }
-
-    .jJKuoL {
-        background-color: $primary;
-        box-shadow: 0 0 1px 3px $primary-light;
-    }
-    .rec-pagination {
-      @media (max-width: 710px) {
-        display: none;
-      }
-    }
-
-    
   }
+
+  .jJKuoL {
+    background-color: $primary;
+    box-shadow: 0 0 1px 3px $primary-light;
+  }
+  .rec-pagination {
+    @media (max-width: 710px) {
+      display: none;
+    }
+  }
+}
