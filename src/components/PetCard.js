@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heart, Location } from '../icons/icons'
+import { Heart, Location, FemaleGender } from '../icons/icons'
 import {Link} from 'react-router-dom'
 
 const PetCard = ({src}) => {
@@ -10,7 +10,13 @@ const PetCard = ({src}) => {
             </div> 
             <div className="card__content">
                 <div className="card__content--top">
-                    <div className="card__title">Lily</div>
+                    <div className="card__name-with-gender">
+                        <div className="card__title">Lily</div>
+                        <div className="card__gender--icon">
+                            <FemaleGender/>
+                        </div>
+                    </div>
+                    
                     <button className="card__like--icon">
                         <Heart/>
                     </button>
