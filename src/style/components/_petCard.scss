@@ -1,18 +1,31 @@
 
 .card {
-    background-color: rgba(180, 175, 175, 0.541);
+    background-color: rgba(211, 206, 206, 0.541);
     margin: 0 auto;
     border-radius: 15px;
+    box-shadow: 0 5px 8px -9px rgba(0, 0, 0, 0.75);
+    // max-width: 20vw;
     display: flex;
     justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    transition: .1s ease-in-out;
+    
+    button {
+        outline: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
 
     &__image {
-        aspect-ratio: 1;
+        flex: 3;
         border-radius: 15px;
+        height: 10em;
 
         img {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: 15px;
             background-size: cover;
             background-position: center center;
@@ -20,11 +33,18 @@
     }
 
     &__content {
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
         padding: 1.5rem;
     }
     &__content--top {
+        width: 100%;
         display: flex;
         justify-content: space-between;
+
     }
     &__title {
         font-size: 1.75rem;
@@ -33,7 +53,8 @@
         line-height: 1.1;
 
     }
-    &__like--icon {
+    &__like--icon, 
+    &__gender--icon {
         width: 1.3rem;
         height: 1.3rem;
     }
@@ -42,16 +63,23 @@
         line-height: 1.5;
     }
 
+    &__name-with-gender {
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__location {
-        padding: 1.5rem 0;
-        display: flex;                      
+        padding: 1.5rem 0;          
         font-size: .9rem;
         line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     &__location--icon {
         width: .9rem;
         height: .9rem;
-
        
     }
     &__location--name {

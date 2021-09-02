@@ -8,13 +8,22 @@ import Dog4 from '../dummy/images/charles-deluvio-pOUA8Xay514-unsplash.jpg'
 
 
 const CarouselPets = () => {
+    //for phone use a prop "verticalMode"
     return (
-        <Carousel itemsToShow={3}>
+        <Carousel itemsToShow={3} itemsToScroll={2}>
             <PetCard src={Dog1}/>
             <PetCard src={Dog2}/>
             <PetCard src={Dog3}/>
             <PetCard src={Dog4}/>
             <PetCard src={Dog1}/>
+            <PetCard src={Dog2}/>
+            <PetCard src={Dog3}/>
+            <PetCard src={Dog4}/>
+            <PetCard src={Dog4}/>
+            <PetCard src={Dog1}/>
+            <PetCard src={Dog2}/>
+            <PetCard src={Dog3}/>
+            <PetCard src={Dog4}/>
         </Carousel>
     )
 }
