@@ -1,10 +1,10 @@
 import React from 'react'
 import { Heart, Location } from '../icons/icons'
+import {Link} from 'react-router-dom'
 
 const PetCard = ({src}) => {
     return (
-        //eslint-disable-next-line
-        <a href="#" className="card">
+        <Link to="#" className="card">
             <div className="card__image">
                 <img src={src} alt="dog portrait"/>
             </div> 
@@ -20,15 +20,15 @@ const PetCard = ({src}) => {
                     <p>1 year old</p>
                 </div>
                 <div className="card__location">
-                    <button className="card__location--icon">
+                    <div className="card__location--icon">
                         <Location/>
-                    </button>
+                    </div>
                     <div className="card__location--name">
-                        <p>Berlin, Germany</p>
+                        <p>Berlin, Germany (1,5km)</p>
                     </div>
                 </div>  
             </div>           
-        </a>
+        </Link>
     )
 }
 
