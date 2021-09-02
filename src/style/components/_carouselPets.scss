@@ -1,0 +1,36 @@
+.rec {
+    .rec-carousel-item {
+        margin: 1rem;
+        // height: 20rem;
+    }
+    .rec-arrow {
+      background-color: $primary;
+      border-radius: 50%;
+      &:hover {
+        background-color: lighten($primary, 10%);
+      }
+    }
+
+    .ejXxNI {
+      background-color: $primary;
+      box-shadow: 0 0 1px 3px $very-dark-grey;
+
+      &:hover {
+        box-shadow: 0 0 1px 3px lighten($primary, 10%);
+      }
+    }
+
+    .jJKuoL {
+        background-color: $primary;
+        box-shadow: 0 0 1px 3px $primary-light;
+    }
+
+    // .rec-item-wrapper {
+    //   height: 100%;
+    // }
+    .rec-pagination {
+      @media (max-width: 710px) {
+        display: none;
+      }
+    }
+  }
