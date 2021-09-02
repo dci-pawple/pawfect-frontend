@@ -19,6 +19,11 @@ const CarouselPets = () => {
             <PetCard src={Dog2}/>
             <PetCard src={Dog3}/>
             <PetCard src={Dog4}/>
+            <PetCard src={Dog4}/>
+            <PetCard src={Dog1}/>
+            <PetCard src={Dog2}/>
+            <PetCard src={Dog3}/>
+            <PetCard src={Dog4}/>
         </Carousel>
     )
 }
