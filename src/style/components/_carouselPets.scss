@@ -1,36 +1,46 @@
 .rec {
-    .rec-carousel-item {
-        margin: 1rem;
-        // height: 20rem;
-    }
-    .rec-arrow {
-      background-color: $primary;
-      border-radius: 50%;
-      &:hover {
-        background-color: lighten($primary, 10%);
-      }
-    }
+  .rec-carousel-item {
+    margin: 1rem;
+  }
+  /// Carousel Arrow styling:
+  .rec-arrow,
+  .rec-arrow-right,
+  .rec-arrow-left {
+    background-color: $primary;
+    border-radius: 10px;
+  }
 
-    .ejXxNI {
-      background-color: $primary;
-      box-shadow: 0 0 1px 3px $very-dark-grey;
+  .khvUfi:hover:enabled,
+  .khvUfi:focus:enabled {
+    background-color: $primary-light;
+  }
 
-      &:hover {
-        box-shadow: 0 0 1px 3px lighten($primary, 10%);
-      }
-    }
+  //Pagination Styling (3 dots under the Carousel)
 
-    .jJKuoL {
-        background-color: $primary;
-        box-shadow: 0 0 1px 3px $primary-light;
-    }
+  .jJKuoL:hover,
+  .jJKuoL:focus,
+  .gQIqMI:hover,
+  .gQIqMI:focus {
+    box-shadow: 0 0 1px 3px lighten($primary, 10%);
+  }
 
-    // .rec-item-wrapper {
-    //   height: 100%;
-    // }
-    .rec-pagination {
-      @media (max-width: 710px) {
-        display: none;
-      }
+  .ejXxNI {
+    background-color: $primary;
+    box-shadow: 0 0 1px 3px $very-dark-grey;
+
+    &:hover {
+      background-color: lighten($primary, 10%);
+      box-shadow: 0 0 1px 3px lighten($primary, 10%);
     }
   }
+
+  .jJKuoL {
+    background-color: $primary;
+    box-shadow: 0 0 1px 3px $primary-light;
+  }
+  .rec-pagination {
+    @media (max-width: 710px) {
+      display: none;
+    }
+  }
+}

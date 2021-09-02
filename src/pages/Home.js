@@ -5,6 +5,7 @@ import Categories from "../components/Categories";
 import CarouselPets from "../components/CarouselPets";
 import CommunityPreview from "../components/CommunityPreview"
 
+
 const Home = () => {
   return (
     <>
