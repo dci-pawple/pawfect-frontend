@@ -6,7 +6,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5rem;
+    padding: 1rem 10rem;
+    // padding: 1rem 0;
     transition: background 250ms ease-in;
     .site-logo {
       width: 150px;
@@ -190,6 +191,12 @@
 
 // mobile styling
 @media screen and (max-width: 960px) {
+  .navigation {
+    header {
+      padding: 1rem 5rem;
+    }
+  }
+
   .nav-list {
     color: $very-dark-grey;
     flex-direction: column;
