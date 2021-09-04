@@ -19,7 +19,7 @@ const App = () => {
           <Gallery />
         </Route>
         <Route>
-          <UserProfile path="/profile"/>
+          <UserProfile path="/user/profile"/>
         </Route>
       </Switch>
     </BrowserRouter>

@@ -11,7 +11,9 @@ const Home = () => {
       <Navbar />
       <Categories />
       <div className="container">
-        <h2>Newest pets</h2>
+        <h2>
+          Pets Available for Adoption
+        </h2>
         <CarouselPets />
       </div>
     </>
