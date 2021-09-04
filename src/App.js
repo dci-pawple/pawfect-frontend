@@ -6,6 +6,7 @@ import "./style/App.scss";
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
+import UserProfile from "./pages/UserProfile";
 
 const App = () => {
   return (
@@ -16,6 +17,9 @@ const App = () => {
         </Route>
         <Route path="/gallery">
           <Gallery />
+        </Route>
+        <Route>
+          <UserProfile path="/profile"/>
         </Route>
       </Switch>
     </BrowserRouter>
