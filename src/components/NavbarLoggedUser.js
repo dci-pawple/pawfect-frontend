@@ -4,7 +4,7 @@ import logo from "../dummy/pawfect-pink.png";
 
 export default function NavbarLoggedUser() {
     
-    let user = true;
+  let user = true;
 
   const [click, setClick] = useState(false);
   const [navbar, setNavbar] = useState(false);
@@ -115,7 +115,7 @@ export default function NavbarLoggedUser() {
                         <li className="nav__list-item">
                             
                             <Link to="/" className="nav__link nav__link--highlighted" onClick={closeMobileMenu}>
-                                Post an ad
+                                Add a pet
                                 <i class="fas fa-plus-circle"></i>
                             </Link>
                         </li>
