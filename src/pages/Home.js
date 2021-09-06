@@ -13,8 +13,6 @@ import CommunityPreview from "../components/CommunityPreview"
 const Home = () => {
   return (
     <>
-
-      <Navbar />
       <Banner />
 
       <Categories />
