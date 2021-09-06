@@ -1,8 +1,10 @@
 .carousel-container {
-  padding: 1rem;
-  margin: 2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 45vh;
+
 
   .btn__save {
     outline: none;

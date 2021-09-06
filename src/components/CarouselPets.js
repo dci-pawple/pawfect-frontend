@@ -16,7 +16,10 @@ const breakPoints = [
 const CarouselPets = () => {
     
     return (
-        <div className="carousel-container">
+        <div className="carousel-container container">
+            <h2>
+                Pets Available for adoption
+            </h2>
             <Carousel itemsToShow={3} breakPoints={breakPoints}>
                 <PetCard src={Dog1}/>
                 <PetCard src={Dog2}/>
