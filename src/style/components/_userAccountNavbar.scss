@@ -14,7 +14,8 @@
         position: relative;
         font-family: $font-text;
         letter-spacing: 2px;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        font-weight: 600;
       
         // responsible for the line under links
         &:after {

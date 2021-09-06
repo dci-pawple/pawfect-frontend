@@ -1,11 +1,14 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 import TextField from '@material-ui/core/TextField';
+// import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles, createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(1.5),
         width: '25ch',
       },
     },
@@ -13,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         width: '25ch',
+    }, 
+
+    inputLabel: {
+        color:"red",
     }
   }));
 
@@ -30,6 +37,7 @@ const EditUserProfile = () => {
         <ThemeProvider theme={theme}>
             <form className={classes.root} noValidate autoComplete="off">
                 <p>Your name and last name</p>
+                {/* <InputLabel htmlFor="my-input">Your name</InputLabel> */}
                 <TextField 
                     id="standard-basic" 
                     placeholder="First name"
@@ -43,11 +51,11 @@ const EditUserProfile = () => {
 
                     />
 
-                <p>How can you be reached?</p>
+                <p>Your phone number</p>
                 <TextField
                     placeholder="Your Phone Number"
                     id="standard-basic" 
-                    label="Last name"
+                    label="Phone number"
                     />
 
 
@@ -71,10 +79,28 @@ const EditUserProfile = () => {
                     InputLabelProps={{
                         shrink: true,
                     }}/>
-
-
             </form>
+
+            <button className="btn__post">
+                <Link to="/"  >
+                    SAVE
+                </Link>
+            </button>
+
+            <p>You may search our <Link to="/gallery">database of thousands of pets</Link> looking for forever homes. </p>
+
+            <section className="account__post-ad">
+            <p>Your current pets:</p>
+            <button className="btn__post">
+                <Link to="/"  >
+                    POST AN AD
+                    <i class="fas fa-plus-circle"></i>
+                </Link>
+            </button>
+            </section>
         </ThemeProvider>
+
+
         
     )
 }
