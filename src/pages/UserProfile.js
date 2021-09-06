@@ -4,14 +4,11 @@ import UserDetails from '../components/UserDetails'
 
 const UserProfile = () => {
     return (
-
           <div className="app-container container"> 
-            <div className="account__container">
-            <h2>User Profile</h2>
+            <div className="account__container">       
               <UserDetails/>
             </div>
-          </div>  
-
+          </div>
     )
 }
 

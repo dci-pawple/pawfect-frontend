@@ -3,25 +3,26 @@ import {Link} from 'react-router-dom'
 
 import TextField from '@material-ui/core/TextField';
 // import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles, createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles, createTheme, ThemeProvider, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1.5),
-        width: '25ch',
+const useStyles = makeStyles (theme =>
+    createStyles ({
+      root: {
+        '& > *': {
+          margin: theme.spacing (2),
+          'font-size': '1.6rem',
+          palette: {
+            primary: {
+              light: '#464646',
+              main: '#1f1f1f',
+              dark: '#000000',
+              contrastText: '#fff',
+            },
+          },
+        },
       },
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: '25ch',
-    }, 
-
-    inputLabel: {
-        color:"red",
-    }
-  }));
+    })
+  );
 
   const theme = createTheme({
     typography: {
@@ -35,73 +36,107 @@ const UserDetails = () => {
 
     return (
         <ThemeProvider theme={theme}>
+        <div className="user-form-container">
+            <h2>Update your profile:</h2>
             <form className={classes.root} noValidate autoComplete="off">
-                <p>Your name and last name</p>
-                {/* <InputLabel htmlFor="my-input">Your name</InputLabel> */}
-                <TextField 
-                    id="standard-basic" 
-                    placeholder="First name"
-                    label="First name"
-                    />
+                <div>
+                    <TextField
+                        id="standard-basic"
+                        placeholder="First name"
+                        label="First name"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                </div>
 
-                <TextField
-                    placeholder="Last name"
-                    id="standard-basic" 
-                    label="Last name"
+                <div>
+                    <TextField
+                        placeholder="Last name"
+                        id="standard-basic"
+                        label="Last name"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                </div>
 
-                    />
+                <div>
+                    <TextField
+                        placeholder="Your Phone Number"
+                        id="standard-basic"
+                        label="Phone number"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                </div>
 
-                <p>Your phone number</p>
-                <TextField
-                    placeholder="Your Phone Number"
-                    id="standard-basic" 
-                    label="Phone number"
-                    />
-
-
-                <p>Your address:</p>
-                <TextField 
-                    id="standard-basic" 
-                    placeholder="Country"
-                    label="Country"
-                    />
-                <TextField
-                    id="standard-basic" 
-                    placeholder="Street address"
-                    label="Street address"
-                    />
-                <TextField
-                    id="standard-basic" 
-                    label="ZIP code"
-                    style={{ margin: 8 }}
-                    placeholder="ZIP code"
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}/>
+                <div>
+                    <TextField
+                        id="standard-basic"
+                        placeholder="Country"
+                        label="Country"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                </div>
+                 <div>
+                     <TextField
+                        id="standard-basic"
+                        placeholder="City"
+                        label="City"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                 </div>
+                <div>
+                    <TextField
+                        id="standard-basic"
+                        placeholder="Street address"
+                        label="Street address"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                </div>
+                <div>
+                    <TextField
+                        id="standard-basic"
+                        label="ZIP code"
+                        placeholder="ZIP code"
+                        margin="normal"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                        
+                </div>
+                    <div>
+                        <TextField
+                        label="Change your e-mail"
+                        type="email"
+                        name="email"
+                        id="email"
+                        variant="outlined"
+                        color="secondary"
+                        />
+                </div>
             </form>
+            <div className="button-container">
+                <button className="btn__post">
+                    <Link to="/">
+                        SAVE CHANGES
+                    </Link>
+                </button>
 
-            <button className="btn__post">
-                <Link to="/"  >
-                    SAVE CHANGES
-                </Link>
-            </button>
+                {/* <p>You may search our <Link to="/gallery">database of pets</Link> looking for homes. </p> */}
 
-            <p>You may search our <Link to="/gallery">database of thousands of pets</Link> looking for forever homes. </p>
-
-            <section className="account__post-ad">
-            <p>Your current pets:</p>
-            <button className="btn__post">
-                <Link to="/"  >
-                    POST AN AD
+                <button className="btn__post">
+                    <Link to="/"  >
+                         POST AN AD
+                     </Link>
                     <i class="fas fa-plus-circle"></i>
-                </Link>
-            </button>
-            </section>
+                 </button>
+            </div>
+        </div>
         </ThemeProvider>
 
-
-        
     )
 }
 
