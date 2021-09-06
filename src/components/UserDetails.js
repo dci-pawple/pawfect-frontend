@@ -37,7 +37,7 @@ const UserDetails = () => {
     return (
         <ThemeProvider theme={theme}>
         <div className="user-form-container">
-            <h2>Update your profile:</h2>
+            <h2>Your profile:</h2>
             <form className={classes.root} noValidate autoComplete="off">
                 <div>
                     <TextField
