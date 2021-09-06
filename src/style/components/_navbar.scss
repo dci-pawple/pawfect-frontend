@@ -1,128 +1,188 @@
 .navigation {
-  // just for now, will be adjusted later
-  height: 120vh;
-  background-image: url(https://images.unsplash.com/photo-1557495235-340eb888a9fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2602&q=80);
-  background-position: center;
-  background-size: cover;
-}
-
-header {
-  position: fixed;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 3rem;
-  transition: background 250ms ease-in;
-}
-
-.nav-active {
-  background: #fff;
-}
-
-.site-logo {
-  width: 150px;
-}
-
-.nav__list {
-  display: flex;
-  &-item {
-    list-style-type: none;
-  }
-}
-
-.search {
-  position: relative;
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
-  transition: 0.3s;
-  overflow: hidden;
-
-  .icon {
-    position: absolute;
-    top: 0;
+  header {
+    position: fixed;
     left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 10rem;
+    // padding: 1rem 0;
+    transition: background 250ms ease-in;
+    .site-logo {
+      width: 150px;
+    }
+  }
+
+  .nav-active {
+    background: #fff;
+  }
+
+  .nav-list {
+    display: flex;
+
+    .list-item {
+      list-style-type: none;
+    }
+  }
+
+  .search {
+    position: relative;
     width: 35px;
     height: 35px;
     border-radius: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    cursor: pointer;
-    background-color: $light-grey;
+    transition: 0.3s;
+    overflow: hidden;
+    align-self: center;
 
-    .icon:hover {
-      transform: scaleX(1.2);
-    }
-  }
-
-  .icon-active {
-    background-color: transparent;
-  }
-
-  .input {
-    position: relative;
-    width: 300px;
-    height: 40px;
-    left: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    input {
-      font-family: $font-text;
+    .icon {
       position: absolute;
-      bottom: 25%;
-      width: 100%;
-      border: none;
-      outline: none;
-      font-size: 0.9rem;
+      top: 0;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      border-radius: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer;
       background-color: $light-grey;
-      letter-spacing: 1px;
+    }
+
+    .icon-active {
+      background-color: transparent;
+    }
+
+    .input {
+      position: relative;
+      width: 180px;
+      height: 40px;
+      left: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        font-family: $font-text;
+        position: absolute;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: $light-grey;
+        letter-spacing: 1px;
+      }
+    }
+    .submit {
+      border: none;
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      cursor: pointer;
     }
   }
-  .submit {
-    position: absolute;
-    bottom: 25%;
-    right: 15px;
-    cursor: pointer;
-  }
-}
 
-.search-active {
-  width: 360px;
-  background-color: $light-grey;
-}
-
-.nav__link {
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-  padding: 0.5rem;
-  position: relative;
-  text-transform: uppercase;
-  font-family: $font-text;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-
-  // responsible for the line under links
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 1rem;
-    right: 1rem;
-    height: 2px;
-    background-color: black;
-    transform: scaleX(0);
-    transition: transform 150ms ease-in-out;
+  .search-active {
+    width: 260px;
+    background-color: $light-grey;
   }
 
-  &:hover::after {
-    transform: scaleX(1);
+  .nav-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    margin: 1rem;
+    position: relative;
+    font-family: $font-text;
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+
+    // responsible for the line under links
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 1rem;
+      right: 1rem;
+      height: 2px;
+      background-color: black;
+      transform: scaleX(0);
+      transition: transform 150ms ease-in-out;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  .user {
+    position: relative;
+    display: flex;
+    align-self: center;
+
+    .user-btn {
+      width: 80px;
+      height: 40px;
+      background-color: $light-grey;
+      box-shadow: 0px 0px 7px rgb(173, 173, 173);
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin: 0 1rem;
+      outline: none;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .fa-user-circle {
+        transform: scale(2.5);
+      }
+
+      .profile-pic {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 35px;
+      margin: 1rem;
+      border-radius: 10px;
+      background-color: #ffffff;
+      min-width: 140px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      overflow: hidden;
+
+      .drop-link {
+        position: relative;
+        width: 100%;
+        text-decoration: none;
+        color: inherit;
+        display: inline-block;
+        padding: 1rem;
+        font-family: $font-text;
+        letter-spacing: 1px;
+        font-size: 1.4rem;
+
+        &:hover {
+          background-color: $very-light-grey;
+        }
+      }
+    }
+    &:hover .dropdown {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 
@@ -133,17 +193,19 @@ header {
 
 // mobile styling
 @media screen and (max-width: 960px) {
-  .nav__link {
-    font-size: 0.7rem;
+  .navigation {
+    header {
+      padding: 1rem 5rem;
+    }
   }
 
-  .nav__list {
-    color: rgb(197, 197, 197);
+  .nav-list {
+    color: $very-dark-grey;
     flex-direction: column;
     width: 100%;
     height: fit-content;
     position: absolute;
-    top: 45px;
+    top: 55px;
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
@@ -151,28 +213,34 @@ header {
     text-align: center;
   }
 
-  .nav__list.active {
-    background-color: rgba(68, 68, 68, 0.562);
+  .active {
+    background-color: transparent;
     height: fit-content;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
   }
-  .nav__link {
+
+  .nav-link {
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem;
     width: 50%;
     margin: 0.2rem;
   }
 
   .menu-icon {
-    display: inline-block;
-    font-size: 1.5rem;
+    display: block;
+    transform: scale(1.2);
     cursor: pointer;
   }
+
   .site-logo {
     width: 110px;
   }
 
-  
+
+  .user {
+    padding: 2rem;
+  }
+
 }

@@ -1,12 +1,15 @@
 .categories {
+  max-width: 800px;
+  margin: -7.5rem auto 10rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 10px;
+  background-color: $very-light-grey;
   display: flex;
   justify-content: space-around;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
 
   &-btn {
-    border-radius: 6px;
+    border-radius: 10px;
     background-color: $primary;
     padding: 2rem;
     color: $very-light-grey;

@@ -14,7 +14,11 @@ const Categories = () => {
     );
   });
 
-  return <div className="container categories">{renderButtons}</div>;
+  return (
+    <div className="container">
+      <div className="categories">{renderButtons}</div>
+    </div>
+  );
 };
 
 export default Categories;
