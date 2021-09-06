@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./style/App.scss";
-import {ThemeProvider, createTheme} from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
@@ -12,24 +12,25 @@ import Navbar from "./components/Navbar";
 
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
+import CreateAd from "./pages/CreateAd";
+import Navbar from "./components/Navbar";
 
-
-const theme =createTheme({
-palette: {
+const theme = createTheme({
+  palette: {
     primary: {
-      light: '#ff9e9a',
-      main: '#f76c6c',
-      dark: '#bf3a41',
-      contrastText: '#fff',
+      light: "#ff9e9a",
+      main: "#f76c6c",
+      dark: "#bf3a41",
+      contrastText: "#fff",
     },
-     secondary: {
-      light: '#464646',
-      main: '#1f1f1f',
-      dark: '#000000',
-      contrastText: '#fff',
+    secondary: {
+      light: "#464646",
+      main: "#1f1f1f",
+      dark: "#000000",
+      contrastText: "#fff",
     },
   },
-})
+});
 
 
 const App = () => {
@@ -40,27 +41,32 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <BrowserRouter>
-      <Navbar/>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        {/* tried this out to see if we can search input */}
-        <Route path="/gallery/">
-          <Gallery search={search} />
-        </Route>
-        <Route path="/registration">
-          <Registration />
-        </Route>
-         <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/user/profile">
-          <UserProfile/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+
+      <BrowserRouter>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          {/* tried this out to see if we can search input */}
+          <Route path="/gallery/">
+            <Gallery search={search} />
+          </Route>
+          <Route path="/registration">
+            <Registration />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/createad">
+            <CreateAd />
+          </Route>
+          <Route path="/user/profile">
+            <UserProfile/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+
     </ThemeProvider>
   );
 };

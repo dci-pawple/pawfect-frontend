@@ -6,18 +6,17 @@ import CarouselPets from "../components/CarouselPets";
 
 import Banner from "../components/Banner";
 
-import CommunityPreview from "../components/CommunityPreview"
-
-
+import CommunityPreview from "../components/CommunityPreview";
 
 const Home = () => {
   return (
-    <>
+    <div>
       <Banner />
       <Categories />
       <CarouselPets />
       <CommunityPreview/>
-    </>
+    </div>
+
   );
 };
 
