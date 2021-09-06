@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
 import '@fontsource/roboto'
 import { Button, TextField } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
+
 
 /**
  * Styling the form (Material-ui)

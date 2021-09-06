@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../dummy/pawfect-pink.png";
+import profilepic from "../dummy/images/profile-example.png";
 
 export default function Navbar() {
   const [click, setClick] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [active, setActive] = useState(false);
   const [search, setSearch] = useState("");
+  const [login, setLogin] = useState(false);
 
   const changeBackground = () => {
     // console.log(window.scrollY);
@@ -53,56 +55,89 @@ export default function Navbar() {
             onClick={backToTop}
           />
         </Link>
-        {/* <li className="nav__list-item">
-          <form action="/search/">
-            <input
-              type="text"
-              name="search"
-              placeholder="search"
-              className="nav__link nav__link--input"
-            />
-          </form>
-        </li> */}
         <nav>
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"} />
           </div>
-          <ul className={click ? "nav__list active" : "nav__list"}>
-            <li className="nav__list-item">
-              <Link to="/" className="nav__link" onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-            <li className="nav__list-item">
-              <Link to="/" className="nav__link" onClick={closeMobileMenu}>
+          <ul className={click ? "nav-list active" : "nav-list"}>
+            <li className="list-item">
+              <Link
+                to="/community"
+                className="nav-link"
+                onClick={closeMobileMenu}
+              >
                 Community
               </Link>
             </li>
-            {/* <li>
-              <i class="fas fa-search"></i>
-            </li> */}
-            <li
-              className={`search nav__list-item ${
-                active ? "search-active" : ""
-              }`}
-            >
+            <li className={`search list-item ${active ? "search-active" : ""}`}>
               <div
                 onClick={toggleClass}
                 className={active ? "icon" : "icon icon-active"}
               >
                 <i class="fas fa-search"></i>
               </div>
-              <div className="input">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+              <form action="/gallery/">
+                <div className="input">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+                <span className={active ? "submit" : ""} onClick={handleSubmit}>
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </form>
+            </li>
+            <li className="user list-item">
+              <button className="user-btn">
+                <i className="fas fa-bars" />
+                {setLogin ? (
+                  <i class="fas fa-user-circle"></i>
+                ) : (
+                  // need to change this to users picture
+                  <img src={profilepic} alt="profile" className="profile-pic" />
+                )}
+              </button>
+
+              <div className="dropdown">
+                {setLogin ? (
+                  <div className="user-logout">
+                    <Link
+                      to="/login"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      Register
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="user-login">
+                    <Link
+                      to="/profile"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      Go to profile
+                    </Link>
+                    <Link
+                      to="/new-ad"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      Place an ad
+                    </Link>
+                  </div>
+                )}
               </div>
-              <span className={active ? "submit" : ""} onClick={handleSubmit}>
-                <i class="fas fa-arrow-right"></i>
-              </span>
             </li>
           </ul>
         </nav>

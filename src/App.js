@@ -2,12 +2,13 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./style/App.scss";
+import {ThemeProvider, createTheme} from '@material-ui/core/styles';
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
-import {ThemeProvider, createTheme} from '@material-ui/core/styles';
+
 
 const theme =createTheme({
 palette: {
@@ -25,7 +26,6 @@ palette: {
     },
   },
 })
-
 
 const App = () => {
   return (
