@@ -9,7 +9,7 @@ import CommunityPreview from "../components/CommunityPreview";
 
 const Home = () => {
   return (
-    <div className="app-container">
+    <div>
       <Banner />
       <Categories />
       <div className="container">
