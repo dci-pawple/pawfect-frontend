@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 
 import UserProfile from "./pages/UserProfile";
-import Navbar from "./components/Navbar";
 
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
@@ -32,7 +31,6 @@ const theme = createTheme({
   },
 });
 
-
 const App = () => {
   //need this to get search input
   const params = new URLSearchParams(window.location.search);
@@ -41,7 +39,6 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-
       <BrowserRouter>
         <Navbar />
         <Switch>
@@ -62,11 +59,10 @@ const App = () => {
             <CreateAd />
           </Route>
           <Route path="/user/profile">
-            <UserProfile/>
+            <UserProfile />
           </Route>
         </Switch>
       </BrowserRouter>
-
     </ThemeProvider>
   );
 };
