@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     }
   });
 
-const EditUserProfile = () => {
+const UserDetails = () => {
 
       const classes = useStyles();
 
@@ -105,4 +105,4 @@ const EditUserProfile = () => {
     )
 }
 
-export default EditUserProfile
+export default UserDetails

@@ -1,16 +1,17 @@
 import React from 'react'
-import EditUserProfile from '../components/EditUserProfile'
-import NavbarLoggedUser from '../components/NavbarLoggedUser'
-import UserAccountNavbar from '../components/UserAccountNavbar'
+import UserDetails from '../components/UserDetails'
+// import NavbarLoggedUser from '../components/NavbarLoggedUser'
+// import UserAccountNavbar from '../components/UserAccountNavbar'
 
 const UserProfile = () => {
     return (
         <>
-          <NavbarLoggedUser/> 
+          {/* <NavbarLoggedUser/>  */}
           <div className="container"> 
             <div className="account__container">
-              <UserAccountNavbar/>
-              <EditUserProfile/>
+            <h2>User Profile</h2>
+              {/* <UserAccountNavbar/> */}
+              <UserDetails/>
             </div>
           </div>  
         </>
