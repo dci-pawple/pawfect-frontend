@@ -1,4 +1,34 @@
+.carousel-container {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  .btn__save {
+    outline: none;
+    border: none;
+    display: block;
+    width: 15%;
+    background: transparent;
+    cursor: pointer;
+    align-self: flex-end;
+    font-family: $font-text;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    
+
+  }
+}
+
 .rec {
+
+    /// Carousel Arrow styling: 
+    .rec-arrow, 
+    .rec-arrow-right,
+    .rec-arrow-left {
+      background-color: $primary;
+      border-radius: 15%;
+    }
+
   .rec-carousel-item {
     margin: 1rem;
   }
@@ -9,6 +39,7 @@
     background-color: $primary;
     border-radius: 10px;
   }
+
 
   .khvUfi:hover:enabled,
   .khvUfi:focus:enabled {

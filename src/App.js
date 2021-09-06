@@ -6,6 +6,10 @@ import {ThemeProvider, createTheme} from '@material-ui/core/styles';
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
+
+import UserProfile from "./pages/UserProfile";
+import Navbar from "./components/Navbar";
+
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 
@@ -27,6 +31,7 @@ palette: {
   },
 })
 
+
 const App = () => {
   //need this to get search input
   const params = new URLSearchParams(window.location.search);
@@ -36,6 +41,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
     <BrowserRouter>
+      <Navbar/>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -49,6 +55,9 @@ const App = () => {
         </Route>
          <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/user/profile">
+          <UserProfile/>
         </Route>
       </Switch>
     </BrowserRouter>
