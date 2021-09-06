@@ -14,25 +14,26 @@ const breakPoints = [
 ];
 
 const CarouselPets = () => {
-    //for phone use a prop "verticalMode"
-    // itemsToScroll={2}
-
+    
     return (
-        <Carousel itemsToShow={3} breakPoints={breakPoints}>
-            <PetCard src={Dog1}/>
-            <PetCard src={Dog2}/>
-            <PetCard src={Dog3}/>
-            <PetCard src={Dog4}/>
-            <PetCard src={Dog1}/>
-            <PetCard src={Dog2}/>
-            <PetCard src={Dog3}/>
-            <PetCard src={Dog4}/>
-            <PetCard src={Dog4}/>
-            <PetCard src={Dog1}/>
-            <PetCard src={Dog2}/>
-            <PetCard src={Dog3}/>
-            <PetCard src={Dog4}/>
-        </Carousel>
+        <div className="carousel-container">
+            <Carousel itemsToShow={3} breakPoints={breakPoints}>
+                <PetCard src={Dog1}/>
+                <PetCard src={Dog2}/>
+                <PetCard src={Dog3}/>
+                <PetCard src={Dog4}/>
+                <PetCard src={Dog1}/>
+                <PetCard src={Dog2}/>
+                <PetCard src={Dog3}/>
+                <PetCard src={Dog4}/>
+                <PetCard src={Dog4}/>
+                <PetCard src={Dog1}/>
+                <PetCard src={Dog2}/>
+                <PetCard src={Dog3}/>
+                <PetCard src={Dog4}/>
+            </Carousel>
+            <button>See all</button>
+        </div>
     )
 }
 
