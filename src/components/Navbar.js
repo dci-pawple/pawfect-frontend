@@ -101,7 +101,7 @@ export default function Navbar() {
                       Login
                     </Link>
                     <Link
-                      to="/register"
+                      to="/registration"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
