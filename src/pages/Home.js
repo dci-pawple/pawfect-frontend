@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import Categories from "../components/Categories";
 import CarouselPets from "../components/CarouselPets";
 
@@ -12,12 +13,10 @@ const Home = () => {
     <div>
       <Banner />
       <Categories />
-      <div className="container">
-        <h2>Newest pets</h2>
-        <CarouselPets />
-      </div>
-      <CommunityPreview />
+      <CarouselPets />
+      <CommunityPreview/>
     </div>
+
   );
 };
 
