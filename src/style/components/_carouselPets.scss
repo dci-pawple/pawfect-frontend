@@ -1,7 +1,11 @@
 .carousel-container {
-  margin: 2rem;
+  padding: 2rem;
+  margin: 3rem auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 40vh;
+
 
   .btn__save {
     outline: none;
@@ -12,9 +16,8 @@
     cursor: pointer;
     align-self: flex-end;
     font-family: $font-text;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 3px 3px 1px rgba(0,0,0,0.2);
     border-radius: 10px;
-    
 
   }
 }
@@ -29,9 +32,6 @@
       border-radius: 15%;
     }
 
-  .rec-carousel-item {
-    margin: 1rem;
-  }
   /// Carousel Arrow styling:
   .rec-arrow,
   .rec-arrow-right,

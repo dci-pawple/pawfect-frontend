@@ -1,32 +1,13 @@
 .card {
-
     background-color: $light-grey;
-    margin: 1rem;
-    border-radius: 15px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    text-decoration: none;
-    color: inherit;
-    transition: .1s ease-in-out;
-    
-    button {
-        outline: 0;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-    }
-
-  background-color: rgba(211, 206, 206, 0.541);
-  margin: 0 auto;
   border-radius: 10px;
   box-shadow: 0 5px 8px -9px rgba(0, 0, 0, 0.75);
-  // max-width: 20vw;
   display: flex;
   justify-content: space-between;
   text-decoration: none;
   color: inherit;
   transition: 0.1s ease-in-out;
+  margin: 0 1rem;
 
 
   button {
@@ -35,11 +16,13 @@
     background: transparent;
     cursor: pointer;
   }
+  
 
   &__image {
     flex: 3;
-    // border-radius: 15px;
     height: 10em;
+    width: auto;
+
 
     img {
       width: 100%;

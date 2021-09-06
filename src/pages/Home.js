@@ -14,14 +14,8 @@ const Home = () => {
   return (
     <>
       <Banner />
-
       <Categories />
-      <div className="container">
-        <h2>
-          Pets Available for Adoption
-        </h2>
-        <CarouselPets />
-      </div>
+      <CarouselPets />
       <CommunityPreview/>
     </>
   );

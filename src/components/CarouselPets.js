@@ -16,23 +16,26 @@ const breakPoints = [
 const CarouselPets = () => {
     
     return (
-        <div className="carousel-container">
-            <Carousel itemsToShow={3} breakPoints={breakPoints}>
-                <PetCard src={Dog1}/>
-                <PetCard src={Dog2}/>
-                <PetCard src={Dog3}/>
-                <PetCard src={Dog4}/>
-                <PetCard src={Dog1}/>
-                <PetCard src={Dog2}/>
-                <PetCard src={Dog3}/>
-                <PetCard src={Dog4}/>
-                <PetCard src={Dog4}/>
-                <PetCard src={Dog1}/>
-                <PetCard src={Dog2}/>
-                <PetCard src={Dog3}/>
-                <PetCard src={Dog4}/>
-            </Carousel>
-            <button className="btn__save">See all</button>
+        <div className="carousel-container container">
+            <h2>
+                Pets Available for adoption
+            </h2>
+                <Carousel itemsToShow={3} breakPoints={breakPoints}>
+                    <PetCard src={Dog1}/>
+                    <PetCard src={Dog2}/>
+                    <PetCard src={Dog3}/>
+                    <PetCard src={Dog4}/>
+                    <PetCard src={Dog1}/>
+                    <PetCard src={Dog2}/>
+                    <PetCard src={Dog3}/>
+                    <PetCard src={Dog4}/>
+                    <PetCard src={Dog4}/>
+                    <PetCard src={Dog1}/>
+                    <PetCard src={Dog2}/>
+                    <PetCard src={Dog3}/>
+                    <PetCard src={Dog4}/>
+                </Carousel>
+                <button className="btn__save">See all</button>
         </div>
     )
 }
