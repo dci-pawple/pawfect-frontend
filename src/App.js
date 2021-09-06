@@ -7,10 +7,12 @@ import "./style/App.scss";
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import UserProfile from "./pages/UserProfile";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Navbar/>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -18,8 +20,8 @@ const App = () => {
         <Route path="/gallery">
           <Gallery />
         </Route>
-        <Route>
-          <UserProfile path="/user/profile"/>
+        <Route path="/user/profile">
+          <UserProfile/>
         </Route>
       </Switch>
     </BrowserRouter>
