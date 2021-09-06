@@ -32,7 +32,7 @@ const CarouselPets = () => {
                 <PetCard src={Dog3}/>
                 <PetCard src={Dog4}/>
             </Carousel>
-            <button>See all</button>
+            <button className="btn__save">See all</button>
         </div>
     )
 }

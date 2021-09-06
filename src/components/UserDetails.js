@@ -83,7 +83,7 @@ const UserDetails = () => {
 
             <button className="btn__post">
                 <Link to="/"  >
-                    SAVE
+                    SAVE CHANGES
                 </Link>
             </button>
 
