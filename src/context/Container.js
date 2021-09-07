@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { MyContext } from "./MyContext";
+import  MyContext from "./MyContext";
+
 
 const Container = ({ children }) => {
-  return <MyContext.Provider value={{}}>{children}</MyContext.Provider>;
+  const [login,setLogin]=useState(false);
+
+  return <MyContext.Provider value={{login,setLogin}}>{children}</MyContext.Provider>;
 };
 
 export default Container;

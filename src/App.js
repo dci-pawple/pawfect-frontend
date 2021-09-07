@@ -31,6 +31,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
     <BrowserRouter>
+    
       <Switch>
         <Route exact path="/">
           <Home />
