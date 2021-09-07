@@ -4,6 +4,8 @@ import logo from "../dummy/pawfect-pink.png";
 import profilepic from "../dummy/images/profile-example.png";
 
 export default function Navbar() {
+
+  let user = true;
   const [click, setClick] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [active, setActive] = useState(false);
@@ -91,7 +93,7 @@ export default function Navbar() {
               </button>
 
               <div className="dropdown">
-                {setLogin ? (
+                {!user ? (
                   <div className="user-logout">
                     <Link
                       to="/login"
@@ -101,7 +103,7 @@ export default function Navbar() {
                       Login
                     </Link>
                     <Link
-                      to="/register"
+                      to="/registration"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
@@ -111,7 +113,7 @@ export default function Navbar() {
                 ) : (
                   <div className="user-login">
                     <Link
-                      to="/profile"
+                      to="/user/profile"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >

@@ -10,7 +10,7 @@ html {
   font-size: 62.5%;
 }
 
-body {  
+body {
   background-color: $very-light-grey;
   color: $very-dark-grey;
   font-family: $font-text;
@@ -23,15 +23,19 @@ body {
   padding: 0 1rem;
 }
 
-.text-center{
-    text-align: center;
+.app-container {
+  margin-top: 65px;
 }
 
-.form-style{
-    padding:30px;
+.text-center {
+  text-align: center;
 }
 
-.form-container{
-    max-width:500px;
-    margin:0 auto;
+.form-style {
+  padding: 30px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
 }

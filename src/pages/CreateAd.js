@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import "@fontsource/roboto";
 import { Button, TextField } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import FormLabel from "@material-ui/core/FormLabel";
+import InputLabel from "@material-ui/core/InputLabel";
 
 /**
  * Styling the form (Material-ui)
@@ -27,9 +29,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-/**
- * Form Valitation
- */
 const validate = (values) => {
   const errors = {};
 
@@ -50,22 +49,29 @@ const validate = (values) => {
   return errors;
 };
 
-export default function Login() {
-  // get the styling from global style theme
+export default function CreateAd() {
   const classes = useStyles();
-  //const classes=useTheme();
 
-  /**
-   * Define the Form for FORMIK
-   */
+  const [value, setValue] = useState("female");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   const formik = useFormik({
     initialValues: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-      passwordConfirm: "",
+      typeOfPet: "",
+      age: "",
+      name: "",
+      gender: "",
+      breed: "",
+      likes: "",
+      dislikes: "",
+      habits: "",
+      size: "",
+      health: "",
     },
+
     validate,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -79,7 +85,7 @@ export default function Login() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <h1 className="text-center">Login</h1>
+        <h1 className="text-center">Create an Ad</h1>
 
         <form
           className={`form-style ${classes.root}`}
@@ -87,9 +93,9 @@ export default function Login() {
           action="/"
           method="post"
         >
-          {/* EMAIL */}
+          {/* Type of pet */}
           <div>
-            <TextField
+            {/* <TextField
               label="E-Mail"
               type="email"
               fullWidth
@@ -101,24 +107,36 @@ export default function Login() {
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
               color="secondary"
-            />
-          </div>
+            /> */}
+            {/* <FormControl component="fieldset">
+              <FormLabel component="legend">Type of pet</FormLabel>
+              <RadioGroup
+                aria-label="typeOfPet"
+                name="typeOfPet1"
+                value={value}
+                onChange={handleChange}
+              >
+                <FormControlLabel value="Dog" control={<Radio />} label="Dog" />
+                <FormControlLabel value="Cat" control={<Radio />} label="Cat" />
+                <FormControlLabel
+                  value="Bird"
+                  control={<Radio />}
+                  label="Bird"
+                />
+                <FormControlLabel
+                  value="Other"
+                  control={<Radio />}
+                  label="Other"
+                />
+              </RadioGroup>
+            </FormControl> */}
 
-          {/* PASSWORD */}
-          <div>
-            <TextField
-              label="Password"
-              type="password"
-              fullWidth
-              name="password"
-              id="password"
-              variant="outlined"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              color="secondary"
-            />
+            {/*             
+            <InputLabel id="label">Age</InputLabel>
+            <Select labelId="label" id="select" value="20">
+              <MenuItem value="10">Ten</MenuItem>
+              <MenuItem value="20">Twenty</MenuItem>
+            </Select> */}
           </div>
 
           <Button
@@ -127,10 +145,10 @@ export default function Login() {
             variant="contained"
             type="submit"
           >
-            Login
+            Submit
           </Button>
           <p>
-            Go to <Link to="/registration">Sign-up</Link>
+            Go to <Link to="/registration">Sign Up</Link>
           </p>
         </form>
       </div>
