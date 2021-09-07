@@ -1,10 +1,12 @@
-import React, { useState, useContext } from "react";
-import MyContext from "../context/MyContext";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import "@fontsource/roboto";
-import { Button, TextField } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import React,{useState, useContext} from 'react'
+import MyContext from "../context/MyContext"
+import { Link } from 'react-router-dom'
+import { useFormik } from 'formik'
+import '@fontsource/roboto'
+import { Button, TextField } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles, createStyles } from '@material-ui/core/styles'
+
 
 /**
  * Styling the form (Material-ui)
@@ -132,23 +134,23 @@ export default function Login() {
             />
           </div>
 
-          {/* PASSWORD */}
-          <div>
-            <TextField
-              label="Password"
-              type="password"
-              fullWidth
-              name="password"
-              id="password"
-              variant="outlined"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              color="secondary"
-            />
-          </div>
-          {error ? `${error}` : null}
+        {/* PASSWORD */}
+        <div>
+          <TextField
+            label='Password'
+            type='password'
+            fullWidth
+            name='password'
+            id='password'
+            variant='outlined'
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            color='secondary'
+          />
+        </div>
+        {error? <Alert severity="error">{error}</Alert>:null}
 
           <Button
             disableElevation
