@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useFormik } from 'formik'
 import '@fontsource/roboto'
 import { Button, TextField } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles, createStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 
 /**
  * Styling the form (Material-ui)
@@ -66,6 +67,10 @@ const validate = values => {
 }
 
 export default function Registration() {
+
+   const [error,setError]=useState(null);
+
+   let history = useHistory();
   // get the styling from global style theme
   const classes = useStyles()
   //const classes=useTheme();
@@ -84,6 +89,7 @@ export default function Registration() {
     validate,
     onSubmit: async values => {
       //alert (JSON.stringify (values, null, 2));
+      setError(null);
       try {
         const response = await fetch('http://localhost:4000/users/', {
           method: 'POST',
@@ -94,9 +100,20 @@ export default function Registration() {
           body: JSON.stringify(values)
         })
 
-        console.log(response.json())
+        const data=await response.json()
+        console.log("data=>",data);
+        if(!data.success){
+          setError(data.message);
+          console.log("error=>",error);
+         
+        }else{
+            //redirect to login
+         history.push("login")
+        console.log("redirect to login");
+         
+        }
       } catch (err) {
-        console.error('Error while fetching data for registration =>', err)
+        console.log('Error while fetching data for registration =>', err)
       }
     }
   })
@@ -205,6 +222,9 @@ export default function Registration() {
               }
             />
           </div>
+
+          {error? <Alert severity="error">{error}</Alert>:null}
+          
 
           <Button
             disableElevation

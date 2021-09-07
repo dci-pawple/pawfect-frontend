@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
 import '@fontsource/roboto'
 import { Button, TextField } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 
@@ -149,7 +150,7 @@ export default function Login () {
             color='secondary'
           />
         </div>
-        {error? `${error}`:null}
+        {error? <Alert severity="error">{error}</Alert>:null}
 
           <Button
             disableElevation
