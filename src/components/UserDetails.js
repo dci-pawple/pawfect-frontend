@@ -10,42 +10,36 @@ import {useFormik} from 'formik';
  */
  const validate = values => {
   const errors = {};
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  } else if (values.firstName.length > 15) {
+ 
+  if (values.firstName.length > 15) {
     errors.firstName = 'Must be 15 characters or less';
   }
 
-  if (!values.lastName) {
-    //errors.lastName = 'Required';
-  } else if (values.lastName.length > 20) {
+  
+  if (values.lastName.length > 20) {
     errors.lastName = 'Must be 20 characters or less';
   }
-
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test (values.email)) {
+  
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test (values.email)) {
     errors.email = 'Invalid email address';
   }
-
-  if (!values.password) {
-    errors.password = 'Required';
-  } else if (
+  
+  if (
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test (values.password)
   ) {
     errors.password = 'Invalid Character';
   } else if (values.password.length < 6) {
     errors.password = 'Must be longer than 6 Characters';
   }
-
-  if (!values.passwordConfirm) {
-    errors.passwordConfirm = 'Required';
-  } else if (values.password !== values.passwordConfirm) {
+  
+  if (values.password !== values.passwordConfirm) {
     errors.passwordConfirm = 'Not the same Password';
   }
 
   return errors;
 };
+
+// Material-ui styling:
 
 const useStyles = makeStyles (theme =>
     createStyles ({
@@ -78,22 +72,34 @@ const UserDetails = () => {
 
     const formik = useFormik ({
       initialValues: {
-        firstName: '',
-        lastName: '',
+        firstName: 'Magda',
+        lastName: 'Sokolovic',
         phoneNumber: '',
-        country: '',
         city: '',
-        streetName: '',
         postalCode: '',
-        email: '',
+        streetName: '',
+        email: 'magda.sokolovic@gmail.com',
         emailConfirm: '',
         password: '',
         passwordConfirm: '',
       },
       validate,
-      onSubmit: values => {
-        alert (JSON.stringify (values, null, 2));
-      },
+      onSubmit: async values => {
+        try {
+          const response = await fetch('http://localhost:4000/user/profile', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+          })
+  
+          console.log(response.json())
+        } catch (err) {
+          console.error('Error while fetching data for user profile update =>', err)
+        }
+      }
     });
 
     return (
@@ -104,6 +110,7 @@ const UserDetails = () => {
             onSubmit={formik.handleSubmit}>
                 <div>
                     <TextField
+                        style={{marginRight: "1rem"}}
                         id="standard-basic"
                         placeholder="First name"
                         label="First name"
@@ -118,6 +125,7 @@ const UserDetails = () => {
                         />
 
                     <TextField
+                       
                         placeholder="Last name"
                         id="standard-basic"
                         label="Last name"
@@ -134,6 +142,7 @@ const UserDetails = () => {
 
                 <div>
                     <TextField
+                        style={{marginRight: "1rem"}}
                         placeholder="Your Phone Number"
                         id="standard-basic"
                         label="Phone number"
@@ -149,20 +158,8 @@ const UserDetails = () => {
                 </div>
 
                 <div>
-                    <TextField
-                        id="standard-basic"
-                        placeholder="Country"
-                        label="Country"
-                        variant="outlined"
-                        color="secondary"
-                        onChange={formik.handleChange}
-                        value={formik.values.phoneNumber}
-                        error={formik.touched.country && Boolean (formik.errors.country)
-                        }
-                        helperText={formik.touched.country && formik.errors.country}
-                        />
-                
                      <TextField
+                        style={{marginRight: "1rem"}}
                         id="standard-basic"
                         placeholder="City"
                         label="City"
@@ -175,23 +172,8 @@ const UserDetails = () => {
                         }
                         helperText={formik.touched.city && formik.errors.city}
                         />
-                 </div>
-                <div>
-                    <TextField
-                        id="standard-basic"
-                        placeholder="Street name and number"
-                        label="Street name and number"
-                        variant="outlined"
-                        color="secondary"
-                        onChange={formik.handleChange}
-                        value={formik.values.streetName}
-                        error={
-                          formik.touched.streetName && Boolean (formik.errors.streetName)
-                        }
-                        helperText={formik.touched.streetName && formik.errors.streetName}
-                        />
-                
-                    <TextField
+
+                      <TextField
                         id="standard-basic"
                         label="Postal code"
                         placeholder="Postal code"
@@ -204,11 +186,28 @@ const UserDetails = () => {
                         }
                         helperText={formik.touched.postalCode && formik.errors.postalCode}
                         />
-                        
+                 </div>
+                <div>
+                    <TextField
+                        id="standard-basic"
+                        placeholder="Street name and number"
+                        label="Street name and number"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        onChange={formik.handleChange}
+                        value={formik.values.streetName}
+                        error={
+                          formik.touched.streetName && Boolean (formik.errors.streetName)
+                        }
+                        helperText={formik.touched.streetName && formik.errors.streetName}
+                        />
+           
                 </div>
                 <div>
 
                         <TextField
+                        style={{marginRight: "1rem"}}
                         label="Change your e-mail"
                         type="email"
                         name="email"
@@ -221,10 +220,10 @@ const UserDetails = () => {
                         helperText={formik.touched.email && formik.errors.email}
                         />
                         <TextField
-                        label="Confirm your e-mail"
+                        label="Confirm your new e-mail"
                         type="email"
-                        name="email"
-                        id="email"
+                        name="emailConfirm"
+                        id="emailConfirm"
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
@@ -234,26 +233,25 @@ const UserDetails = () => {
                         />
                 </div>
                 <div>
-            <TextField
-              label="Password"
-              type="password"
-              
-              name="password"
-              id="password"
-              variant="outlined"
-              color="secondary"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={
-                formik.touched.password && Boolean (formik.errors.password)
-              }
-              helperText={formik.touched.password && formik.errors.password}
-            />
-              
+                  <TextField
+                    style={{marginRight: "1rem"}}
+                    label="Change password"
+                    type="password"
+                    name="password"
+                    id="password"
+                    variant="outlined"
+                    color="secondary"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    error={
+                      formik.touched.password && Boolean (formik.errors.password)
+                    }
+                    helperText={formik.touched.password && formik.errors.password}
+                  />
+                    
                 <TextField
-                  label="Password Confirmation"
-                  type="password"
-                
+                  label="Confirm changed password"
+                  type="password"  
                   name="passwordConfirm"
                   id="passwordConfirm"
                   variant="outlined"
