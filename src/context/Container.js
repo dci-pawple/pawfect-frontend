@@ -3,7 +3,7 @@ import MyContext from "./MyContext";
 
 const Container = ({ children }) => {
   const [login, setLogin] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [userId, setUserId] = useState(null);
 
 

@@ -73,22 +73,30 @@ const UserProfile = () => {
   const {userId, setUserId} = useContext(MyContext) 
 
   useEffect(()=>{
-     fetch(`http://localhost:4000/users/${userId}`)
-     .then(data=>data.json())
-     .then(res=>console.log(res))
-  })
+    const fetchData = () => {
+        fetch(`http://localhost:4000/users/${userId}`)
+      .then(data=>data.json())
+      .then(res=> {
+        setUser(res.data)
+      }
+    )}
+
+    fetchData()
+     
+  }, [setUser, userId])
+
     const formik = useFormik ({
       initialValues: {
-        firstName: 'Ashly',
-        lastName: 'Hermiston',
-        phoneNumber: '',
-        city: '',
-        postalCode: '',
-        streetName: '',
-        email: 'terrance.lebsack@yahoo.com',
-        emailConfirm: '',
-        password: '',
-        passwordConfirm: '',
+        firstName: user.firstName||'',
+        lastName: user.lastName||'',
+        phoneNumber: user.phoneNumber||'',
+        city: user.city||'',
+        postalCode: user.postalCode||'',
+        streetName: user.streetName||'',
+        email: user.email||'',
+        emailConfirm: user.emailConfirm||'',
+        password: user.password||'',
+        passwordConfirm: user.passwordConfirm||'',
       },
       validate,
       onSubmit: async values => {
