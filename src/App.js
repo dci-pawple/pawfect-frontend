@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./style/App.scss";
@@ -6,17 +6,14 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
-
 import UserProfile from "./pages/UserProfile";
-
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
-
-import Footer from "./components/Footer";
-
 import CreateAd from "./pages/CreateAd";
-import Navbar from "./components/Navbar";
 
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import MyContext from "./context/MyContext";
 
 const theme = createTheme({
   palette: {
@@ -44,10 +41,12 @@ const App = () => {
   const search = params.get("search");
   console.log(search);
 
+  const { user } = useContext(MyContext);
+  console.log(user);
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-
         <Navbar />
 
         <Switch>
@@ -55,7 +54,7 @@ const App = () => {
             <Home />
           </Route>
           {/* tried this out to see if we can search input */}
-          <Route path="/gallery/">
+          <Route path="/gallery">
             <Gallery search={search} />
           </Route>
           <Route path="/registration">
@@ -65,8 +64,6 @@ const App = () => {
             <Login />
           </Route>
 
-       
-
           <Route path="/createad">
             <CreateAd />
           </Route>
@@ -75,7 +72,7 @@ const App = () => {
           </Route>
         </Switch>
 
-         <Footer />
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );
