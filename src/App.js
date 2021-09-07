@@ -16,6 +16,9 @@ import Footer from "./components/Footer";
 import MyContext from "./context/MyContext";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "Poppins"
+  },
   palette: {
     primary: {
       light: "#ff9e9a",

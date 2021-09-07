@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import {Link} from 'react-router-dom'
 import {Button, TextField} from '@material-ui/core';
-import { makeStyles, createTheme, ThemeProvider, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {useFormik} from 'formik';
 import MyContext from '../context/MyContext';
 
@@ -57,12 +57,6 @@ const useStyles = makeStyles (theme =>
       },
     })
   );
-
-  const theme = createTheme({
-    typography: {
-      fontFamily: "Poppins"
-    }
-  });
 
 
 const UserProfile = () => {
@@ -121,7 +115,6 @@ const UserProfile = () => {
     return (
           <div className="app-container container"> 
             <div className="account__container">       
-            <ThemeProvider theme={theme}>
         <div className="user-form-container">
             <h2>Your profile:</h2>
             <form className={classes.root} noValidate autoComplete="off"
@@ -300,7 +293,7 @@ const UserProfile = () => {
                  </button>
 
         </div>
-        </ThemeProvider>
+
             </div>
           </div>
     )
