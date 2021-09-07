@@ -1,9 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import "@fontsource/roboto";
-import { Button, TextField } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import React,{useState, useContext} from 'react'
+import MyContext from "../context/MyContext"
+import { Link } from 'react-router-dom'
+import { useFormik } from 'formik'
+import '@fontsource/roboto'
+import { Button, TextField } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles, createStyles } from '@material-ui/core/styles'
+
 
 /**
  * Styling the form (Material-ui)
@@ -51,6 +54,12 @@ const validate = (values) => {
 };
 
 export default function Login() {
+  const [error, setError] = useState(null);
+  const { login, setLogin } = useContext(MyContext);
+  const { userId, setUserId } = useContext(MyContext);
+
+
+
   // get the styling from global style theme
   const classes = useStyles();
   //const classes=useTheme();
@@ -67,8 +76,31 @@ export default function Login() {
       passwordConfirm: "",
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      //alert (JSON.stringify (values, null, 2));
+      try {
+        const response = await fetch("http://localhost:4000/users/login", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+
+        const data = await response.json();
+        console.log("data=>", data);
+        if (!data.success) {
+          setError(data.message);
+          console.log("error=>", error);
+        } else {
+          setLogin(true);
+          setUserId(data.data._id);
+        }
+      } catch (err) {
+        //console.error('Error while fetching data for login =>', err)
+        console.log(err.message);
+      }
     },
   });
 
@@ -104,22 +136,23 @@ export default function Login() {
             />
           </div>
 
-          {/* PASSWORD */}
-          <div>
-            <TextField
-              label="Password"
-              type="password"
-              fullWidth
-              name="password"
-              id="password"
-              variant="outlined"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              color="secondary"
-            />
-          </div>
+        {/* PASSWORD */}
+        <div>
+          <TextField
+            label='Password'
+            type='password'
+            fullWidth
+            name='password'
+            id='password'
+            variant='outlined'
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            color='secondary'
+          />
+        </div>
+        {error? <Alert severity="error">{error}</Alert>:null}
 
           <Button
             disableElevation

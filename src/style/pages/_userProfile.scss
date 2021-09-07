@@ -1,0 +1,70 @@
+
+// User account dashboard:
+.account__container {
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    background-color: $very-light-grey;
+    padding: 2rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // will delete this margin-top after merging with Julia
+    margin-top: 10vh;
+    max-width: 50vw;
+    margin: 10vh auto;
+
+    p {
+      font-size:1.3rem;
+    }
+
+    a {
+      color: $primary;
+    }
+    
+    .btn{
+        outline: none;
+        border: none;
+        background-color: $primary;
+        border-radius: 10px;
+        color: $very-dark-grey;
+        transition: all .3s ease-in-out;
+        padding: .5em;
+        margin: .5em 1.5rem;
+        display: block;
+        font-size: 1.5rem;
+        width: 30%;
+
+
+        &__post {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }   
+        i {
+          align-self: center;
+        }
+
+        color: $very-light-grey;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            font-family: $font-text;
+
+        a {
+            color: $very-light-grey;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            font-family: $font-text;
+        }
+    }
+
+    .user-form-container {
+      margin: 0 auto;
+    }
+
+}
+
+
+  
