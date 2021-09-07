@@ -11,8 +11,12 @@ import UserProfile from "./pages/UserProfile";
 
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
+
+import Footer from "./components/Footer";
+
 import CreateAd from "./pages/CreateAd";
 import Navbar from "./components/Navbar";
+
 
 const theme = createTheme({
   palette: {
@@ -40,7 +44,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+
         <Navbar />
+
         <Switch>
           <Route exact path="/">
             <Home />
@@ -55,6 +61,9 @@ const App = () => {
           <Route path="/login">
             <Login />
           </Route>
+
+       
+
           <Route path="/createad">
             <CreateAd />
           </Route>
@@ -62,6 +71,8 @@ const App = () => {
             <UserProfile />
           </Route>
         </Switch>
+
+         <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );
