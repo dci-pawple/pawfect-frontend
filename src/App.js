@@ -52,7 +52,7 @@ const App = () => {
             <Home />
           </Route>
           {/* tried this out to see if we can search input */}
-          <Route path="/gallery/">
+          <Route path="/gallery">
             <Gallery search={search} />
           </Route>
           <Route path="/registration">

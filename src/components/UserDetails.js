@@ -15,7 +15,6 @@ import {useFormik} from 'formik';
     errors.firstName = 'Must be 15 characters or less';
   }
 
-  
   if (values.lastName.length > 20) {
     errors.lastName = 'Must be 20 characters or less';
   }
@@ -23,7 +22,6 @@ import {useFormik} from 'formik';
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test (values.email)) {
     errors.email = 'Invalid email address';
   }
-  
   if (
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test (values.password)
   ) {
@@ -72,13 +70,13 @@ const UserDetails = () => {
 
     const formik = useFormik ({
       initialValues: {
-        firstName: 'Magda',
-        lastName: 'Sokolovic',
+        firstName: 'Ashly',
+        lastName: 'Hermiston',
         phoneNumber: '',
         city: '',
         postalCode: '',
         streetName: '',
-        email: 'magda.sokolovic@gmail.com',
+        email: 'terrance.lebsack@yahoo.com',
         emailConfirm: '',
         password: '',
         passwordConfirm: '',
