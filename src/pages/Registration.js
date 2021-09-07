@@ -65,7 +65,7 @@ const validate = values => {
   return errors
 }
 
-export default function Registration () {
+export default function Registration() {
   // get the styling from global style theme
   const classes = useStyles()
   //const classes=useTheme();

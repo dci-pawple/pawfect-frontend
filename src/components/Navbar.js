@@ -4,10 +4,11 @@ import logo from "../dummy/pawfect-pink.png";
 import profilepic from "../dummy/images/profile-example.png";
 
 export default function Navbar() {
+
+  let user = true;
   const [click, setClick] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [active, setActive] = useState(false);
-  const [search, setSearch] = useState("");
   const [login, setLogin] = useState(false);
 
   const changeBackground = () => {
@@ -25,11 +26,6 @@ export default function Navbar() {
       window.removeEventListener("scroll", changeBackground);
     };
   }, []);
-
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    setSearch("");
-  };
 
   const handleClick = () => setClick(!click);
 
@@ -78,16 +74,11 @@ export default function Navbar() {
               </div>
               <form action="/gallery/">
                 <div className="input">
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
+                  <input type="text" name="search" placeholder="Search" />
                 </div>
-                <span className={active ? "submit" : ""} onClick={handleSubmit}>
+                <button className={active ? "submit" : ""}>
                   <i class="fas fa-arrow-right"></i>
-                </span>
+                </button>
               </form>
             </li>
             <li className="user list-item">
@@ -102,7 +93,7 @@ export default function Navbar() {
               </button>
 
               <div className="dropdown">
-                {setLogin ? (
+                {!user ? (
                   <div className="user-logout">
                     <Link
                       to="/login"
@@ -112,7 +103,7 @@ export default function Navbar() {
                       Login
                     </Link>
                     <Link
-                      to="/register"
+                      to="/registration"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
@@ -122,7 +113,7 @@ export default function Navbar() {
                 ) : (
                   <div className="user-login">
                     <Link
-                      to="/profile"
+                      to="/user/profile"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
@@ -134,6 +125,20 @@ export default function Navbar() {
                       onClick={closeMobileMenu}
                     >
                       Place an ad
+                    </Link>
+                    <Link
+                      to="/messages"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      Messages
+                    </Link>
+                    <Link
+                      to="/saved"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      Saved searches
                     </Link>
                   </div>
                 )}
