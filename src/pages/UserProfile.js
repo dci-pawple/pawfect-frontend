@@ -87,16 +87,16 @@ const UserProfile = () => {
 
     const formik = useFormik ({
       initialValues: {
-        firstName: user.firstName||'',
-        lastName: user.lastName||'',
-        phoneNumber: user.phoneNumber||'',
-        city: user.city||'',
-        postalCode: user.postalCode||'',
-        streetName: user.streetName||'',
-        email: user.email||'',
-        emailConfirm: user.emailConfirm||'',
-        password: user.password||'',
-        passwordConfirm: user.passwordConfirm||'',
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        city: '',
+        postalCode: '',
+        streetName: '',
+        email: '',
+        emailConfirm: '',
+        password: '',
+        passwordConfirm: '',
       },
       validate,
       onSubmit: async values => {
@@ -116,7 +116,7 @@ const UserProfile = () => {
           console.error('Error while fetching data for user profile update =>', err)
         }
       }
-    });
+    });  
 
     return (
           <div className="app-container container"> 
@@ -135,7 +135,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.firstName}
+                        value={user.firstName||''}
                         error={
                           formik.touched.firstName && Boolean (formik.errors.firstName)
                         }
@@ -150,7 +150,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.lastName}
+                        value={user.lastName||''}
                         error={formik.touched.lastName && Boolean (formik.errors.lastName)
                         }
                         helperText={formik.touched.lastName && formik.errors.lastName}
@@ -168,7 +168,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.phoneNumber}
+                        value={user.phoneNumber||''}
                         error={formik.touched.phoneNumber && Boolean (formik.errors.phoneNumber)
                         }
                         helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
@@ -184,7 +184,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.city}
+                        value={user.city||''}
                         error={
                           formik.touched.city && Boolean (formik.errors.city)
                         }
@@ -198,7 +198,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.postalCode}
+                        value={user.postalCode||''}
                         error={
                           formik.touched.postalCode && Boolean (formik.errors.postalCode)
                         }
@@ -214,7 +214,7 @@ const UserProfile = () => {
                         fullWidth
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.streetName}
+                        value={user.streetName||''}
                         error={
                           formik.touched.streetName && Boolean (formik.errors.streetName)
                         }
@@ -233,7 +233,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.email}
+                        value={user.email||''}
                         error={formik.touched.email && Boolean (formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                         />
@@ -245,7 +245,7 @@ const UserProfile = () => {
                         variant="outlined"
                         color="secondary"
                         onChange={formik.handleChange}
-                        value={formik.values.email}
+                        value={user.emailConfirm||''}
                         error={formik.touched.email && Boolean (formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                         />
@@ -260,7 +260,7 @@ const UserProfile = () => {
                     variant="outlined"
                     color="secondary"
                     onChange={formik.handleChange}
-                    value={formik.values.password}
+                    value={user.password||''}
                     error={
                       formik.touched.password && Boolean (formik.errors.password)
                     }
@@ -275,7 +275,7 @@ const UserProfile = () => {
                   variant="outlined"
                   color="secondary"
                   onChange={formik.handleChange}
-                  value={formik.values.passwordConfirm}
+                  value={user.passwordConfirm||''}
                   error={
                     formik.touched.passwordConfirm &&
                       Boolean (formik.errors.passwordConfirm)
