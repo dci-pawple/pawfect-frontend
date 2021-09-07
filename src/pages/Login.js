@@ -1,11 +1,10 @@
-import React,{useState, useContext} from 'react'
-import MyContext from "../context/MyContext"
-import { Link } from 'react-router-dom'
-import { useFormik } from 'formik'
-import '@fontsource/roboto'
-import { Button, TextField } from '@material-ui/core'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-
+import React, { useState, useContext } from "react";
+import MyContext from "../context/MyContext";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import "@fontsource/roboto";
+import { Button, TextField } from "@material-ui/core";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 /**
  * Styling the form (Material-ui)
@@ -52,10 +51,10 @@ const validate = (values) => {
   return errors;
 };
 
-export default function Login () {
-
-  const [error,setError]=useState(null);
-  const {login,setLogin}=useContext(MyContext);
+export default function Login() {
+  const [error, setError] = useState(null);
+  const { login, setLogin } = useContext(MyContext);
+  const { user, setUser } = useContext(MyContext);
 
   // get the styling from global style theme
   const classes = useStyles();
@@ -73,33 +72,33 @@ export default function Login () {
       passwordConfirm: "",
     },
     validate,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
       try {
-        const response = await fetch('http://localhost:4000/users/login', {
-          method: 'POST',
-          mode: 'cors',
+        const response = await fetch("http://localhost:4000/users/login", {
+          method: "POST",
+          mode: "cors",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(values)
-        })
+          body: JSON.stringify(values),
+        });
 
-        const data=await response.json()
-        console.log("data=>",data);
-        if(!data.success){
-          
+        const data = await response.json();
+        console.log("data=>", data);
+        if (!data.success) {
           setError(data.message);
-          console.log("error=>",error);
-        }else{
+          console.log("error=>", error);
+        } else {
           setLogin(true);
+          setUser(data.data._id);
         }
       } catch (err) {
         //console.error('Error while fetching data for login =>', err)
         console.log(err.message);
       }
-    }
-  })
+    },
+  });
 
   return (
     <div className="app-container">
@@ -133,23 +132,23 @@ export default function Login () {
             />
           </div>
 
-        {/* PASSWORD */}
-        <div>
-          <TextField
-            label='Password'
-            type='password'
-            fullWidth
-            name='password'
-            id='password'
-            variant='outlined'
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-            color='secondary'
-          />
-        </div>
-        {error? `${error}`:null}
+          {/* PASSWORD */}
+          <div>
+            <TextField
+              label="Password"
+              type="password"
+              fullWidth
+              name="password"
+              id="password"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              color="secondary"
+            />
+          </div>
+          {error ? `${error}` : null}
 
           <Button
             disableElevation
