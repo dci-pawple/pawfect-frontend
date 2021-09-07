@@ -54,7 +54,9 @@ const validate = (values) => {
 export default function Login() {
   const [error, setError] = useState(null);
   const { login, setLogin } = useContext(MyContext);
-  const { user, setUser } = useContext(MyContext);
+  const { userId, setUserId } = useContext(MyContext);
+
+
 
   // get the styling from global style theme
   const classes = useStyles();
@@ -91,7 +93,7 @@ export default function Login() {
           console.log("error=>", error);
         } else {
           setLogin(true);
-          setUser(data.data._id);
+          setUserId(data.data._id);
         }
       } catch (err) {
         //console.error('Error while fetching data for login =>', err)
