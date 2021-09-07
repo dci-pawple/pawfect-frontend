@@ -13,7 +13,7 @@ import CreateAd from "./pages/CreateAd";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-// import MyContext from "./context/MyContext";
+import MyContext from "./context/MyContext";
 
 const theme = createTheme({
   palette: {
@@ -38,8 +38,8 @@ const App = () => {
   const search = params.get("search");
   console.log(search);
 
-  // const { user } = useContext(MyContext);
-  // console.log(user);
+  const { user } = useContext(MyContext);
+  console.log(user);
 
   return (
     <ThemeProvider theme={theme}>
