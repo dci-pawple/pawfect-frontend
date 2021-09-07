@@ -22,7 +22,7 @@
       color: $primary;
     }
     
-    .btn__post {
+    .btn{
         outline: none;
         border: none;
         background-color: $primary;
@@ -32,12 +32,14 @@
         padding: .5em;
         margin: .5em 1.5rem;
         display: block;
-        width: 50%;
+        font-size: 1.5rem;
 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
+        &__post {
+          width: 30%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }   
         i {
           align-self: center;
         }
