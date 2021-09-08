@@ -96,6 +96,7 @@
 }
 
 .owner {
+   
 	&__container {
 		display: flex;
 		flex-direction: column;
@@ -104,6 +105,7 @@
 		flex: 1;
 		border-radius: 10px;
 		height: 25vh;
+        margin: 5rem auto;
 
 		.btn__chat {
 			outline: none;
@@ -115,7 +117,7 @@
 			padding: 0.5em;
 			display: block;
 			font-size: 1.5rem;
-			width: 60%;
+			width: 65%;
 			color: $very-light-grey;
 			text-decoration: none;
 			display: flex;
@@ -133,6 +135,7 @@
 				display: flex;
 				justify-content: space-between;
 				font-family: $font-text;
+                font-weight: bold;
 			}
 		}
 	}

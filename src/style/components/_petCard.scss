@@ -9,28 +9,26 @@
   transition: 0.1s ease-in-out;
   margin: 0 1rem;
 
-
-  &__button {
-        outline: none;
-        border: none;
-        background-color: $primary;
-        border-radius: 10px;
-        color: $very-dark-grey;
-        transition: all .3s ease-in-out;
-        padding: .9em;
-        margin: .5em 1.5em;
-        display: block;
-        font-size: .9rem;
-        align-self: flex-end;
-        a {
-          color: $very-light-grey;
-          font-weight: bold;
-          font-size: 1rem;
-          text-decoration: none;
-          font-family: $font-text;
-        }
-  }
-  
+  .btn__call-to-action {
+    outline: none;
+    border: none;
+    background-color: $primary;
+    border-radius: 10px;
+    color: $very-dark-grey;
+    transition: all .3s ease-in-out;
+    padding: 0.3rem 0.6rem;
+    margin: .5em 1.5em;
+    display: block;
+    font-size: .9rem;
+    align-self: flex-end;
+    a {
+      color: $very-light-grey;
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+      font-family: $font-text;
+    }
+}
 
   &__image {
     flex: 3;

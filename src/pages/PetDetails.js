@@ -17,7 +17,6 @@ const breakPoints = [
 const PetDetails = () => {
 	return (
 		<div className='app-container container pet__container'>
-            
 			<button className='btn-go-back'>
 				<Link to='/'>Go Back</Link>
 			</button>
@@ -126,13 +125,12 @@ const PetDetails = () => {
 						</div>
 					</div>
 
-                    <div className="owner__btn-container">
-                        <button className='btn__chat'>
-                            <Link to='/chat'>Chat with Mark</Link>
-                            <i class='fas fa-comment-alt'></i>
-                        </button>
-                    </div>
-					
+					<div className='owner__btn-container'>
+						<button className='btn__chat'>
+							<Link to='/chat'>Chat with Mark</Link>
+							<i class='fas fa-comment-alt'></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

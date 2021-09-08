@@ -6,8 +6,7 @@
   justify-content: space-between;
   height: 40vh;
 
-
-  .btn__save {
+  .btn__see-all {
     outline: none;
     border: none;
     display: block;
@@ -18,12 +17,15 @@
     font-family: $font-text;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+		padding: 0.3rem;
+
     a {
       color: inherit;
       text-decoration: none;
       font-family: $font-text;
     }
   }
+  
 }
 
 .rec {
