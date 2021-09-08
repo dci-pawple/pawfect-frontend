@@ -1,0 +1,18 @@
+.dropzone {
+  background-color: $primary-light;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  padding: 1rem;
+  width: 100%;
+  &:hover {
+    // box-shadow: 3px 3px 3px 1px #cecece;
+    border: 1px solid black;
+  }
+}
+
+.image-preview {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

@@ -11,6 +11,7 @@ import {
   TextField,
   FormHelperText,
   Input,
+  MenuItem,
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 
@@ -65,10 +66,6 @@ export default function CreateAd() {
   return (
     <div className="app-container">
       <div className="form-container">
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
         <h1 className="text-center">Create an Ad</h1>
 
         <form
@@ -86,6 +83,7 @@ export default function CreateAd() {
             <InputLabel htmlFor="type-native-simple">Type of pet</InputLabel>
             <Select
               native
+              label="Type of pet"
               value={formik.values.typeOfPet}
               onChange={formik.handleChange}
               inputProps={{
@@ -113,13 +111,14 @@ export default function CreateAd() {
               native
               value={formik.values.age}
               onChange={formik.handleChange}
+              label="Age"
               inputProps={{
                 name: "age",
                 id: "age-native-simple",
               }}
             >
               <option aria-label="None" value="" />
-              <option value={"puppy"}>Baby (0-6 months)</option>
+              <option value={"baby"}>Baby (0-6 months)</option>
               <option value={"young"}>Young (6-12 months)</option>
               <option value={"adult"}>Adult (1-7 years)</option>
               <option value={"senior"}>Senior (7+ years)</option>
@@ -139,6 +138,7 @@ export default function CreateAd() {
             <InputLabel htmlFor="size-native-simple">Size</InputLabel>
             <Select
               native
+              label="Size"
               value={formik.values.size}
               onChange={formik.handleChange}
               inputProps={{
@@ -163,6 +163,7 @@ export default function CreateAd() {
           >
             <InputLabel htmlFor="gender-native-simple">Gender</InputLabel>
             <Select
+              label="Gender"
               native
               value={formik.values.gender}
               onChange={formik.handleChange}
@@ -231,17 +232,6 @@ export default function CreateAd() {
             <FormHelperText>Optional</FormHelperText>
           </FormControl>
 
-          {/* image upload */}
-          <UploadComponent
-            setFieldValue={formik.setFieldValue}
-            values={formik.values}
-          />
-
-          {formik.values.photos &&
-            formik.values.photos.map((photo, i) => (
-              <Thumb key={i} file={photo} />
-            ))}
-
           {/* Extras */}
           <FormControl fullWidth>
             <TextField
@@ -257,6 +247,18 @@ export default function CreateAd() {
             <FormHelperText>Optional</FormHelperText>
           </FormControl>
 
+          {/* image upload */}
+          <UploadComponent
+            setFieldValue={formik.setFieldValue}
+            values={formik.values}
+          />
+          <div className="image-preview">
+            {formik.values.photos &&
+              formik.values.photos.map((photo, i) => (
+                <Thumb key={i} file={photo} />
+              ))}
+          </div>
+          {/* submit button */}
           <Button
             disableElevation
             color="primary"
@@ -286,12 +288,10 @@ const UploadComponent = (props) => {
     },
   });
   return (
-    <FormControl fullWidth>
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
+    <div {...getRootProps({ className: "dropzone" })}>
+      <input {...getInputProps()} />
 
-        <p>Drop some photos here or click to select photos</p>
-      </div>
-    </FormControl>
+      <p>Drop some photos here or click to select photos</p>
+    </div>
   );
 };
