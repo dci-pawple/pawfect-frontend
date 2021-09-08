@@ -119,7 +119,7 @@ export default function Registration() {
   })
 
   return (
-    <div className='container'>
+    <div className='container app-container'>
       <div className='form-container'>
         <link
           rel='stylesheet'
