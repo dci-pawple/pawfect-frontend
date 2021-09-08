@@ -30,9 +30,9 @@ const theme = createTheme({
       contrastText: "#fff",
     },
   },
-  typography:{
-    fontSize:20,
-  }
+  typography: {
+    fontSize: 20,
+  },
 });
 
 const App = () => {
