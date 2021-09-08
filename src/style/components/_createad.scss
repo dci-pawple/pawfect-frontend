@@ -16,3 +16,18 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+// Thumb
+
+.img-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.img-thumbnail {
+  height: 200px;
+  width: auto;
+}
