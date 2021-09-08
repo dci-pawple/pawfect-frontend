@@ -116,8 +116,9 @@ export default function Registration() {
   });
 
   return (
-    <div className="container">
-      <div className="form-container">
+
+    <div className='container app-container'>
+      <div className='form-container'>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
