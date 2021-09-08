@@ -10,8 +10,6 @@ import {
   FormControl,
   TextField,
   FormHelperText,
-  Input,
-  MenuItem,
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 
@@ -235,7 +233,7 @@ export default function CreateAd() {
           {/* Extras */}
           <FormControl fullWidth>
             <TextField
-              label="Anything else you would like to add..."
+              label="Anything else you would like to tell future pawrents..."
               name="extras"
               id="extras"
               variant="outlined"
