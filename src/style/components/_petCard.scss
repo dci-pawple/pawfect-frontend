@@ -23,7 +23,9 @@
         font-size: .9rem;
         align-self: flex-end;
         a {
-          color: inherit;
+          color: $very-light-grey;
+          font-weight: bold;
+          font-size: 1rem;
           text-decoration: none;
           font-family: $font-text;
         }

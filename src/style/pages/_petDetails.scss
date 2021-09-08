@@ -23,6 +23,8 @@
 			}
 		}
 	}
+    
+
 	&__image-container {
 		height: 30vh;
 		width: 100%;
@@ -31,7 +33,7 @@
 		object-position: 50% 50%;
 		background-size: cover;
 		background-position: center center;
-		margin: 0 1rem;
+		margin: 0 .5rem;
 		position: relative;
 
 		.fas {
@@ -70,6 +72,7 @@
 	&__info-data {
 		font-weight: bold;
 		margin-right: 1rem;
+        text-align: justify;
 	}
 
 	&__info-data-about {
@@ -102,11 +105,6 @@
 		border-radius: 10px;
 		height: 25vh;
 
-		&__btn-container {
-			padding: 5rem;
-			align-self: center;
-		}
-
 		.btn__chat {
 			outline: none;
 			border: none;
@@ -138,6 +136,10 @@
 			}
 		}
 	}
+
+    &__btn-container {
+        padding: 0 2rem;
+    }
 
 	&__icons {
 		display: flex;
