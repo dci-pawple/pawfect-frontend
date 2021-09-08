@@ -1,40 +1,40 @@
-import React,{useState} from 'react'
-import { useFormik } from 'formik'
-import '@fontsource/roboto'
-import { Button, TextField } from '@material-ui/core'
-import Alert from '@material-ui/lab/Alert';
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import { Link,useHistory } from 'react-router-dom'
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import "@fontsource/roboto";
+import { Button, TextField } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { Link, useHistory } from "react-router-dom";
 
 /**
  * Styling the form (Material-ui)
  */
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      '& > *': {
+      "& > *": {
         margin: theme.spacing(2),
-        'font-size': '1.6rem',
+        "font-size": "1.6rem",
         palette: {
           primary: {
-            light: '#464646',
-            main: '#1f1f1f',
-            dark: '#000000',
-            contrastText: '#fff'
-          }
-        }
-      }
-    }
+            light: "#464646",
+            main: "#1f1f1f",
+            dark: "#000000",
+            contrastText: "#fff",
+          },
+        },
+      },
+    },
   })
-)
+);
 
 /**
  * Form Valitation
  */
-const validate = values => {
-  const errors = {}
+const validate = (values) => {
+  const errors = {};
   if (!values.firstName) {
-    errors.firstName = 'Required'
+    errors.firstName = "Required";
   }
 
   if (!values.lastName) {
@@ -42,37 +42,36 @@ const validate = values => {
   }
 
   if (!values.email) {
-    errors.email = 'Required'
+    errors.email = "Required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
+    errors.email = "Invalid email address";
   }
 
   if (!values.password) {
-    errors.password = 'Required'
+    errors.password = "Required";
   } else if (
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)
   ) {
-    errors.password = 'Invalid Character'
+    errors.password = "Invalid Character";
   } else if (values.password.length < 6) {
-    errors.password = 'Must be longer than 6 Characters'
+    errors.password = "Must be longer than 6 Characters";
   }
 
   if (!values.passwordConfirm) {
-    errors.passwordConfirm = 'Required'
+    errors.passwordConfirm = "Required";
   } else if (values.password !== values.passwordConfirm) {
-    errors.passwordConfirm = 'Not the same Password'
+    errors.passwordConfirm = "Not the same Password";
   }
 
-  return errors
-}
+  return errors;
+};
 
 export default function Registration() {
+  const [error, setError] = useState(null);
 
-   const [error,setError]=useState(null);
-
-   let history = useHistory();
+  let history = useHistory();
   // get the styling from global style theme
-  const classes = useStyles()
+  const classes = useStyles();
   //const classes=useTheme();
 
   /**
@@ -80,68 +79,67 @@ export default function Registration() {
    */
   const formik = useFormik({
     initialValues: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirm: ''
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      passwordConfirm: "",
     },
     validate,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
       setError(null);
       try {
-        const response = await fetch('http://localhost:4000/users/', {
-          method: 'POST',
-          mode: 'cors',
+        const response = await fetch("http://localhost:4000/users/", {
+          method: "POST",
+          mode: "cors",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(values)
-        })
+          body: JSON.stringify(values),
+        });
 
-        const data=await response.json()
-        console.log("data=>",data);
-        if(!data.success){
+        const data = await response.json();
+        console.log("data=>", data);
+        if (!data.success) {
           setError(data.message);
-          console.log("error=>",error);
-         
-        }else{
-            //redirect to login
-         history.push("login")
-        console.log("redirect to login");
-         
+          console.log("error=>", error);
+        } else {
+          //redirect to login
+          history.push("login");
+          console.log("redirect to login");
         }
       } catch (err) {
-        console.log('Error while fetching data for registration =>', err)
+        console.log("Error while fetching data for registration =>", err);
       }
-    }
-  })
+    },
+  });
 
   return (
+
     <div className='container app-container'>
       <div className='form-container'>
         <link
-          rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <h1 className='text-center'>Registration</h1>
+        <h1 className="text-center">Registration</h1>
 
         <form
           className={`form-style ${classes.root}`}
           onSubmit={formik.handleSubmit}
-          action='/'
-          method='post'
+          action="/"
+          method="post"
         >
           {/* FIRST NAME */}
           <div>
             <TextField
-              label='First Name'
+              label="First Name"
               fullWidth
-              name='firstName'
-              id='firstName'
-              variant='outlined'
-              color='secondary'
+              name="firstName"
+              id="firstName"
+              variant="outlined"
+              color="secondary"
               onChange={formik.handleChange}
               value={formik.values.firstName}
               error={
@@ -154,12 +152,12 @@ export default function Registration() {
           {/* LAST NAME */}
           <div>
             <TextField
-              label='Last Name'
-              name='lastName'
+              label="Last Name"
+              name="lastName"
               fullWidth
-              id='lastName'
-              variant='outlined'
-              color='secondary'
+              id="lastName"
+              variant="outlined"
+              color="secondary"
               onChange={formik.handleChange}
               value={formik.values.lastName}
               error={formik.touched.lastName && Boolean(formik.errors.lastName)}
@@ -170,13 +168,13 @@ export default function Registration() {
           {/* EMAIL */}
           <div>
             <TextField
-              label='E-Mail'
-              type='email'
+              label="E-Mail"
+              type="email"
               fullWidth
-              name='email'
-              id='email'
-              variant='outlined'
-              color='secondary'
+              name="email"
+              id="email"
+              variant="outlined"
+              color="secondary"
               onChange={formik.handleChange}
               value={formik.values.email}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -187,13 +185,13 @@ export default function Registration() {
           {/* PASSWORD */}
           <div>
             <TextField
-              label='Password'
-              type='password'
+              label="Password"
+              type="password"
               fullWidth
-              name='password'
-              id='password'
-              variant='outlined'
-              color='secondary'
+              name="password"
+              id="password"
+              variant="outlined"
+              color="secondary"
               onChange={formik.handleChange}
               value={formik.values.password}
               error={formik.touched.password && Boolean(formik.errors.password)}
@@ -204,13 +202,13 @@ export default function Registration() {
           {/* PASSWORD CONFIRMATION */}
           <div>
             <TextField
-              label='Password Confirmation'
-              type='password'
+              label="Password Confirmation"
+              type="password"
               fullWidth
-              name='passwordConfirm'
-              id='passwordConfirm'
-              variant='outlined'
-              color='secondary'
+              name="passwordConfirm"
+              id="passwordConfirm"
+              variant="outlined"
+              color="secondary"
               onChange={formik.handleChange}
               value={formik.values.passwordConfirm}
               error={
@@ -223,22 +221,21 @@ export default function Registration() {
             />
           </div>
 
-          {error? <Alert severity="error">{error}</Alert>:null}
-          
+          {error ? <Alert severity="error">{error}</Alert> : null}
 
           <Button
             disableElevation
-            color='primary'
-            variant='contained'
-            type='submit'
+            color="primary"
+            variant="contained"
+            type="submit"
           >
             Register
           </Button>
           <p>
-            Go to <Link to='/login'>Login</Link>
+            Go to <Link to="/login">Login</Link>
           </p>
         </form>
       </div>
     </div>
-  )
+  );
 }
