@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
-import "@fontsource/roboto";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Select,
@@ -13,14 +12,13 @@ import {
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 
-/**
- * Styling the form (Material-ui)
- */
+/* Styling the form (Material-ui) */
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       "& > *": {
-        margin: theme.spacing(2),
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
         fontSize: "1.6rem",
         palette: {
           primary: {
@@ -37,6 +35,32 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
+
+// for uploading images
+const UploadComponent = (props) => {
+  const { setFieldValue, values } = props;
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedPhotos) => {
+      if (values.photos) {
+        setFieldValue("photos", values.photos.concat(acceptedPhotos));
+      } else {
+        setFieldValue("photos", acceptedPhotos);
+      }
+    },
+  });
+  return (
+    <div>
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
+
+        <p>Drop some photos here or click to select photos</p>
+      </div>
+      <FormHelperText>Optional</FormHelperText>
+    </div>
+  );
+};
 
 export default function CreateAd() {
   const classes = useStyles();
@@ -124,7 +148,7 @@ export default function CreateAd() {
             <FormHelperText>Required</FormHelperText>
           </FormControl>
 
-          {/* Size should only be shown when dog is selected */}
+          {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
 
           {/* Size */}
           <FormControl
@@ -250,6 +274,7 @@ export default function CreateAd() {
             setFieldValue={formik.setFieldValue}
             values={formik.values}
           />
+
           <div className="image-preview">
             {formik.values.photos &&
               formik.values.photos.map((photo, i) => (
@@ -270,26 +295,3 @@ export default function CreateAd() {
     </div>
   );
 }
-
-// for uploading images
-const UploadComponent = (props) => {
-  const { setFieldValue, values } = props;
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedPhotos) => {
-      if (values.photos) {
-        setFieldValue("photos", values.photos.concat(acceptedPhotos));
-      } else {
-        setFieldValue("photos", acceptedPhotos);
-      }
-    },
-  });
-  return (
-    <div {...getRootProps({ className: "dropzone" })}>
-      <input {...getInputProps()} />
-
-      <p>Drop some photos here or click to select photos</p>
-    </div>
-  );
-};
