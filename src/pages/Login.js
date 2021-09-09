@@ -1,12 +1,11 @@
-import React,{useState, useContext} from 'react'
-import MyContext from "../context/MyContext"
-import { Link } from 'react-router-dom'
-import { useFormik } from 'formik'
-import '@fontsource/roboto'
-import { Button, TextField } from '@material-ui/core'
-import Alert from '@material-ui/lab/Alert';
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-
+import React, { useState, useContext } from "react";
+import MyContext from "../context/MyContext";
+import { Link, useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import "@fontsource/roboto";
+import { Button, TextField } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 /**
  * Styling the form (Material-ui)
@@ -58,7 +57,7 @@ export default function Login() {
   const { login, setLogin } = useContext(MyContext);
   const { userId, setUserId } = useContext(MyContext);
 
-
+  const history = useHistory();
 
   // get the styling from global style theme
   const classes = useStyles();
@@ -96,6 +95,7 @@ export default function Login() {
         } else {
           setLogin(true);
           setUserId(data.data._id);
+          history.push("/");
         }
       } catch (err) {
         //console.error('Error while fetching data for login =>', err)
@@ -136,23 +136,23 @@ export default function Login() {
             />
           </div>
 
-        {/* PASSWORD */}
-        <div>
-          <TextField
-            label='Password'
-            type='password'
-            fullWidth
-            name='password'
-            id='password'
-            variant='outlined'
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-            color='secondary'
-          />
-        </div>
-        {error? <Alert severity="error">{error}</Alert>:null}
+          {/* PASSWORD */}
+          <div>
+            <TextField
+              label="Password"
+              type="password"
+              fullWidth
+              name="password"
+              id="password"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              color="secondary"
+            />
+          </div>
+          {error ? <Alert severity="error">{error}</Alert> : null}
 
           <Button
             disableElevation

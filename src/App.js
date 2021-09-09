@@ -34,6 +34,10 @@ const theme = createTheme({
       contrastText: "#fff",
     },
   },
+  typography: {
+    fontSize: 20,
+    fontFamily: "Poppins",
+  },
 });
 
 const App = () => {

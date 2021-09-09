@@ -1,21 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useFormik } from "formik";
-import "@fontsource/roboto";
-import { Button, TextField } from "@material-ui/core";
+import { useDropzone } from "react-dropzone";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
-import InputLabel from "@material-ui/core/InputLabel";
+import {
+  Select,
+  InputLabel,
+  Button,
+  FormControl,
+  TextField,
+  FormHelperText,
+} from "@material-ui/core";
+import Thumb from "../components/Thumb";
 
-/**
- * Styling the form (Material-ui)
- */
+/* Styling the form (Material-ui) */
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       "& > *": {
-        margin: theme.spacing(2),
-        "font-size": "1.6rem",
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+        fontSize: "1.6rem",
         palette: {
           primary: {
             light: "#464646",
@@ -26,37 +30,40 @@ const useStyles = makeStyles((theme) =>
         },
       },
     },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
   })
 );
 
-const validate = (values) => {
-  const errors = {};
+// for uploading images
+const UploadComponent = (props) => {
+  const { setFieldValue, values } = props;
 
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
-  }
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedPhotos) => {
+      if (values.photos) {
+        setFieldValue("photos", values.photos.concat(acceptedPhotos));
+      } else {
+        setFieldValue("photos", acceptedPhotos);
+      }
+    },
+  });
+  return (
+    <div>
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
 
-  if (!values.password) {
-    errors.password = "Required";
-  } else if (
-    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)
-  ) {
-    errors.password = "Invalid Character";
-  }
-
-  return errors;
+        <p>Drop some photos here or click to select photos</p>
+      </div>
+      <FormHelperText>Optional</FormHelperText>
+    </div>
+  );
 };
 
 export default function CreateAd() {
   const classes = useStyles();
-
-  const [value, setValue] = useState("female");
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -64,15 +71,15 @@ export default function CreateAd() {
       age: "",
       name: "",
       gender: "",
-      breed: "",
+      // breed: "",
       likes: "",
       dislikes: "",
       habits: "",
       size: "",
-      health: "",
+      extras: "",
+      photos: "",
     },
 
-    validate,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -81,64 +88,200 @@ export default function CreateAd() {
   return (
     <div className="app-container">
       <div className="form-container">
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
         <h1 className="text-center">Create an Ad</h1>
 
         <form
           className={`form-style ${classes.root}`}
-          onSubmit={formik.handleSubmit}
           action="/"
-          method="post"
+          onSubmit={formik.handleSubmit}
         >
           {/* Type of pet */}
-          <div>
-            {/* <TextField
-              label="E-Mail"
-              type="email"
-              fullWidth
-              name="email"
-              id="email"
+          <FormControl
+            className={classes.formControl}
+            variant="outlined"
+            fullWidth
+            required
+          >
+            <InputLabel htmlFor="type-native-simple">Type of pet</InputLabel>
+            <Select
+              native
+              label="Type of pet"
+              value={formik.values.typeOfPet}
+              onChange={formik.handleChange}
+              inputProps={{
+                name: "typeOfPet",
+                id: "type-native-simple",
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value={"dog"}>Dog</option>
+              <option value={"cat"}>Cat</option>
+              <option value={"other"}>Other</option>
+            </Select>
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
+
+          {/* Age */}
+          <FormControl
+            className={classes.formControl}
+            variant="outlined"
+            fullWidth
+            required
+          >
+            <InputLabel htmlFor="age-native-simple">Age</InputLabel>
+            <Select
+              native
+              value={formik.values.age}
+              onChange={formik.handleChange}
+              label="Age"
+              inputProps={{
+                name: "age",
+                id: "age-native-simple",
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value={"baby"}>Baby (0-6 months)</option>
+              <option value={"young"}>Young (6-12 months)</option>
+              <option value={"adult"}>Adult (1-7 years)</option>
+              <option value={"senior"}>Senior (7+ years)</option>
+            </Select>
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
+
+          {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
+
+          {/* Size */}
+          <FormControl
+            className={classes.formControl}
+            variant="outlined"
+            fullWidth
+            required
+          >
+            <InputLabel htmlFor="size-native-simple">Size</InputLabel>
+            <Select
+              native
+              label="Size"
+              value={formik.values.size}
+              onChange={formik.handleChange}
+              inputProps={{
+                name: "size",
+                id: "size-native-simple",
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value={"small"}>small (until 30cm)</option>
+              <option value={"medium"}>medium (until 50cm)</option>
+              <option value={"large"}>large (above 50cm)</option>
+            </Select>
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
+
+          {/* Gender */}
+          <FormControl
+            className={classes.formControl}
+            variant="outlined"
+            fullWidth
+            required
+          >
+            <InputLabel htmlFor="gender-native-simple">Gender</InputLabel>
+            <Select
+              label="Gender"
+              native
+              value={formik.values.gender}
+              onChange={formik.handleChange}
+              inputProps={{
+                name: "gender",
+                id: "gender-native-simple",
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value={"female"}>Female</option>
+              <option value={"male"}>Male</option>
+            </Select>
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
+
+          {/* Name */}
+          <FormControl fullWidth>
+            <TextField
+              label="Name"
+              name="name"
+              required
+              id="name"
               variant="outlined"
               onChange={formik.handleChange}
-              value={formik.values.email}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-              color="secondary"
-            /> */}
-            {/* <FormControl component="fieldset">
-              <FormLabel component="legend">Type of pet</FormLabel>
-              <RadioGroup
-                aria-label="typeOfPet"
-                name="typeOfPet1"
-                value={value}
-                onChange={handleChange}
-              >
-                <FormControlLabel value="Dog" control={<Radio />} label="Dog" />
-                <FormControlLabel value="Cat" control={<Radio />} label="Cat" />
-                <FormControlLabel
-                  value="Bird"
-                  control={<Radio />}
-                  label="Bird"
-                />
-                <FormControlLabel
-                  value="Other"
-                  control={<Radio />}
-                  label="Other"
-                />
-              </RadioGroup>
-            </FormControl> */}
+              value={formik.values.name}
+            />
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
 
-            {/*             
-            <InputLabel id="label">Age</InputLabel>
-            <Select labelId="label" id="select" value="20">
-              <MenuItem value="10">Ten</MenuItem>
-              <MenuItem value="20">Twenty</MenuItem>
-            </Select> */}
+          {/* Likes */}
+          <FormControl fullWidth>
+            <TextField
+              label="Likes"
+              name="likes"
+              id="likes"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.likes}
+            />
+            <FormHelperText>Optional</FormHelperText>
+          </FormControl>
+
+          {/* Dislikes */}
+          <FormControl fullWidth>
+            <TextField
+              label="Dislikes"
+              name="dislikes"
+              id="dislikes"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.dislikes}
+            />
+            <FormHelperText>Optional</FormHelperText>
+          </FormControl>
+
+          {/* Habits */}
+          <FormControl fullWidth>
+            <TextField
+              label="Habits"
+              name="habits"
+              id="habits"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.habits}
+            />
+            <FormHelperText>Optional</FormHelperText>
+          </FormControl>
+
+          {/* Extras */}
+          <FormControl fullWidth>
+            <TextField
+              label="Anything else you would like to tell future pawrents..."
+              name="extras"
+              id="extras"
+              variant="outlined"
+              multiline
+              rows={4}
+              onChange={formik.handleChange}
+              value={formik.values.extras}
+            />
+            <FormHelperText>Optional</FormHelperText>
+          </FormControl>
+
+          {/* image upload */}
+          <UploadComponent
+            setFieldValue={formik.setFieldValue}
+            values={formik.values}
+          />
+
+          <div className="image-preview">
+            {formik.values.photos &&
+              formik.values.photos.map((photo, i) => (
+                <Thumb key={i} file={photo} />
+              ))}
           </div>
-
+          {/* submit button */}
           <Button
             disableElevation
             color="primary"
@@ -147,9 +290,6 @@ export default function CreateAd() {
           >
             Submit
           </Button>
-          <p>
-            Go to <Link to="/registration">Sign Up</Link>
-          </p>
         </form>
       </div>
     </div>

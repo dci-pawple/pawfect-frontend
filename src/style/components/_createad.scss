@@ -1,0 +1,38 @@
+.dropzone {
+  // background-color: $primary-light;
+  border-radius: 3px;
+  border: 1px solid #acabac;
+  padding: 1rem;
+  width: 100%;
+
+  &:hover {
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  p {
+    color: #707071;
+    font-size: 1.4rem;
+  }
+}
+
+.image-preview {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+// Thumb
+
+.img-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.img-thumbnail {
+  height: 200px;
+  width: auto;
+}
