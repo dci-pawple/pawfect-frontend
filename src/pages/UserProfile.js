@@ -56,8 +56,9 @@ const useStyles = makeStyles((theme) =>
           },
         },
       },
-    })
-  );
+    },
+  })
+);
 
 
 const UserProfile = () => {
