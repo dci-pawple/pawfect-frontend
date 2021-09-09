@@ -5,11 +5,11 @@ export default function Footer() {
     <footer>
       <ul className="flex">
         <li>
-          <h5 className="copyright">
+          {/* <h5 className="copyright"> */}
             <p>
               All copyright &copy; for <b>Magda, Julia, Phil, Dusan and Mo</b>
             </p>
-          </h5>
+          {/* </h5> */}
         </li>
 
         <li>

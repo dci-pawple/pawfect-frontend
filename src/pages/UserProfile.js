@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import {
   makeStyles,
-  createTheme,
-  ThemeProvider,
   createStyles,
 } from "@material-ui/core/styles";
 import { useFormik } from "formik";
@@ -60,11 +58,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Poppins",
-  },
-});
 
 const UserProfile = () => {
   const classes = useStyles();
@@ -119,7 +112,7 @@ const UserProfile = () => {
     onSubmit: async (values) => {
       try {
         const response = await fetch(`http://localhost:4000/users/${userId}`, {
-          //change to PATCH
+          
           method: "PATCH",
           mode: "cors",
           headers: {
@@ -141,7 +134,6 @@ const UserProfile = () => {
   return (
     <div className="app-container container">
       <div className="account__container">
-        <ThemeProvider theme={theme}>
           <div className="user-form-container">
             <h2>Your profile:</h2>
             <form
@@ -337,7 +329,6 @@ const UserProfile = () => {
               <i class="fas fa-plus-circle"></i>
             </button>
           </div>
-        </ThemeProvider>
       </div>
     </div>
   );

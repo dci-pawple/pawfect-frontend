@@ -1,0 +1,175 @@
+.pet {
+	&__container {
+		p {
+			font-size: 1.1rem;
+		}
+
+		.btn-go-back {
+			outline: none;
+			border: none;
+			display: block;
+			width: 15%;
+			background: transparent;
+			cursor: pointer;
+			font-family: $font-text;
+			box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+			margin-bottom: 2rem;
+			padding: 0.3rem;
+			a {
+				color: inherit;
+				text-decoration: none;
+				font-family: $font-text;
+			}
+		}
+	}
+    
+
+	&__image-container {
+		height: 30vh;
+		width: 100%;
+		border-radius: 10px;
+		object-fit: cover;
+		object-position: 50% 50%;
+		background-size: cover;
+		background-position: center center;
+		margin: 0 .5rem;
+		position: relative;
+
+		.fas {
+			color: $primary;
+			position: absolute;
+			bottom: 10px;
+			left: 10px;
+			font-size: 3rem;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			border-radius: 10px;
+			object-fit: cover;
+			object-position: 50% 50%;
+			background-size: cover;
+			background-position: center center;
+		}
+	}
+
+	&__content-container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__info-container {
+		flex: 3;
+	}
+
+	&__info-data-container {
+		display: flex;
+		margin: 1rem 0;
+	}
+
+	&__info-data {
+		font-weight: bold;
+		margin-right: 1rem;
+        text-align: justify;
+	}
+
+	&__info-data-about {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin: 1em 0;
+		width: 90%;
+
+		&:before {
+			content: "";
+			position: absolute;
+			background-color: $primary;
+			width: 100%;
+			height: 2px;
+			top: -8px;
+			left: 0;
+		}
+	}
+}
+
+.owner {
+   
+	&__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		background-color: $primary-light;
+		flex: 1;
+		border-radius: 10px;
+		height: 25vh;
+        margin: 5rem auto;
+
+		.btn__chat {
+			outline: none;
+			border: none;
+			background-color: $primary;
+			border-radius: 10px;
+			color: $very-dark-grey;
+			transition: all 0.3s ease-in-out;
+			padding: 0.5em;
+			display: block;
+			font-size: 1.5rem;
+			width: 65%;
+			color: $very-light-grey;
+			text-decoration: none;
+			display: flex;
+			justify-content: space-between;
+			align-self: center;
+			font-family: $font-text;
+
+			i {
+				align-self: center;
+			}
+
+			a {
+				color: $very-light-grey;
+				text-decoration: none;
+				display: flex;
+				justify-content: space-between;
+				font-family: $font-text;
+                font-weight: bold;
+			}
+		}
+	}
+
+    &__btn-container {
+        padding: 0 2rem;
+    }
+
+	&__icons {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 2rem;
+		.fas {
+			font-size: 2rem;
+		}
+		p {
+			text-align: center;
+		}
+		&__icon-container {
+			display: flex;
+		}
+	}
+
+	&__data-container {
+		display: flex;
+		align-self: left;
+		padding: 0 2rem;
+	}
+
+	&__image-container img {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		object-fit: cover;
+		margin-right: 0.3em;
+	}
+}
