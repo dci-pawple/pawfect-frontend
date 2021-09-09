@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
+import { useHistory } from "react-router-dom";
+import "@fontsource/roboto";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Select,
@@ -64,6 +66,9 @@ const UploadComponent = (props) => {
 
 export default function CreateAd() {
   const classes = useStyles();
+  let history = useHistory();
+
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -80,8 +85,43 @@ export default function CreateAd() {
       photos: "",
     },
 
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      //alert (JSON.stringify (values, null, 2));
+      setLoading(true);
+      console.log("values=>", values.photos);
+      let fd = new FormData();
+      fd.append("name", values.name);
+      fd.append("age", values.age);
+      //fd.append("photos", values.photos);
+      values.photos.forEach((file) => fd.append("photos", file));
+      console.log("fd=>", fd);
+
+      try {
+        const response = await fetch("http://localhost:4000/pets/newpet", {
+          method: "POST",
+          mode: "cors",
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          //   "charset":"utf-8",
+          // },
+          body: fd,
+        });
+
+        const data = await response.json();
+        console.log("data=>", data);
+        setLoading(false);
+
+        if (!data.success) {
+          console.log("Error with uploading");
+        } else {
+          console.log("Upload completed successfully");
+
+          history.push("/");
+        }
+      } catch (err) {
+        //console.error('Error while fetching data for login =>', err)
+        console.log(err.message);
+      }
     },
   });
 
@@ -151,30 +191,32 @@ export default function CreateAd() {
           {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
 
           {/* Size */}
-          <FormControl
-            className={classes.formControl}
-            variant="outlined"
-            fullWidth
-            required
-          >
-            <InputLabel htmlFor="size-native-simple">Size</InputLabel>
-            <Select
-              native
-              label="Size"
-              value={formik.values.size}
-              onChange={formik.handleChange}
-              inputProps={{
-                name: "size",
-                id: "size-native-simple",
-              }}
+          {formik.values.typeOfPet === "dog" && (
+            <FormControl
+              className={classes.formControl}
+              variant="outlined"
+              fullWidth
+              required
             >
-              <option aria-label="None" value="" />
-              <option value={"small"}>small (until 30cm)</option>
-              <option value={"medium"}>medium (until 50cm)</option>
-              <option value={"large"}>large (above 50cm)</option>
-            </Select>
-            <FormHelperText>Required</FormHelperText>
-          </FormControl>
+              <InputLabel htmlFor="size-native-simple">Size</InputLabel>
+              <Select
+                native
+                label="Size"
+                value={formik.values.size}
+                onChange={formik.handleChange}
+                inputProps={{
+                  name: "size",
+                  id: "size-native-simple",
+                }}
+              >
+                <option aria-label="None" value="" />
+                <option value={"small"}>small (until 30cm)</option>
+                <option value={"medium"}>medium (until 50cm)</option>
+                <option value={"large"}>large (above 50cm)</option>
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+          )}
 
           {/* Gender */}
           <FormControl
