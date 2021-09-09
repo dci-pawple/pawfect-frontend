@@ -34,6 +34,11 @@
         display: block;
         font-size: 1.5rem;
         width: 30%;
+        color: $very-light-grey;
+        text-decoration: none;
+        display: flex;
+        justify-content: space-between;
+        font-family: $font-text;
 
 
         &__post {
@@ -44,12 +49,6 @@
         i {
           align-self: center;
         }
-
-        color: $very-light-grey;
-            text-decoration: none;
-            display: flex;
-            justify-content: space-between;
-            font-family: $font-text;
 
         a {
             color: $very-light-grey;
