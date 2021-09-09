@@ -70,12 +70,6 @@ export default function CreateAd() {
 
   const [loading, setLoading] = useState(false);
 
-  const [dog, setDog] = useState(false);
-
-  const isDog = () => {
-    setDog(true);
-  };
-
   const formik = useFormik({
     initialValues: {
       typeOfPet: "",
@@ -160,9 +154,7 @@ export default function CreateAd() {
               }}
             >
               <option aria-label="None" value="" />
-              <option value={"dog"} onKeyDown={isDog}>
-                Dog
-              </option>
+              <option value={"dog"}>Dog</option>
               <option value={"cat"}>Cat</option>
               <option value={"other"}>Other</option>
             </Select>
@@ -199,7 +191,7 @@ export default function CreateAd() {
           {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
 
           {/* Size */}
-          {dog && (
+          {formik.values.typeOfPet === "dog" && (
             <FormControl
               className={classes.formControl}
               variant="outlined"
