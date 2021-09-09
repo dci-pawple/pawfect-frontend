@@ -1,12 +1,12 @@
 .popup {
     position: fixed;
     top: 50%;
-    right: 11%;
-    width: 10vh;
+    right: 23vh;
+    width: 8vh;
     height: auto;
     background-color: $light-grey;
     border-radius: 10px;
-
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
