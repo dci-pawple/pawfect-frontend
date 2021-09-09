@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
 import { useHistory } from "react-router-dom";
-import "@fontsource/roboto";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Select,
