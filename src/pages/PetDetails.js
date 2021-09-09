@@ -7,7 +7,6 @@ import Dog2 from "../dummy/images/alan-king-KZv7w34tluA-unsplash.jpg";
 import Dog3 from "../dummy/images/charles-deluvio-Mv9hjnEUHR4-unsplash.jpg";
 import Dog4 from "../dummy/images/charles-deluvio-pOUA8Xay514-unsplash.jpg";
 
-
 const breakPoints = [
 	{ width: 1, itemsToShow: 1, pagination: false },
 	{ width: 550, itemsToShow: 2, itemsToScroll: 2 },
@@ -16,12 +15,15 @@ const breakPoints = [
 ];
 
 const PetDetails = () => {
-	const [buttonPopup, setButtonPopup] = useState(false)
-	let history = useHistory()
+	const [buttonPopup, setButtonPopup] = useState(false);
+	const [likeIcon, setLikeIcon] = useState('black');
+	const [favourite, setFavourite] = useState('Add to favourites')
+
+	let history = useHistory();
 
 	return (
 		<div className='app-container container pet__container'>
-			<button onClick={()=>history.goBack()} className='btn-go-back'>
+			<button onClick={() => history.goBack()} className='btn-go-back'>
 				Go Back
 			</button>
 
@@ -106,21 +108,28 @@ const PetDetails = () => {
 				<div className='owner__container'>
 					<div className='owner__icons'>
 						<div className='owner__icon-container'>
-							<button>
-								<i class='fas fa-heart'></i>
-								<p>Add to favourites</p>
+							<button
+								className='owner__btn'
+								onClick={() => {
+									likeIcon === "black" ? setLikeIcon("#f76c6c") : setLikeIcon("black");
+									favourite === "Add to favourites" ? setFavourite("Remove from favourites") : setFavourite("Add to favourites");
+								}
+								}
+								>
+								<i className='fas fa-heart' style={{ color: likeIcon }}></i>
+								<p className='hidden'>{favourite}</p>
 							</button>
 						</div>
-						
+
 						<div className='owner__icon-container'>
-							<button onClick={()=>setButtonPopup(true)}>
-								<i class='fas fa-share'></i>
-								<p>Share this ad</p>
+							<button  onClick={() => setButtonPopup(true)} className='owner__btn'>
+								<i className='fas fa-share'></i>
+								<p className='hidden'>Share this ad</p>
 							</button>
-							<SharePopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-							</SharePopup>
+							<SharePopup
+								trigger={buttonPopup}
+								setTrigger={setButtonPopup}></SharePopup>
 						</div>
-						
 					</div>
 
 					<div className='owner__data-container'>
