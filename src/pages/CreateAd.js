@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -65,6 +65,12 @@ const UploadComponent = (props) => {
 export default function CreateAd() {
   const classes = useStyles();
 
+  const [dog, setDog] = useState(false);
+
+  const isDog = () => {
+    setDog(true);
+  };
+
   const formik = useFormik({
     initialValues: {
       typeOfPet: "",
@@ -114,7 +120,9 @@ export default function CreateAd() {
               }}
             >
               <option aria-label="None" value="" />
-              <option value={"dog"}>Dog</option>
+              <option value={"dog"} onKeyDown={isDog}>
+                Dog
+              </option>
               <option value={"cat"}>Cat</option>
               <option value={"other"}>Other</option>
             </Select>
@@ -151,30 +159,32 @@ export default function CreateAd() {
           {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
 
           {/* Size */}
-          <FormControl
-            className={classes.formControl}
-            variant="outlined"
-            fullWidth
-            required
-          >
-            <InputLabel htmlFor="size-native-simple">Size</InputLabel>
-            <Select
-              native
-              label="Size"
-              value={formik.values.size}
-              onChange={formik.handleChange}
-              inputProps={{
-                name: "size",
-                id: "size-native-simple",
-              }}
+          {dog && (
+            <FormControl
+              className={classes.formControl}
+              variant="outlined"
+              fullWidth
+              required
             >
-              <option aria-label="None" value="" />
-              <option value={"small"}>small (until 30cm)</option>
-              <option value={"medium"}>medium (until 50cm)</option>
-              <option value={"large"}>large (above 50cm)</option>
-            </Select>
-            <FormHelperText>Required</FormHelperText>
-          </FormControl>
+              <InputLabel htmlFor="size-native-simple">Size</InputLabel>
+              <Select
+                native
+                label="Size"
+                value={formik.values.size}
+                onChange={formik.handleChange}
+                inputProps={{
+                  name: "size",
+                  id: "size-native-simple",
+                }}
+              >
+                <option aria-label="None" value="" />
+                <option value={"small"}>small (until 30cm)</option>
+                <option value={"medium"}>medium (until 50cm)</option>
+                <option value={"large"}>large (above 50cm)</option>
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+          )}
 
           {/* Gender */}
           <FormControl
