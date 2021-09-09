@@ -14,8 +14,12 @@ import CreateAd from "./pages/CreateAd";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MyContext from "./context/MyContext";
+import PetDetails from "./pages/PetDetails";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "Poppins"
+  },
   palette: {
     primary: {
       light: "#ff9e9a",
@@ -71,6 +75,11 @@ const App = () => {
           <Route path="/user/profile">
             <UserProfile />
           </Route>
+          
+          <Route path="/pet">
+            <PetDetails/>
+          </Route>
+
         </Switch>
 
         <Footer />

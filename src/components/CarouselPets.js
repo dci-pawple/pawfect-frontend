@@ -36,7 +36,7 @@ const CarouselPets = () => {
                     <PetCard src={Dog3}/>
                     <PetCard src={Dog4}/>
                 </Carousel>
-                <button className="btn__save">
+                <button className="btn__see-all">
                     <Link to="/gallery">See all</Link>
                 </button>
 
