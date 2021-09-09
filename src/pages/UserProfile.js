@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import {
   makeStyles,
-  createTheme,
-  ThemeProvider,
   createStyles,
 } from "@material-ui/core/styles";
 import { useFormik } from "formik";
@@ -136,7 +134,6 @@ const UserProfile = () => {
   return (
     <div className="app-container container">
       <div className="account__container">
-        <ThemeProvider theme={theme}>
           <div className="user-form-container">
             <h2>Your profile:</h2>
             <form
@@ -332,7 +329,6 @@ const UserProfile = () => {
               <i class="fas fa-plus-circle"></i>
             </button>
           </div>
-        </ThemeProvider>
       </div>
     </div>
   );
