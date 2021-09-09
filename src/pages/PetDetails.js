@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
-
+import SharePopup from "../components/SharePopup";
 import Dog1 from "../dummy/images/karsten-winegeart-oU6KZTXhuvk-unsplash.jpg";
 import Dog2 from "../dummy/images/alan-king-KZv7w34tluA-unsplash.jpg";
 import Dog3 from "../dummy/images/charles-deluvio-Mv9hjnEUHR4-unsplash.jpg";
 import Dog4 from "../dummy/images/charles-deluvio-pOUA8Xay514-unsplash.jpg";
+
 
 const breakPoints = [
 	{ width: 1, itemsToShow: 1, pagination: false },
@@ -15,6 +16,8 @@ const breakPoints = [
 ];
 
 const PetDetails = () => {
+	const [buttonPopup, setButtonPopup] = useState(false)
+
 	return (
 		<div className='app-container container pet__container'>
 			<button className='btn-go-back'>
@@ -102,14 +105,21 @@ const PetDetails = () => {
 				<div className='owner__container'>
 					<div className='owner__icons'>
 						<div className='owner__icon-container'>
-							<i class='fas fa-heart'></i>
-							<p>Add to favourites</p>
+							<button>
+								<i class='fas fa-heart'></i>
+								<p>Add to favourites</p>
+							</button>
 						</div>
-
+						
 						<div className='owner__icon-container'>
-							<i class='fas fa-share'></i>
-							<p>Share this ad</p>
+							<button onClick={()=>setButtonPopup(true)}>
+								<i class='fas fa-share'></i>
+								<p>Share this ad</p>
+							</button>
+							<SharePopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+							</SharePopup>
 						</div>
+						
 					</div>
 
 					<div className='owner__data-container'>

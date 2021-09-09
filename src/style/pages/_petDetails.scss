@@ -148,6 +148,12 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 0 2rem;
+		button {
+			background: transparent;
+			border: none;
+			outline: none;
+			font-family: $font-text;
+		}
 		.fas {
 			font-size: 2rem;
 		}
