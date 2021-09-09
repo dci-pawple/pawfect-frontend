@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./style/App.scss";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import Theme from "./style/theme/Theme";
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
@@ -16,27 +16,6 @@ import Footer from "./components/Footer";
 import MyContext from "./context/MyContext";
 import PetDetails from "./pages/PetDetails";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#ff9e9a",
-      main: "#f76c6c",
-      dark: "#bf3a41",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#464646",
-      main: "#1f1f1f",
-      dark: "#000000",
-      contrastText: "#fff",
-    },
-  },
-  typography: {
-    fontSize: 20,
-    fontFamily: "Poppins",
-  },
-});
-
 const App = () => {
   //need this to get search input
   const params = new URLSearchParams(window.location.search);
@@ -47,7 +26,7 @@ const App = () => {
   console.log(user);
 
   return (
-    <ThemeProvider theme={theme}>
+    <Theme>
       <BrowserRouter>
         <Navbar />
 
@@ -80,7 +59,7 @@ const App = () => {
 
         <Footer />
       </BrowserRouter>
-    </ThemeProvider>
+    </Theme>
   );
 };
 
