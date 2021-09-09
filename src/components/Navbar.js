@@ -142,7 +142,10 @@ export default function Navbar() {
                     <Link
                       to="/"
                       className="drop-link"
-                      onClick={closeMobileMenu}
+                      onClick={() => {
+                        closeMobileMenu();
+                        setLogin(false);
+                      }}
                     >
                       Logout
                     </Link>
