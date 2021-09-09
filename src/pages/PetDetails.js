@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import Dog1 from "../dummy/images/karsten-winegeart-oU6KZTXhuvk-unsplash.jpg";
@@ -17,11 +17,12 @@ const breakPoints = [
 
 const PetDetails = () => {
 	const [buttonPopup, setButtonPopup] = useState(false)
+	let history = useHistory()
 
 	return (
 		<div className='app-container container pet__container'>
-			<button className='btn-go-back'>
-				<Link to='/'>Go Back</Link>
+			<button onClick={()=>history.goBack()} className='btn-go-back'>
+				Go Back
 			</button>
 
 			<Carousel
