@@ -1,12 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
-import {
-  makeStyles,
-  createStyles,
-} from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
+import { useDropzone } from "react-dropzone";
+
 import MyContext from "../context/MyContext";
+import Thumb from "../components/Thumb";
 
 //Form Valitation
 
@@ -58,6 +58,25 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+const UploadComponent = (props) => {
+  const { setFieldValue, values } = props;
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedPhotos) => {
+      setFieldValue("profilePhoto", acceptedPhotos);
+    },
+  });
+  return (
+    <div>
+      <div {...getRootProps({ className: "upload-text" })}>
+        <input {...getInputProps()} />
+
+        <p>Update photo</p>
+      </div>
+    </div>
+  );
+};
 
 const UserProfile = () => {
   const classes = useStyles();
@@ -88,6 +107,7 @@ const UserProfile = () => {
     emailConfirm: "",
     password: "",
     passwordConfirm: "",
+    profilePhoto: "",
   });
 
   useEffect(() => {
@@ -102,6 +122,7 @@ const UserProfile = () => {
       emailConfirm: "",
       password: user.password || "",
       passwordConfirm: "",
+      profilePhoto: user.profilePhoto || "",
     });
   }, [user]);
 
@@ -112,7 +133,6 @@ const UserProfile = () => {
     onSubmit: async (values) => {
       try {
         const response = await fetch(`http://localhost:4000/users/${userId}`, {
-          
           method: "PATCH",
           mode: "cors",
           headers: {
@@ -134,201 +154,217 @@ const UserProfile = () => {
   return (
     <div className="app-container container">
       <div className="account__container">
-          <div className="user-form-container">
-            <h2>Your profile:</h2>
-            <form
-              className={classes.root}
-              noValidate
-              autoComplete="off"
-              onSubmit={formik.handleSubmit}
+        <div className="user-form-container">
+          <h2>Your profile:</h2>
+
+          <form
+            className={classes.root}
+            noValidate
+            autoComplete="off"
+            onSubmit={formik.handleSubmit}
+          >
+            <div>
+              <TextField
+                style={{ marginRight: "1rem" }}
+                id="firstName"
+                placeholder="First name"
+                label="First name"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.firstName}
+                error={
+                  formik.touched.firstName && Boolean(formik.errors.firstName)
+                }
+                helperText={formik.touched.firstName && formik.errors.firstName}
+              />
+
+              <TextField
+                placeholder="Last name"
+                id="lastName"
+                label="Last name"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.lastName}
+                error={
+                  formik.touched.lastName && Boolean(formik.errors.lastName)
+                }
+                helperText={formik.touched.lastName && formik.errors.lastName}
+              />
+            </div>
+
+            <div>
+              <TextField
+                style={{ marginRight: "1rem" }}
+                placeholder="Your Phone Number"
+                id="phoneNumber"
+                label="Phone number"
+                fullWidth
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.phoneNumber}
+                error={
+                  formik.touched.phoneNumber &&
+                  Boolean(formik.errors.phoneNumber)
+                }
+                helperText={
+                  formik.touched.phoneNumber && formik.errors.phoneNumber
+                }
+              />
+            </div>
+
+            <div>
+              <TextField
+                style={{ marginRight: "1rem" }}
+                id="city"
+                placeholder="City"
+                label="City"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.city}
+                error={formik.touched.city && Boolean(formik.errors.city)}
+                helperText={formik.touched.city && formik.errors.city}
+              />
+
+              <TextField
+                id="postalCode"
+                label="Postal code"
+                placeholder="Postal code"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.postalCode}
+                error={
+                  formik.touched.postalCode && Boolean(formik.errors.postalCode)
+                }
+                helperText={
+                  formik.touched.postalCode && formik.errors.postalCode
+                }
+              />
+            </div>
+            <div>
+              <TextField
+                id="street"
+                placeholder="Street name and number"
+                label="Street name and number"
+                variant="outlined"
+                fullWidth
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.streetName}
+                error={
+                  formik.touched.streetName && Boolean(formik.errors.streetName)
+                }
+                helperText={
+                  formik.touched.streetName && formik.errors.streetName
+                }
+              />
+            </div>
+            <div>
+              <TextField
+                style={{ marginRight: "1rem" }}
+                label="Change your e-mail"
+                type="email"
+                name="email"
+                id="email"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+              <TextField
+                label="Confirm your new e-mail"
+                type="email"
+                name="emailConfirm"
+                id="emailConfirm"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.emailConfirm}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+            </div>
+            <div>
+              <TextField
+                style={{ marginRight: "1rem" }}
+                label="Change password"
+                type="password"
+                name="password"
+                id="password"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+              />
+
+              <TextField
+                label="Confirm changed password"
+                type="password"
+                name="passwordConfirm"
+                id="passwordConfirm"
+                variant="outlined"
+                color="secondary"
+                onChange={formik.handleChange}
+                value={formik.values.passwordConfirm}
+                error={
+                  formik.touched.passwordConfirm &&
+                  Boolean(formik.errors.passwordConfirm)
+                }
+                helperText={
+                  formik.touched.passwordConfirm &&
+                  formik.errors.passwordConfirm
+                }
+              />
+            </div>
+            <Button
+              className="btn"
+              disableElevation
+              variant="contained"
+              type="submit"
             >
+              SAVE CHANGES
+            </Button>
+          </form>
+
+          <p>
+            You may search our <Link to="/gallery">database of pets</Link>
+            looking for homes.
+          </p>
+
+          <button className="btn btn__post">
+            <Link to="/">POST AN AD</Link>
+            <i class="fas fa-plus-circle"></i>
+          </button>
+        </div>
+        <div className="profile-img-container">
+          <div className="img-container">
+            {formik.values.profilePhoto === "" ? (
+              <i class="fas fa-user-circle"></i>
+            ) : (
               <div>
-                <TextField
-                  style={{ marginRight: "1rem" }}
-                  id="firstName"
-                  placeholder="First name"
-                  label="First name"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.firstName}
-                  error={
-                    formik.touched.firstName && Boolean(formik.errors.firstName)
-                  }
-                  helperText={
-                    formik.touched.firstName && formik.errors.firstName
-                  }
-                />
-
-                <TextField
-                  placeholder="Last name"
-                  id="lastName"
-                  label="Last name"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.lastName}
-                  error={
-                    formik.touched.lastName && Boolean(formik.errors.lastName)
-                  }
-                  helperText={formik.touched.lastName && formik.errors.lastName}
-                />
+                {formik.values.profilePhoto &&
+                  formik.values.profilePhoto.map((photo, i) => (
+                    <Thumb key={i} file={photo} />
+                  ))}
               </div>
-
-              <div>
-                <TextField
-                  style={{ marginRight: "1rem" }}
-                  placeholder="Your Phone Number"
-                  id="phoneNumber"
-                  label="Phone number"
-                  fullWidth
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.phoneNumber}
-                  error={
-                    formik.touched.phoneNumber &&
-                    Boolean(formik.errors.phoneNumber)
-                  }
-                  helperText={
-                    formik.touched.phoneNumber && formik.errors.phoneNumber
-                  }
-                />
-              </div>
-
-              <div>
-                <TextField
-                  style={{ marginRight: "1rem" }}
-                  id="city"
-                  placeholder="City"
-                  label="City"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.city}
-                  error={formik.touched.city && Boolean(formik.errors.city)}
-                  helperText={formik.touched.city && formik.errors.city}
-                />
-
-                <TextField
-                  id="postalCode"
-                  label="Postal code"
-                  placeholder="Postal code"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.postalCode}
-                  error={
-                    formik.touched.postalCode &&
-                    Boolean(formik.errors.postalCode)
-                  }
-                  helperText={
-                    formik.touched.postalCode && formik.errors.postalCode
-                  }
-                />
-              </div>
-              <div>
-                <TextField
-                  id="street"
-                  placeholder="Street name and number"
-                  label="Street name and number"
-                  variant="outlined"
-                  fullWidth
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.streetName}
-                  error={
-                    formik.touched.streetName &&
-                    Boolean(formik.errors.streetName)
-                  }
-                  helperText={
-                    formik.touched.streetName && formik.errors.streetName
-                  }
-                />
-              </div>
-              <div>
-                <TextField
-                  style={{ marginRight: "1rem" }}
-                  label="Change your e-mail"
-                  type="email"
-                  name="email"
-                  id="email"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
-                <TextField
-                  label="Confirm your new e-mail"
-                  type="email"
-                  name="emailConfirm"
-                  id="emailConfirm"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.emailConfirm}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
-              </div>
-              <div>
-                <TextField
-                  style={{ marginRight: "1rem" }}
-                  label="Change password"
-                  type="password"
-                  name="password"
-                  id="password"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  error={
-                    formik.touched.password && Boolean(formik.errors.password)
-                  }
-                  helperText={formik.touched.password && formik.errors.password}
-                />
-
-                <TextField
-                  label="Confirm changed password"
-                  type="password"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  variant="outlined"
-                  color="secondary"
-                  onChange={formik.handleChange}
-                  value={formik.values.passwordConfirm}
-                  error={
-                    formik.touched.passwordConfirm &&
-                    Boolean(formik.errors.passwordConfirm)
-                  }
-                  helperText={
-                    formik.touched.passwordConfirm &&
-                    formik.errors.passwordConfirm
-                  }
-                />
-              </div>
-              <Button
-                className="btn"
-                disableElevation
-                variant="contained"
-                type="submit"
-              >
-                SAVE CHANGES
-              </Button>
-            </form>
-
-            <p>
-              You may search our <Link to="/gallery">database of pets</Link>{" "}
-              looking for homes.{" "}
-            </p>
-
-            <button className="btn btn__post">
-              <Link to="/">POST AN AD</Link>
-              <i class="fas fa-plus-circle"></i>
-            </button>
+            )}
           </div>
+
+          <UploadComponent
+            setFieldValue={formik.setFieldValue}
+            values={formik.values}
+          />
+        </div>
       </div>
     </div>
   );
