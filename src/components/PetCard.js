@@ -2,16 +2,19 @@ import React from 'react'
 import { Heart, Location, FemaleGender } from '../icons/icons'
 import {Link} from 'react-router-dom'
 
-const PetCard = ({src}) => {
+const PetCard = ({src,petData}) => {
+    if(!petData)return 0;
     return (
+        
         <Link to="#" className="card">
             <div className="card__image">
-                <img src={src} alt="dog portrait"/>
+            {/* petData.photos[0].url */}
+                <img src={petData.photos[0].url} alt="dog portrait"/>
             </div> 
             <div className="card__content">
                 <div className="card__content--top">
                     <div className="card__name-with-gender">
-                        <div className="card__title">Lily</div>
+                        <div className="card__title">{petData.name}</div>
                         <div className="card__gender--icon">
                             <FemaleGender/>
                         </div>
@@ -22,8 +25,8 @@ const PetCard = ({src}) => {
                     </button>
                 </div>
                 <div className="card__description">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <p>1 year old</p>
+                    <p>{petData.extras}</p>
+                    <p>{petData.age} year old</p>
                 </div>
                 <div className="card__location">
                     <div className="card__location--icon">
