@@ -1,15 +1,14 @@
-import React, { useState,useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../dummy/pawfect-pink.png";
 import profilepic from "../dummy/images/profile-example.png";
-import MyContext from "../context/MyContext"
+import MyContext from "../context/MyContext";
 
 export default function Navbar() {
-
   const [click, setClick] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [active, setActive] = useState(false);
-  const {login, setLogin} = useContext(MyContext);
+  const { login, setLogin } = useContext(MyContext);
 
   const changeBackground = () => {
     // console.log(window.scrollY);
@@ -139,6 +138,16 @@ export default function Navbar() {
                       onClick={closeMobileMenu}
                     >
                       Saved searches
+                    </Link>
+                    <Link
+                      to="/"
+                      className="drop-link"
+                      onClick={() => {
+                        closeMobileMenu();
+                        setLogin(false);
+                      }}
+                    >
+                      Logout
                     </Link>
                   </div>
                 )}
