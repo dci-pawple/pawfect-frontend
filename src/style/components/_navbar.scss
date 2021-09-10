@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
     padding: 1rem 10rem;
     // padding: 1rem 0;
     transition: background 250ms ease-in;
@@ -219,6 +220,8 @@
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
+    z-index: 1000;
+    background-color: $primary;
   }
 
   .nav-link {
@@ -238,7 +241,9 @@
     width: 110px;
   }
 
+
   .user {
     padding: 2rem;
   }
+
 }
