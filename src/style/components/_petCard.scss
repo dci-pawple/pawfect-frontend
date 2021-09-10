@@ -64,25 +64,32 @@
     margin-bottom: 0.75rem;
     line-height: 1.1;
   }
-  &__like--icon,
+  // &__like--icon,
   &__gender--icon {
     width: 1.3rem;
     height: 1.3rem;
   }
+
+  &__gender--icon {
+    margin-left: 1rem;
+  }
+
   &__like--icon {
     outline: none;
     border: none;
     color: transparent;
+    width: 2rem;
+    height: 2rem;
   }
   
 
   &__description {
     font-size: 1rem;
     line-height: 1.5;
+    font-weight: 500;
   }
 
   &__name-with-gender {
-    width: 30%;
     display: flex;
     justify-content: space-between;
   }

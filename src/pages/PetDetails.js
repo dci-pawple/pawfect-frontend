@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
+import MyContext from '../context/MyContext'
+
 import Dog1 from "../dummy/images/karsten-winegeart-oU6KZTXhuvk-unsplash.jpg";
 import Dog2 from "../dummy/images/alan-king-KZv7w34tluA-unsplash.jpg";
 import Dog3 from "../dummy/images/charles-deluvio-Mv9hjnEUHR4-unsplash.jpg";
@@ -18,8 +20,27 @@ const PetDetails = () => {
 	const [buttonPopup, setButtonPopup] = useState(false);
 	const [likeIcon, setLikeIcon] = useState('black');
 	const [favourite, setFavourite] = useState('Add to favourites')
+	const {pet, setPet} = useContext(MyContext);
+	const {petId, setPetId} = useContext(MyContext);
+
 
 	let history = useHistory();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				await fetch(`http://localhost:4000/pets/${petId}`)
+				.then((data) => data.json())
+				.then((res) => {
+				setPet(res.data);
+				})
+			}
+			catch(err) {
+				console.log(err)
+			}
+		}
+		fetchData()
+	}, [petId, setPet])
 
 	return (
 		<div className='app-container container pet__container'>
