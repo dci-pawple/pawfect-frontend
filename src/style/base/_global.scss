@@ -11,6 +11,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   background-color: $very-light-grey;
   color: $very-dark-grey;
   font-family: $font-text;
@@ -38,4 +39,5 @@ body {
 .form-container {
   max-width: 500px;
   margin: 0 auto;
+  padding-top: 3rem;
 }

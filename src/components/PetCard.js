@@ -33,6 +33,9 @@ const PetCard = ({src}) => {
                         <p>Berlin, Germany (1,5km)</p>
                     </div>
                 </div>  
+                <button className="btn__call-to-action">
+                    <Link to="/pet">Adopt me!</Link>
+                </button>
             </div>           
         </Link>
     )

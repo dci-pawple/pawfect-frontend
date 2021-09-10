@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import Carousel from "react-elastic-carousel";
 import PetCard from './PetCard';
 import Dog1 from '../dummy/images/karsten-winegeart-oU6KZTXhuvk-unsplash.jpg'
@@ -35,7 +36,10 @@ const CarouselPets = () => {
                     <PetCard src={Dog3}/>
                     <PetCard src={Dog4}/>
                 </Carousel>
-                <button className="btn__save">See all</button>
+                <button className="btn__see-all">
+                    <Link to="/gallery">See all</Link>
+                </button>
+
         </div>
     )
 }

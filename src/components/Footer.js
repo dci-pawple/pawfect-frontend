@@ -3,11 +3,13 @@ import React from "react";
 export default function Footer() {
   return (
     <footer>
+
       <aside className="copy">
         <p>
           All copyright &copy; for <b>Magda, Julia, Phil, Dusan and Mo</b>
         </p>
       </aside>
+    
       <aside className="social">
         <a
           href="https://www.facebook.com/Pawfect-100884952347295/"
