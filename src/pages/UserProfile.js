@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) =>
     root: {
       "& > *": {
         margin: theme.spacing(2),
-        "font-size": "1.6rem",
+        fontSize: "1.6rem",
         palette: {
           primary: {
             light: "#464646",
@@ -72,7 +72,7 @@ const UploadComponent = (props) => {
       <div {...getRootProps({ className: "upload-text" })}>
         <input {...getInputProps()} />
 
-        <p>Update photo</p>
+        <span>Update photo</span>
       </div>
     </div>
   );
@@ -154,21 +154,40 @@ const UserProfile = () => {
   return (
     <div className="app-container container">
       <div className="account__container">
+        <div className="profile-img-container">
+          <h1>Your profile</h1>
+          <div className="img-text-container">
+            <div className="img-container">
+              {formik.values.profilePhoto === "" ? (
+                <i class="fas fa-user-circle"></i>
+              ) : (
+                <div>
+                  {formik.values.profilePhoto &&
+                    formik.values.profilePhoto.map((photo, i) => (
+                      <Thumb key={i} file={photo} />
+                    ))}
+                </div>
+              )}
+            </div>
+            <UploadComponent
+              setFieldValue={formik.setFieldValue}
+              values={formik.values}
+            />
+          </div>
+        </div>
         <div className="user-form-container">
-          <h2>Your profile:</h2>
-
           <form
             className={classes.root}
             noValidate
             autoComplete="off"
             onSubmit={formik.handleSubmit}
           >
-            <div>
+            <div className="one-line">
               <TextField
-                style={{ marginRight: "1rem" }}
                 id="firstName"
                 placeholder="First name"
                 label="First name"
+                className="one-line-item"
                 variant="outlined"
                 color="secondary"
                 onChange={formik.handleChange}
@@ -182,6 +201,7 @@ const UserProfile = () => {
               <TextField
                 placeholder="Last name"
                 id="lastName"
+                className="one-line-item"
                 label="Last name"
                 variant="outlined"
                 color="secondary"
@@ -194,9 +214,8 @@ const UserProfile = () => {
               />
             </div>
 
-            <div>
+            <div className="one-line">
               <TextField
-                style={{ marginRight: "1rem" }}
                 placeholder="Your Phone Number"
                 id="phoneNumber"
                 label="Phone number"
@@ -215,9 +234,9 @@ const UserProfile = () => {
               />
             </div>
 
-            <div>
+            <div className="one-line">
               <TextField
-                style={{ marginRight: "1rem" }}
+                className="one-line-item"
                 id="city"
                 placeholder="City"
                 label="City"
@@ -230,6 +249,7 @@ const UserProfile = () => {
               />
 
               <TextField
+                className="one-line-item"
                 id="postalCode"
                 label="Postal code"
                 placeholder="Postal code"
@@ -245,7 +265,7 @@ const UserProfile = () => {
                 }
               />
             </div>
-            <div>
+            <div className="one-line">
               <TextField
                 id="street"
                 placeholder="Street name and number"
@@ -263,9 +283,9 @@ const UserProfile = () => {
                 }
               />
             </div>
-            <div>
+            <div className="one-line">
               <TextField
-                style={{ marginRight: "1rem" }}
+                className="one-line-item"
                 label="Change your e-mail"
                 type="email"
                 name="email"
@@ -278,6 +298,7 @@ const UserProfile = () => {
                 helperText={formik.touched.email && formik.errors.email}
               />
               <TextField
+                className="one-line-item"
                 label="Confirm your new e-mail"
                 type="email"
                 name="emailConfirm"
@@ -290,9 +311,9 @@ const UserProfile = () => {
                 helperText={formik.touched.email && formik.errors.email}
               />
             </div>
-            <div>
+            <div className="one-line">
               <TextField
-                style={{ marginRight: "1rem" }}
+                className="one-line-item"
                 label="Change password"
                 type="password"
                 name="password"
@@ -308,7 +329,8 @@ const UserProfile = () => {
               />
 
               <TextField
-                label="Confirm changed password"
+                className="one-line-item"
+                label="Confirm new password"
                 type="password"
                 name="passwordConfirm"
                 id="passwordConfirm"
@@ -336,6 +358,7 @@ const UserProfile = () => {
             </Button>
           </form>
 
+          {/* let's decide if we want this here */}
           <p>
             You may search our <Link to="/gallery">database of pets</Link>
             looking for homes.
@@ -345,25 +368,6 @@ const UserProfile = () => {
             <Link to="/">POST AN AD</Link>
             <i class="fas fa-plus-circle"></i>
           </button>
-        </div>
-        <div className="profile-img-container">
-          <div className="img-container">
-            {formik.values.profilePhoto === "" ? (
-              <i class="fas fa-user-circle"></i>
-            ) : (
-              <div>
-                {formik.values.profilePhoto &&
-                  formik.values.profilePhoto.map((photo, i) => (
-                    <Thumb key={i} file={photo} />
-                  ))}
-              </div>
-            )}
-          </div>
-
-          <UploadComponent
-            setFieldValue={formik.setFieldValue}
-            values={formik.values}
-          />
         </div>
       </div>
     </div>
