@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { Heart, Location, FemaleGender } from "../icons/icons";
+import React, { useState, useContext } from "react";
+import { Location } from "../icons/icons";
 import { Link } from "react-router-dom";
+import MyContext from "../context/MyContext";
 
 const PetCard = ({ pet }) => {
-	// console.log("PET => ", pet)
+
 	const [likeIcon, setLikeIcon] = useState("black");
+	const { petId, setPetId } = useContext(MyContext);
 
 	return (
-        // Link to='/pet'
+		// <Link to='/pet' className='card'>
 		<div className='card'>
 			<div className='card__image'>
 				<img src={pet.photos[0].url} alt='dog portrait' />
@@ -34,13 +36,20 @@ const PetCard = ({ pet }) => {
 						}}>
 						<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 					</button>
-
 				</div>
 				<div className='card__description'>
-					<p><strong>habits:</strong> {pet.extras}</p>
-					<p><strong>likes:</strong> {pet.likes}</p>
-					<p><strong>dislikes:</strong> {pet.dislikes}</p>
-					<p><strong>age:</strong> {pet.age}</p>
+					<p>
+						<strong>habits:</strong> {pet.extras}
+					</p>
+					<p>
+						<strong>likes:</strong> {pet.likes}
+					</p>
+					<p>
+						<strong>dislikes:</strong> {pet.dislikes}
+					</p>
+					<p>
+						<strong>age:</strong> {pet.age}
+					</p>
 				</div>
 				<div className='card__location'>
 					<div className='card__location--icon'>
@@ -50,13 +59,19 @@ const PetCard = ({ pet }) => {
 						<p>Berlin, Germany (1,5km)</p>
 					</div>
 				</div>
-				<button
-					onClick={e => console.log(e.target)}
-					className='btn__call-to-action'>
-					<Link to='/pet'>Adopt me!</Link>
-				</button>
+				<Link to='/pet'>
+					<button
+						data-petid={pet._id}
+						onClick={e => {
+							setPetId(pet._id);
+						}}
+						className='btn__call-to-action'>
+						Adopt me!
+					</button>
+				</Link>
 			</div>
 		</div>
+		//* </Link>
 	);
 };
 

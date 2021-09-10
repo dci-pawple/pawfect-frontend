@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
-import MyContext from '../context/MyContext'
+import MyContext from "../context/MyContext";
 
 import Dog1 from "../dummy/images/karsten-winegeart-oU6KZTXhuvk-unsplash.jpg";
 import Dog2 from "../dummy/images/alan-king-KZv7w34tluA-unsplash.jpg";
@@ -18,29 +18,26 @@ const breakPoints = [
 
 const PetDetails = () => {
 	const [buttonPopup, setButtonPopup] = useState(false);
-	const [likeIcon, setLikeIcon] = useState('black');
-	const [favourite, setFavourite] = useState('Add to favourites')
-	const {pet, setPet} = useContext(MyContext);
-	const {petId, setPetId} = useContext(MyContext);
-
+	const [likeIcon, setLikeIcon] = useState("black");
+	const [favourite, setFavourite] = useState("Add to favourites");
+	const { pet, setPet } = useContext(MyContext);
+	const { petId, setPetId } = useContext(MyContext);
 
 	let history = useHistory();
 
+
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchData = () => {
 			try {
-				await fetch(`http://localhost:4000/pets/${petId}`)
-				.then((data) => data.json())
-				.then((res) => {
-				setPet(res.data);
-				})
+				fetch(`http://localhost:4000/pets/${petId}`)
+				.then(data => data.json())
+				.then(res =>setPet(res.data));
+			} catch (err) {
+				console.log(err);
 			}
-			catch(err) {
-				console.log(err)
-			}
-		}
-		fetchData()
-	}, [petId, setPet])
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<div className='app-container container pet__container'>
@@ -81,7 +78,7 @@ const PetDetails = () => {
 
 			<div className='pet__content-container'>
 				<div className='pet__info-container'>
-					<h2>Hi, I am Henry</h2>
+					<h2>Hi, I am {pet.name}</h2>
 					<div className='pet__info-data-container'>
 						<p className='pet__info-data'>Type of pet:</p>
 						<p>Dog</p>
@@ -132,18 +129,22 @@ const PetDetails = () => {
 							<button
 								className='owner__btn'
 								onClick={() => {
-									likeIcon === "black" ? setLikeIcon("#f76c6c") : setLikeIcon("black");
-									favourite === "Add to favourites" ? setFavourite("Remove from favourites") : setFavourite("Add to favourites");
-								}
-								}
-								>
+									likeIcon === "black"
+										? setLikeIcon("#f76c6c")
+										: setLikeIcon("black");
+									favourite === "Add to favourites"
+										? setFavourite("Remove from favourites")
+										: setFavourite("Add to favourites");
+								}}>
 								<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 								<p className='hidden'>{favourite}</p>
 							</button>
 						</div>
 
 						<div className='owner__icon-container'>
-							<button  onClick={() => setButtonPopup(true)} className='owner__btn'>
+							<button
+								onClick={() => setButtonPopup(true)}
+								className='owner__btn'>
 								<i className='fas fa-share'></i>
 								<p className='hidden'>Share this ad</p>
 							</button>
