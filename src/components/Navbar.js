@@ -124,7 +124,7 @@ export default function Navbar() {
                       Go to profile
                     </Link>
                     <Link
-                      to="/new-ad"
+                      to="/createad"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >

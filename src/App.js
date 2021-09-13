@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MyContext from "./context/MyContext";
 import PetDetails from "./pages/PetDetails";
+import Chat from "./pages/Chat";
 
 const App = () => {
   //need this to get search input
@@ -50,6 +51,10 @@ const App = () => {
           </Route>
           <Route path="/user/profile">
             <UserProfile />
+          </Route>
+
+          <Route path="/messages">
+            <Chat />
           </Route>
 
           <Route path="/pet">
