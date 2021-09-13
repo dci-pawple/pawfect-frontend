@@ -81,6 +81,9 @@ const UploadComponent = (props) => {
 const UserProfile = () => {
   const classes = useStyles();
 
+  // const [isValidating, setIsValidating] = useState(false)
+
+
   const { user, setUser } = useContext(MyContext);
   const { userId, setUserId } = useContext(MyContext);
 
@@ -155,6 +158,7 @@ const UserProfile = () => {
         );
       }
     },
+    
   });
 
   return (
@@ -362,6 +366,8 @@ const UserProfile = () => {
             >
               SAVE CHANGES
             </Button>
+            {/* <p className={isValidating ? "" : "hidden"}>changes saved</p> */}
+
           </form>
 
           {/* let's decide if we want this here */}

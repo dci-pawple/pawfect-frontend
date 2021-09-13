@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 
 const PetCard = ({ pet, handleFavouritesClick}) => {
+
   const [likeIcon, setLikeIcon] = useState("black");
   const [favourites, setFavourites] = useState([]);
 
@@ -20,6 +21,7 @@ const removeFavouritePet = (pet) => {
         )
         setFavourites(newFavouriteList)
 }
+
   return (
     // <Link to='/pet' className='card'>
     <div className="card">
