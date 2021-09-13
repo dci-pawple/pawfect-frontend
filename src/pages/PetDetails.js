@@ -4,10 +4,6 @@ import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
 
-// import Dog1 from "../dummy/images/karsten-winegeart-oU6KZTXhuvk-unsplash.jpg";
-// import Dog2 from "../dummy/images/alan-king-KZv7w34tluA-unsplash.jpg";
-// import Dog3 from "../dummy/images/charles-deluvio-Mv9hjnEUHR4-unsplash.jpg";
-// import Dog4 from "../dummy/images/charles-deluvio-pOUA8Xay514-unsplash.jpg";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false },
