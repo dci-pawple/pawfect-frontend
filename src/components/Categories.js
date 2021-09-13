@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // import dog from "../icons/dog1.png";
 
-const iconNames = ["dog", "cat", "crow", "fish", "dragon"];
+const iconNames = ["dog", "cat", "dragon"];
 
 const Categories = () => {
   const renderButtons = iconNames.map((item) => {
@@ -15,7 +15,7 @@ const Categories = () => {
   });
 
   return (
-    <div className="container">
+    <div>
       <div className="categories">{renderButtons}</div>
     </div>
   );

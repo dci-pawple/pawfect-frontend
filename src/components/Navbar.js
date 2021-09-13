@@ -8,6 +8,7 @@ export default function Navbar() {
   const [click, setClick] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [active, setActive] = useState(false);
+  const [display, setDisplay] = useState(false);
   const { login, setLogin } = useContext(MyContext);
 
   const changeBackground = () => {
@@ -29,6 +30,8 @@ export default function Navbar() {
   const handleClick = () => setClick(!click);
 
   const toggleClass = () => setActive(!active);
+
+  const toggleDisplay = () => setDisplay(!display);
 
   const closeMobileMenu = () => setClick(false);
 
@@ -80,7 +83,7 @@ export default function Navbar() {
                 </button>
               </form>
             </li>
-            <li className="user list-item">
+            <li className="user list-item" onClick={toggleDisplay}>
               <button className="user-btn">
                 <i className="fas fa-bars" />
                 {!login ? (
@@ -91,7 +94,9 @@ export default function Navbar() {
                 )}
               </button>
 
-              <div className="dropdown">
+              <div
+                className={display ? "dropdown dropdown-active" : "dropdown"}
+              >
                 {!login ? (
                   <div className="user-logout">
                     <Link
@@ -119,7 +124,7 @@ export default function Navbar() {
                       Go to profile
                     </Link>
                     <Link
-                      to="/new-ad"
+                      to="/createad"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
