@@ -29,7 +29,9 @@ const Gallery = () => {
 			<GalleryFilter/>
 			<div className='gallery__grid-container'>
 
-				{petsList.map((pet, index) => (
+				{filteredData?filteredData.map((pet, index) => (
+					<PetCard pet={pet} petData={pet} key={pet._id} />
+				)):petsList.map((pet, index) => (
 					<PetCard pet={pet} petData={pet} key={pet._id} />
 				))}
 			</div>
