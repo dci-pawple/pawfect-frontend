@@ -4,6 +4,11 @@
 			font-size: 1.1rem;
 		}
 
+		@media (max-width: $bp-small) {
+			margin: 0 auto;
+			width: 90%;
+		}
+
 		.btn-go-back {
 			outline: none;
 			border: none;
@@ -16,10 +21,9 @@
 			border-radius: 10px;
 			margin-bottom: 2rem;
 			padding: 0.3rem;
-			a {
-				color: inherit;
-				text-decoration: none;
-				font-family: $font-text;
+
+			@media (max-width: $bp-small) {
+				margin: 1rem 4rem;
 			}
 		}
 	}
@@ -58,10 +62,23 @@
 	&__content-container {
 		display: flex;
 		justify-content: space-between;
+
+		@media (max-width: $bp-small) {
+			flex-direction: column;
+		}
 	}
 
 	&__info-container {
 		flex: 3;
+
+		@media (max-width: $bp-small) {
+			flex:1;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			margin: 1rem 4rem;
+			width: 100%;
+		}
 	}
 
 	&__info-data-container {
@@ -107,6 +124,14 @@
 		height: 25vh;
         margin: 5rem auto;
 
+		@media (max-width: $bp-small) {
+			flex: 0;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
+			padding: 1rem 0;
+		}
+
 		.btn__chat {
 			outline: none;
 			border: none;
@@ -125,6 +150,11 @@
 			align-self: center;
 			font-family: $font-text;
 
+			@media (max-width: $bp-small) {
+				width: 100%;
+				font-size: 1rem;
+			}
+
 			i {
 				align-self: center;
 			}
@@ -140,6 +170,12 @@
 		}
 	}
 
+	&__btn {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
     &__btn-container {
         padding: 0 2rem;
     }
@@ -148,14 +184,31 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 0 2rem;
+		button {
+			background: transparent;
+			border: none;
+			outline: none;
+			font-family: $font-text;
+		}
 		.fas {
 			font-size: 2rem;
 		}
 		p {
 			text-align: center;
 		}
-		&__icon-container {
-			display: flex;
+		
+	}
+
+	&__icon-container {
+		display: flex;
+		
+		@media (max-width: $bp-small) {
+			.hidden {
+				visibility: hidden;
+			}
+			i {
+				align-self: center;
+			}
 		}
 	}
 

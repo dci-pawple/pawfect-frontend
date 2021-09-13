@@ -1,44 +1,79 @@
-import React from 'react'
-import { Heart, Location, FemaleGender } from '../icons/icons'
-import {Link} from 'react-router-dom'
+import React, { useState, useContext } from "react";
+import { Location } from "../icons/icons";
+import { Link } from "react-router-dom";
+import MyContext from "../context/MyContext";
 
-const PetCard = ({src}) => {
-    return (
-        <Link to="#" className="card">
-            <div className="card__image">
-                <img src={src} alt="dog portrait"/>
-            </div> 
-            <div className="card__content">
-                <div className="card__content--top">
-                    <div className="card__name-with-gender">
-                        <div className="card__title">Lily</div>
-                        <div className="card__gender--icon">
-                            <FemaleGender/>
-                        </div>
-                    </div>
-                    
-                    <button className="card__like--icon">
-                        <Heart/>
-                    </button>
-                </div>
-                <div className="card__description">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <p>1 year old</p>
-                </div>
-                <div className="card__location">
-                    <div className="card__location--icon">
-                        <Location/>
-                    </div>
-                    <div className="card__location--name">
-                        <p>Berlin, Germany (1,5km)</p>
-                    </div>
-                </div>  
-                <button className="btn__call-to-action">
-                    <Link to="/pet">Adopt me!</Link>
-                </button>
-            </div>           
+const PetCard = ({ pet }) => {
+  const [likeIcon, setLikeIcon] = useState("black");
+  const { petId, setPetId } = useContext(MyContext);
+
+  return (
+    // <Link to='/pet' className='card'>
+    <div className="card">
+      <div className="card__image">
+        <img src={pet && pet.photos[0].url} alt="dog portrait" />
+      </div>
+      <div className="card__content">
+        <div className="card__content--top">
+          <div className="card__name-with-gender">
+            <div className="card__title">{pet && pet.name}</div>
+            <div className="card__gender--icon">
+              {pet && pet.gender === "male" ? (
+                <i class="fas fa-mars"></i>
+              ) : (
+                <i class="fas fa-venus"></i>
+              )}
+            </div>
+          </div>
+
+          <button
+            className="card__like--icon"
+            onClick={() => {
+              likeIcon === "black"
+                ? setLikeIcon("#f76c6c")
+                : setLikeIcon("black");
+            }}
+          >
+            <i className="fas fa-heart" style={{ color: likeIcon }}></i>
+          </button>
+        </div>
+        <div className="card__description">
+          <p>
+            <strong>habits:</strong> {pet && pet.extras}
+          </p>
+          <p>
+            <strong>likes:</strong> {pet && pet.likes}
+          </p>
+          <p>
+            <strong>dislikes:</strong> {pet && pet.dislikes}
+          </p>
+          <p>
+            <strong>age:</strong> {pet && pet.age}
+          </p>
+        </div>
+        <div className="card__location">
+          <div className="card__location--icon">
+            <Location />
+          </div>
+          <div className="card__location--name">
+            <p>Berlin, Germany (1,5km)</p>
+          </div>
+        </div>
+        <Link to="/pet">
+          <button
+            data-petid={pet && pet._id}
+            onClick={(e) => {
+              setPetId(pet && pet._id);
+            }}
+            className="btn__call-to-action"
+          >
+            Adopt me!
+          </button>
         </Link>
-    )
-}
+      </div>
+    </div>
+    //* </Link>
+  );
+};
 
-export default PetCard
+export default PetCard;
