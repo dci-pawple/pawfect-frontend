@@ -12,7 +12,6 @@ const breakPoints = [
 ];
 
 const CarouselPets = () => {
-
     const [petsList, setPetsList] = useState([]);
 
 	useEffect(() => {
@@ -29,6 +28,9 @@ const CarouselPets = () => {
 		};
 		fetchData();
 	}, []);
+
+
+    
     
     return (
         <div className="carousel-container container">
@@ -40,6 +42,7 @@ const CarouselPets = () => {
                         <PetCard pet={pet} key={pet._id}/>
                     ))}
                 </Carousel>
+
 
                 <button className="btn__see-all">
                     <Link to="/gallery">See all</Link>

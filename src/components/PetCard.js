@@ -3,10 +3,23 @@ import { Location } from "../icons/icons";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 
-const PetCard = ({ pet }) => {
+const PetCard = ({ pet, handleFavouritesClick}) => {
   const [likeIcon, setLikeIcon] = useState("black");
-  const { petId, setPetId } = useContext(MyContext);
+  const [favourites, setFavourites] = useState([]);
 
+  const { petId, setPetId } = useContext(MyContext);
+  
+  const addFavouritePet = (pet) => {
+    const newFavouriteList = [...favourites, pet];
+    setFavourites(newFavouriteList)
+}
+
+const removeFavouritePet = (pet) => {
+    const newFavouriteList = favourites.filter(
+        (favourite) => favourite._id !== pet._id
+        )
+        setFavourites(newFavouriteList)
+}
   return (
     // <Link to='/pet' className='card'>
     <div className="card">
@@ -24,19 +37,21 @@ const PetCard = ({ pet }) => {
                 <i class="fas fa-venus"></i>
               )}
             </div>
-          </div>
+          </div>   
+
 
           <button
             className="card__like--icon"
             onClick={() => {
               likeIcon === "black"
-                ? setLikeIcon("#f76c6c")
-                : setLikeIcon("black");
-            }}
-          >
+                ? setLikeIcon("#f76c6c") && addFavouritePet(pet)
+                : setLikeIcon("black") && removeFavouritePet(pet)
+            }}>
             <i className="fas fa-heart" style={{ color: likeIcon }}></i>
           </button>
+
         </div>
+
         <div className="card__description">
           <p>
             <strong>habits:</strong> {pet && pet.extras}
@@ -72,7 +87,8 @@ const PetCard = ({ pet }) => {
         </Link>
       </div>
     </div>
-    //* </Link>
+ 
+ 
   );
 };
 
