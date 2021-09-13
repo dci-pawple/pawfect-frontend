@@ -11,7 +11,6 @@ html {
 }
 
 body {
-  min-height: 100vh;
   background-color: $very-light-grey;
   color: $very-dark-grey;
   font-family: $font-text;
@@ -22,6 +21,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  min-height: 77vh;
 }
 
 .app-container {
@@ -40,4 +40,5 @@ body {
   max-width: 500px;
   margin: 0 auto;
   padding-top: 3rem;
+  // min-height: 82vh;
 }
