@@ -131,6 +131,12 @@ const UserProfile = () => {
     enableReinitialize: true,
     validate,
     onSubmit: async (values) => {
+      const realValues = Object.keys(values)
+        .filter((item) => values[item] !== "")
+        .reduce((acc, item) => {
+          return { ...acc, [item]: values[item] };
+        }, {});
+
       try {
         const response = await fetch(`http://localhost:4000/users/${userId}`, {
           method: "PATCH",
@@ -138,7 +144,7 @@ const UserProfile = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(realValues),
         });
 
         console.log(response.json());

@@ -15,7 +15,7 @@ const Categories = () => {
   });
 
   return (
-    <div className="container">
+    <div>
       <div className="categories">{renderButtons}</div>
     </div>
   );

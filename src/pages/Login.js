@@ -105,7 +105,7 @@ export default function Login() {
   });
 
   return (
-    <div className="app-container">
+    <div className="app-container container">
       <div className="form-container">
         <link
           rel="stylesheet"
