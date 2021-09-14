@@ -77,6 +77,7 @@ export default function Login() {
     validate,
     onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
+
       try {
         const response = await fetch("http://localhost:4000/users/login", {
           method: "POST",
@@ -95,6 +96,7 @@ export default function Login() {
         } else {
           setLogin(true);
           setUserId(data.data._id);
+          localStorage.setItem("user", JSON.stringify(data.data));
           history.push("/");
         }
       } catch (err) {
