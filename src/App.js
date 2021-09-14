@@ -31,7 +31,6 @@ const App = () => {
     <Theme>
       <BrowserRouter>
         <Navbar />
-
         <Switch>
           <Route exact path="/">
             <Home />
@@ -62,7 +61,7 @@ const App = () => {
             <PetDetails />
           </Route>
 
-          <Route path="/saved">
+          <Route path="/save">
             <SavedSearches/>
           </Route>
         </Switch>

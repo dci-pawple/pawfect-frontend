@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
+import LikeButton from "../components/LikeButton";
 
 
 const breakPoints = [
@@ -15,8 +16,7 @@ const breakPoints = [
 const PetDetails = () => {
 
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [likeIcon, setLikeIcon] = useState("black");
-  const [favourite, setFavourite] = useState("Add to favourites");
+  // const [favourite, setFavourite] = useState("Add to favourites");
   const { pet, setPet } = useContext(MyContext);
   const { petId, setPetId } = useContext(MyContext);
 
@@ -106,7 +106,7 @@ const PetDetails = () => {
         <div className="owner__container">
           <div className="owner__icons">
             <div className="owner__icon-container">
-              <button
+              {/* <button
                 className="owner__btn"
                 onClick={() => {
                   likeIcon === "black"
@@ -119,7 +119,9 @@ const PetDetails = () => {
               >
                 <i className="fas fa-heart" style={{ color: likeIcon }}></i>
                 <p className="hidden">{favourite}</p>
-              </button>
+              </button> */}
+
+              <LikeButton/>
             </div>
 
             <div className="owner__icon-container">
@@ -128,7 +130,7 @@ const PetDetails = () => {
                 className="owner__btn"
               >
                 <i className="fas fa-share"></i>
-                <p className="hidden">Share this ad</p>
+                {/* <p className="hidden">Share this ad</p> */}
               </button>
               <SharePopup
                 trigger={buttonPopup}

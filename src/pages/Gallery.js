@@ -5,6 +5,7 @@ import MyContext from '../context/MyContext'
 
 const Gallery = () => {
   const { filteredData, setFilteredData } = useContext(MyContext)
+  
 	const [petsList, setPetsList] = useState([]);
 
 	useEffect(() => {
@@ -14,7 +15,7 @@ const Gallery = () => {
 					.then(data => data.json())
 					.then(res => {
 						setPetsList(res.data);
-            setFilteredData(res.data)
+            			setFilteredData(res.data)
 					});
 			} catch (err) {
 				  console.log('Error while filtering =>', err)
