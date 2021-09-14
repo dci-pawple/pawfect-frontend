@@ -9,6 +9,9 @@
   transition: 0.1s ease-in-out;
   margin: 0 1rem;
 
+  a {
+    text-decoration: none;
+    // display: flex;
   .btn__call-to-action {
     outline: none;
     border: none;
@@ -20,18 +23,15 @@
     display: block;
     font-size: .9rem;
     align-self: flex-end;
-    a {
-      color: $very-light-grey;
-      font-weight: bold;
-      font-size: 1rem;
-      text-decoration: none;
-      font-family: $font-text;
+    color: $very-light-grey;
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: $font-text;
     }
 }
 
   &__image {
     flex: 3;
-    // height: 10.6em;
     height: auto;
     width:100%;
     

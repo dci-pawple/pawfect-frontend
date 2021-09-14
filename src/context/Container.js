@@ -11,6 +11,7 @@ const Container = ({ children }) => {
   const [petId, setPetId] = useState(null);
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [filteredData, setFilteredData] = useState([]);
 
   return (
     <MyContext.Provider
@@ -29,6 +30,8 @@ const Container = ({ children }) => {
         setCurrentUser,
         users,
         setUsers,
+        filteredData,
+        setFilteredData,
       }}
     >
       {children}
