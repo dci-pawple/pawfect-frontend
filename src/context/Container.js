@@ -2,15 +2,35 @@ import React, { useState } from "react";
 import MyContext from "./MyContext";
 
 const Container = ({ children }) => {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(
+    localStorage.getItem("user") ? true : false
+  );
   const [user, setUser] = useState({});
   const [userId, setUserId] = useState(null);
   const [pet, setPet] = useState({});
   const [petId, setPetId] = useState(null);
-
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
 
   return (
-    <MyContext.Provider value={{ login, setLogin, user, setUser, userId, setUserId, pet, setPet, petId, setPetId }}>
+    <MyContext.Provider
+      value={{
+        login,
+        setLogin,
+        user,
+        setUser,
+        userId,
+        setUserId,
+        pet,
+        setPet,
+        petId,
+        setPetId,
+        currentUser,
+        setCurrentUser,
+        users,
+        setUsers,
+      }}
+    >
       {children}
     </MyContext.Provider>
   );
