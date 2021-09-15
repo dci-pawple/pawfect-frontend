@@ -60,11 +60,11 @@ export default function Navbar() {
           <ul className={click ? "nav-list active" : "nav-list"}>
             <li className="list-item">
               <Link
-                to="/community"
+                to="/gallery"
                 className="nav-link"
                 onClick={closeMobileMenu}
               >
-                Community
+                Find a pet
               </Link>
             </li>
             <li className={`search list-item ${active ? "search-active" : ""}`}>
@@ -149,6 +149,7 @@ export default function Navbar() {
                       className="drop-link"
                       onClick={() => {
                         closeMobileMenu();
+                        localStorage.removeItem("user");
                         setLogin(false);
                       }}
                     >
