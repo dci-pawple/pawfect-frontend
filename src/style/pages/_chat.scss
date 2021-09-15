@@ -1,0 +1,39 @@
+.chat-container {
+  padding-top: 5rem;
+}
+
+// .chat-container > div > div > div:last-child {
+//   display: none;
+// }
+// .chat-container > div > div > div:first-child {
+//   width: 34% !important;
+//   flex: 0 0 34% !important;
+//   max-width: 34% !important;
+// }
+// .chat-container > div > div > div:nth-child(2) {
+//   width: 66% !important;
+//   flex: 0 0 66% !important;
+//   max-width: 66% !important;
+// }
+
+.ce-my-message-bubble {
+  background-color: $primary !important;
+}
+
+.ce-chat-title-container {
+  color: $primary !important;
+}
+
+// .ce-settings {
+//   //   display: none;
+// }
+
+#ce-send-message-button {
+  background-color: $primary !important;
+}
+
+// we should use user image or our avatar
+.ce-avatar,
+.ce-avatar-dot {
+  background-color: $primary-light !important;
+}
