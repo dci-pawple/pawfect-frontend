@@ -20,6 +20,8 @@ const PetDetails = () => {
 
   const { pet, setPet } = useContext(MyContext);
   const { petId } = useContext(MyContext);
+  const { user } = useContext(MyContext);
+
 
   let history = useHistory();
 
@@ -148,13 +150,13 @@ const PetDetails = () => {
             </div>
             <div className="owner__info-container">
               <p>Owner of {pet && pet.name}</p>
-              <h5>Mark</h5>
+              <h5>name: {user.firstName}</h5>
             </div>
           </div>
 
           <div className="owner__btn-container">
             <button className="btn__chat">
-              <Link to="/chat">Chat with Mark</Link>
+              <Link to="/chat">Chat with {user.firstName}</Link>
               <i class="fas fa-comment-alt"></i>
             </button>
           </div>

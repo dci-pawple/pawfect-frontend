@@ -3,37 +3,41 @@ import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
-// import CheckIcon from "@material-ui/icons/Check";
 
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
 import MyContext from "../context/MyContext";
 import Thumb from "../components/Thumb";
 
-//Form Valitation
+//Form Validation
 
 const validate = values => {
 	const errors = {};
 
 	if (values.firstName.length > 15) {
-	  errors.firstName = "Must be 15 characters or less";
+		errors.firstName = "Must be 15 characters or less";
 	}
 
 	if (values.lastName.length > 20) {
-	  errors.lastName = "Must be 20 characters or less";
+		errors.lastName = "Must be 20 characters or less";
 	}
 
 	if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-	  errors.email = "Invalid email address";
+		errors.email = "Invalid email address";
 	}
+
+	if (values.email !== values.emailConfirm) {
+		errors.emailConfirm = "Emails don't match";
+	}
+
 	if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)) {
-	  errors.password = "Invalid Character";
+		errors.password = "Invalid Character";
 	} else if (values.password.length < 6) {
-	  errors.password = "Must be longer than 6 Characters";
+		errors.password = "Must be longer than 6 Characters";
 	}
 
 	if (values.password !== values.passwordConfirm) {
-	  errors.passwordConfirm = "Not the same Password";
+		errors.passwordConfirm = "Not the same Password";
 	}
 
 	return errors;
@@ -83,9 +87,8 @@ const UploadComponent = props => {
 const UserProfile = () => {
 	const classes = useStyles();
 
-	const [isValidating, setIsValidating] = useState(false)
-  const [error, setError] = useState(null)
-
+	const [isValidating, setIsValidating] = useState(false);
+	const [error, setError] = useState(null);
 
 	const { user, setUser } = useContext(MyContext);
 	const { userId, setUserId } = useContext(MyContext);
@@ -142,8 +145,8 @@ const UserProfile = () => {
 				.reduce((acc, item) => {
 					return { ...acc, [item]: values[item] };
 				}, {});
-        setIsValidating(true)
-        setError(null)
+			setIsValidating(true);
+			setError(null);
 
 			try {
 				const response = await fetch(`http://localhost:4000/users/${userId}`, {
@@ -156,13 +159,13 @@ const UserProfile = () => {
 				});
 
 				// console.log(response.json());
-        const data = await response.json()
-        console.log('data=>', data)
-        if (!data.success) {
-          setError(data.message)
-          setIsValidating(false)
-          console.log('error=>', error)
-        }
+				const data = await response.json();
+				console.log("data=>", data);
+				if (!data.success) {
+					setError(data.message);
+					setIsValidating(false);
+					console.log("error=>", error);
+				}
 			} catch (err) {
 				console.error(
 					"Error while fetching data for user profile update =>",
@@ -380,10 +383,7 @@ const UserProfile = () => {
 							<Alert severity='success'>
 								Your changes have been successfully saved
 							</Alert>
-						) : (
-							
-              			null
-						)}
+						) : null}
 					</form>
 
 					{/* let's decide if we want this here */}
