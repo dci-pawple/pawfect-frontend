@@ -2,19 +2,20 @@ import React, {useEffect, useState} from 'react'
 import PetCard from './PetCard'
 
 const SavedSearches = () => {
-	const [petsList, setPetsList] = useState([]);
+	const [favouritesList, setFavouritesList] = useState([]);
 
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				fetch(`http://localhost:4000/pets`)
+				fetch(`http://localhost:4000/users`)
 					.then(data => data.json())
 					.then(res => {
-						setPetsList(res.data);
+						console.log("res.data =>", res.data)
+						setFavouritesList(res.data);
 					});
 			} catch (err) {
-				  console.log('Error while filtering =>', err)
+				  console.log('Error while fetching favourite pets =>', err)
 			}
 		};
 		fetchData();
@@ -24,7 +25,7 @@ const SavedSearches = () => {
         <div className='app-container container'>
 			<h2>Saved Searches</h2>
 			<div className='gallery__grid-container'>
-				{petsList.map((pet, index) => (
+				{favouritesList.map((pet, index) => (
 					<PetCard pet={pet} petData={pet} key={pet._id} />
 				))}
 			</div>

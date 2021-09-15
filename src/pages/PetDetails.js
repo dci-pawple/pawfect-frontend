@@ -16,7 +16,8 @@ const breakPoints = [
 const PetDetails = () => {
 
   const [buttonPopup, setButtonPopup] = useState(false);
-  // const [favourite, setFavourite] = useState("Add to favourites");
+  const [favourite, setFavourite] = useState("Add to favourites");
+
   const { pet, setPet } = useContext(MyContext);
   const { petId, setPetId } = useContext(MyContext);
 
@@ -121,7 +122,7 @@ const PetDetails = () => {
                 <p className="hidden">{favourite}</p>
               </button> */}
 
-              <LikeButton/>
+              <LikeButton favourite={favourite} setFavourite={setFavourite}/>
             </div>
 
             <div className="owner__icon-container">
@@ -130,7 +131,6 @@ const PetDetails = () => {
                 className="owner__btn"
               >
                 <i className="fas fa-share"></i>
-                {/* <p className="hidden">Share this ad</p> */}
               </button>
               <SharePopup
                 trigger={buttonPopup}

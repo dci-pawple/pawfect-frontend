@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import MyContext from "../context/MyContext";
 
-const LikeButton = ({ pet }) => {
+const LikeButton = ({ pet, favourite, setFavourite }) => {
 	const [likeIcon, setLikeIcon] = useState("black");
 	const { userId, setUserId } = useContext(MyContext);
 
@@ -27,6 +27,9 @@ const LikeButton = ({ pet }) => {
                 	likeIcon === "black"
 			    ? setLikeIcon("#f76c6c")
 			    : setLikeIcon("black");
+				favourite && favourite === "Add to favourites"
+                    ? setFavourite("Remove from favourites")
+                    : setFavourite("Add to favourites");
 				savePet(pet);
 			}}>
 			<i className='fas fa-heart' style={{ color: likeIcon }}></i>
