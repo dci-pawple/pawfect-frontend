@@ -22,11 +22,6 @@ const LikeButton = ({ pet }) => {
 	return (
 		<button
 			className='card__like--icon'
-			// onClick={(e) => {
-			//   likeIcon === "black"
-			//     ? setLikeIcon("#f76c6c")
-			//     : setLikeIcon("black");
-			// }}
 			data-petid={pet && pet._id}
 			onClick={e => {
                 	likeIcon === "black"
