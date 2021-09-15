@@ -32,15 +32,15 @@ const PetDetails = () => {
           .then((data) => data.json())
           .then((res) => setPet(res.data));
           console.log('pet =>', pet)
-          // fetch(`http://localhost:4000/users/${pet.userId}`)
-          // .then((data) => data.json())
-          // .then((res)=>console.log("pet Owner =>", res))
+          fetch(`http://localhost:4000/users/${pet.userId}`)
+          .then((data) => data.json())
+          .then((res)=>setPetOwner(res.data))
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [petId, setPet]);
+  }, [petId, setPet, pet]);
 
   return (
     <div className="app-container container pet__container">
@@ -154,13 +154,13 @@ const PetDetails = () => {
             </div>
             <div className="owner__info-container">
               <p>Owner of {pet && pet.name}</p>
-              <h5>name: {user.firstName}</h5>
+              <h5>name: {petOwner && petOwner.firstName}</h5>
             </div>
           </div>
 
           <div className="owner__btn-container">
             <button className="btn__chat">
-              <Link to="/chat">Chat with {user.firstName}</Link>
+              <Link to="/chat">Chat with {petOwner && petOwner.firstName}</Link>
               <i class="fas fa-comment-alt"></i>
             </button>
           </div>

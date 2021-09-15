@@ -70,6 +70,8 @@ export default function CreateAd () {
   let history = useHistory()
   const [error, setError] = useState(null)
   const {userId, setUserId}=useContext(MyContext)
+  const { pet, setPet } = useContext(MyContext);
+
 
   const formik = useFormik({
     initialValues: {
@@ -127,7 +129,10 @@ export default function CreateAd () {
         } else {
           console.log('Upload completed successfully')
           history.push('/')
+          setPet(data.data)
+          
         }
+
       } catch (err) {
         console.log('Error while uploadting data for new ad =>', err)
       }
