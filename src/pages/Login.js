@@ -56,6 +56,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const { login, setLogin } = useContext(MyContext);
   const { userId, setUserId } = useContext(MyContext);
+  const { user, setUser } = useContext(MyContext);
 
   const history = useHistory();
 
@@ -96,6 +97,7 @@ export default function Login() {
         } else {
           setLogin(true);
           setUserId(data.data._id);
+          setUser(data.data);
           localStorage.setItem("user", JSON.stringify(data.data));
           history.push("/");
         }
