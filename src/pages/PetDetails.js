@@ -17,7 +17,7 @@ const PetDetails = () => {
 
   const [buttonPopup, setButtonPopup] = useState(false);
   // const [favourite, setFavourite] = useState("Add to favourites");
-
+  const [petOwner, setPetOwner] = useState(null)
   const { pet, setPet } = useContext(MyContext);
   const { petId } = useContext(MyContext);
   const { user } = useContext(MyContext);
@@ -26,11 +26,15 @@ const PetDetails = () => {
   let history = useHistory();
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = async () => {
       try {
-        fetch(`http://localhost:4000/pets/${petId}`)
+        await fetch(`http://localhost:4000/pets/${petId}`)
           .then((data) => data.json())
           .then((res) => setPet(res.data));
+          console.log('pet =>', pet)
+          // fetch(`http://localhost:4000/users/${pet.userId}`)
+          // .then((data) => data.json())
+          // .then((res)=>console.log("pet Owner =>", res))
       } catch (err) {
         console.log(err);
       }
