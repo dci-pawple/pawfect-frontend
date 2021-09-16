@@ -158,7 +158,7 @@ const PetDetails = () => {
             <button className="btn__chat">
               <Link
                 to="/messages"
-                onClick={() => setChatUsername("Harold_Shields@yahoo.com")}
+                onClick={() => setChatUsername("Rebekah_Batz@yahoo.com")}
               >
                 Chat with {petOwner && petOwner.firstName}
               </Link>
