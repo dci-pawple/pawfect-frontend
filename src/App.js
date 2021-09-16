@@ -22,10 +22,10 @@ const App = () => {
   //need this to get search input
   const params = new URLSearchParams(window.location.search);
   const search = params.get("search");
-  console.log(search);
+  // console.log(search);
 
-  const { user } = useContext(MyContext);
-  console.log(user);
+  // const { user } = useContext(MyContext);
+  // console.log(user);
 
   return (
     <Theme>

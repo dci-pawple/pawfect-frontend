@@ -6,7 +6,7 @@ import LikeButton from "./LikeButton";
 
 const PetCard = ({ pet}) => {
 
-  const { petId, setPetId } = useContext(MyContext);
+  const { setPetId } = useContext(MyContext);
 
   return (
     // <Link to='/pet' className='card'>
