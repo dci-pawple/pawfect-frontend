@@ -20,7 +20,7 @@ const SavedSearches = () => {
 				.catch(err => console.log(err.response));
 		};
 		fetchFavourites();
-	}, []);
+	}, [userId]);
 
 	return (
 		<div className='app-container container'>

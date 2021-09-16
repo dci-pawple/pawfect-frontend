@@ -27,7 +27,6 @@ const PetCard = ({ pet}) => {
             </div>
           </div>   
           <LikeButton pet={pet}/>
-
         </div>
 
         <div className="card__description">

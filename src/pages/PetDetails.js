@@ -20,8 +20,6 @@ const PetDetails = () => {
   const [petOwner, setPetOwner] = useState(null)
   const { pet, setPet } = useContext(MyContext);
   const { petId } = useContext(MyContext);
-  const { user } = useContext(MyContext);
-
 
   let history = useHistory();
 
