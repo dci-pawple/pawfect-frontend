@@ -5,7 +5,6 @@ import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
 import LikeButton from "../components/LikeButton";
 
-
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false },
   { width: 550, itemsToShow: 2, itemsToScroll: 2 },
@@ -14,12 +13,12 @@ const breakPoints = [
 ];
 
 const PetDetails = () => {
-
   const [buttonPopup, setButtonPopup] = useState(false);
   const [favourite, setFavourite] = useState("Add to favourites");
-  const [petOwner, setPetOwner] = useState(null)
+  const [petOwner, setPetOwner] = useState(null);
   const { pet, setPet } = useContext(MyContext);
-  const { petId } = useContext(MyContext);
+  const { petId, setPetId } = useContext(MyContext);
+  const { chatUsername, setChatUsername } = useContext(MyContext);
 
   let history = useHistory();
 
@@ -29,10 +28,10 @@ const PetDetails = () => {
         await fetch(`http://localhost:4000/pets/${petId}`)
           .then((data) => data.json())
           .then((res) => setPet(res.data));
-          console.log('pet =>', pet)
-          fetch(`http://localhost:4000/users/${pet.userId}`)
+        console.log("pet =>", pet);
+        fetch(`http://localhost:4000/users/${pet.userId}`)
           .then((data) => data.json())
-          .then((res)=>setPetOwner(res.data))
+          .then((res) => setPetOwner(res.data));
       } catch (err) {
         console.log(err);
       }
@@ -51,14 +50,12 @@ const PetDetails = () => {
         breakPoints={breakPoints}
         className="pet__gallery-container"
       >
-
-        {pet.photos && pet.photos.map((photo, index) => (
+        {pet.photos &&
+          pet.photos.map((photo, index) => (
             <div className="pet__image-container">
               <img src={photo.url} alt="a pet profile" key={index} />
             </div>
-
           ))}
-
       </Carousel>
 
       <div className="pet__content-container">
@@ -95,15 +92,16 @@ const PetDetails = () => {
           <div className="pet__info-data-about">
             <p className="pet__info-data">About:</p>
             <p>
-              {pet && pet.name} enjoys playing in the yard and going for walks around the
-              neighborhood. Her foster is working on her leash training so an
-              adopter would need to be committed to continuing to work with her
-              to walk nicely on leash when she sees squirrels. {pet && pet.name} also must
-              be the only pet in the home, she cannot live with other dogs or
-              cats. {pet && pet.name} would love an adopter where she was the central pet in
-              their lives and would much prefer to be with her people than other
-              animals so she will not be a dog park or play date type dog but
-              will love you endlessly if you do the same!
+              {pet && pet.name} enjoys playing in the yard and going for walks
+              around the neighborhood. Her foster is working on her leash
+              training so an adopter would need to be committed to continuing to
+              work with her to walk nicely on leash when she sees squirrels.{" "}
+              {pet && pet.name} also must be the only pet in the home, she
+              cannot live with other dogs or cats. {pet && pet.name} would love
+              an adopter where she was the central pet in their lives and would
+              much prefer to be with her people than other animals so she will
+              not be a dog park or play date type dog but will love you
+              endlessly if you do the same!
             </p>
           </div>
         </div>
@@ -126,7 +124,11 @@ const PetDetails = () => {
                 <p className="hidden">{favourite}</p>
               </button> */}
 
-              <LikeButton pet={pet} favourite={favourite} setFavourite={setFavourite}/>
+              <LikeButton
+                pet={pet}
+                favourite={favourite}
+                setFavourite={setFavourite}
+              />
             </div>
 
             <div className="owner__icon-container">
@@ -158,7 +160,12 @@ const PetDetails = () => {
 
           <div className="owner__btn-container">
             <button className="btn__chat">
-              <Link to="/chat">Chat with {petOwner && petOwner.firstName}</Link>
+              <Link
+                to="/messages"
+                onClick={() => setChatUsername("Rebekah_Batz@yahoo.com")}
+              >
+                Chat with {petOwner && petOwner.firstName}
+              </Link>
               <i class="fas fa-comment-alt"></i>
             </button>
           </div>
