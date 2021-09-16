@@ -10,7 +10,7 @@ const Gallery = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				fetch(`http://localhost:4000/pets`)
+				fetch(`http://localhost:4000/pets/`)
 					.then(data => data.json())
 					.then(res => {
 						setPetsList(res.data);

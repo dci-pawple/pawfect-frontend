@@ -150,6 +150,7 @@ export default function Navbar() {
                       onClick={() => {
                         closeMobileMenu();
                         localStorage.removeItem("user");
+                        
                         setLogin(false);
                       }}
                     >

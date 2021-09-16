@@ -2,8 +2,9 @@ import React, { useState, useContext,useEffect} from "react";
 import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
 
-const LikeButton = ({ pet}) => {
-	const [likeIcon, setLikeIcon] = useState(pet.usersFavorite===true?"#f76c6c":"black" );
+const LikeButton = ({pet}) => {
+	console.log("pet.usersFavorite",pet.usersFavorite);
+	const [likeIcon, setLikeIcon] = useState("black" );
 	const [loginText, setLoginText] = useState("")
 	const { userId} = useContext(MyContext);
 	const { login} = useContext(MyContext);
@@ -28,7 +29,9 @@ const LikeButton = ({ pet}) => {
 			.catch(err => console.log(err.response));
 	};
 
-	
+	useEffect(()=>{
+		setLikeIcon(pet.usersFavorite===true?"#f76c6c":"black")
+	},[pet])  
 
 	return (
 		<>
