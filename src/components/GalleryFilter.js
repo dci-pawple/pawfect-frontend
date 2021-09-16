@@ -4,18 +4,12 @@ import '@fontsource/roboto'
 import {
   Button,
   FormControl,
-  FormLabel,
-  RadioGroup,
   FormControlLabel,
   Checkbox,
   FormGroup,
-  ButtonGroup,
-  CheckboxWithLabel,
-  Radio
+  ButtonGroup
 } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import { Link, useHistory } from 'react-router-dom'
 import MyContext from '../context/MyContext'
 import '../style/components/_galleryFilter.scss'
 
@@ -23,8 +17,6 @@ export default function GalleryFilter () {
   const [error, setError] = useState(null)
 
   const { filteredData, setFilteredData } = useContext(MyContext)
-  const { userId, setUserId } = useContext(MyContext)
-  const [openFilter, setOpenFilter] = useState(false)
   /**
    * Define the Form for FORMIK
    */
@@ -32,7 +24,7 @@ export default function GalleryFilter () {
     initialValues: {
       type: 'all',
       age: '',
-    
+      favorites: false
     },
     onSubmit: async values => {
       //alert (JSON.stringify (values, null, 2));
@@ -41,8 +33,11 @@ export default function GalleryFilter () {
       alert(JSON.stringify(values, null, 2))
       try {
         console.log('formik.values.type', formik.values.type)
+        console.log('formik.values.age', JSON.stringify(formik.values.age))
         const response = await fetch(
-          `http://localhost:4000/pets/filter?type=${formik.values.type}`,
+          `http://localhost:4000/pets/filter?type=${
+            formik.values.type
+          }&age=${JSON.stringify(formik.values.age)}&favorites=${formik.values.favorites}`,
           {
             method: 'GET',
             mode: 'cors',
@@ -53,7 +48,7 @@ export default function GalleryFilter () {
         )
 
         const data = await response.json()
-        console.log('filteredData', data.data)
+        console.log('requested filteredData', data.data)
         setFilteredData(data.data)
 
         if (!data.success) {
@@ -70,7 +65,7 @@ export default function GalleryFilter () {
 
   const toggleDropdown = filterType => {
     const dropdown = document.getElementById(filterType)
-    console.log('toggle')
+    console.log('in toggleDropdown')
     console.log('dropdown', dropdown)
     //change classes for visible and hide dropdown
     if (dropdown.classList.contains('filter-dropdown-hidden')) {
@@ -80,9 +75,14 @@ export default function GalleryFilter () {
     }
   }
 
+  //   useEffect( () => {
+  //   console.log( 'in UseEffect formik' )
+  //   formik.handleSubmit()
+  // }, [formik.values] )
+
   return (
     <div>
-      <form action='/' method='post'>
+      <form>
         <div className='filterContainer'>
           {/* <FilterElementAll filterText={"All Filters"}/> */}
 
@@ -97,31 +97,36 @@ export default function GalleryFilter () {
             toggleDropdown={toggleDropdown}
             formik={formik}
           />
-          <FilterElementAll filterText={'All Filters'} />
+
+          <FilterFavorites filterText={'Favorites'} formik={formik} />
+          {/* <FilterElementAll filterText={ 'All Filters' } /> */}
+          <Button
+            disableElevation
+            color='primary'
+            variant='contained'
+            type='submit'
+            onClick={formik.handleSubmit}
+          >
+            Filter
+          </Button>
+          <Button
+            disableElevation
+            color='grey'
+            variant='contained'
+            type='submit'
+            onClick={()=>{
+
+      formik.values.type= 'all'
+      formik.values.age= ''
+      formik.values.favorites= false
+
+            }}
+          >
+            Clear
+          </Button>
         </div>
-
         {error ? <Alert severity='error'>{error}</Alert> : null}
-
-        {/* <Button
-          disableElevation
-          color='primary'
-          variant='contained'
-          type='submit'
-        >
-          Filter
-        </Button> */}
       </form>
-      {/* <Button
-          disableElevation
-          color='grey'
-          variant='contained'
-          onClick={() => {
-            setFilteredData(null)
-          }}
-          type='submit'
-        >
-          Clear
-        </Button> */}
     </div>
   )
 }
@@ -145,7 +150,6 @@ function FilterElementType ({ filterText, toggleDropdown, formik }) {
           onClick={() => {
             setSelectedBtn(1)
             formik.values.type = 'all'
-            formik.handleSubmit()
           }}
         >
           All
@@ -157,7 +161,6 @@ function FilterElementType ({ filterText, toggleDropdown, formik }) {
           onClick={() => {
             setSelectedBtn(2)
             formik.values.type = 'dog'
-            formik.handleSubmit()
           }}
         >
           Dogs
@@ -169,7 +172,6 @@ function FilterElementType ({ filterText, toggleDropdown, formik }) {
           onClick={() => {
             setSelectedBtn(3)
             formik.values.type = 'cat'
-            formik.handleSubmit()
           }}
         >
           Cats
@@ -182,7 +184,6 @@ function FilterElementType ({ filterText, toggleDropdown, formik }) {
           onClick={() => {
             setSelectedBtn(4)
             formik.values.type = 'others'
-            formik.handleSubmit()
           }}
         >
           Others
@@ -192,30 +193,48 @@ function FilterElementType ({ filterText, toggleDropdown, formik }) {
   )
 }
 
-function FilterElementAge ({ filterText, toggleDropdown, formik }) {
+function FilterElementAge ({ filterText, formik }) {
+  console.log('into FilterElementAge')
   const ref = useRef()
 
-  useEffect(() => {
-    const eventlistener = document.body.addEventListener('click', e => {
-      console.log('eventhandler')
-      // if the e.target is still the same like before than nothing should happen
-      if (ref.current && ref.current.contains(e.target)) {
-        console.log("the same");
-        return //do nothing
-      } else {
-        //close it, because u clicked on other element
-        const dropdown = document.querySelector(`#filterAge`)
-        console.log(dropdown)
-        dropdown && dropdown.classList.add('filter-dropdown-hidden')
-           console.log("not the same");
-      }
-    })
+  const toggleDropdown = () => {
+    const dropdown = document.getElementById('filterAge')
+    console.log('in toggleDropdown')
+    console.log('dropdown', dropdown)
 
-    //unmount remove eventlistener
-    return () => {
-      document.body.removeEventListener('click', eventlistener)
+    //change classes for visible and hide dropdown
+    if (dropdown.classList.contains('filter-dropdown-hidden')) {
+      dropdown.classList.remove('filter-dropdown-hidden')
+      console.log('open dropdown')
+    } else {
+      dropdown.classList.add('filter-dropdown-hidden')
+      console.log('close dropdown')
     }
-  }, [])
+  }
+
+  //   useEffect( () => {
+  //     console.log( 'in UseEffect' )
+  //     let eventlistener = document.body.addEventListener( 'click', e => {
+  //       e.stopPropagation()
+  //       console.log( 'into eventhandler' )
+  //
+  //       // if the e.target is still the same like before than nothing should happen
+  //       if ( ref.current && ref.current.contains( e.target ) ) {
+  //         console.log( 'the same e target:', e.target )
+  //         return //do nothing
+  //       } else {
+  //         //close it, because u clicked on other element
+  //         console.log( 'not the same e target:', e.target )
+  //         const dropdown = document.querySelector( `#filterAge` )
+  //         dropdown && dropdown.classList.add( 'filter-dropdown-hidden' )
+  //       }
+  //     } )
+  //     //unmount remove eventlistener
+  //     return () => {
+  //       console.log( 'close eventhandler' )
+  //       document.body.removeEventListener( 'click', eventlistener )
+  //     }
+  //   }, [] )
 
   const ageOptions = [
     {
@@ -229,21 +248,21 @@ function FilterElementAge ({ filterText, toggleDropdown, formik }) {
     {
       label: 'Adult (1-7 years)',
       value: 'adult'
-    }, {
+    },
+    {
       label: 'Senior (7+ years)',
       value: 'senior'
     }
   ]
 
+  console.log('render')
   return (
-    <div
-      className='filterElement'
-      ref={ref}
-      onClick={() => {
-        toggleDropdown('filterAge')
-      }}
-    >
-      <span>
+    <div className='filterElement' ref={ref}>
+      <span
+        onClick={() => {
+          toggleDropdown()
+        }}
+      >
         <span className=''>{filterText}</span>
         <i className='fas fa-chevron-down filtericon'></i>{' '}
       </span>
@@ -259,8 +278,7 @@ function FilterElementAge ({ filterText, toggleDropdown, formik }) {
                 onChange={formik.handleChange}
               />
             ))}
-          </FormGroup> 
-    
+          </FormGroup>
         </FormControl>
       </div>
     </div>
@@ -273,6 +291,37 @@ function FilterElementAll ({ filterText, filterData }) {
       <span>
         {filterText} <i class='fas fa-sliders-h filtericon'></i>{' '}
       </span>
+    </div>
+  )
+}
+
+function FilterFavorites ({ filterText, formik }) {
+  const [likeIcon, setLikeIcon] = useState('black')
+
+  // useEffect( () => {
+  //   console.log( 'in UseEffect formik' )
+  //   formik.handleSubmit()
+  // }, [formik.values] )
+
+  const toggle = status => {
+    console.log('toggle', status)
+    if (status) return false
+    if (!status) return true
+  }
+  return (
+    <div
+      onClick={() => {
+        formik.values.favorites = toggle(formik.values.favorites)
+
+        formik.values.favorites === false
+          ? setLikeIcon('black')
+          : setLikeIcon('#f76c6c')
+      }}
+      className='filterElement'
+    >
+      <span className=''>{filterText}</span>
+
+      <i className='fas fa-heart' style={{ color: likeIcon }}></i>
     </div>
   )
 }
