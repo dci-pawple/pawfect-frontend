@@ -1,20 +1,22 @@
-import React, { useState, useContext,useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
 
-const LikeButton = ({ pet}) => {
-	const [likeIcon, setLikeIcon] = useState(pet.usersFavorite===true?"#f76c6c":"black" );
-	const [loginText, setLoginText] = useState("")
-	const { userId} = useContext(MyContext);
-	const { login} = useContext(MyContext);
+const LikeButton = ({ pet, favouritesList }) => {
+	const [likeIcon, setLikeIcon] = useState(
+		pet.usersFavorite === true ? "#f76c6c" : "black"
+	);
+	const [loginText, setLoginText] = useState("");
+	const { userId } = useContext(MyContext);
+	const { login } = useContext(MyContext);
 
-	const style={
+	const btnStyle = {
 		boxShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
 		borderRadius: "10px",
 		padding: "0.5rem",
-		fontSize: "1rem"
-	}
-	
+		fontSize: "1rem",
+	};
+
 	const savePet = pet => {
 		fetch(`http://localhost:4000/users/save`, {
 			method: "PATCH",
@@ -25,11 +27,16 @@ const LikeButton = ({ pet}) => {
 			body: JSON.stringify({ user_id: userId, pet_id: pet._id }),
 		})
 			.then(data => data.json())
-			.then(res => console.log("saving to favourites"))
+			.then(res => console.log("saving to favourites", res))
 			.catch(err => console.log(err.response));
 	};
 
-	
+	const removePet = pet => {
+		if (pet.usersFavorite && pet.usersFavorite === false) {
+			console.log("users favourites =>>>", pet.usersFavorite)
+			return favouritesList.filter(removedPet => removedPet !== pet);
+		}
+	};
 
 	return (
 		<>
@@ -41,7 +48,7 @@ const LikeButton = ({ pet}) => {
 						likeIcon === "black"
 							? setLikeIcon("#f76c6c")
 							: setLikeIcon("black");
-						savePet(pet);
+							savePet(pet);
 					}}>
 					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 				</button>
@@ -51,15 +58,14 @@ const LikeButton = ({ pet}) => {
 					onClick={() => setLoginText("Login to like it")}>
 					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 					<Link to='/login' className='card__login-btn'>
-						<button style={loginText === "" ? {display:"none"}:style}>{loginText}</button>
+						<button style={loginText === "" ? { display: "none" } : btnStyle}>
+							{loginText}
+						</button>
 					</Link>
 				</button>
 			)}
 		</>
 	);
-		
-		
-	
 };
 
 export default LikeButton;
