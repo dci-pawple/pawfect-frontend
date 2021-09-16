@@ -13,7 +13,7 @@ import axios from "axios";
 import { getOrCreateChat } from "../chat/getOrCreateChat";
 
 export default function Chat() {
-  const { setUsers, user, chatUsername } = useContext(MyContext);
+  const { setUsers, user, chatUsername, petOwner } = useContext(MyContext);
   const [chat, setChat] = useState(null);
   // to see the chats of the currently logged in person
   const [headers, setHeaders] = useState({
@@ -67,7 +67,7 @@ export default function Chat() {
     getOrCreateChat(headers, data, (chat) => setChat(chat));
     console.log("this is data", data);
     // }
-  }, [chatUsername]);
+  }, [chat, chatUsername, petOwner]);
 
   // const userLocalStorage = JSON.parse(localStorage.getItem("user"));
 
