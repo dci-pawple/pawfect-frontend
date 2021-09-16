@@ -16,21 +16,21 @@ import Footer from "./components/Footer";
 import MyContext from "./context/MyContext";
 import PetDetails from "./pages/PetDetails";
 import Chat from "./pages/Chat";
+import SavedSearches from "./components/SavedSearches";
 
 const App = () => {
   //need this to get search input
   const params = new URLSearchParams(window.location.search);
   const search = params.get("search");
-  console.log(search);
+  // console.log(search);
 
-  const { user } = useContext(MyContext);
-  console.log(user);
+  // const { user } = useContext(MyContext);
+  // console.log(user);
 
   return (
     <Theme>
       <BrowserRouter>
         <Navbar />
-
         <Switch>
           <Route exact path="/">
             <Home />
@@ -59,6 +59,10 @@ const App = () => {
 
           <Route path="/pet">
             <PetDetails />
+          </Route>
+
+          <Route path="/save">
+            <SavedSearches/>
           </Route>
         </Switch>
 

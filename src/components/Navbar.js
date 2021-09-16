@@ -138,7 +138,7 @@ export default function Navbar() {
                       Messages
                     </Link>
                     <Link
-                      to="/saved"
+                      to="/save"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
@@ -150,6 +150,7 @@ export default function Navbar() {
                       onClick={() => {
                         closeMobileMenu();
                         localStorage.removeItem("user");
+                        localStorage.removeItem("userId");
                         setLogin(false);
                       }}
                     >

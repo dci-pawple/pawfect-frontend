@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { useFormik } from 'formik'
 import { useDropzone } from 'react-dropzone'
 import { useHistory } from 'react-router-dom'
@@ -13,6 +13,7 @@ import {
   FormHelperText
 } from '@material-ui/core'
 import Thumb from '../components/Thumb'
+import MyContext from '../context/MyContext'
 
 /* Styling the form (Material-ui) */
 const useStyles = makeStyles(theme =>
@@ -68,6 +69,9 @@ export default function CreateAd () {
   const classes = useStyles()
   let history = useHistory()
   const [error, setError] = useState(null)
+  const {userId, setUserId}=useContext(MyContext)
+  const { pet, setPet } = useContext(MyContext);
+
 
   const formik = useFormik({
     initialValues: {
@@ -97,6 +101,7 @@ export default function CreateAd () {
       fd.append('habits', values.habits)
       fd.append('size', values.size)
       fd.append('extras', values.extras)
+      fd.append('userId', userId)
 
       if (values.photos) {
         values.photos.forEach(file => fd.append('photos', file))
@@ -124,7 +129,10 @@ export default function CreateAd () {
         } else {
           console.log('Upload completed successfully')
           history.push('/')
+          setPet(data.data)
+          
         }
+
       } catch (err) {
         console.log('Error while uploadting data for new ad =>', err)
       }

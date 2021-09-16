@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Location } from "../icons/icons";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
+import LikeButton from "./LikeButton";
 
-const PetCard = ({ pet }) => {
-  const [likeIcon, setLikeIcon] = useState("black");
-  const { petId, setPetId } = useContext(MyContext);
+const PetCard = ({ pet}) => {
+
+  const { setPetId } = useContext(MyContext);
 
   return (
     // <Link to='/pet' className='card'>
@@ -24,19 +25,10 @@ const PetCard = ({ pet }) => {
                 <i class="fas fa-venus"></i>
               )}
             </div>
-          </div>
-
-          <button
-            className="card__like--icon"
-            onClick={() => {
-              likeIcon === "black"
-                ? setLikeIcon("#f76c6c")
-                : setLikeIcon("black");
-            }}
-          >
-            <i className="fas fa-heart" style={{ color: likeIcon }}></i>
-          </button>
+          </div>   
+          <LikeButton pet={pet}/>
         </div>
+
         <div className="card__description">
           <p>
             <strong>habits:</strong> {pet && pet.extras}
@@ -72,7 +64,8 @@ const PetCard = ({ pet }) => {
         </Link>
       </div>
     </div>
-    //* </Link>
+ 
+ 
   );
 };
 
