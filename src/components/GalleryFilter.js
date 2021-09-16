@@ -15,7 +15,7 @@ import '../style/components/_galleryFilter.scss'
 
 export default function GalleryFilter () {
   const [error, setError] = useState(null)
-
+  const {userId, setUserId} =useContext(MyContext)
   const { filteredData, setFilteredData } = useContext(MyContext)
   /**
    * Define the Form for FORMIK
@@ -34,10 +34,11 @@ export default function GalleryFilter () {
       try {
         console.log('formik.values.type', formik.values.type)
         console.log('formik.values.age', JSON.stringify(formik.values.age))
+        console.log('userId',userId)
         const response = await fetch(
           `http://localhost:4000/pets/filter?type=${
             formik.values.type
-          }&age=${JSON.stringify(formik.values.age)}&favorites=${formik.values.favorites}`,
+          }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(formik.values.favorites)}&userId=${userId?userId:null}`,
           {
             method: 'GET',
             mode: 'cors',
