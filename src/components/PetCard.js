@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
 
-const PetCard = ({ pet}) => {
+const PetCard = ({ pet, favouritesList}) => {
 
   const { setPetId } = useContext(MyContext);
 
@@ -26,7 +26,7 @@ const PetCard = ({ pet}) => {
               )}
             </div>
           </div>   
-          <LikeButton pet={pet}/>
+          <LikeButton pet={pet} favouritesList={favouritesList}/>
         </div>
 
         <div className="card__description">
