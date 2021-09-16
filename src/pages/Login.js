@@ -88,7 +88,6 @@ export default function Login() {
           },
           body: JSON.stringify(values),
         });
-
         const data = await response.json();
         console.log("data=>", data);
         if (!data.success) {
@@ -99,6 +98,7 @@ export default function Login() {
           setUserId(data.data._id);
           setUser(data.data);
           localStorage.setItem("user", JSON.stringify(data.data));
+          localStorage.setItem("userId", JSON.stringify(data.data._id));
           history.push("/");
         }
       } catch (err) {
