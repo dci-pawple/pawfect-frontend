@@ -56,12 +56,19 @@ export default function Chat() {
     //   }
   }, []);
 
+  const chatUser = {
+    secret: user.password,
+    username: user.email,
+    first_name: user.firstName,
+  };
+
   useEffect(() => {
     // if (!didMountRef.current) {
     //     didMountRef.current = true
 
     const data = {
       usernames: [chatUser.username, chatUsername],
+
       is_direct_chat: true,
     };
     getOrCreateChat(headers, data, (chat) => setChat(chat));
@@ -70,12 +77,6 @@ export default function Chat() {
   }, [chat, chatUsername, petOwner]);
 
   // const userLocalStorage = JSON.parse(localStorage.getItem("user"));
-
-  const chatUser = {
-    secret: user.password,
-    username: user.email,
-    first_name: user.firstName,
-  };
 
   console.log("chat user", chatUser);
 

@@ -98,7 +98,7 @@ const UserProfile = () => {
       fetch(`http://localhost:4000/users/${userId}`)
         .then((data) => data.json())
         .then((res) => {
-          setUser(res.data);
+          !user && setUser(res.data);
         });
     };
 
