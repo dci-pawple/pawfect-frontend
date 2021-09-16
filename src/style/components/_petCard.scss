@@ -58,6 +58,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items:flex-start;
   }
   &__title {
     font-size: 1.75rem;
@@ -80,6 +81,21 @@
     border: none;
     background-color: transparent;
     
+
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-end;
+    
+  }
+
+  &__login-btn {
+
+    button {
+      outline: none;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
   
 
