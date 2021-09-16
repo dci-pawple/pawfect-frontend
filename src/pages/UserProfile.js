@@ -83,6 +83,7 @@ const UserProfile = () => {
 
   const { user, setUser } = useContext(MyContext);
   const { userId, setUserId } = useContext(MyContext);
+  console.log("userprofile", user);
 
   useEffect(() => {
     const fetchData = () => {

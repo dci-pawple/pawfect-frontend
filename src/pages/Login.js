@@ -56,6 +56,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const { login, setLogin } = useContext(MyContext);
   const { userId, setUserId } = useContext(MyContext);
+  const { user, setUser } = useContext(MyContext);
 
   const history = useHistory();
 
@@ -87,7 +88,6 @@ export default function Login() {
           },
           body: JSON.stringify(values),
         });
-
         const data = await response.json();
         console.log("data=>", data);
         if (!data.success) {
@@ -96,7 +96,10 @@ export default function Login() {
         } else {
           setLogin(true);
           setUserId(data.data._id);
+          setUser(data.data);
+          console.log("this is data.data: ", data.data);
           localStorage.setItem("user", JSON.stringify(data.data));
+          localStorage.setItem("userId", JSON.stringify(data.data._id));
           history.push("/");
         }
       } catch (err) {
