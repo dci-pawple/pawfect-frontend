@@ -14,6 +14,7 @@ const LikeButton = ({ pet}) => {
 		padding: "0.5rem",
 		fontSize: "1rem"
 	}
+	
 	const savePet = pet => {
 		fetch(`http://localhost:4000/users/save`, {
 			method: "PATCH",
