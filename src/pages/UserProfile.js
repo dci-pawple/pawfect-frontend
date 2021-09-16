@@ -91,7 +91,7 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
 
   const { user, setUser } = useContext(MyContext);
-  const { userId, setUserId } = useContext(MyContext);
+  const { userId } = useContext(MyContext);
 
   useEffect(() => {
     const fetchData = () => {
@@ -158,9 +158,11 @@ const UserProfile = () => {
           body: JSON.stringify(realValues),
         });
 
-        // console.log(response.json());
         const data = await response.json();
         console.log("data=>", data);
+        // setIsValidating(true);
+
+
         if (!data.success) {
           setError(data.message);
           setIsValidating(false);
@@ -386,6 +388,7 @@ const UserProfile = () => {
                 Your changes have been successfully saved
               </Alert>
             ) : null}
+
           </form>
 
           {/* let's decide if we want this here */}

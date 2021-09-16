@@ -14,8 +14,7 @@ const SavedSearches = () => {
 			.then(response => {
 				console.log("response in favourites =>", response)
 				setFavouritesList(response.data)
-			}
-				)
+			})
 			.catch(err => console.error("error in favourites =>", err))
 		}
 
@@ -27,7 +26,7 @@ const SavedSearches = () => {
 		<div className='app-container container'>
 			<h2>Saved Searches</h2>
 			<div className='gallery__grid-container'>
-			{favouritesList && favouritesList.map((favouritePet, index)=><PetCard pet={favouritePet} key={index}/>)}
+			{favouritesList && favouritesList.map((favouritePet, index)=><PetCard favouritesList={favouritesList} pet={favouritePet} key={index}/>)}
 			</div>
 		</div>
 	);
