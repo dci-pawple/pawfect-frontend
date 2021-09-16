@@ -15,7 +15,8 @@ const breakPoints = [
 const PetDetails = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [favourite, setFavourite] = useState("Add to favourites");
-  const [petOwner, setPetOwner] = useState(null);
+  // const [petOwner, setPetOwner] = useState(null);
+  const { petOwner, setPetOwner } = useContext(MyContext);
   const { pet, setPet } = useContext(MyContext);
   const { petId, setPetId } = useContext(MyContext);
   const { chatUsername, setChatUsername } = useContext(MyContext);
@@ -162,7 +163,7 @@ const PetDetails = () => {
             <button className="btn__chat">
               <Link
                 to="/messages"
-                onClick={() => setChatUsername("Rebekah_Batz@yahoo.com")}
+                onClick={() => petOwner && setChatUsername(petOwner.email)}
               >
                 Chat with {petOwner && petOwner.firstName}
               </Link>
