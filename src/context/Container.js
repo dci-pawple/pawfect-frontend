@@ -6,12 +6,9 @@ const Container = ({ children }) => {
     localStorage.getItem("user") ? true : false
   );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  console.log(user);
-  // const [userId, setUserId] = useState(login ? user._id : null);
   const [userId, setUserId] = useState(
     JSON.parse(localStorage.getItem("userId"))
   );
-
   const [pet, setPet] = useState({});
   const [petId, setPetId] = useState(null);
   const [users, setUsers] = useState([]);

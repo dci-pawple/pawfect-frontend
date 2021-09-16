@@ -97,7 +97,6 @@ export default function Login() {
           setLogin(true);
           setUserId(data.data._id);
           setUser(data.data);
-          console.log("this is data.data: ", data.data);
           localStorage.setItem("user", JSON.stringify(data.data));
           localStorage.setItem("userId", JSON.stringify(data.data._id));
           history.push("/");

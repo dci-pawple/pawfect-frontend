@@ -2,37 +2,43 @@ import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
+
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
-
 import MyContext from "../context/MyContext";
 import Thumb from "../components/Thumb";
 
-//Form Valitation
+//Form Validation
 
 const validate = (values) => {
   const errors = {};
 
-  // if (values.firstName.length > 15) {
-  //   errors.firstName = "Must be 15 characters or less";
-  // }
+  if (values.firstName.length > 15) {
+    errors.firstName = "Must be 15 characters or less";
+  }
 
-  // if (values.lastName.length > 20) {
-  //   errors.lastName = "Must be 20 characters or less";
-  // }
+  if (values.lastName.length > 20) {
+    errors.lastName = "Must be 20 characters or less";
+  }
 
-  // if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-  //   errors.email = "Invalid email address";
-  // }
-  // if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)) {
-  //   errors.password = "Invalid Character";
-  // } else if (values.password.length < 6) {
-  //   errors.password = "Must be longer than 6 Characters";
-  // }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address";
+  }
 
-  // if (values.password !== values.passwordConfirm) {
-  //   errors.passwordConfirm = "Not the same Password";
-  // }
+  if (values.email !== values.emailConfirm) {
+    errors.emailConfirm = "Emails don't match";
+  }
+
+  if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)) {
+    errors.password = "Invalid Character";
+  } else if (values.password.length < 6) {
+    errors.password = "Must be longer than 6 Characters";
+  }
+
+  if (values.password !== values.passwordConfirm) {
+    errors.passwordConfirm = "Not the same Password";
+  }
 
   return errors;
 };
@@ -81,9 +87,11 @@ const UploadComponent = (props) => {
 const UserProfile = () => {
   const classes = useStyles();
 
+  const [isValidating, setIsValidating] = useState(false);
+  const [error, setError] = useState(null);
+
   const { user, setUser } = useContext(MyContext);
   const { userId, setUserId } = useContext(MyContext);
-  console.log("userprofile", user);
 
   useEffect(() => {
     const fetchData = () => {
@@ -137,6 +145,8 @@ const UserProfile = () => {
         .reduce((acc, item) => {
           return { ...acc, [item]: values[item] };
         }, {});
+      setIsValidating(true);
+      setError(null);
 
       try {
         const response = await fetch(`http://localhost:4000/users/${userId}`, {
@@ -148,7 +158,14 @@ const UserProfile = () => {
           body: JSON.stringify(realValues),
         });
 
-        console.log(response.json());
+        // console.log(response.json());
+        const data = await response.json();
+        console.log("data=>", data);
+        if (!data.success) {
+          setError(data.message);
+          setIsValidating(false);
+          console.log("error=>", error);
+        }
       } catch (err) {
         console.error(
           "Error while fetching data for user profile update =>",
@@ -161,34 +178,34 @@ const UserProfile = () => {
   return (
     <div className="app-container container">
       <div className="account__container">
-        <div className="profile-img-container">
-          <h1>Your profile</h1>
-          <div className="img-text-container">
-            <div className="img-container">
-              {formik.values.profilePhoto === "" ? (
-                <i class="fas fa-user-circle"></i>
-              ) : (
-                <div>
-                  {formik.values.profilePhoto &&
-                    formik.values.profilePhoto.map((photo, i) => (
-                      <Thumb key={i} file={photo} />
-                    ))}
-                </div>
-              )}
-            </div>
-            <UploadComponent
-              setFieldValue={formik.setFieldValue}
-              values={formik.values}
-            />
-          </div>
-        </div>
         <div className="user-form-container">
           <form
             className={classes.root}
             noValidate
-            autoComplete="off"
+            autoComplete="on"
             onSubmit={formik.handleSubmit}
           >
+            <div className="profile-img-container">
+              <h1>Your profile</h1>
+              <div className="img-text-container">
+                <div className="img-container">
+                  {formik.values.profilePhoto === "" ? (
+                    <i class="fas fa-user-circle"></i>
+                  ) : (
+                    <div>
+                      {formik.values.profilePhoto &&
+                        formik.values.profilePhoto.map((photo, i) => (
+                          <Thumb key={i} file={photo} />
+                        ))}
+                    </div>
+                  )}
+                </div>
+                <UploadComponent
+                  setFieldValue={formik.setFieldValue}
+                  values={formik.values}
+                />
+              </div>
+            </div>
             <div className="one-line">
               <TextField
                 id="firstName"
@@ -363,6 +380,12 @@ const UserProfile = () => {
             >
               SAVE CHANGES
             </Button>
+
+            {isValidating ? (
+              <Alert severity="success">
+                Your changes have been successfully saved
+              </Alert>
+            ) : null}
           </form>
 
           {/* let's decide if we want this here */}

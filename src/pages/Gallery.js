@@ -14,7 +14,7 @@ const Gallery = () => {
 					.then(data => data.json())
 					.then(res => {
 						setPetsList(res.data);
-            setFilteredData(res.data)
+            			setFilteredData(res.data)
 					});
 			} catch (err) {
 				  console.log('Error while filtering =>', err)
@@ -29,7 +29,9 @@ const Gallery = () => {
 			<GalleryFilter/>
 			<div className='gallery__grid-container'>
 
-				{petsList.map((pet, index) => (
+				{filteredData.length!==0?filteredData.map((pet, index) => (
+					<PetCard pet={pet} petData={pet} key={pet._id} />
+				)):petsList.map((pet, index) => (
 					<PetCard pet={pet} petData={pet} key={pet._id} />
 				))}
 			</div>

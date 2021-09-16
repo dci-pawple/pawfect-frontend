@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
+import LikeButton from "../components/LikeButton";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false },
@@ -13,8 +14,8 @@ const breakPoints = [
 
 const PetDetails = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [likeIcon, setLikeIcon] = useState("black");
-  const [favourite, setFavourite] = useState("Add to favourites");
+  // const [favourite, setFavourite] = useState("Add to favourites");
+  const [petOwner, setPetOwner] = useState(null);
   const { pet, setPet } = useContext(MyContext);
   const { petId, setPetId } = useContext(MyContext);
   const { chatUsername, setChatUsername } = useContext(MyContext);
@@ -22,17 +23,21 @@ const PetDetails = () => {
   let history = useHistory();
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = async () => {
       try {
-        fetch(`http://localhost:4000/pets/${petId}`)
+        await fetch(`http://localhost:4000/pets/${petId}`)
           .then((data) => data.json())
           .then((res) => setPet(res.data));
+        console.log("pet =>", pet);
+        fetch(`http://localhost:4000/users/${pet.userId}`)
+          .then((data) => data.json())
+          .then((res) => setPetOwner(res.data));
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [petId, setPet]);
+  }, [petId, setPet, pet]);
 
   return (
     <div className="app-container container pet__container">
@@ -104,7 +109,7 @@ const PetDetails = () => {
         <div className="owner__container">
           <div className="owner__icons">
             <div className="owner__icon-container">
-              <button
+              {/* <button
                 className="owner__btn"
                 onClick={() => {
                   likeIcon === "black"
@@ -117,7 +122,9 @@ const PetDetails = () => {
               >
                 <i className="fas fa-heart" style={{ color: likeIcon }}></i>
                 <p className="hidden">{favourite}</p>
-              </button>
+              </button> */}
+
+              <LikeButton pet={pet} />
             </div>
 
             <div className="owner__icon-container">
@@ -126,7 +133,6 @@ const PetDetails = () => {
                 className="owner__btn"
               >
                 <i className="fas fa-share"></i>
-                <p className="hidden">Share this ad</p>
               </button>
               <SharePopup
                 trigger={buttonPopup}
@@ -144,7 +150,7 @@ const PetDetails = () => {
             </div>
             <div className="owner__info-container">
               <p>Owner of {pet && pet.name}</p>
-              <h5>Mark</h5>
+              <h5>name: {petOwner && petOwner.firstName}</h5>
             </div>
           </div>
 
@@ -154,7 +160,7 @@ const PetDetails = () => {
                 to="/messages"
                 onClick={() => setChatUsername("Harold_Shields@yahoo.com")}
               >
-                Chat with Mark
+                Chat with {petOwner && petOwner.firstName}
               </Link>
               <i class="fas fa-comment-alt"></i>
             </button>
