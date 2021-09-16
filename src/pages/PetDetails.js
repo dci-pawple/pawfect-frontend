@@ -16,7 +16,7 @@ const breakPoints = [
 const PetDetails = () => {
 
   const [buttonPopup, setButtonPopup] = useState(false);
-  // const [favourite, setFavourite] = useState("Add to favourites");
+  const [favourite, setFavourite] = useState("Add to favourites");
   const [petOwner, setPetOwner] = useState(null)
   const { pet, setPet } = useContext(MyContext);
   const { petId } = useContext(MyContext);
@@ -126,7 +126,7 @@ const PetDetails = () => {
                 <p className="hidden">{favourite}</p>
               </button> */}
 
-              <LikeButton pet={pet}/>
+              <LikeButton pet={pet} favourite={favourite} setFavourite={setFavourite}/>
             </div>
 
             <div className="owner__icon-container">

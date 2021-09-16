@@ -2,7 +2,7 @@ import React, { useState, useContext} from "react";
 import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
 
-const LikeButton = ({ pet}) => {
+const LikeButton = ({ pet, favourite, setFavourite}) => {
 	const [likeIcon, setLikeIcon] = useState("black");
 	const [loginText, setLoginText] = useState("")
 	const { userId} = useContext(MyContext);
@@ -14,6 +14,7 @@ const LikeButton = ({ pet}) => {
 		padding: "0.5rem",
 		fontSize: "1rem"
 	}
+	
 	const savePet = pet => {
 		fetch(`http://localhost:4000/users/save`, {
 			method: "PATCH",
