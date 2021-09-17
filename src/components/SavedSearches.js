@@ -4,8 +4,8 @@ import MyContext from "../context/MyContext";
 
 const SavedSearches = () => {
 	const [favouritesList, setFavouritesList] = useState([]);
+	const [favouriteToggle, setFavouriteToggle] = useState(false)
 	const { userId } = useContext(MyContext);
-
 
 	useEffect(() => {
 		const fetchFavourites = () => {
@@ -19,14 +19,20 @@ const SavedSearches = () => {
 		}
 
 		fetchFavourites()
-	}, [userId])
+	}, [userId, favouriteToggle])
+
+	const clickFavourites = () => {
+		setFavouriteToggle(!true)
+	}
 	
 
 	return (
 		<div className='app-container container'>
 			<h2>Saved Searches</h2>
 			<div className='gallery__grid-container'>
-			{favouritesList && favouritesList.map((favouritePet, index)=><PetCard favouritesList={favouritesList} pet={favouritePet} key={index}/>)}
+			{favouritesList && favouritesList.map((favouritePet, index)=>
+			<PetCard favouritesList={favouritesList} clickFavourites={clickFavourites} pet={favouritePet} key={index}/>
+			)}
 			</div>
 		</div>
 	);

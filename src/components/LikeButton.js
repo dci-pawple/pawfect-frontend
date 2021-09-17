@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
 
-const LikeButton = ({ pet, favouritesList }) => {
+const LikeButton = ({ pet, favouritesList, clickFavourites }) => {
 	const [likeIcon, setLikeIcon] = useState(
 		pet.usersFavorite === true ? "#f76c6c" : "black"
 	);
@@ -31,24 +31,26 @@ const LikeButton = ({ pet, favouritesList }) => {
 			.catch(err => console.log(err.response));
 	};
 
-	const removePet = pet => {
-		if (pet.usersFavorite && pet.usersFavorite === false) {
-			console.log("users favourites =>>>", pet.usersFavorite)
-			return favouritesList.filter(removedPet => removedPet !== pet);
-		}
-	};
-
+	// const removePet = pet => {
+	// 	if (pet.usersFavorite && pet.usersFavorite === false) {
+	// 		console.log("users favourites =>>>", pet.usersFavorite)
+	// 		return favouritesList.filter(removedPet => removedPet !== pet);
+	// 	}
+	// };
+	clickFavourites()
 	return (
 		<>
 			{login && login ? (
 				<button
 					className='card__like--icon'
 					data-petid={pet && pet._id}
-					onClick={e => {
+					onClick={e=> {
 						likeIcon === "black"
 							? setLikeIcon("#f76c6c")
 							: setLikeIcon("black");
 							savePet(pet);
+							// clickFavourites()
+							
 					}}>
 					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 				</button>
