@@ -23,6 +23,7 @@ const SavedSearches = () => {
 
 	const clickFavourites = () => {
 		setFavouriteToggle(!true)
+		console.log('clickFavourites function inside SavedSearches')
 	}
 	
 

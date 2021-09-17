@@ -31,13 +31,9 @@ const LikeButton = ({ pet, favouritesList, clickFavourites }) => {
 			.catch(err => console.log(err.response));
 	};
 
-	// const removePet = pet => {
-	// 	if (pet.usersFavorite && pet.usersFavorite === false) {
-	// 		console.log("users favourites =>>>", pet.usersFavorite)
-	// 		return favouritesList.filter(removedPet => removedPet !== pet);
-	// 	}
-	// };
-	clickFavourites()
+
+	console.log("click favourites ", clickFavourites);
+	
 	return (
 		<>
 			{login && login ? (
@@ -49,8 +45,7 @@ const LikeButton = ({ pet, favouritesList, clickFavourites }) => {
 							? setLikeIcon("#f76c6c")
 							: setLikeIcon("black");
 							savePet(pet);
-							// clickFavourites()
-							
+							clickFavourites();
 					}}>
 					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 				</button>
