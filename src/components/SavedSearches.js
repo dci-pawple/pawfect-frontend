@@ -4,41 +4,38 @@ import MyContext from "../context/MyContext";
 
 const SavedSearches = () => {
 	const [favouritesList, setFavouritesList] = useState([]);
-	const [favouriteToggle, setFavouriteToggle] = useState(false)
+	const { renderFavourite } = useContext(MyContext);
 	const { userId } = useContext(MyContext);
 
 	useEffect(() => {
 		const fetchFavourites = () => {
 			fetch(`http://localhost:4000/pets/filter?favorites=true&userId=${userId}`)
-			.then(data => data.json())
-			.then(response => {
-				console.log("response in favourites =>", response)
-				setFavouritesList(response.data)
-			})
-			.catch(err => console.error("error in favourites =>", err))
-		}
+				.then(data => data.json())
+				.then(response => {
+					console.log("response in favourites =>", response);
+					setFavouritesList(response.data);
+				})
+				.catch(err => console.error("error in favourites =>", err));
+		};
 
-		fetchFavourites()
-	}, [userId, favouriteToggle])
-
-	const clickFavourites = () => {
-		setFavouriteToggle(!true)
-		console.log('clickFavourites function inside SavedSearches')
-	}
-	
+		fetchFavourites();
+	}, [userId, renderFavourite]);
 
 	return (
 		<div className='app-container container'>
 			<h2>Saved Searches</h2>
 			<div className='gallery__grid-container'>
-			{favouritesList && favouritesList.map((favouritePet, index)=>
-			<PetCard favouritesList={favouritesList} clickFavourites={clickFavourites} pet={favouritePet} key={index}/>
-			)}
+				{favouritesList &&
+					favouritesList.map((favouritePet, index) => (
+						<PetCard
+							favouritesList={favouritesList}
+							pet={favouritePet}
+							key={index}
+						/>
+					))}
 			</div>
 		</div>
 	);
 };
 
 export default SavedSearches;
-
-

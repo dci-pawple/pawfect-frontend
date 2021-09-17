@@ -2,13 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
 
-const LikeButton = ({ pet, favouritesList, clickFavourites }) => {
+const LikeButton = ({ pet }) => {
 	const [likeIcon, setLikeIcon] = useState(
 		pet.usersFavorite === true ? "#f76c6c" : "black"
 	);
 	const [loginText, setLoginText] = useState("");
 	const { userId } = useContext(MyContext);
 	const { login } = useContext(MyContext);
+	const {renderFavourite, setRenderFavourite} = useContext(MyContext);
 
 	const btnStyle = {
 		boxShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
@@ -31,8 +32,11 @@ const LikeButton = ({ pet, favouritesList, clickFavourites }) => {
 			.catch(err => console.log(err.response));
 	};
 
+	// const clickFavourites = (renderFavourite) => {
+	// 	console.log('clickFavourites function inside SavedSearches')
+	// }
 
-	console.log("click favourites ", clickFavourites);
+
 	
 	return (
 		<>
@@ -45,7 +49,9 @@ const LikeButton = ({ pet, favouritesList, clickFavourites }) => {
 							? setLikeIcon("#f76c6c")
 							: setLikeIcon("black");
 							savePet(pet);
-							clickFavourites();
+							setRenderFavourite(!renderFavourite)
+							console.log("petId: => ", pet._id)
+							console.log("userId: => ", userId)
 					}}>
 					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
 				</button>
