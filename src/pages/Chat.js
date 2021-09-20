@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  ChatEngine,
-  ChatEngineWrapper,
-  Socket,
-  ChatFeed,
-  ChatList,
-} from "react-chat-engine";
+import { ChatEngine, ChatFeed, editChat } from "react-chat-engine";
 import { createUser } from "../chat/createUser";
 import { getUsers } from "../chat/getUser";
 import MyContext from "../context/MyContext";
@@ -15,9 +9,7 @@ import { getOrCreateChat } from "../chat/getOrCreateChat";
 export default function Chat() {
   const { setUsers, user, chatUsername, petOwner } = useContext(MyContext);
   const [chat, setChat] = useState(null);
-  // to see the chats of the currently logged in person
   const [headers, setHeaders] = useState({
-    // need to change this again later
     "Project-ID": "b095d165-217e-4a79-b190-6fb4706e857a",
     "User-Name": user.email,
     "User-Secret": user.password,
@@ -56,6 +48,12 @@ export default function Chat() {
     //   }
   }, []);
 
+  const chatUser = {
+    secret: user.password,
+    username: user.email,
+    first_name: user.firstName,
+  };
+
   useEffect(() => {
     // if (!didMountRef.current) {
     //     didMountRef.current = true
@@ -66,18 +64,28 @@ export default function Chat() {
     };
     getOrCreateChat(headers, data, (chat) => setChat(chat));
     console.log("this is data", data);
+
     // }
   }, [chat, chatUsername, petOwner]);
 
   // const userLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-  const chatUser = {
-    secret: user.password,
-    username: user.email,
-    first_name: user.firstName,
-  };
-
   console.log("chat user", chatUser);
+
+  // change title of chat
+  // useEffect(() => {
+  //   let isFirstRender = true;
+  //   if (isFirstRender) {
+  //     isFirstRender = false;
+  //   } else {
+  //     const authObject = headers;
+  //     const chatID = chat && chat.id;
+  //     console.log("chatid", chatID);
+  //     const chatObject = { title: petOwner && petOwner.firstName };
+  //     // const callback = (data) => console.log(data);
+  //     // editChat(authObject, chatID, chatObject);
+  //   }
+  // }, [chat]);
 
   return (
     <div className="app-container container">
@@ -95,6 +103,7 @@ export default function Chat() {
 
         <ChatEngine
           projectID="b095d165-217e-4a79-b190-6fb4706e857a"
+          offset={2}
           userName={chatUser.username}
           userSecret={chatUser.secret}
           renderChatFeed={(chatAppState) => {

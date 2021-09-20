@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
 
-const PetCard = ({ pet}) => {
+const PetCard = ({ pet, clickFavourites}) => {
 
   const { setPetId } = useContext(MyContext);
 
