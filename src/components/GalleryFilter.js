@@ -44,7 +44,7 @@ export default function GalleryFilter () {
             formik.values.type
           }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(
             formik.values.favorites
-          )}&userId=${userId ? JSON.stringify(userId) : ''}`,
+          )}&userId=${userId ? userId : ''}`,
           {
             method: 'GET',
             mode: 'cors',
@@ -89,11 +89,7 @@ export default function GalleryFilter () {
         console.log('userId==', userId)
 
         const response = await fetch(
-          `http://localhost:4000/pets/filter?type=${
-            formik.values.type
-          }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(
-            formik.values.favorites
-          )}&userId=${userId ? userId : ''}`,
+          `http://localhost:4000/pets/filter?type=all&favorites=false&userId=${userId ? userId : ''}`,
           {
             method: 'GET',
             mode: 'cors',
@@ -104,7 +100,7 @@ export default function GalleryFilter () {
         )
 
         const data = await response.json()
-        console.log('requested filteredData', data.data)
+        console.log('requested  filteredData in useeffect', data.data)
         setFilteredData(data.data)
 
         if (!data.success) {
