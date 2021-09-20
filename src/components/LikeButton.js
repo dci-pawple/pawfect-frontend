@@ -3,11 +3,13 @@ import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
 
 const LikeButton = ({pet}) => {
-	console.log("pet.usersFavorite",pet.usersFavorite);
+	//console.log("pet.usersFavorite",pet.usersFavorite);
 	const [likeIcon, setLikeIcon] = useState("black" );
 	const [loginText, setLoginText] = useState("")
 	const { userId} = useContext(MyContext);
 	const { login} = useContext(MyContext);
+	const iconStyleFilled= "far fa-heart";
+	const iconStyleBorder= "fas fa-heart";
 
 	const style={
 		boxShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
@@ -34,6 +36,8 @@ const LikeButton = ({pet}) => {
 		setLikeIcon(pet.usersFavorite===true?"#f76c6c":"black")
 	},[pet])  
 
+
+
 	return (
 		<>
 			{login && login ? (
@@ -46,13 +50,15 @@ const LikeButton = ({pet}) => {
 							: setLikeIcon("black");
 						savePet(pet);
 					}}>
-					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
+
+					
+					<i className={likeIcon==="black"? iconStyleFilled:iconStyleBorder} style={{ color: likeIcon }}></i>
 				</button>
 			) : (
 				<button
 					className='card__like--icon'
 					onClick={() => setLoginText("Login to like it")}>
-					<i className='fas fa-heart' style={{ color: likeIcon }}></i>
+					<i className='far fa-heart' style={{ color: likeIcon }}></i>
 					<Link to='/login' className='card__login-btn'>
 						<button style={loginText === "" ? {display:"none"}:style}>{loginText}</button>
 					</Link>
