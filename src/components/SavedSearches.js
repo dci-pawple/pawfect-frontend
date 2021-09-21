@@ -9,10 +9,12 @@ const SavedSearches = () => {
 
 	useEffect(() => {
 		const fetchFavourites = () => {
+			console.log({userId});
 			fetch(`http://localhost:4000/pets/filter?favorites=true&userId=${userId}`)
 				.then(data => data.json())
 				.then(response => {
-					console.log("response in favourites =>", response);
+				
+					console.log("response.data",response.data);
 					setFavouritesList(response.data);
 				})
 				.catch(err => console.error("error in favourites =>", err));
