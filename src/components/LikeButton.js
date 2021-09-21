@@ -44,8 +44,6 @@ const LikeButton = ( { pet } ) => {
 	}, [pet] )
 
 
-
-
 	return (
 		<>
 			{ login && login ? (
