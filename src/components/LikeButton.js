@@ -1,6 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import MyContext from "../context/MyContext";
 import { Link } from "react-router-dom";
+import {
+	Button,
+	FormControl,
+	FormControlLabel,
+	Checkbox,
+	FormGroup,
+	ButtonGroup,
+  
+	Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions
+  } from '@material-ui/core'
 
 const LikeButton = ( { pet } ) => {
 	//console.log("pet.usersFavorite",pet.usersFavorite);
