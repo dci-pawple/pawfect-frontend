@@ -15,7 +15,7 @@ const Container = ({ children }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [chatUsername, setChatUsername] = useState("");
   const [petOwner, setPetOwner] = useState(null);
-	const [renderFavourite, setRenderFavourite] = useState(false)
+	const [favouritePetsIds, setFavouritePetsIds] = useState(null)
 
 
   return (
@@ -39,8 +39,8 @@ const Container = ({ children }) => {
         setChatUsername,
         petOwner,
         setPetOwner,
-        renderFavourite,
-        setRenderFavourite
+        favouritePetsIds, 
+        setFavouritePetsIds
       }}
     >
       {children}
