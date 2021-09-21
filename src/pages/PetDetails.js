@@ -40,7 +40,7 @@ const PetDetails = () => {
       }
     };
     fetchData();
-  }, [petId, setPet]);
+  }, [petId, setPet,pet]);
 
   return (
     <div className="app-container container pet__container">
