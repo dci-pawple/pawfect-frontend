@@ -32,10 +32,6 @@ const LikeButton = ({ pet }) => {
 			.catch(err => console.log(err.response));
 	};
 
-	// const clickFavourites = (renderFavourite) => {
-	// 	console.log('clickFavourites function inside SavedSearches')
-	// }
-
 
 	
 	return (
