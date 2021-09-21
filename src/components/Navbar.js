@@ -152,6 +152,7 @@ export default function Navbar() {
                         localStorage.removeItem("user");
                         localStorage.removeItem("userId");
                         setLogin(false);
+                      
                       }}
                     >
                       Logout
