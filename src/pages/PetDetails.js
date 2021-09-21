@@ -38,7 +38,7 @@ const PetDetails = () => {
       }
     };
     fetchData();
-  }, [petId, setPet, pet]);
+  }, [petId, setPet]);
 
   return (
     <div className="app-container container pet__container">
