@@ -28,7 +28,9 @@ const PetDetails = () => {
       try {
         await fetch(`http://localhost:4000/pets/${petId}`)
           .then((data) => data.json())
-          .then((res) => setPet(res.data));
+          .then((res) => {
+            if (pet._id !== res.data._id) setPet(res.data);
+          });
         console.log("pet =>", pet);
         fetch(`http://localhost:4000/users/${pet.userId}`)
           .then((data) => data.json())
