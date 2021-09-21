@@ -57,11 +57,6 @@ const LikeButton = ( { pet } ) => {
 						const {savedFavorites} = await savePet( pet );
 
 						console.log("savedFavorites",savedFavorites)
-						// 							setTimeout(()=>{
-						// 								console.log("waiting...")
-						// 								
-						// 
-						// 							},4000)
 						setFavouritePetsIds(savedFavorites)
 						console.log( "petId: => ", pet._id )
 						console.log( "userId: => ", userId )
