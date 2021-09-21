@@ -4,7 +4,7 @@ import MyContext from "../context/MyContext";
 
 const SavedSearches = () => {
 	const [favouritesList, setFavouritesList] = useState([]);
-	const { renderFavourite } = useContext(MyContext);
+	const { favouritePetsIds } = useContext(MyContext);
 	const { userId } = useContext(MyContext);
 
 	useEffect(() => {
@@ -21,7 +21,7 @@ const SavedSearches = () => {
 		};
 
 		fetchFavourites();
-	}, [userId, renderFavourite]);
+	}, [userId, favouritePetsIds]);
 
 	return (
 		<div className='app-container container'>

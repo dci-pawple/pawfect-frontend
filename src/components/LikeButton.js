@@ -10,7 +10,7 @@ const LikeButton = ( { pet } ) => {
 	const { login } = useContext( MyContext );
 	const iconStyleFilled = "far fa-heart";
 	const iconStyleBorder = "fas fa-heart";
-	const { renderFavourite, setRenderFavourite } = useContext( MyContext );
+	const { favouritePetsIds, setFavouritePetsIds } = useContext( MyContext );
 
 	const btnStyle = {
 		boxShadow: "0 0 8px rgba(0, 0, 0, 0.2)",
@@ -64,7 +64,7 @@ const LikeButton = ( { pet } ) => {
 						// 								
 						// 
 						// 							},4000)
-						setRenderFavourite(savedFavorites)
+						setFavouritePetsIds(savedFavorites)
 						console.log( "petId: => ", pet._id )
 						console.log( "userId: => ", userId )
 					} }>
