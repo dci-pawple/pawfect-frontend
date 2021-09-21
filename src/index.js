@@ -5,10 +5,11 @@ import App from "./App";
 import Container from "./context/Container";
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Container>
       <App />
     </Container>
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.querySelector("#root")
 );

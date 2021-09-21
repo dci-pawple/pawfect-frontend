@@ -15,6 +15,8 @@ const Container = ({ children }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [chatUsername, setChatUsername] = useState("");
   const [petOwner, setPetOwner] = useState(null);
+	const [favouritePetsIds, setFavouritePetsIds] = useState(null)
+
 
   return (
     <MyContext.Provider
@@ -37,6 +39,8 @@ const Container = ({ children }) => {
         setChatUsername,
         petOwner,
         setPetOwner,
+        favouritePetsIds, 
+        setFavouritePetsIds
       }}
     >
       {children}

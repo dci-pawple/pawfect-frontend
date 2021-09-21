@@ -7,16 +7,20 @@ import {
   FormControlLabel,
   Checkbox,
   FormGroup,
-  ButtonGroup
+  ButtonGroup,
+
+  Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions
 } from '@material-ui/core'
+
+
 import Alert from '@material-ui/lab/Alert'
 import MyContext from '../context/MyContext'
 import '../style/components/_galleryFilter.scss'
 
 export default function GalleryFilter () {
   const [error, setError] = useState(null)
-  const {userId, setUserId} =useContext(MyContext)
   const { filteredData, setFilteredData } = useContext(MyContext)
+
   /**
    * Define the Form for FORMIK
    */
@@ -30,15 +34,17 @@ export default function GalleryFilter () {
       //alert (JSON.stringify (values, null, 2));
       setError(null)
 
-      alert(JSON.stringify(values, null, 2))
+      //alert(JSON.stringify(values, null, 2))
       try {
-        console.log('formik.values.type', formik.values.type)
-        console.log('formik.values.age', JSON.stringify(formik.values.age))
-        console.log('userId',userId)
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        console.log('userId==', userId)
+
         const response = await fetch(
           `http://localhost:4000/pets/filter?type=${
             formik.values.type
-          }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(formik.values.favorites)}&userId=${userId?userId:null}`,
+          }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(
+            formik.values.favorites
+          )}&userId=${userId ? userId : ''}`,
           {
             method: 'GET',
             mode: 'cors',
@@ -76,10 +82,38 @@ export default function GalleryFilter () {
     }
   }
 
-  //   useEffect( () => {
-  //   console.log( 'in UseEffect formik' )
-  //   formik.handleSubmit()
-  // }, [formik.values] )
+  useEffect(async () => {
+
+         try {
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        console.log('userId==', userId)
+
+        const response = await fetch(
+          `http://localhost:4000/pets/filter?type=all&favorites=false&userId=${userId ? userId : ''}`,
+          {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+
+        const data = await response.json()
+        console.log('requested  filteredData in useeffect', data.data)
+        setFilteredData(data.data)
+
+        if (!data.success) {
+          setError(data.message)
+          console.log('error=>', error)
+        } else {
+          console.log('filtered successful')
+        }
+      } catch (err) {
+        console.log('Error while filtering =>', err)
+      }
+    
+  }, [])
 
   return (
     <div>
@@ -99,7 +133,7 @@ export default function GalleryFilter () {
             formik={formik}
           />
 
-          <FilterFavorites filterText={'Favorites'} formik={formik} />
+          <FilterFavorites filterText={''} formik={formik} />
           {/* <FilterElementAll filterText={ 'All Filters' } /> */}
           <Button
             disableElevation
@@ -112,15 +146,13 @@ export default function GalleryFilter () {
           </Button>
           <Button
             disableElevation
-            color='grey'
+            color='gray'
             variant='contained'
             type='submit'
-            onClick={()=>{
-
-      formik.values.type= 'all'
-      formik.values.age= ''
-      formik.values.favorites= false
-
+            onClick={() => {
+              formik.values.type = 'all'
+              formik.values.age = ''
+              formik.values.favorites = false
             }}
           >
             Clear
@@ -142,7 +174,7 @@ function FilterElementType ({ filterText, toggleDropdown, formik }) {
         color='primary'
         aria-label='outlined primary button group'
         size='large'
-        variant='contained'
+        variant='outlined'
       >
         <Button
           id='all'
@@ -297,32 +329,72 @@ function FilterElementAll ({ filterText, filterData }) {
 }
 
 function FilterFavorites ({ filterText, formik }) {
+  console.log("in FilterFavorites");
   const [likeIcon, setLikeIcon] = useState('black')
+  const { login, setLogin } = useContext(MyContext)
+  const [open, setOpen] = useState(false);
 
-  // useEffect( () => {
-  //   console.log( 'in UseEffect formik' )
-  //   formik.handleSubmit()
-  // }, [formik.values] )
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const toggle = status => {
     console.log('toggle', status)
     if (status) return false
     if (!status) return true
   }
-  return (
-    <div
-      onClick={() => {
-        formik.values.favorites = toggle(formik.values.favorites)
 
-        formik.values.favorites === false
-          ? setLikeIcon('black')
-          : setLikeIcon('#f76c6c')
-      }}
+  const normalFunctionality = () => {
+    formik.values.favorites = toggle(formik.values.favorites)
+
+    formik.values.favorites === false
+      ? setLikeIcon('black')
+      : setLikeIcon('#f76c6c')
+  }
+
+
+  return (
+    <>
+    <div
+      onClick={login ? normalFunctionality : handleClickOpen}
       className='filterElement'
     >
       <span className=''>{filterText}</span>
 
       <i className='fas fa-heart' style={{ color: likeIcon }}></i>
-    </div>
+
+          </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Join Pawfect to favorite pets"}
+        </DialogTitle>
+        <DialogContent>
+         <Button variant="contained" sx={{ margin: 3 }} color="primary" href="/registration" >Create new Account</Button>
+          
+             <DialogContentText id="alert-dialog-description">
+            Already have an account?
+          </DialogContentText>
+           <Button variant="outlined" color="primary" href="/login"  >Login</Button>
+          
+        </DialogContent>
+        <DialogActions>
+          
+          <Button onClick={()=>{setOpen(false)}}>
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+</>
+   
+
   )
 }
