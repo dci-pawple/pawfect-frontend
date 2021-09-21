@@ -129,8 +129,7 @@ export default function CreateAd () {
           setError(data.message)
         } else {
           console.log('Upload completed successfully')
-          setPetId(pet && pet._id);
-          history.push('/pet')
+          history.push(`/pet/${data.data._id}`)
           setPet(data.data)
           
         }

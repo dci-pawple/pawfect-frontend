@@ -22,9 +22,6 @@ const PetDetails = () => {
   const { chatUsername, setChatUsername } = useContext(MyContext);
 
   let { id } = useParams();
-  console.log({id});
-
- 
 
 
   let history = useHistory();
