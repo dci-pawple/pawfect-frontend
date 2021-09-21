@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory,useParams } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
@@ -21,12 +21,18 @@ const PetDetails = () => {
   const { petId, setPetId } = useContext(MyContext);
   const { chatUsername, setChatUsername } = useContext(MyContext);
 
+  let { id } = useParams();
+  console.log({id});
+
+ 
+
+
   let history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetch(`http://localhost:4000/pets/${petId}`)
+        await fetch(`http://localhost:4000/pets/${id || petId}`)
           .then((data) => data.json())
           .then((res) => {
             if (pet._id !== res.data._id) setPet(res.data);

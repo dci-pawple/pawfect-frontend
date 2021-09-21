@@ -71,6 +71,7 @@ export default function CreateAd () {
   const [error, setError] = useState(null)
   const {userId, setUserId}=useContext(MyContext)
   const { pet, setPet } = useContext(MyContext);
+   const { petId, setPetId } = useContext(MyContext);
 
 
   const formik = useFormik({
@@ -128,7 +129,8 @@ export default function CreateAd () {
           setError(data.message)
         } else {
           console.log('Upload completed successfully')
-          history.push('/')
+          setPetId(pet && pet._id);
+          history.push('/pet')
           setPet(data.data)
           
         }

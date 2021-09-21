@@ -57,9 +57,14 @@ const App = () => {
             <Chat />
           </Route>
 
-          <Route path="/pet">
+          <Route exact path="/pet">
             <PetDetails />
           </Route>
+
+          <Route exact path="/pet/:id">
+            <PetDetails />
+          </Route>
+
 
           <Route path="/save">
             <SavedSearches/>
