@@ -32,9 +32,10 @@ const PetDetails = () => {
             if (pet._id !== res.data._id) setPet(res.data);
           });
         console.log("pet =>", pet);
-        fetch(`http://localhost:4000/users/${pet.userId}`)
-          .then((data) => data.json())
-          .then((res) => setPetOwner(res.data));
+        pet &&
+          fetch(`http://localhost:4000/users/${pet.userId}`)
+            .then((data) => data.json())
+            .then((res) => setPetOwner(res.data));
       } catch (err) {
         console.log(err);
       }
