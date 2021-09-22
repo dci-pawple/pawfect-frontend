@@ -64,18 +64,26 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items:flex-start;
+    align-items:center;
   }
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+
     line-height: 1.1;
+
+    @media (max-width: $bp-small) {
+      font-size: 1.3rem;
+		}
   }
 
   &__gender--icon, 
   &__like--icon {
     font-size: 2rem;
+
+    @media (max-width: $bp-small) {
+      font-size: 1.3rem;
+		}
   }
 
   &__gender--icon {
@@ -87,12 +95,8 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    
-
     display: flex;
     flex-direction: column;
-
-    
   }
 
   &__login-btn {
@@ -110,6 +114,10 @@
     font-size: 1rem;
     line-height: 1.5;
     font-weight: 500;
+
+    @media (max-width: $bp-small) {
+      font-size: .8rem;
+		}
   }
 
   &__name-with-gender {
