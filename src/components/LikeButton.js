@@ -26,7 +26,6 @@ const LikeButton = ({ pet }) => {
 		setOpen(false);
 	};
 
-
 	const savePet = async pet => {
 		try {
 			const result = await fetch(`http://localhost:4000/users/save`, {
@@ -71,8 +70,10 @@ const LikeButton = ({ pet }) => {
 						style={{ color: likeIcon }}></i>
 				</button>
 			) : (
-				<div className='card__like--icon' onClick={handleClickOpen}>
-					<i className='far fa-heart' style={{ color: likeIcon }}></i>
+				<>
+					<button className='card__like--icon' onClick={handleClickOpen}>
+						<i className='far fa-heart' style={{ color: likeIcon }}></i>
+					</button>
 					<Dialog
 						open={open}
 						onClose={handleClose}
@@ -106,7 +107,7 @@ const LikeButton = ({ pet }) => {
 							</Button>
 						</DialogActions>
 					</Dialog>
-				</div>
+				</>
 			)}
 		</>
 	);
