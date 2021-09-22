@@ -51,7 +51,7 @@ const PetCard = ({ pet, clickFavourites}) => {
             <p>Berlin, Germany (1,5km)</p>
           </div>
         </div>
-        <Link to="/pet">
+        <Link to={`/pet/${ pet._id}`}>
           <button
             data-petid={pet && pet._id}
             onClick={(e) => {

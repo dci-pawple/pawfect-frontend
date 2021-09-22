@@ -8,7 +8,7 @@ const iconNames = ["dog", "cat", "dragon"];
 const Categories = () => {
   const renderButtons = iconNames.map((item) => {
     return (
-      <Link className="categories-btn" key={item} to="/gallery">
+      <Link className="categories-btn" key={item} to={`/gallery/${item==="dragon"? "others":item}`}>
         <i className={`fas fa-${item} fa-3x`}></i>
       </Link>
     );
