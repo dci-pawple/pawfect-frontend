@@ -79,20 +79,20 @@ const PetDetails = () => {
             <p className="pet__info-data">Gender:</p>
             <p>{pet && pet.gender}</p>
           </div>
-          <div className="pet__info-data-container">
+          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
             <p className="pet__info-data">{pet && pet.likes ? "Likes:" : ""}</p>
             <p>{pet && pet.likes}</p>
           </div>
-          <div className="pet__info-data-container">
+          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
             <p className="pet__info-data">{pet && pet.dislikes ? "Dislikes:" : ""}</p>
             <p>{pet && pet.dislikes}</p>
           </div>
-          <div className="pet__info-data-container">
-            <p className="pet__info-data">{pet && pet.dislikes ? "Habits:" : ""}:</p>
+          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
+            <p className="pet__info-data">{pet && pet.habits ? "Habits:" : ""}</p>
             <p>{pet && pet.habits}</p>
           </div>
-          <div className="pet__info-data-about">
-            <p className="pet__info-data">{pet && pet.dislikes ? "About:" : ""}</p>
+          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
+            <p className="pet__info-data">{pet && pet.extras ? "About:" : ""}</p>
             <p>
               {pet && pet.extras}
             </p>

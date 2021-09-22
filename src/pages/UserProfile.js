@@ -103,7 +103,7 @@ const UserProfile = () => {
 		};
 
 		fetchData();
-	}, [setUser, userId]);
+	}, [setUser, userId, user]);
 
 	const [initialValues, setInitialValues] = useState({
 		firstName: "",
@@ -128,9 +128,9 @@ const UserProfile = () => {
 			postalCode: user.postalCode || "",
 			street: user.street || "",
 			email: user.email || "",
-			emailConfirm: "",
+			emailConfirm: user.email || "",
 			password: user.password || "",
-			passwordConfirm: user.passwordConfirm || "",
+			passwordConfirm: user.password || "",
 			profilePhoto: user.profilePhoto || "",
 		});
 	}, [user]);
@@ -160,7 +160,6 @@ const UserProfile = () => {
 
 				const data = await response.json();
 				console.log("data=>", data);
-				// setIsValidating(true);
 
 				if (!data.success) {
 					setError(data.message);

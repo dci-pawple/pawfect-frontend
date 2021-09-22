@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Location } from "../icons/icons";
+// import { Location } from "../icons/icons";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
@@ -8,7 +8,6 @@ const PetCard = ({ pet }) => {
 	const { setPetId } = useContext(MyContext);
 
 	return (
-		// <Link to='/pet' className='card'>
 		<div className='card'>
 			<div className='card__image'>
 				<img src={pet && pet.photos[0].url} alt='dog portrait' />
