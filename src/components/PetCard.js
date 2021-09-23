@@ -12,7 +12,8 @@ const PetCard = ({ pet, clickFavourites}) => {
     // <Link to='/pet' className='card'>
     <div className="card">
       <div className="card__image">
-        <img src={pet && pet.photos[0].url} alt="dog portrait" />
+      {/* I added a placeholder image if ther is no immage ind the database */}
+        <img src={pet && pet.photos.length===0?"https://i.stack.imgur.com/y9DpT.jpg":pet.photos[0].url} alt="dog portrait" />
       </div>
       <div className="card__content">
         <div className="card__content--top">

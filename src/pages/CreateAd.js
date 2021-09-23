@@ -90,6 +90,7 @@ export default function CreateAd () {
     },
 
     onSubmit: async values => {
+      alert (JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
       let fd = new FormData()
@@ -111,7 +112,7 @@ export default function CreateAd () {
       }
 
       try {
-        const response = await fetch('http://localhost:4000/pets/newpet', {
+        const response = await fetch(`http://localhost:4000/pets/newpet/`, {
           method: 'POST',
           mode: 'cors',
           // headers: {

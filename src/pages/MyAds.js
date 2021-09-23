@@ -8,6 +8,7 @@ import '../style/pages/_myAds.scss'
 const SavedSearches = () => {
   const [adsList, setAdsList] = useState([])
   const { userId } = useContext(MyContext)
+  const { pet,setPet } = useContext(MyContext)
 
   useEffect(() => {
     const fetchFavourites = () => {
@@ -21,7 +22,7 @@ const SavedSearches = () => {
       })
         .then(data => data.json())
         .then(response => {
-          console.log('response.data', response.data)
+          console.log('MyAds response.data', response.data)
           setAdsList(response.data)
         })
         .catch(err => console.error('error while fetching user-ads =>', err))
@@ -39,16 +40,19 @@ const SavedSearches = () => {
             <div className='ad-card'>
               <PetCard pet={pet} key={index} />
               <div className='ad-actions'>
+               <Link to={`/edit-ad/${pet._id}`}>
                 <Button
                   variant='contained'
                   color='primary'
                   className='ad-btn-edit'
-                  onClick={()=>{
-                      
-                  }}
+                onClick={
+                    setPet(pet)
+                   
+                }
                 >
                   Edit
                 </Button>
+                </Link>
                 <Button
                   variant='outlined'
                   color='secondary'

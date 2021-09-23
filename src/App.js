@@ -46,7 +46,7 @@ const App = () => {
             <MyAds />
           </Route>
 
-          <Route path="/edit-ad/:id">
+          <Route path="/edit-ad/:petId">
             <EditCreateAd />
           </Route>
           
