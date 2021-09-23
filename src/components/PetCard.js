@@ -10,7 +10,10 @@ const PetCard = ({ pet }) => {
   return (
     <div className="card">
       <div className="card__image">
-        <img src={pet && pet.photos[0].url} alt="dog portrait" />
+        <img
+          src={pet && pet.photos[0] && pet.photos[0].url}
+          alt="dog portrait"
+        />
       </div>
       <div className="card__content">
         <div className="card__content--top">
