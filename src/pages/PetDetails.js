@@ -41,6 +41,7 @@ const PetDetails = () => {
     fetchData();
   }, [petId, setPet, pet, setPetOwner]);
 
+  console.log("petOwner", petOwner);
   return (
     <div className="app-container container pet__container">
       <button onClick={() => history.goBack()} className="btn-go-back">
@@ -122,11 +123,17 @@ const PetDetails = () => {
           </div>
 
           <div className="owner__data-container">
-            <div className="owner__image-container">
-              <img
-                src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                alt=""
-              />
+            <div>
+              {petOwner && petOwner.profilePhoto.length === 0 ? (
+                <i class="fas fa-user-circle"></i>
+              ) : (
+                <div className="owner__image-container">
+                  {petOwner &&
+                    petOwner.profilePhoto.map((photo, i) => (
+                      <img src={photo.url} alt="user photo" />
+                    ))}
+                </div>
+              )}
             </div>
             <div className="owner__info-container">
               <p>Owner of {pet && pet.name}:</p>

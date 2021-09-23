@@ -10,6 +10,7 @@ export default function Navbar() {
   const [active, setActive] = useState(false);
   const [display, setDisplay] = useState(false);
   const { login, setLogin } = useContext(MyContext);
+  const { user, setUser } = useContext(MyContext);
 
   const changeBackground = () => {
     // console.log(window.scrollY);
@@ -42,6 +43,8 @@ export default function Navbar() {
     });
   };
 
+  console.log("user", user);
+
   return (
     <div className="navigation">
       <header className={navbar ? "nav-active" : ""}>
@@ -64,7 +67,7 @@ export default function Navbar() {
                 className="nav-link"
                 onClick={closeMobileMenu}
               >
-                Find a pet
+                See all pets
               </Link>
             </li>
             <li className={`search list-item ${active ? "search-active" : ""}`}>
@@ -89,8 +92,23 @@ export default function Navbar() {
                 {!login ? (
                   <i class="fas fa-user-circle"></i>
                 ) : (
-                  // need to change this to users picture
-                  <img src={profilepic} alt="profile" className="profile-pic" />
+                  <div>
+                    {user &&
+                    user.profilePhoto &&
+                    user.profilePhoto.length === 0 ? (
+                      <i class="fas fa-user-circle"></i>
+                    ) : (
+                      user.profilePhoto.map((photo, i) => (
+                        <div className="profile-pic-container">
+                          <img
+                            src={photo.url}
+                            alt="profile"
+                            className="profile-pic"
+                          />
+                        </div>
+                      ))
+                    )}
+                  </div>
                 )}
               </button>
 
@@ -142,7 +160,7 @@ export default function Navbar() {
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
-                      Saved searches
+                      My Favourites
                     </Link>
                     <Link
                       to="/"
@@ -152,7 +170,6 @@ export default function Navbar() {
                         localStorage.removeItem("user");
                         localStorage.removeItem("userId");
                         setLogin(false);
-                      
                       }}
                     >
                       Logout
