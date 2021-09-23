@@ -1,58 +1,11 @@
-.chat-container {
-  padding-top: 5rem;
-}
-
-.ce-chats-container {
-  font-family: $font-text;
-  padding: 0 1rem !important;
-}
-
-.chat-container > div {
-  margin: 0 2rem !important;
-  border-radius: 10px !important;
-  overflow: hidden !important;
-}
-
-.chat-container > div > div > div:last-child {
+.ce-chat-settings-mobile-option {
   display: none;
-}
-.chat-container > div > div > div:first-child {
-  width: 34% !important;
-  flex: 0 0 34% !important;
-  max-width: 34% !important;
-}
-.chat-container > div > div > div:nth-child(2) {
-  width: 66% !important;
-  flex: 0 0 66% !important;
-  max-width: 66% !important;
+  width: 0% !important;
+  max-width: 0% !important;
 }
 
-.ce-chat-feed {
-  height: 60vh !important;
-}
-
-.ce-feed-container-top {
-  height: 70px !important;
-}
-
-.ce-chat-feed-container {
-  padding: 0 1rem !important;
-}
-.ce-message-bubble-row span {
+.anticon-setting {
   color: $primary !important;
-}
-
-.ce-message-date-text {
-  padding: 1rem !important;
-}
-
-#ce-ice-breaker {
-  padding: 5rem 0 !important;
-}
-
-.ql-toolbar {
-  border: none !important;
-  margin: 0.2rem !important;
 }
 
 .ce-my-message-bubble {
@@ -62,32 +15,93 @@
 .ce-chat-title-container {
   color: $primary !important;
 }
-
-.ce-chat-subtitle-text {
-  display: none;
+.ce-message-bubble-row span {
+  color: $primary !important;
 }
 
-#new-chat-plus-button {
-  visibility: hidden;
+.anticon-menu {
+  color: $primary !important;
 }
-
 #ce-send-message-button {
   background-color: $primary !important;
   margin-right: 0.7rem !important;
 }
+@media screen and (min-width: 580px) {
+  .chat-container {
+    padding-top: 5rem;
+  }
 
-.ql-editor {
-  font-family: $font-text;
-}
+  .ce-chats-container {
+    font-family: $font-text;
+    padding: 0 1rem !important;
+  }
 
-.ql-container {
-  width: 97% !important;
-  margin: 0 auto !important;
-  border-radius: 7px !important;
-}
+  .chat-container > div {
+    margin: 0 2rem !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
 
-// we should use user image or our avatar
-.ce-avatar,
-.ce-avatar-dot {
-  background-color: $primary-light !important;
+  .chat-contaner > div > div > div {
+    background-color: red !important;
+  }
+
+  .chat-container > div > div > div:last-child {
+    display: none;
+  }
+  .chat-container > div > div > div:first-child {
+    width: 34% !important;
+    flex: 0 0 34% !important;
+    max-width: 34% !important;
+  }
+  .chat-container > div > div > div:nth-child(2) {
+    width: 66% !important;
+    flex: 0 0 66% !important;
+    max-width: 66% !important;
+  }
+
+  .ce-feed-container-top {
+    height: 70px !important;
+  }
+
+  .ce-chat-feed-container {
+    padding: 0 1rem !important;
+  }
+
+  .ce-message-date-text {
+    padding: 1rem !important;
+  }
+
+  #ce-ice-breaker {
+    padding: 5rem 0 !important;
+  }
+
+  .ql-toolbar {
+    border: none !important;
+    margin: 0.2rem !important;
+  }
+
+  .ce-chat-subtitle-text {
+    display: none;
+  }
+
+  #new-chat-plus-button {
+    visibility: hidden;
+  }
+
+  .ql-editor {
+    font-family: $font-text;
+  }
+
+  .ql-container {
+    width: 97% !important;
+    margin: 0 auto !important;
+    border-radius: 7px !important;
+  }
+
+  // we should use user image or our avatar
+  .ce-avatar,
+  .ce-avatar-dot {
+    background-color: $primary-light !important;
+  }
 }

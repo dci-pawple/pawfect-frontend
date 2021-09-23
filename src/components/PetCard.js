@@ -4,15 +4,14 @@ import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
 
-const PetCard = ({ pet, clickFavourites}) => {
-
+const PetCard = ({ pet, clickFavourites }) => {
   const { setPetId } = useContext(MyContext);
 
   return (
     // <Link to='/pet' className='card'>
     <div className="card">
       <div className="card__image">
-        <img src={pet && pet.photos[0].url} alt="dog portrait" />
+        <img src={pet.photos[0] && pet.photos[0].url} alt="dog portrait" />
       </div>
       <div className="card__content">
         <div className="card__content--top">
@@ -25,8 +24,8 @@ const PetCard = ({ pet, clickFavourites}) => {
                 <i class="fas fa-venus"></i>
               )}
             </div>
-          </div>   
-          <LikeButton pet={pet}/>
+          </div>
+          <LikeButton pet={pet} />
         </div>
 
         <div className="card__description">
@@ -64,8 +63,6 @@ const PetCard = ({ pet, clickFavourites}) => {
         </Link>
       </div>
     </div>
- 
- 
   );
 };
 
