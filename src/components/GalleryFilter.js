@@ -330,71 +330,74 @@ function FilterElementAll ({ filterText, filterData }) {
 
 function FilterFavorites ({ filterText, formik }) {
   console.log("in FilterFavorites");
-  const [likeIcon, setLikeIcon] = useState('black')
-  const { login, setLogin } = useContext(MyContext)
-  const [open, setOpen] = useState(false);
+  const [likeIcon, setLikeIcon] = useState("black");
+	const { login, setLogin } = useContext(MyContext);
+	const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+	const handleClose = () => {
+		setOpen(false);
+	};
 
-  const toggle = status => {
-    console.log('toggle', status)
-    if (status) return false
-    if (!status) return true
-  }
+	const toggle = status => {
+		console.log("toggle", status);
+		if (status) return false;
+		if (!status) return true;
+	};
 
-  const normalFunctionality = () => {
-    formik.values.favorites = toggle(formik.values.favorites)
+	const normalFunctionality = () => {
+		formik.values.favorites = toggle(formik.values.favorites);
 
-    formik.values.favorites === false
-      ? setLikeIcon('black')
-      : setLikeIcon('#f76c6c')
-  }
+		formik.values.favorites === false
+			? setLikeIcon("black")
+			: setLikeIcon("#f76c6c");
+	};
 
+	return (
+		<>
+			<div
+				onClick={login ? normalFunctionality : handleClickOpen}
+				className='filterElement'>
+				<span className=''>{filterText}</span>
 
-  return (
-    <>
-    <div
-      onClick={login ? normalFunctionality : handleClickOpen}
-      className='filterElement'
-    >
-      <span className=''>{filterText}</span>
+				<i className='fas fa-heart' style={{ color: likeIcon }}></i>
+			</div>
+			<Dialog
+				open={open}
+				onClose={handleClose}
+				aria-labelledby='alert-dialog-title'
+				aria-describedby='alert-dialog-description'>
+				<DialogTitle id='alert-dialog-title'>
+					{"Join Pawfect to favorite pets"}
+				</DialogTitle>
+				<DialogContent>
+					<Button
+						variant='contained'
+						sx={{ margin: 3 }}
+						color='primary'
+						href='/registration'>
+						Create new Account
+					</Button>
 
-      <i className='fas fa-heart' style={{ color: likeIcon }}></i>
-
-          </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Join Pawfect to favorite pets"}
-        </DialogTitle>
-        <DialogContent>
-         <Button variant="contained" sx={{ margin: 3 }} color="primary" href="/registration" >Create new Account</Button>
-          
-             <DialogContentText id="alert-dialog-description">
-            Already have an account?
-          </DialogContentText>
-           <Button variant="outlined" color="primary" href="/login"  >Login</Button>
-          
-        </DialogContent>
-        <DialogActions>
-          
-          <Button onClick={()=>{setOpen(false)}}>
-            Cancel
-          </Button>
-        </DialogActions>
-      </Dialog>
-</>
-   
-
-  )
+					<DialogContentText id='alert-dialog-description'>
+						Already have an account?
+					</DialogContentText>
+					<Button variant='outlined' color='primary' href='/login'>
+						Login
+					</Button>
+				</DialogContent>
+				<DialogActions>
+					<Button
+						onClick={() => {
+							setOpen(false);
+						}}>
+						Cancel
+					</Button>
+				</DialogActions>
+			</Dialog>
+		</>
+	);
 }
