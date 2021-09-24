@@ -93,7 +93,7 @@ export default function Navbar() {
                   <i class="fas fa-user-circle"></i>
                 ) : (
                   <div>
-                    {user &&
+                     {user &&
                     user.profilePhoto &&
                     user.profilePhoto.length === 0 ? (
                       <i class="fas fa-user-circle"></i>
@@ -107,7 +107,7 @@ export default function Navbar() {
                           />
                         </div>
                       ))
-                    )}
+                    )} 
                   </div>
                 )}
               </button>
