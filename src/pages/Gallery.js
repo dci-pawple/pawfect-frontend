@@ -4,9 +4,7 @@ import PetCard from "../components/PetCard";
 import MyContext from "../context/MyContext";
 
 const Gallery = ({ filter }) => {
-  const { filteredData, setFilteredData } = useContext(MyContext);
-  const [petsList, setPetsList] = useState([]);
-  const { login, setLogin } = useContext(MyContext);
+  const { filteredData } = useContext(MyContext);
 
   console.log("gallery filter:", filter);
 

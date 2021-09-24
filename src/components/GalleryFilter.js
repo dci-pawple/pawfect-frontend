@@ -17,7 +17,6 @@ import {
 
 import Alert from "@material-ui/lab/Alert";
 import MyContext from "../context/MyContext";
-import "../style/components/_galleryFilter.scss";
 
 export default function GalleryFilter({ filter }) {
   const [error, setError] = useState(null);
