@@ -19,9 +19,9 @@ import Alert from "@material-ui/lab/Alert";
 import MyContext from "../context/MyContext";
 import "../style/components/_galleryFilter.scss";
 
-export default function GalleryFilter() {
+export default function GalleryFilter({ filter }) {
   const [error, setError] = useState(null);
-  const { setFilteredData } = useContext(MyContext);
+  const { filteredData, setFilteredData } = useContext(MyContext);
 
   /**
    * Define the Form for FORMIK
@@ -72,57 +72,67 @@ export default function GalleryFilter() {
     },
   });
 
-  const toggleDropdown = (filterType) => {
+  const toggleDropdown = (filterType, className = "filter-dropdown-hidden") => {
     const dropdown = document.getElementById(filterType);
     console.log("in toggleDropdown");
     console.log("dropdown", dropdown);
     //change classes for visible and hide dropdown
-    if (dropdown.classList.contains("filter-dropdown-hidden")) {
-      dropdown.classList.remove("filter-dropdown-hidden");
+    if (dropdown.classList.contains(className)) {
+      dropdown.classList.remove(className);
     } else {
-      dropdown.classList.add("filter-dropdown-hidden");
+      dropdown.classList.add(className);
     }
   };
 
-  useEffect(async () => {
-    try {
-      const userId = JSON.parse(localStorage.getItem("userId"));
-      console.log("userId==", userId);
+  useEffect(() => {
+    const getFirstGalleryData = async () => {
+      try {
+        const userId = JSON.parse(localStorage.getItem("userId"));
+        console.log("userId==", userId);
+        console.log("Filter:", filter);
 
-      const response = await fetch(
-        `http://localhost:4000/pets/filter?type=all&favorites=false&userId=${
-          userId ? userId : ""
-        }`,
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const response = await fetch(
+          `http://localhost:4000/pets/filter?type=${
+            filter || "all"
+          }&favorites=false&userId=${userId ? userId : ""}`,
+          {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await response.json();
+        console.log("requested  filteredData in useeffect", data.data);
+        setFilteredData(data.data);
+
+        if (!data.success) {
+          setError(data.message);
+          console.log("error=>", error);
+        } else {
+          console.log("filtered successful");
         }
-      );
-
-      const data = await response.json();
-      console.log("requested  filteredData in useeffect", data.data);
-      setFilteredData(data.data);
-
-      if (!data.success) {
-        setError(data.message);
-        console.log("error=>", error);
-      } else {
-        console.log("filtered successful");
+      } catch (err) {
+        console.log("Error while filtering =>", err);
       }
-    } catch (err) {
-      console.log("Error while filtering =>", err);
-    }
+    };
+
+    getFirstGalleryData();
   }, []);
 
   return (
     <div>
-      <form>
+      <FilterElementAll
+        filterText={"All Filters"}
+        toggleDropdown={toggleDropdown}
+      />
+      <form
+        id="filter"
+        className="filter-dropdown-overlay filter-dropdown-hidden"
+      >
         <div className="filterContainer">
-          {/* <FilterElementAll filterText={"All Filters"}/> */}
-
           <FilterElementType
             filterText={"Type"}
             formik={formik}
@@ -136,29 +146,35 @@ export default function GalleryFilter() {
           />
 
           <FilterFavorites filterText={""} formik={formik} />
-          {/* <FilterElementAll filterText={ 'All Filters' } /> */}
-          <Button
-            disableElevation
-            color="primary"
-            variant="contained"
-            type="submit"
-            onClick={formik.handleSubmit}
-          >
-            Filter
-          </Button>
-          <Button
-            disableElevation
-            color="gray"
-            variant="contained"
-            type="submit"
-            onClick={() => {
-              formik.values.type = "all";
-              formik.values.age = "";
-              formik.values.favorites = false;
-            }}
-          >
-            Clear
-          </Button>
+          <div className="filter-button">
+            <Button
+              className="clear-btn"
+              disableElevation
+              color="gray"
+              variant="contained"
+              type="submit"
+              onClick={() => {
+                formik.values.type = "all";
+                formik.values.age = "";
+                formik.values.favorites = false;
+                toggleDropdown("filter");
+              }}
+            >
+              Clear
+            </Button>
+            <Button
+              disableElevation
+              color="primary"
+              variant="contained"
+              type="submit"
+              onClick={() => {
+                formik.handleSubmit();
+                toggleDropdown("filter");
+              }}
+            >
+              Set Filter
+            </Button>
+          </div>
         </div>
         {error ? <Alert severity="error">{error}</Alert> : null}
       </form>
@@ -320,9 +336,14 @@ function FilterElementAge({ filterText, formik }) {
   );
 }
 
-function FilterElementAll({ filterText, filterData }) {
+function FilterElementAll({ filterText, filterData, toggleDropdown }) {
   return (
-    <div className="filterElement">
+    <div
+      className="filterElement filterElement-white"
+      onClick={() => {
+        toggleDropdown("filter", "filter-dropdown-hidden");
+      }}
+    >
       <span>
         {filterText} <i class="fas fa-sliders-h filtericon"></i>{" "}
       </span>
@@ -333,8 +354,10 @@ function FilterElementAll({ filterText, filterData }) {
 function FilterFavorites({ filterText, formik }) {
   console.log("in FilterFavorites");
   const [likeIcon, setLikeIcon] = useState("black");
-  const { login } = useContext(MyContext);
+  const { login, setLogin } = useContext(MyContext);
   const [open, setOpen] = useState(false);
+  const iconStyleFilled = "far fa-heart";
+  const iconStyleBorder = "fas fa-heart";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -366,7 +389,10 @@ function FilterFavorites({ filterText, formik }) {
       >
         <span className="">{filterText}</span>
 
-        <i className="fas fa-heart" style={{ color: likeIcon }}></i>
+        <i
+          className={likeIcon === "black" ? iconStyleFilled : iconStyleBorder}
+          style={{ color: likeIcon }}
+        ></i>
       </div>
       <Dialog
         open={open}

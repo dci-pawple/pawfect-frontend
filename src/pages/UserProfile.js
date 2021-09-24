@@ -43,26 +43,18 @@ const validate = (values) => {
   return errors;
 };
 
-// Material-ui styling:
-
-const useStyles = makeStyles((theme) =>
+/**
+ * Styling the form (Material-ui)
+ */
+const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      "& > *": {
+      '& > *': {
         margin: theme.spacing(2),
-        fontSize: "1.6rem",
-        palette: {
-          primary: {
-            light: "#464646",
-            main: "#1f1f1f",
-            dark: "#000000",
-            contrastText: "#fff",
-          },
-        },
-      },
-    },
+      }
+    }
   })
-);
+)
 
 const UploadComponent = (props) => {
   const { setFieldValue, values } = props;

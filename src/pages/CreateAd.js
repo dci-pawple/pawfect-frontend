@@ -127,7 +127,7 @@ export default function CreateAd() {
           setError(data.message);
         } else {
           console.log("Upload completed successfully");
-          history.push("/");
+          history.push(`/pet/${data.data._id}`);
           setPet(data.data);
         }
       } catch (err) {
