@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { Location } from "../icons/icons";
+// import { Location } from "../icons/icons";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
 
-const PetCard = ({ pet, clickFavourites }) => {
+const PetCard = ({ pet }) => {
   const { setPetId } = useContext(MyContext);
 
   return (
-    // <Link to='/pet' className='card'>
     <div className="card">
       <div className="card__image">
         <img
@@ -33,27 +32,29 @@ const PetCard = ({ pet, clickFavourites }) => {
 
         <div className="card__description">
           <p>
-            <strong>habits:</strong> {pet && pet.extras}
+            <strong>{pet && pet.habits ? "Habits:" : ""}</strong>{" "}
+            {pet && pet.extras}
           </p>
           <p>
-            <strong>likes:</strong> {pet && pet.likes}
+            <strong>{pet && pet.likes ? "Likes:" : ""}</strong>{" "}
+            {pet && pet.likes}
           </p>
           <p>
-            <strong>dislikes:</strong> {pet && pet.dislikes}
+            <strong>{pet && pet.dislikes ? "Dislikes:" : ""}</strong>{" "}
+            {pet && pet.dislikes}
           </p>
           <p>
-            <strong>age:</strong> {pet && pet.age}
+            <strong>Age category:</strong> {pet && pet.age}
           </p>
         </div>
-        <div className="card__location">
+        {/* <div className="card__location">
           <div className="card__location--icon">
             <Location />
           </div>
           <div className="card__location--name">
             <p>Berlin, Germany (1,5km)</p>
           </div>
-        </div>
-        {/* <Link to={`/pet/${pet._id}`}> */}
+        </div> */}
         <Link to="/pet">
           <button
             data-petid={pet && pet._id}
