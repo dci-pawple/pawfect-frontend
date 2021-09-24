@@ -62,8 +62,12 @@ export default function Chat() {
       usernames: [chatUser.username, chatUsername],
       is_direct_chat: true,
     };
-    getOrCreateChat(headers, data, (chat) => setChat(chat));
-    console.log("this is data", data);
+    getOrCreateChat(headers, data, (chatArg) => {
+      console.log("this is chat", chat);
+      console.log("this is chatArg", chatArg);
+
+      if (chat.id !== chatArg.id) setChat(chatArg);
+    });
 
     // }
   }, [chat, chatUsername, petOwner]);

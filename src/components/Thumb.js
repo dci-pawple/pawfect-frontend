@@ -14,11 +14,12 @@ export default class Thumb extends React.Component {
 
     this.setState({ loading: true }, () => {
       let reader = new FileReader();
+      console.log("reader.result", reader.result);
 
       reader.onloadend = () => {
         this.setState({ loading: false, thumb: reader.result });
       };
-
+      console.log("file type", nextProps.file.type);
       reader.readAsDataURL(nextProps.file);
     });
   }

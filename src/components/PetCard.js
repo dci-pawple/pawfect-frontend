@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
-import { Location } from "../icons/icons";
+// import { Location } from "../icons/icons";
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
 
-const PetCard = ({ pet, clickFavourites}) => {
-
+const PetCard = ({ pet }) => {
   const { setPetId } = useContext(MyContext);
 
   return (
-    // <Link to='/pet' className='card'>
     <div className="card">
       <div className="card__image">
       {/* I added a placeholder image if ther is no immage ind the database */}
@@ -26,32 +24,36 @@ const PetCard = ({ pet, clickFavourites}) => {
                 <i class="fas fa-venus"></i>
               )}
             </div>
-          </div>   
-          <LikeButton pet={pet}/>
+          </div>
+          <LikeButton pet={pet} />
         </div>
 
         <div className="card__description">
           <p>
-            <strong>habits:</strong> {pet && pet.extras}
+            <strong>{pet && pet.habits ? "Habits:" : ""}</strong>{" "}
+            {pet && pet.extras}
           </p>
           <p>
-            <strong>likes:</strong> {pet && pet.likes}
+            <strong>{pet && pet.likes ? "Likes:" : ""}</strong>{" "}
+            {pet && pet.likes}
           </p>
           <p>
-            <strong>dislikes:</strong> {pet && pet.dislikes}
+            <strong>{pet && pet.dislikes ? "Dislikes:" : ""}</strong>{" "}
+            {pet && pet.dislikes}
           </p>
           <p>
-            <strong>age:</strong> {pet && pet.age}
+            <strong>Age category:</strong> {pet && pet.age}
           </p>
         </div>
-        <div className="card__location">
+        {/* <div className="card__location">
           <div className="card__location--icon">
             <Location />
           </div>
           <div className="card__location--name">
             <p>Berlin, Germany (1,5km)</p>
           </div>
-        </div>
+
+      </div> */}
         <Link to={`/pet/${ pet._id}`}>
           <button
             data-petid={pet && pet._id}
@@ -65,8 +67,6 @@ const PetCard = ({ pet, clickFavourites}) => {
         </Link>
       </div>
     </div>
- 
- 
   );
 };
 
