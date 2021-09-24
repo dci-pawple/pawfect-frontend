@@ -10,24 +10,15 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 /**
  * Styling the form (Material-ui)
  */
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      "& > *": {
+      '& > *': {
         margin: theme.spacing(2),
-        "font-size": "1.6rem",
-        palette: {
-          primary: {
-            light: "#464646",
-            main: "#1f1f1f",
-            dark: "#000000",
-            contrastText: "#fff",
-          },
-        },
-      },
-    },
+      }
+    }
   })
-);
+)
 
 /**
  * Form Valitation

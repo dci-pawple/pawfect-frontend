@@ -1,7 +1,7 @@
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import { useFormik } from 'formik'
 import { useDropzone } from 'react-dropzone'
-import { useHistory } from 'react-router-dom'
+import { useHistory,useParams } from 'react-router-dom'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
 import {
@@ -42,17 +42,21 @@ const useStyles = makeStyles(theme =>
 // for uploading images
 const UploadComponent = props => {
   const { setFieldValue, values } = props
+    let { petId } = useParams();
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedPhotos => {
-      if (values.photos) {
+      if (values.photos.length!==0) {
         setFieldValue('photos', values.photos.concat(acceptedPhotos))
+        console.log("values.photos in Uploadcomponent", values.photos);
+
       } else {
         setFieldValue('photos', acceptedPhotos)
       }
     }
   })
+
   return (
     <div>
       <div {...getRootProps({ className: 'dropzone' })}>
@@ -65,7 +69,8 @@ const UploadComponent = props => {
   )
 }
 
-export default function CreateAd () {
+
+export default function EditCreateAd () {
   const classes = useStyles()
   let history = useHistory()
   const [error, setError] = useState(null)
@@ -73,24 +78,31 @@ export default function CreateAd () {
   const { pet, setPet } = useContext(MyContext);
    const { petId, setPetId } = useContext(MyContext);
 
+useEffect(()=>{
+
+
+
+})
+
 
   const formik = useFormik({
     initialValues: {
-      typeOfPet: '',
-      age: '',
-      name: '',
-      gender: '',
+      typeOfPet: pet.typeOfPet || "",
+      age: pet.age || '',
+      name: pet.name || '',
+      gender: pet.gender || '',
       // breed: "",
-      likes: '',
-      dislikes: '',
-      habits: '',
-      size: '',
-      extras: '',
-      photos: ''
+      likes: pet.likes || '',
+      dislikes: pet.dislikes || '',
+      habits: pet.habits || '',
+      size: pet.size || '',
+      extras: pet.extras || '',
+      photos: [],
+      deletePhoto: [],
     },
 
     onSubmit: async values => {
-      alert (JSON.stringify (values, null, 2));
+      console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
       let fd = new FormData()
@@ -104,6 +116,7 @@ export default function CreateAd () {
       fd.append('size', values.size)
       fd.append('extras', values.extras)
       fd.append('userId', userId)
+      fd.append('deletePhoto', values.deletePhoto)
 
       if (values.photos) {
         values.photos.forEach(file => fd.append('photos', file))
@@ -112,8 +125,9 @@ export default function CreateAd () {
       }
 
       try {
-        const response = await fetch(`http://localhost:4000/pets/newpet/`, {
-          method: 'POST',
+        console.log("EditAd pedId", pet._id);
+        const response = await fetch(`http://localhost:4000/pets/updatepet/${pet._id}`, {
+          method: 'PATCH',
           mode: 'cors',
           // headers: {
           //   "Content-Type": "multipart/form-data",
@@ -141,10 +155,23 @@ export default function CreateAd () {
     }
   })
 
+  const deleteImage = (e,formik) =>{
+
+    const newArray=[];
+     console.log(e.target.alt);
+    formik.values.deletePhoto=newArray.push(e.target.id)
+    formik.handleChange();
+    const photo= document.getElementById(e.target.id)
+    console.log("photo",photo);
+    //delete element
+                        
+    
+  }
+
   return (
     <div className='app-container'>
       <div className='form-container'>
-        <h1 className='text-center'>Create an Ad</h1>
+        <h1 className='text-center'>Update your Ad</h1>
 
         <form
           className={`form-style ${classes.root}`}
@@ -332,12 +359,21 @@ export default function CreateAd () {
             setFieldValue={formik.setFieldValue}
             values={formik.values}
           />
-
-          <div className='image-preview'>
+         <div className='image-preview'>
             {formik.values.photos &&
-              formik.values.photos.map((photo, i) => (
-                <Thumb key={i} file={photo} />
+              formik.values.photos.map((file, i) => (
+                
+                <Thumb file={file} alt={file.path}/>
               ))}
+          </div>
+     
+          <div className='image-preview'>
+           {pet.photos &&
+                   pet.photos.map((photo, i) => (
+                      <img onClick={(e)=>{
+                       deleteImage(e,formik)
+                        }} key={i} src={photo.url}  id={photo.publicId}  alt={i}/>
+                    ))}
           </div>
 
           {error ? <Alert severity='error'>{error}</Alert> : null}
@@ -349,7 +385,7 @@ export default function CreateAd () {
             variant='contained'
             type='submit'
           >
-            Submit
+            Save Changes
           </Button>
         </form>
       </div>

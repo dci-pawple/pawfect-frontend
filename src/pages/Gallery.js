@@ -3,17 +3,17 @@ import GalleryFilter from "../components/GalleryFilter";
 import PetCard from "../components/PetCard";
 import MyContext from '../context/MyContext'
 
-const Gallery = () => {
+const Gallery = ({filter}) => {
   const { filteredData, setFilteredData } = useContext(MyContext)
 	const [petsList, setPetsList] = useState([]);
 	 const {login, setLogin} = useContext(MyContext)
 
-
+console.log("gallery filter:",filter);
 
 	return (
 		<div className='app-container container'>
 			<h2>Pets available:</h2>
-			<GalleryFilter/>
+			<GalleryFilter filter={filter}/>
 			<div className='gallery__grid-container'>
 
 				{filteredData && filteredData.map((pet, index) => (

@@ -7,25 +7,26 @@ import LikeButton from "./LikeButton";
 const PetCard = ({ pet }) => {
   const { setPetId } = useContext(MyContext);
 
-	return (
-		<div className='card'>
-			<div className='card__image'>
-				<img src={pet && pet.photos.length===0?"https://i.stack.imgur.com/y9DpT.jpg":pet.photos[0].url} alt="dog portrait" /> 
-			</div>
-			<div className='card__content'>
-				<div className='card__content--top'>
-					<div className='card__name-with-gender'>
-						<div className='card__title'>{pet && pet.name}</div>
-						<div className='card__gender--icon'>
-							{pet && pet.gender === "male" ? (
-								<i class='fas fa-mars'></i>
-							) : (
-								<i class='fas fa-venus'></i>
-							)}
-						</div>
-					</div>
-					<LikeButton pet={pet} />
-				</div>
+  return (
+    <div className="card">
+      <div className="card__image">
+      {/* I added a placeholder image if ther is no immage ind the database */}
+        <img src={pet && pet.photos.length===0?"https://i.stack.imgur.com/y9DpT.jpg":pet.photos[0].url} alt="dog portrait" />
+      </div>
+      <div className="card__content">
+        <div className="card__content--top">
+          <div className="card__name-with-gender">
+            <div className="card__title">{pet && pet.name}</div>
+            <div className="card__gender--icon">
+              {pet && pet.gender === "male" ? (
+                <i class="fas fa-mars"></i>
+              ) : (
+                <i class="fas fa-venus"></i>
+              )}
+            </div>
+          </div>
+          <LikeButton pet={pet} />
+        </div>
 
         <div className="card__description">
           <p>
@@ -51,8 +52,9 @@ const PetCard = ({ pet }) => {
           <div className="card__location--name">
             <p>Berlin, Germany (1,5km)</p>
           </div>
-        </div> */}
-        <Link to="/pet">
+
+      </div> */}
+        <Link to={`/pet/${ pet._id}`}>
           <button
             data-petid={pet && pet._id}
             onClick={(e) => {
