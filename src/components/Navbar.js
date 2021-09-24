@@ -95,9 +95,7 @@ export default function Navbar() {
                   <div>
                      {user &&
                     user.profilePhoto &&
-                    user.profilePhoto.length === 0 ? (
-                      <i class="fas fa-user-circle"></i>
-                    ) : (
+                    user.profilePhoto.length > 0 ? (
                       user.profilePhoto.map((photo, i) => (
                         <div className="profile-pic-container">
                           <img
@@ -107,7 +105,9 @@ export default function Navbar() {
                           />
                         </div>
                       ))
-                    )} 
+                    ) : (
+                      <i class="fas fa-user-circle"></i>
+                    )}
                   </div>
                 )}
               </button>
