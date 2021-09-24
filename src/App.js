@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./style/App.scss";
@@ -13,7 +13,6 @@ import CreateAd from "./pages/CreateAd";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import MyContext from "./context/MyContext";
 import PetDetails from "./pages/PetDetails";
 import Chat from "./pages/Chat";
 import SavedSearches from "./components/SavedSearches";
@@ -23,8 +22,6 @@ const App = () => {
   const params = new URLSearchParams(window.location.search);
   const search = params.get("search");
   // console.log(search);
-
-  const { pet } = useContext(MyContext);
 
   return (
     <Theme>

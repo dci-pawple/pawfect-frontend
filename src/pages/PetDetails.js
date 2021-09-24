@@ -16,8 +16,8 @@ const PetDetails = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const { petOwner, setPetOwner } = useContext(MyContext);
   const { pet, setPet } = useContext(MyContext);
-  const { petId, setPetId } = useContext(MyContext);
-  const { chatUsername, setChatUsername } = useContext(MyContext);
+  const { petId } = useContext(MyContext);
+  const { setChatUsername } = useContext(MyContext);
 
   let history = useHistory();
 
@@ -80,32 +80,50 @@ const PetDetails = () => {
             <p className="pet__info-data">Gender:</p>
             <p>{pet && pet.gender}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
             <p className="pet__info-data">{pet && pet.likes ? "Likes:" : ""}</p>
             <p>{pet && pet.likes}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
-            <p className="pet__info-data">{pet && pet.dislikes ? "Dislikes:" : ""}</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.dislikes ? "Dislikes:" : ""}
+            </p>
             <p>{pet && pet.dislikes}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
-            <p className="pet__info-data">{pet && pet.habits ? "Habits:" : ""}</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.habits ? "Habits:" : ""}
+            </p>
             <p>{pet && pet.habits}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
-            <p className="pet__info-data">{pet && pet.extras ? "About:" : ""}</p>
-            <p>
-              {pet && pet.extras}
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.extras ? "About:" : ""}
             </p>
+            <p>{pet && pet.extras}</p>
           </div>
         </div>
 
         <div className="owner__container">
           <div className="owner__icons">
             <div className="owner__icon-container">
-              <LikeButton
-                pet={pet}
-              />
+              <LikeButton pet={pet} />
             </div>
 
             <div className="owner__icon-container">
@@ -130,7 +148,7 @@ const PetDetails = () => {
                 <div className="owner__image-container">
                   {petOwner &&
                     petOwner.profilePhoto.map((photo, i) => (
-                      <img src={photo.url} alt="user photo" />
+                      <img src={photo.url} alt="user " />
                     ))}
                 </div>
               )}

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ChatEngine, ChatFeed, editChat } from "react-chat-engine";
+import { ChatEngine, ChatFeed } from "react-chat-engine";
 import { createUser } from "../chat/createUser";
 import { getUsers } from "../chat/getUser";
 import MyContext from "../context/MyContext";

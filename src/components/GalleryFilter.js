@@ -1,6 +1,6 @@
-import React, { useState, useContext, useRef, useEffect } from 'react'
-import { useFormik } from 'formik'
-import '@fontsource/roboto'
+import React, { useState, useContext, useRef, useEffect } from "react";
+import { useFormik } from "formik";
+import "@fontsource/roboto";
 import {
   Button,
   FormControl,
@@ -8,242 +8,244 @@ import {
   Checkbox,
   FormGroup,
   ButtonGroup,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@material-ui/core";
 
-  Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions
-} from '@material-ui/core'
+import Alert from "@material-ui/lab/Alert";
+import MyContext from "../context/MyContext";
+import "../style/components/_galleryFilter.scss";
 
-
-import Alert from '@material-ui/lab/Alert'
-import MyContext from '../context/MyContext'
-import '../style/components/_galleryFilter.scss'
-
-export default function GalleryFilter () {
-  const [error, setError] = useState(null)
-  const { filteredData, setFilteredData } = useContext(MyContext)
+export default function GalleryFilter() {
+  const [error, setError] = useState(null);
+  const { setFilteredData } = useContext(MyContext);
 
   /**
    * Define the Form for FORMIK
    */
   const formik = useFormik({
     initialValues: {
-      type: 'all',
-      age: '',
-      favorites: false
+      type: "all",
+      age: "",
+      favorites: false,
     },
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
-      setError(null)
+      setError(null);
 
       //alert(JSON.stringify(values, null, 2))
       try {
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        console.log('userId==', userId)
+        const userId = JSON.parse(localStorage.getItem("userId"));
+        console.log("userId==", userId);
 
         const response = await fetch(
           `http://localhost:4000/pets/filter?type=${
             formik.values.type
           }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(
             formik.values.favorites
-          )}&userId=${userId ? userId : ''}`,
+          )}&userId=${userId ? userId : ""}`,
           {
-            method: 'GET',
-            mode: 'cors',
+            method: "GET",
+            mode: "cors",
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           }
-        )
+        );
 
-        const data = await response.json()
-        console.log('requested filteredData', data.data)
-        setFilteredData(data.data)
+        const data = await response.json();
+        console.log("requested filteredData", data.data);
+        setFilteredData(data.data);
 
         if (!data.success) {
-          setError(data.message)
-          console.log('error=>', error)
+          setError(data.message);
+          console.log("error=>", error);
         } else {
-          console.log('filtered successful')
+          console.log("filtered successful");
         }
       } catch (err) {
-        console.log('Error while filtering =>', err)
+        console.log("Error while filtering =>", err);
       }
-    }
-  })
+    },
+  });
 
-  const toggleDropdown = filterType => {
-    const dropdown = document.getElementById(filterType)
-    console.log('in toggleDropdown')
-    console.log('dropdown', dropdown)
+  const toggleDropdown = (filterType) => {
+    const dropdown = document.getElementById(filterType);
+    console.log("in toggleDropdown");
+    console.log("dropdown", dropdown);
     //change classes for visible and hide dropdown
-    if (dropdown.classList.contains('filter-dropdown-hidden')) {
-      dropdown.classList.remove('filter-dropdown-hidden')
+    if (dropdown.classList.contains("filter-dropdown-hidden")) {
+      dropdown.classList.remove("filter-dropdown-hidden");
     } else {
-      dropdown.classList.add('filter-dropdown-hidden')
+      dropdown.classList.add("filter-dropdown-hidden");
     }
-  }
+  };
 
   useEffect(async () => {
+    try {
+      const userId = JSON.parse(localStorage.getItem("userId"));
+      console.log("userId==", userId);
 
-         try {
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        console.log('userId==', userId)
-
-        const response = await fetch(
-          `http://localhost:4000/pets/filter?type=all&favorites=false&userId=${userId ? userId : ''}`,
-          {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-        )
-
-        const data = await response.json()
-        console.log('requested  filteredData in useeffect', data.data)
-        setFilteredData(data.data)
-
-        if (!data.success) {
-          setError(data.message)
-          console.log('error=>', error)
-        } else {
-          console.log('filtered successful')
+      const response = await fetch(
+        `http://localhost:4000/pets/filter?type=all&favorites=false&userId=${
+          userId ? userId : ""
+        }`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      } catch (err) {
-        console.log('Error while filtering =>', err)
+      );
+
+      const data = await response.json();
+      console.log("requested  filteredData in useeffect", data.data);
+      setFilteredData(data.data);
+
+      if (!data.success) {
+        setError(data.message);
+        console.log("error=>", error);
+      } else {
+        console.log("filtered successful");
       }
-    
-  }, [])
+    } catch (err) {
+      console.log("Error while filtering =>", err);
+    }
+  }, []);
 
   return (
     <div>
       <form>
-        <div className='filterContainer'>
+        <div className="filterContainer">
           {/* <FilterElementAll filterText={"All Filters"}/> */}
 
           <FilterElementType
-            filterText={'Type'}
+            filterText={"Type"}
             formik={formik}
             toggleDropdown={toggleDropdown}
           />
 
           <FilterElementAge
-            filterText={'Age'}
+            filterText={"Age"}
             toggleDropdown={toggleDropdown}
             formik={formik}
           />
 
-          <FilterFavorites filterText={''} formik={formik} />
+          <FilterFavorites filterText={""} formik={formik} />
           {/* <FilterElementAll filterText={ 'All Filters' } /> */}
           <Button
             disableElevation
-            color='primary'
-            variant='contained'
-            type='submit'
+            color="primary"
+            variant="contained"
+            type="submit"
             onClick={formik.handleSubmit}
           >
             Filter
           </Button>
           <Button
             disableElevation
-            color='gray'
-            variant='contained'
-            type='submit'
+            color="gray"
+            variant="contained"
+            type="submit"
             onClick={() => {
-              formik.values.type = 'all'
-              formik.values.age = ''
-              formik.values.favorites = false
+              formik.values.type = "all";
+              formik.values.age = "";
+              formik.values.favorites = false;
             }}
           >
             Clear
           </Button>
         </div>
-        {error ? <Alert severity='error'>{error}</Alert> : null}
+        {error ? <Alert severity="error">{error}</Alert> : null}
       </form>
     </div>
-  )
+  );
 }
 
-function FilterElementType ({ filterText, toggleDropdown, formik }) {
-  const [selectedBtn, setSelectedBtn] = useState(1)
+function FilterElementType({ filterText, toggleDropdown, formik }) {
+  const [selectedBtn, setSelectedBtn] = useState(1);
 
   return (
     <div>
       <ButtonGroup
         disableElevation
-        color='primary'
-        aria-label='outlined primary button group'
-        size='large'
-        variant='outlined'
+        color="primary"
+        aria-label="outlined primary button group"
+        size="large"
+        variant="outlined"
       >
         <Button
-          id='all'
-          color={selectedBtn === 1 ? 'secondary' : 'primary'}
-          value={'all'}
+          id="all"
+          color={selectedBtn === 1 ? "secondary" : "primary"}
+          value={"all"}
           onClick={() => {
-            setSelectedBtn(1)
-            formik.values.type = 'all'
+            setSelectedBtn(1);
+            formik.values.type = "all";
           }}
         >
           All
         </Button>
         <Button
-          id='dog'
-          color={selectedBtn === 2 ? 'secondary' : 'primary'}
-          value={'dog'}
+          id="dog"
+          color={selectedBtn === 2 ? "secondary" : "primary"}
+          value={"dog"}
           onClick={() => {
-            setSelectedBtn(2)
-            formik.values.type = 'dog'
+            setSelectedBtn(2);
+            formik.values.type = "dog";
           }}
         >
           Dogs
         </Button>
         <Button
-          id='cat'
-          color={selectedBtn === 3 ? 'secondary' : 'primary'}
-          value={'cat'}
+          id="cat"
+          color={selectedBtn === 3 ? "secondary" : "primary"}
+          value={"cat"}
           onClick={() => {
-            setSelectedBtn(3)
-            formik.values.type = 'cat'
+            setSelectedBtn(3);
+            formik.values.type = "cat";
           }}
         >
           Cats
         </Button>
         <Button
-          id='other'
-          color={selectedBtn === 4 ? 'secondary' : 'primary'}
-          name='other'
-          value={'other'}
+          id="other"
+          color={selectedBtn === 4 ? "secondary" : "primary"}
+          name="other"
+          value={"other"}
           onClick={() => {
-            setSelectedBtn(4)
-            formik.values.type = 'others'
+            setSelectedBtn(4);
+            formik.values.type = "others";
           }}
         >
           Others
         </Button>
       </ButtonGroup>
     </div>
-  )
+  );
 }
 
-function FilterElementAge ({ filterText, formik }) {
-  console.log('into FilterElementAge')
-  const ref = useRef()
+function FilterElementAge({ filterText, formik }) {
+  console.log("into FilterElementAge");
+  const ref = useRef();
 
   const toggleDropdown = () => {
-    const dropdown = document.getElementById('filterAge')
-    console.log('in toggleDropdown')
-    console.log('dropdown', dropdown)
+    const dropdown = document.getElementById("filterAge");
+    console.log("in toggleDropdown");
+    console.log("dropdown", dropdown);
 
     //change classes for visible and hide dropdown
-    if (dropdown.classList.contains('filter-dropdown-hidden')) {
-      dropdown.classList.remove('filter-dropdown-hidden')
-      console.log('open dropdown')
+    if (dropdown.classList.contains("filter-dropdown-hidden")) {
+      dropdown.classList.remove("filter-dropdown-hidden");
+      console.log("open dropdown");
     } else {
-      dropdown.classList.add('filter-dropdown-hidden')
-      console.log('close dropdown')
+      dropdown.classList.add("filter-dropdown-hidden");
+      console.log("close dropdown");
     }
-  }
+  };
 
   //   useEffect( () => {
   //     console.log( 'in UseEffect' )
@@ -271,42 +273,42 @@ function FilterElementAge ({ filterText, formik }) {
 
   const ageOptions = [
     {
-      label: 'Baby (0-6 months)',
-      value: 'baby'
+      label: "Baby (0-6 months)",
+      value: "baby",
     },
     {
-      label: 'Young (6-12 months)',
-      value: 'young'
+      label: "Young (6-12 months)",
+      value: "young",
     },
     {
-      label: 'Adult (1-7 years)',
-      value: 'adult'
+      label: "Adult (1-7 years)",
+      value: "adult",
     },
     {
-      label: 'Senior (7+ years)',
-      value: 'senior'
-    }
-  ]
+      label: "Senior (7+ years)",
+      value: "senior",
+    },
+  ];
 
-  console.log('render')
+  console.log("render");
   return (
-    <div className='filterElement' ref={ref}>
+    <div className="filterElement" ref={ref}>
       <span
         onClick={() => {
-          toggleDropdown()
+          toggleDropdown();
         }}
       >
-        <span className=''>{filterText}</span>
-        <i className='fas fa-chevron-down filtericon'></i>{' '}
+        <span className="">{filterText}</span>
+        <i className="fas fa-chevron-down filtericon"></i>{" "}
       </span>
-      <div id='filterAge' className='dropdown filter-dropdown-hidden'>
-        <FormControl component='fieldset'>
+      <div id="filterAge" className="dropdown filter-dropdown-hidden">
+        <FormControl component="fieldset">
           <FormGroup>
-            {ageOptions.map(opt => (
+            {ageOptions.map((opt) => (
               <FormControlLabel
                 id={opt.value}
                 value={opt.value}
-                control={<Checkbox name='age' />}
+                control={<Checkbox name="age" />}
                 label={opt.label}
                 onChange={formik.handleChange}
               />
@@ -315,89 +317,93 @@ function FilterElementAge ({ filterText, formik }) {
         </FormControl>
       </div>
     </div>
-  )
+  );
 }
 
-function FilterElementAll ({ filterText, filterData }) {
+function FilterElementAll({ filterText, filterData }) {
   return (
-    <div className='filterElement'>
+    <div className="filterElement">
       <span>
-        {filterText} <i class='fas fa-sliders-h filtericon'></i>{' '}
+        {filterText} <i class="fas fa-sliders-h filtericon"></i>{" "}
       </span>
     </div>
-  )
+  );
 }
 
-function FilterFavorites ({ filterText, formik }) {
+function FilterFavorites({ filterText, formik }) {
   console.log("in FilterFavorites");
   const [likeIcon, setLikeIcon] = useState("black");
-	const { login, setLogin } = useContext(MyContext);
-	const [open, setOpen] = useState(false);
+  const { login } = useContext(MyContext);
+  const [open, setOpen] = useState(false);
 
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-	const handleClose = () => {
-		setOpen(false);
-	};
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-	const toggle = status => {
-		console.log("toggle", status);
-		if (status) return false;
-		if (!status) return true;
-	};
+  const toggle = (status) => {
+    console.log("toggle", status);
+    if (status) return false;
+    if (!status) return true;
+  };
 
-	const normalFunctionality = () => {
-		formik.values.favorites = toggle(formik.values.favorites);
+  const normalFunctionality = () => {
+    formik.values.favorites = toggle(formik.values.favorites);
 
-		formik.values.favorites === false
-			? setLikeIcon("black")
-			: setLikeIcon("#f76c6c");
-	};
+    formik.values.favorites === false
+      ? setLikeIcon("black")
+      : setLikeIcon("#f76c6c");
+  };
 
-	return (
-		<>
-			<div
-				onClick={login ? normalFunctionality : handleClickOpen}
-				className='filterElement'>
-				<span className=''>{filterText}</span>
+  return (
+    <>
+      <div
+        onClick={login ? normalFunctionality : handleClickOpen}
+        className="filterElement"
+      >
+        <span className="">{filterText}</span>
 
-				<i className='fas fa-heart' style={{ color: likeIcon }}></i>
-			</div>
-			<Dialog
-				open={open}
-				onClose={handleClose}
-				aria-labelledby='alert-dialog-title'
-				aria-describedby='alert-dialog-description'>
-				<DialogTitle id='alert-dialog-title'>
-					{"Join Pawfect to favorite pets"}
-				</DialogTitle>
-				<DialogContent>
-					<Button
-						variant='contained'
-						sx={{ margin: 3 }}
-						color='primary'
-						href='/registration'>
-						Create new Account
-					</Button>
+        <i className="fas fa-heart" style={{ color: likeIcon }}></i>
+      </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Join Pawfect to favorite pets"}
+        </DialogTitle>
+        <DialogContent>
+          <Button
+            variant="contained"
+            sx={{ margin: 3 }}
+            color="primary"
+            href="/registration"
+          >
+            Create new Account
+          </Button>
 
-					<DialogContentText id='alert-dialog-description'>
-						Already have an account?
-					</DialogContentText>
-					<Button variant='outlined' color='primary' href='/login'>
-						Login
-					</Button>
-				</DialogContent>
-				<DialogActions>
-					<Button
-						onClick={() => {
-							setOpen(false);
-						}}>
-						Cancel
-					</Button>
-				</DialogActions>
-			</Dialog>
-		</>
-	);
+          <DialogContentText id="alert-dialog-description">
+            Already have an account?
+          </DialogContentText>
+          <Button variant="outlined" color="primary" href="/login">
+            Login
+          </Button>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
 }

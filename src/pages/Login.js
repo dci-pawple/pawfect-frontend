@@ -54,9 +54,9 @@ const validate = (values) => {
 
 export default function Login() {
   const [error, setError] = useState(null);
-  const { login, setLogin } = useContext(MyContext);
-  const { userId, setUserId } = useContext(MyContext);
-  const { user, setUser } = useContext(MyContext);
+  const { setLogin } = useContext(MyContext);
+  const { setUserId } = useContext(MyContext);
+  const { setUser } = useContext(MyContext);
 
   const history = useHistory();
 

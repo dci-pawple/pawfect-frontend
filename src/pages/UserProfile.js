@@ -228,7 +228,7 @@ const UserProfile = () => {
                           <img
                             key={i}
                             src={photo.url}
-                            alt="profile photo"
+                            alt="avatar"
                             className="img-thumbnail"
                           />
                         ))}
