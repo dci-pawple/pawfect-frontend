@@ -1,4 +1,4 @@
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { ThemeProvider,createTheme } from "@material-ui/core/styles";
 
 const theme = createTheme({
   palette: {
@@ -20,6 +20,8 @@ const theme = createTheme({
     fontFamily: "Poppins",
   },
 });
+
+
 
 const Theme = ({ children }) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
