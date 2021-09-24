@@ -24,8 +24,7 @@ const App = () => {
   const search = params.get("search");
   // console.log(search);
 
-  // const { user } = useContext(MyContext);
-  // console.log(user);
+  const { pet } = useContext(MyContext);
 
   return (
     <Theme>
@@ -57,12 +56,13 @@ const App = () => {
             <Chat />
           </Route>
 
+          {/* <Route path={`/pet/${pet._id}`}> */}
           <Route path="/pet">
             <PetDetails />
           </Route>
 
           <Route path="/save">
-            <SavedSearches/>
+            <SavedSearches />
           </Route>
         </Switch>
 
