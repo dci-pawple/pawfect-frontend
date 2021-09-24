@@ -97,12 +97,12 @@ useEffect(()=>{
       habits: pet.habits || '',
       size: pet.size || '',
       extras: pet.extras || '',
-      photos: '',
+      photos: [],
       deletePhoto: [],
     },
 
     onSubmit: async values => {
-      alert (JSON.stringify (values, null, 2));
+      console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
       let fd = new FormData()
@@ -361,9 +361,9 @@ useEffect(()=>{
           />
          <div className='image-preview'>
             {formik.values.photos &&
-              formik.values.photos.map((photo, i) => (
+              formik.values.photos.map((file, i) => (
                 
-                <img src={photo} alt={photo+i}/>
+                <Thumb file={file} alt={file.path}/>
               ))}
           </div>
      
