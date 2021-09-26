@@ -77,13 +77,11 @@ export default function EditCreateAd () {
   const {userId, setUserId}=useContext(MyContext)
   const { pet, setPet } = useContext(MyContext);
    const { petId, setPetId } = useContext(MyContext);
-
-useEffect(()=>{
-
+   const [deletePhotos,setDeletePhotos] = useState([]);
 
 
-})
 
+console.log("deletePhotos in edit",deletePhotos);
 
   const formik = useFormik({
     initialValues: {
@@ -98,13 +96,14 @@ useEffect(()=>{
       size: pet.size || '',
       extras: pet.extras || '',
       photos: [],
-      deletePhoto: [],
+      deletePhotos: [],
     },
 
     onSubmit: async values => {
       console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
+       console.log('values.deletePhotos=>', values.deletePhotos)
       let fd = new FormData()
       fd.append('name', values.name)
       fd.append('age', values.age)
@@ -116,7 +115,7 @@ useEffect(()=>{
       fd.append('size', values.size)
       fd.append('extras', values.extras)
       fd.append('userId', userId)
-      fd.append('deletePhoto', values.deletePhoto)
+      fd.append('deletePhotos',JSON.stringify(values.deletePhotos))
 
       if (values.photos) {
         values.photos.forEach(file => fd.append('photos', file))
@@ -155,18 +154,16 @@ useEffect(()=>{
     }
   })
 
-  const deleteImage = (e,formik) =>{
+ 
+useEffect(()=>{
 
-    const newArray=[];
-     console.log(e.target.alt);
-    formik.values.deletePhoto=newArray.push(e.target.id)
-    formik.handleChange();
-    const photo= document.getElementById(e.target.id)
-    console.log("photo",photo);
-    //delete element
-                        
-    
-  }
+formik.setFieldValue("deletePhotos", deletePhotos);
+console.log("deletePhotos in edit create render",deletePhotos)
+console.log("formik",formik)
+
+
+},[deletePhotos])
+
 
   return (
     <div className='app-container'>
@@ -370,8 +367,19 @@ useEffect(()=>{
           <div className='image-preview'>
            {pet.photos &&
                    pet.photos.map((photo, i) => (
-                      <img onClick={(e)=>{
-                       deleteImage(e,formik)
+                      <img onClick={ async (e)=>{
+                       //deleteImage(e)
+                       const photoId=[e.target.id];
+                       console.log("photoId",photoId)
+                       
+                       setDeletePhotos(deletePhotos.concat(photoId));
+                       
+                       
+                      
+
+                        const photo= document.getElementById(e.target.id)
+                        photo.style.border = "2px solid red";
+                        console.log("photo",photo);
                         }} key={i} src={photo.url}  id={photo.publicId}  alt={i}/>
                     ))}
           </div>

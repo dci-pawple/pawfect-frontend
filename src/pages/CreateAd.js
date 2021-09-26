@@ -90,7 +90,7 @@ export default function CreateAd () {
     },
 
     onSubmit: async values => {
-      alert (JSON.stringify (values, null, 2));
+      //alert (JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
       let fd = new FormData()
