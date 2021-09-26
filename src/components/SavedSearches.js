@@ -10,7 +10,12 @@ const SavedSearches = () => {
   useEffect(() => {
     const fetchFavourites = () => {
       console.log({ userId });
-      fetch(`http://localhost:4000/pets/filter?favorites=true&userId=${userId}`)
+      // process.env.REACT_APP_BACKEND_URL
+      // http://localhost:4000/
+      fetch(
+        process.env.REACT_APP_BACKEND_URL +
+          `pets/filter?favorites=true&userId=${userId}`
+      )
         .then((data) => data.json())
         .then((response) => {
           console.log("response.data", response.data);

@@ -39,13 +39,15 @@ export default function GalleryFilter({ filter }) {
       try {
         const userId = JSON.parse(localStorage.getItem("userId"));
         console.log("userId==", userId);
-
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
         const response = await fetch(
-          `http://localhost:4000/pets/filter?type=${
-            formik.values.type
-          }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(
-            formik.values.favorites
-          )}&userId=${userId ? userId : ""}`,
+          process.env.REACT_APP_BACKEND_URL +
+            `pets/filter?type=${formik.values.type}&age=${JSON.stringify(
+              formik.values.age
+            )}&favorites=${JSON.stringify(formik.values.favorites)}&userId=${
+              userId ? userId : ""
+            }`,
           {
             method: "GET",
             mode: "cors",
@@ -89,11 +91,13 @@ export default function GalleryFilter({ filter }) {
         const userId = JSON.parse(localStorage.getItem("userId"));
         console.log("userId==", userId);
         console.log("Filter:", filter);
-
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
         const response = await fetch(
-          `http://localhost:4000/pets/filter?type=${
-            filter || "all"
-          }&favorites=false&userId=${userId ? userId : ""}`,
+          process.env.REACT_APP_BACKEND_URL +
+            `pets/filter?type=${filter || "all"}&favorites=false&userId=${
+              userId ? userId : ""
+            }`,
           {
             method: "GET",
             mode: "cors",

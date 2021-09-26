@@ -1,62 +1,61 @@
-import React, { useEffect, useState, useContext } from 'react'
-import PetCard from '../components/PetCard'
-import MyContext from '../context/MyContext'
-import { Button, TextField } from '@material-ui/core'
-import { Link, useHistory } from 'react-router-dom'
-import '../style/pages/_myAds.scss'
+import React, { useEffect, useState, useContext } from "react";
+import PetCard from "../components/PetCard";
+import MyContext from "../context/MyContext";
+import { Button, TextField } from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
+import "../style/pages/_myAds.scss";
 
 const SavedSearches = () => {
-  const [adsList, setAdsList] = useState([])
-  const { userId } = useContext(MyContext)
-  const { pet,setPet } = useContext(MyContext)
+  const [adsList, setAdsList] = useState([]);
+  const { userId } = useContext(MyContext);
+  const { pet, setPet } = useContext(MyContext);
 
   useEffect(() => {
     const fetchFavourites = () => {
-      fetch(`http://localhost:4000/pets/userads`, {
-        method: 'POST',
-        mode: 'cors',
+      // process.env.REACT_APP_BACKEND_URL
+      // http://localhost:4000/
+      fetch(process.env.REACT_APP_BACKEND_URL + `pets/userads`, {
+        method: "POST",
+        mode: "cors",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: userId })
+        body: JSON.stringify({ userId: userId }),
       })
-        .then(data => data.json())
-        .then(response => {
-          console.log('MyAds response.data', response.data)
-          setAdsList(response.data)
+        .then((data) => data.json())
+        .then((response) => {
+          console.log("MyAds response.data", response.data);
+          setAdsList(response.data);
         })
-        .catch(err => console.error('error while fetching user-ads =>', err))
-    }
+        .catch((err) => console.error("error while fetching user-ads =>", err));
+    };
 
-    fetchFavourites()
-  }, [])
+    fetchFavourites();
+  }, []);
 
   return (
-    <div className='app-container container'>
+    <div className="app-container container">
       <h2>Your Ads</h2>
-      <div className='gallery__grid-container'>
+      <div className="gallery__grid-container">
         {adsList &&
           adsList.map((pet, index) => (
-            <div className='ad-card'>
+            <div className="ad-card">
               <PetCard pet={pet} key={index} />
-              <div className='ad-actions'>
-               <Link to={`/edit-ad/${pet._id}`}>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  className='ad-btn-edit'
-                onClick={
-                    setPet(pet)
-                   
-                }
-                >
-                  Edit
-                </Button>
+              <div className="ad-actions">
+                <Link to={`/edit-ad/${pet._id}`}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className="ad-btn-edit"
+                    onClick={setPet(pet)}
+                  >
+                    Edit
+                  </Button>
                 </Link>
                 <Button
-                  variant='outlined'
-                  color='secondary'
-                  className='ad-btn-delete'
+                  variant="outlined"
+                  color="secondary"
+                  className="ad-btn-delete"
                 >
                   Delete
                 </Button>
@@ -65,7 +64,7 @@ const SavedSearches = () => {
           ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SavedSearches
+export default SavedSearches;

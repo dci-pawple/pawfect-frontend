@@ -109,15 +109,20 @@ export default function CreateAd() {
       }
 
       try {
-        const response = await fetch("http://localhost:4000/pets/newpet", {
-          method: "POST",
-          mode: "cors",
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          //   "charset":"utf-8",
-          // },
-          body: fd,
-        });
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + "pets/newpet",
+          {
+            method: "POST",
+            mode: "cors",
+            // headers: {
+            //   "Content-Type": "multipart/form-data",
+            //   "charset":"utf-8",
+            // },
+            body: fd,
+          }
+        );
 
         const data = await response.json();
         console.log("data=>", data);

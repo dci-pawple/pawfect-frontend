@@ -1,205 +1,201 @@
-import React, { useState,useContext,useEffect } from 'react'
-import { useFormik } from 'formik'
-import { useDropzone } from 'react-dropzone'
-import { useHistory,useParams } from 'react-router-dom'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import Alert from '@material-ui/lab/Alert'
+import React, { useState, useContext, useEffect } from "react";
+import { useFormik } from "formik";
+import { useDropzone } from "react-dropzone";
+import { useHistory, useParams } from "react-router-dom";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
 import {
   Select,
   InputLabel,
   Button,
   FormControl,
   TextField,
-  FormHelperText
-} from '@material-ui/core'
-import Thumb from '../components/Thumb'
-import MyContext from '../context/MyContext'
+  FormHelperText,
+} from "@material-ui/core";
+import Thumb from "../components/Thumb";
+import MyContext from "../context/MyContext";
 
 /* Styling the form (Material-ui) */
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      '& > *': {
+      "& > *": {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
-        fontSize: '1.6rem',
+        fontSize: "1.6rem",
         palette: {
           primary: {
-            light: '#464646',
-            main: '#1f1f1f',
-            dark: '#000000',
-            contrastText: '#fff'
-          }
-        }
-      }
+            light: "#464646",
+            main: "#1f1f1f",
+            dark: "#000000",
+            contrastText: "#fff",
+          },
+        },
+      },
     },
     selectEmpty: {
-      marginTop: theme.spacing(2)
-    }
+      marginTop: theme.spacing(2),
+    },
   })
-)
+);
 
 // for uploading images
-const UploadComponent = props => {
-  const { setFieldValue, values } = props
-    let { petId } = useParams();
+const UploadComponent = (props) => {
+  const { setFieldValue, values } = props;
+  let { petId } = useParams();
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: 'image/*',
-    onDrop: acceptedPhotos => {
-      if (values.photos.length!==0) {
-        setFieldValue('photos', values.photos.concat(acceptedPhotos))
+    accept: "image/*",
+    onDrop: (acceptedPhotos) => {
+      if (values.photos.length !== 0) {
+        setFieldValue("photos", values.photos.concat(acceptedPhotos));
         console.log("values.photos in Uploadcomponent", values.photos);
-
       } else {
-        setFieldValue('photos', acceptedPhotos)
+        setFieldValue("photos", acceptedPhotos);
       }
-    }
-  })
+    },
+  });
 
   return (
     <div>
-      <div {...getRootProps({ className: 'dropzone' })}>
+      <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
 
         <p>Drop some photos here or click to select photos</p>
       </div>
       <FormHelperText>Optional</FormHelperText>
     </div>
-  )
-}
+  );
+};
 
-
-export default function EditCreateAd () {
-  const classes = useStyles()
-  let history = useHistory()
-  const [error, setError] = useState(null)
-  const {userId, setUserId}=useContext(MyContext)
+export default function EditCreateAd() {
+  const classes = useStyles();
+  let history = useHistory();
+  const [error, setError] = useState(null);
+  const { userId, setUserId } = useContext(MyContext);
   const { pet, setPet } = useContext(MyContext);
-   const { petId, setPetId } = useContext(MyContext);
+  const { petId, setPetId } = useContext(MyContext);
 
-useEffect(()=>{
-
-
-
-})
-
+  useEffect(() => {});
 
   const formik = useFormik({
     initialValues: {
       typeOfPet: pet.typeOfPet || "",
-      age: pet.age || '',
-      name: pet.name || '',
-      gender: pet.gender || '',
+      age: pet.age || "",
+      name: pet.name || "",
+      gender: pet.gender || "",
       // breed: "",
-      likes: pet.likes || '',
-      dislikes: pet.dislikes || '',
-      habits: pet.habits || '',
-      size: pet.size || '',
-      extras: pet.extras || '',
+      likes: pet.likes || "",
+      dislikes: pet.dislikes || "",
+      habits: pet.habits || "",
+      size: pet.size || "",
+      extras: pet.extras || "",
       photos: [],
       deletePhoto: [],
     },
 
-    onSubmit: async values => {
-      console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
-      setError(null)
-      console.log('values=>', values.photos)
-      let fd = new FormData()
-      fd.append('name', values.name)
-      fd.append('age', values.age)
-      fd.append('typeOfPet', values.typeOfPet)
-      fd.append('gender', values.gender)
-      fd.append('likes', values.likes)
-      fd.append('dislikes', values.dislikes)
-      fd.append('habits', values.habits)
-      fd.append('size', values.size)
-      fd.append('extras', values.extras)
-      fd.append('userId', userId)
-      fd.append('deletePhoto', values.deletePhoto)
+    onSubmit: async (values) => {
+      console.log(
+        "JSON.stringify (values, null, 2)",
+        JSON.stringify(values, null, 2)
+      );
+      setError(null);
+      console.log("values=>", values.photos);
+      let fd = new FormData();
+      fd.append("name", values.name);
+      fd.append("age", values.age);
+      fd.append("typeOfPet", values.typeOfPet);
+      fd.append("gender", values.gender);
+      fd.append("likes", values.likes);
+      fd.append("dislikes", values.dislikes);
+      fd.append("habits", values.habits);
+      fd.append("size", values.size);
+      fd.append("extras", values.extras);
+      fd.append("userId", userId);
+      fd.append("deletePhoto", values.deletePhoto);
 
       if (values.photos) {
-        values.photos.forEach(file => fd.append('photos', file))
-        console.log('fd=>', fd)
-        fd.append('photos', values.photos)
+        values.photos.forEach((file) => fd.append("photos", file));
+        console.log("fd=>", fd);
+        fd.append("photos", values.photos);
       }
 
       try {
         console.log("EditAd pedId", pet._id);
-        const response = await fetch(`http://localhost:4000/pets/updatepet/${pet._id}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          //   "charset":"utf-8",
-          // },
-          body: fd
-        })
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + `pets/updatepet/${pet._id}`,
+          {
+            method: "PATCH",
+            mode: "cors",
+            // headers: {
+            //   "Content-Type": "multipart/form-data",
+            //   "charset":"utf-8",
+            // },
+            body: fd,
+          }
+        );
 
-        const data = await response.json()
-        console.log('data=>', data)
+        const data = await response.json();
+        console.log("data=>", data);
 
         if (!data.success) {
-          console.log('Error with uploading')
-          setError(data.message)
+          console.log("Error with uploading");
+          setError(data.message);
         } else {
-          console.log('Upload completed successfully')
-          history.push(`/pet/${data.data._id}`)
-          setPet(data.data)
-          
+          console.log("Upload completed successfully");
+          history.push(`/pet/${data.data._id}`);
+          setPet(data.data);
         }
-
       } catch (err) {
-        console.log('Error while uploadting data for new ad =>', err)
+        console.log("Error while uploadting data for new ad =>", err);
       }
-    }
-  })
+    },
+  });
 
-  const deleteImage = (e,formik) =>{
-
-    const newArray=[];
-     console.log(e.target.alt);
-    formik.values.deletePhoto=newArray.push(e.target.id)
+  const deleteImage = (e, formik) => {
+    const newArray = [];
+    console.log(e.target.alt);
+    formik.values.deletePhoto = newArray.push(e.target.id);
     formik.handleChange();
-    const photo= document.getElementById(e.target.id)
-    console.log("photo",photo);
+    const photo = document.getElementById(e.target.id);
+    console.log("photo", photo);
     //delete element
-                        
-    
-  }
+  };
 
   return (
-    <div className='app-container'>
-      <div className='form-container'>
-        <h1 className='text-center'>Update your Ad</h1>
+    <div className="app-container">
+      <div className="form-container">
+        <h1 className="text-center">Update your Ad</h1>
 
         <form
           className={`form-style ${classes.root}`}
-          action='/'
+          action="/"
           onSubmit={formik.handleSubmit}
         >
           {/* Type of pet */}
           <FormControl
             className={classes.formControl}
-            variant='outlined'
+            variant="outlined"
             fullWidth
             required
           >
-            <InputLabel htmlFor='type-native-simple'>Type of pet</InputLabel>
+            <InputLabel htmlFor="type-native-simple">Type of pet</InputLabel>
             <Select
               native
-              label='Type of pet'
+              label="Type of pet"
               value={formik.values.typeOfPet}
               onChange={formik.handleChange}
               inputProps={{
-                name: 'typeOfPet',
-                id: 'type-native-simple'
+                name: "typeOfPet",
+                id: "type-native-simple",
               }}
             >
-              <option aria-label='None' value='' />
-              <option value={'dog'}>Dog</option>
-              <option value={'cat'}>Cat</option>
-              <option value={'other'}>Other</option>
+              <option aria-label="None" value="" />
+              <option value={"dog"}>Dog</option>
+              <option value={"cat"}>Cat</option>
+              <option value={"other"}>Other</option>
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -207,26 +203,26 @@ useEffect(()=>{
           {/* Age */}
           <FormControl
             className={classes.formControl}
-            variant='outlined'
+            variant="outlined"
             fullWidth
             required
           >
-            <InputLabel htmlFor='age-native-simple'>Age</InputLabel>
+            <InputLabel htmlFor="age-native-simple">Age</InputLabel>
             <Select
               native
               value={formik.values.age}
               onChange={formik.handleChange}
-              label='Age'
+              label="Age"
               inputProps={{
-                name: 'age',
-                id: 'age-native-simple'
+                name: "age",
+                id: "age-native-simple",
               }}
             >
-              <option aria-label='None' value='' />
-              <option value={'baby'}>Baby (0-6 months)</option>
-              <option value={'young'}>Young (6-12 months)</option>
-              <option value={'adult'}>Adult (1-7 years)</option>
-              <option value={'senior'}>Senior (7+ years)</option>
+              <option aria-label="None" value="" />
+              <option value={"baby"}>Baby (0-6 months)</option>
+              <option value={"young"}>Young (6-12 months)</option>
+              <option value={"adult"}>Adult (1-7 years)</option>
+              <option value={"senior"}>Senior (7+ years)</option>
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -264,24 +260,24 @@ useEffect(()=>{
           {/* Gender */}
           <FormControl
             className={classes.formControl}
-            variant='outlined'
+            variant="outlined"
             fullWidth
             required
           >
-            <InputLabel htmlFor='gender-native-simple'>Gender</InputLabel>
+            <InputLabel htmlFor="gender-native-simple">Gender</InputLabel>
             <Select
-              label='Gender'
+              label="Gender"
               native
               value={formik.values.gender}
               onChange={formik.handleChange}
               inputProps={{
-                name: 'gender',
-                id: 'gender-native-simple'
+                name: "gender",
+                id: "gender-native-simple",
               }}
             >
-              <option aria-label='None' value='' />
-              <option value={'female'}>Female</option>
-              <option value={'male'}>Male</option>
+              <option aria-label="None" value="" />
+              <option value={"female"}>Female</option>
+              <option value={"male"}>Male</option>
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -289,11 +285,11 @@ useEffect(()=>{
           {/* Name */}
           <FormControl fullWidth>
             <TextField
-              label='Name'
-              name='name'
+              label="Name"
+              name="name"
               required
-              id='name'
-              variant='outlined'
+              id="name"
+              variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.name}
             />
@@ -303,10 +299,10 @@ useEffect(()=>{
           {/* Likes */}
           <FormControl fullWidth>
             <TextField
-              label='Likes'
-              name='likes'
-              id='likes'
-              variant='outlined'
+              label="Likes"
+              name="likes"
+              id="likes"
+              variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.likes}
             />
@@ -316,10 +312,10 @@ useEffect(()=>{
           {/* Dislikes */}
           <FormControl fullWidth>
             <TextField
-              label='Dislikes'
-              name='dislikes'
-              id='dislikes'
-              variant='outlined'
+              label="Dislikes"
+              name="dislikes"
+              id="dislikes"
+              variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.dislikes}
             />
@@ -329,10 +325,10 @@ useEffect(()=>{
           {/* Habits */}
           <FormControl fullWidth>
             <TextField
-              label='Habits'
-              name='habits'
-              id='habits'
-              variant='outlined'
+              label="Habits"
+              name="habits"
+              id="habits"
+              variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.habits}
             />
@@ -342,10 +338,10 @@ useEffect(()=>{
           {/* Extras */}
           <FormControl fullWidth>
             <TextField
-              label='Anything else you would like to tell future pawrents...'
-              name='extras'
-              id='extras'
-              variant='outlined'
+              label="Anything else you would like to tell future pawrents..."
+              name="extras"
+              id="extras"
+              variant="outlined"
               multiline
               rows={4}
               onChange={formik.handleChange}
@@ -359,36 +355,41 @@ useEffect(()=>{
             setFieldValue={formik.setFieldValue}
             values={formik.values}
           />
-         <div className='image-preview'>
+          <div className="image-preview">
             {formik.values.photos &&
               formik.values.photos.map((file, i) => (
-                
-                <Thumb file={file} alt={file.path}/>
+                <Thumb file={file} alt={file.path} />
               ))}
           </div>
-     
-          <div className='image-preview'>
-           {pet.photos &&
-                   pet.photos.map((photo, i) => (
-                      <img onClick={(e)=>{
-                       deleteImage(e,formik)
-                        }} key={i} src={photo.url}  id={photo.publicId}  alt={i}/>
-                    ))}
+
+          <div className="image-preview">
+            {pet.photos &&
+              pet.photos.map((photo, i) => (
+                <img
+                  onClick={(e) => {
+                    deleteImage(e, formik);
+                  }}
+                  key={i}
+                  src={photo.url}
+                  id={photo.publicId}
+                  alt={i}
+                />
+              ))}
           </div>
 
-          {error ? <Alert severity='error'>{error}</Alert> : null}
+          {error ? <Alert severity="error">{error}</Alert> : null}
 
           {/* submit button */}
           <Button
             disableElevation
-            color='primary'
-            variant='contained'
-            type='submit'
+            color="primary"
+            variant="contained"
+            type="submit"
           >
             Save Changes
           </Button>
         </form>
       </div>
     </div>
-  )
+  );
 }
