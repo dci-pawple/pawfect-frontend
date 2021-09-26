@@ -16,7 +16,11 @@ const CarouselPets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetch(process.env.REACT_APP_BACKEND_URL + "pets")
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        await fetch(
+          `${process.env.REACT_APP_BACKEND_URL || "http://localhost:4000/"}pets`
+        )
           .then((data) => data.json())
           .then((res) => {
             setPetsList(res.data);
