@@ -367,20 +367,22 @@ console.log("formik",formik)
           <div className='image-preview'>
            {pet.photos &&
                    pet.photos.map((photo, i) => (
+                     <>
                       <img onClick={ async (e)=>{
-                       //deleteImage(e)
-                       const photoId=[e.target.id];
-                       console.log("photoId",photoId)
+                        //deleteImage(e)
+                        const photoId=[e.target.id];
+                        console.log("photoId",photoId)
                        
-                       setDeletePhotos(deletePhotos.concat(photoId));
+                        setDeletePhotos(deletePhotos.concat(photoId));
                        
-                       
-                      
-
                         const photo= document.getElementById(e.target.id)
                         photo.style.border = "2px solid red";
+                        
+                       
                         console.log("photo",photo);
-                        }} key={i} src={photo.url}  id={photo.publicId}  alt={i}/>
+                        }} key={i} src={photo.url}  className="deletedImage" id={photo.publicId}  alt={i}/>
+                       
+</>
                     ))}
           </div>
 

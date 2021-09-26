@@ -5,13 +5,32 @@ import { Button, TextField } from '@material-ui/core'
 import { Link, useHistory } from 'react-router-dom'
 import '../style/pages/_myAds.scss'
 
-const SavedSearches = () => {
+const MyAds = () => {
   const [adsList, setAdsList] = useState([])
   const { userId } = useContext(MyContext)
   const { pet,setPet } = useContext(MyContext)
 
+
+     const deleteAd = () => {
+      fetch(`http://localhost:4000/pets/delete`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ petId: pet._id })
+      })
+        .then(data => data.json())
+        .then(response => {
+          console.log('Delete pet', response.data)
+          setAdsList(response.data)
+        })
+        .catch(err => console.error('error while deleting ad =>', err))
+    }
+
+
   useEffect(() => {
-    const fetchFavourites = () => {
+    const fetchAds = () => {
       fetch(`http://localhost:4000/pets/userads`, {
         method: 'POST',
         mode: 'cors',
@@ -28,7 +47,7 @@ const SavedSearches = () => {
         .catch(err => console.error('error while fetching user-ads =>', err))
     }
 
-    fetchFavourites()
+    fetchAds()
   }, [])
 
   return (
@@ -57,6 +76,12 @@ const SavedSearches = () => {
                   variant='outlined'
                   color='secondary'
                   className='ad-btn-delete'
+                  onClick={
+                  
+
+    deleteAd
+                   
+                }
                 >
                   Delete
                 </Button>
@@ -68,4 +93,4 @@ const SavedSearches = () => {
   )
 }
 
-export default SavedSearches
+export default MyAds
