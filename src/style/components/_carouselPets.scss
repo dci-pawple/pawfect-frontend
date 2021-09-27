@@ -54,6 +54,10 @@
     background-color: $primary !important;
     box-shadow: 0 0 1px 3px $primary-light !important;
 
+    &:hover {
+      background-color: lighten($primary, 10%) !important;
+      box-shadow: 0 0 1px 3px lighten($primary, 10%);
+    }
   }
   
   .jJKuoL:hover,
