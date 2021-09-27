@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useHistory,useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
@@ -16,25 +16,26 @@ const PetDetails = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const { petOwner, setPetOwner } = useContext(MyContext);
   const { pet, setPet } = useContext(MyContext);
-  const { petId, setPetId } = useContext(MyContext);
-  const { chatUsername, setChatUsername } = useContext(MyContext);
+  const { petId } = useContext(MyContext);
+  const { setChatUsername } = useContext(MyContext);
 
   let { id } = useParams();
-
 
   let history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetch(`http://localhost:4000/pets/${id || petId}`)
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        await fetch(process.env.REACT_APP_BACKEND_URL + `pets/${id || petId}`)
           .then((data) => data.json())
           .then((res) => {
             if (pet._id !== res.data._id) setPet(res.data);
           });
         console.log("pet =>", pet);
         pet &&
-          fetch(`http://localhost:4000/users/${pet.userId}`)
+          fetch(process.env.REACT_APP_BACKEND_URL + `users/${pet.userId}`)
             .then((data) => data.json())
             .then((res) => setPetOwner(res.data));
       } catch (err) {
@@ -83,32 +84,50 @@ const PetDetails = () => {
             <p className="pet__info-data">Gender:</p>
             <p>{pet && pet.gender}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
             <p className="pet__info-data">{pet && pet.likes ? "Likes:" : ""}</p>
             <p>{pet && pet.likes}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
-            <p className="pet__info-data">{pet && pet.dislikes ? "Dislikes:" : ""}</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.dislikes ? "Dislikes:" : ""}
+            </p>
             <p>{pet && pet.dislikes}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
-            <p className="pet__info-data">{pet && pet.habits ? "Habits:" : ""}</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.habits ? "Habits:" : ""}
+            </p>
             <p>{pet && pet.habits}</p>
           </div>
-          <div className={`pet__info-data-container ${pet && pet.dislikes ? "" : "hidden"}`}>
-            <p className="pet__info-data">{pet && pet.extras ? "About:" : ""}</p>
-            <p>
-              {pet && pet.extras}
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.extras ? "About:" : ""}
             </p>
+            <p>{pet && pet.extras}</p>
           </div>
         </div>
 
         <div className="owner__container">
           <div className="owner__icons">
             <div className="owner__icon-container">
-              <LikeButton
-                pet={pet}
-              />
+              <LikeButton pet={pet} />
             </div>
 
             <div className="owner__icon-container">
@@ -133,7 +152,7 @@ const PetDetails = () => {
                 <div className="owner__image-container">
                   {petOwner &&
                     petOwner.profilePhoto.map((photo, i) => (
-                      <img src={photo.url} alt="user photo" />
+                      <img src={photo.url} alt="user " />
                     ))}
                 </div>
               )}

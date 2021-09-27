@@ -1,9 +1,6 @@
-.image-preview {
-
-    img{
-  width: 150px;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  }
+.delete-btn{
+    position: absolute;
+    padding:5px 10px;
+    cursor: pointer;
+   
 }

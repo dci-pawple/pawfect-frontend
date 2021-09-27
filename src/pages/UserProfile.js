@@ -46,15 +46,15 @@ const validate = (values) => {
 /**
  * Styling the form (Material-ui)
  */
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      '& > *': {
+      "& > *": {
         margin: theme.spacing(2),
-      }
-    }
+      },
+    },
   })
-)
+);
 
 const UploadComponent = (props) => {
   const { setFieldValue, values } = props;
@@ -87,7 +87,9 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://localhost:4000/users/${userId}`)
+      // process.env.REACT_APP_BACKEND_URL
+      // http://localhost:4000/
+      fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`)
         .then((data) => data.json())
         .then((res) => {
           console.log("res.data", res.data);
@@ -220,7 +222,7 @@ const UserProfile = () => {
                           <img
                             key={i}
                             src={photo.url}
-                            alt="profile photo"
+                            alt="avatar"
                             className="img-thumbnail"
                           />
                         ))}
