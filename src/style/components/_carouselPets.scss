@@ -39,13 +39,13 @@
   .rec-arrow,
   .rec-arrow-right,
   .rec-arrow-left {
-    background-color: $primary;
+    background-color: $primary !important;
     border-radius: 10px;
   }
 
   .khvUfi:hover:enabled,
   .khvUfi:focus:enabled {
-    background-color: $primary-light;
+    background-color: $primary-light !important;
   }
 
   //Pagination Styling (3 dots under the Carousel)
@@ -58,17 +58,17 @@
   }
 
   .ejXxNI {
-    background-color: $primary;
+    background-color: $primary !important;
     box-shadow: 0 0 1px 3px $very-dark-grey;
 
     &:hover {
-      background-color: lighten($primary, 10%);
+      background-color: lighten($primary, 10%) !important;
       box-shadow: 0 0 1px 3px lighten($primary, 10%);
     }
   }
 
   .jJKuoL {
-    background-color: $primary;
+    background-color: $primary !important;
     box-shadow: 0 0 1px 3px $primary-light;
   }
   .rec-pagination {
