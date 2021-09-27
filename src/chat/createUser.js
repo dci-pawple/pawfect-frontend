@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 export const createUser = async (data, successFunc) => {
   // const {

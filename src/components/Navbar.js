@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../dummy/pawfect-pink.png";
-import profilepic from "../dummy/images/profile-example.png";
 import MyContext from "../context/MyContext";
 
 export default function Navbar() {
@@ -10,7 +9,7 @@ export default function Navbar() {
   const [active, setActive] = useState(false);
   const [display, setDisplay] = useState(false);
   const { login, setLogin } = useContext(MyContext);
-  const { user, setUser } = useContext(MyContext);
+  const { user } = useContext(MyContext);
 
   const changeBackground = () => {
     // console.log(window.scrollY);

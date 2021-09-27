@@ -10,15 +10,15 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 /**
  * Styling the form (Material-ui)
  */
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      '& > *': {
+      "& > *": {
         margin: theme.spacing(2),
-      }
-    }
+      },
+    },
   })
-)
+);
 
 /**
  * Form Valitation
@@ -45,9 +45,9 @@ const validate = (values) => {
 
 export default function Login() {
   const [error, setError] = useState(null);
-  const { login, setLogin } = useContext(MyContext);
-  const { userId, setUserId } = useContext(MyContext);
-  const { user, setUser } = useContext(MyContext);
+  const { setLogin } = useContext(MyContext);
+  const { setUserId } = useContext(MyContext);
+  const { setUser } = useContext(MyContext);
 
   const history = useHistory();
 
@@ -71,14 +71,19 @@ export default function Login() {
       //alert (JSON.stringify (values, null, 2));
 
       try {
-        const response = await fetch("http://localhost:4000/users/login", {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        });
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + "users/login",
+          {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          }
+        );
         const data = await response.json();
         console.log("data=>", data);
         if (!data.success) {

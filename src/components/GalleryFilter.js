@@ -1,6 +1,6 @@
-import React, { useState, useContext, useRef, useEffect } from 'react'
-import { useFormik } from 'formik'
-import '@fontsource/roboto'
+import React, { useState, useContext, useRef, useEffect } from "react";
+import { useFormik } from "formik";
+import "@fontsource/roboto";
 import {
   Button,
   FormControl,
@@ -8,260 +8,263 @@ import {
   Checkbox,
   FormGroup,
   ButtonGroup,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@material-ui/core";
 
-  Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions
-} from '@material-ui/core'
+import Alert from "@material-ui/lab/Alert";
+import MyContext from "../context/MyContext";
 
-
-import Alert from '@material-ui/lab/Alert'
-import MyContext from '../context/MyContext'
-
-
-export default function GalleryFilter ({filter}) {
-  const [error, setError] = useState(null)
-  const { filteredData, setFilteredData } = useContext(MyContext)
+export default function GalleryFilter({ filter }) {
+  const [error, setError] = useState(null);
+  const { filteredData, setFilteredData } = useContext(MyContext);
 
   /**
    * Define the Form for FORMIK
    */
   const formik = useFormik({
     initialValues: {
-      type: 'all',
-      age: '',
-      favorites: false
+      type: "all",
+      age: "",
+      favorites: false,
     },
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
-      setError(null)
+      setError(null);
 
       //alert(JSON.stringify(values, null, 2))
       try {
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        console.log('userId==', userId)
-
+        const userId = JSON.parse(localStorage.getItem("userId"));
+        console.log("userId==", userId);
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
         const response = await fetch(
-          `http://localhost:4000/pets/filter?type=${
-            formik.values.type
-          }&age=${JSON.stringify(formik.values.age)}&favorites=${JSON.stringify(
-            formik.values.favorites
-          )}&userId=${userId ? userId : ''}`,
+          process.env.REACT_APP_BACKEND_URL +
+            `pets/filter?type=${formik.values.type}&age=${JSON.stringify(
+              formik.values.age
+            )}&favorites=${JSON.stringify(formik.values.favorites)}&userId=${
+              userId ? userId : ""
+            }`,
           {
-            method: 'GET',
-            mode: 'cors',
+            method: "GET",
+            mode: "cors",
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           }
-        )
+        );
 
-        const data = await response.json()
-        console.log('requested filteredData', data.data)
-        setFilteredData(data.data)
+        const data = await response.json();
+        console.log("requested filteredData", data.data);
+        setFilteredData(data.data);
 
         if (!data.success) {
-          setError(data.message)
-          console.log('error=>', error)
+          setError(data.message);
+          console.log("error=>", error);
         } else {
-          console.log('filtered successful')
+          console.log("filtered successful");
         }
       } catch (err) {
-        console.log('Error while filtering =>', err)
+        console.log("Error while filtering =>", err);
       }
-    }
-  })
+    },
+  });
 
-  const toggleDropdown = (filterType,className='filter-dropdown-hidden') => {
-    const dropdown = document.getElementById(filterType)
-    console.log('in toggleDropdown')
-    console.log('dropdown', dropdown)
+  const toggleDropdown = (filterType, className = "filter-dropdown-hidden") => {
+    const dropdown = document.getElementById(filterType);
+    console.log("in toggleDropdown");
+    console.log("dropdown", dropdown);
     //change classes for visible and hide dropdown
     if (dropdown.classList.contains(className)) {
-      dropdown.classList.remove(className)
+      dropdown.classList.remove(className);
     } else {
-      dropdown.classList.add(className)
+      dropdown.classList.add(className);
     }
-  }
+  };
 
- 
-
-  useEffect( () => {
-
-const getFirstGalleryData = async ()=>{
-
-         try {
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        console.log('userId==', userId)
-        console.log("Filter:",filter);
-
+  useEffect(() => {
+    const getFirstGalleryData = async () => {
+      try {
+        const userId = JSON.parse(localStorage.getItem("userId"));
+        console.log("userId==", userId);
+        console.log("Filter:", filter);
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
         const response = await fetch(
-          `http://localhost:4000/pets/filter?type=${filter || "all"}&favorites=false&userId=${userId ? userId : ''}`,
+          process.env.REACT_APP_BACKEND_URL +
+            `pets/filter?type=${filter || "all"}&favorites=false&userId=${
+              userId ? userId : ""
+            }`,
           {
-            method: 'GET',
-            mode: 'cors',
+            method: "GET",
+            mode: "cors",
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           }
-        )
+        );
 
-        const data = await response.json()
-        console.log('requested  filteredData in useeffect', data.data)
-        setFilteredData(data.data)
+        const data = await response.json();
+        console.log("requested  filteredData in useeffect", data.data);
+        setFilteredData(data.data);
 
         if (!data.success) {
-          setError(data.message)
-          console.log('error=>', error)
+          setError(data.message);
+          console.log("error=>", error);
         } else {
-          console.log('filtered successful')
+          console.log("filtered successful");
         }
       } catch (err) {
-        console.log('Error while filtering =>', err)
+        console.log("Error while filtering =>", err);
       }
-}
-getFirstGalleryData();
-    
-  }, [])
+    };
+
+    getFirstGalleryData();
+  }, []);
 
   return (
-    <div >
-      <FilterElementAll filterText={ 'All Filters' } toggleDropdown={toggleDropdown} /> 
-      <form id="filter" className="filter-dropdown-overlay filter-dropdown-hidden">
-        <div className='filterContainer'>
-       
-          
-          
+    <div>
+      <FilterElementAll
+        filterText={"All Filters"}
+        toggleDropdown={toggleDropdown}
+      />
+      <form
+        id="filter"
+        className="filter-dropdown-overlay filter-dropdown-hidden"
+      >
+        <div className="filterContainer">
           <FilterElementType
-            filterText={'Type'}
+            filterText={"Type"}
             formik={formik}
             toggleDropdown={toggleDropdown}
           />
 
           <FilterElementAge
-            filterText={'Age'}
+            filterText={"Age"}
             toggleDropdown={toggleDropdown}
             formik={formik}
           />
 
-          <FilterFavorites filterText={''} formik={formik} />
+          <FilterFavorites filterText={""} formik={formik} />
           <div className="filter-button">
-
-              <Button
-            className="clear-btn"
-            disableElevation
-            color='gray'
-            variant='contained'
-            type='submit'
-            onClick={() => {
-              formik.values.type = 'all'
-              formik.values.age = ''
-              formik.values.favorites = false
-              toggleDropdown("filter")
-            }}
-          >
-            Clear
-          </Button>
-          <Button
-            disableElevation
-            color='primary'
-            variant='contained'
-            type='submit'
-            onClick={()=>{
-              formik.handleSubmit();
-              toggleDropdown("filter");
+            <Button
+              className="clear-btn"
+              disableElevation
+              color="gray"
+              variant="contained"
+              type="submit"
+              onClick={() => {
+                formik.values.type = "all";
+                formik.values.age = "";
+                formik.values.favorites = false;
+                toggleDropdown("filter");
               }}
-            
-          >
-            Set Filter
-          </Button>
-      
+            >
+              Clear
+            </Button>
+            <Button
+              disableElevation
+              color="primary"
+              variant="contained"
+              type="submit"
+              onClick={() => {
+                formik.handleSubmit();
+                toggleDropdown("filter");
+              }}
+            >
+              Set Filter
+            </Button>
           </div>
         </div>
-        {error ? <Alert severity='error'>{error}</Alert> : null}
+        {error ? <Alert severity="error">{error}</Alert> : null}
       </form>
     </div>
-  )
+  );
 }
 
-function FilterElementType ({ filterText, toggleDropdown, formik }) {
-  const [selectedBtn, setSelectedBtn] = useState(1)
+function FilterElementType({ filterText, toggleDropdown, formik }) {
+  const [selectedBtn, setSelectedBtn] = useState(1);
 
   return (
     <div>
       <ButtonGroup
         disableElevation
-        color='primary'
-        aria-label='outlined primary button group'
-        size='large'
-        variant='outlined'
+        color="primary"
+        aria-label="outlined primary button group"
+        size="large"
+        variant="outlined"
       >
         <Button
-          id='all'
-          color={selectedBtn === 1 ? 'secondary' : 'primary'}
-          value={'all'}
+          id="all"
+          color={selectedBtn === 1 ? "secondary" : "primary"}
+          value={"all"}
           onClick={() => {
-            setSelectedBtn(1)
-            formik.values.type = 'all'
+            setSelectedBtn(1);
+            formik.values.type = "all";
           }}
         >
           All
         </Button>
         <Button
-          id='dog'
-          color={selectedBtn === 2 ? 'secondary' : 'primary'}
-          value={'dog'}
+          id="dog"
+          color={selectedBtn === 2 ? "secondary" : "primary"}
+          value={"dog"}
           onClick={() => {
-            setSelectedBtn(2)
-            formik.values.type = 'dog'
+            setSelectedBtn(2);
+            formik.values.type = "dog";
           }}
         >
           Dogs
         </Button>
         <Button
-          id='cat'
-          color={selectedBtn === 3 ? 'secondary' : 'primary'}
-          value={'cat'}
+          id="cat"
+          color={selectedBtn === 3 ? "secondary" : "primary"}
+          value={"cat"}
           onClick={() => {
-            setSelectedBtn(3)
-            formik.values.type = 'cat'
+            setSelectedBtn(3);
+            formik.values.type = "cat";
           }}
         >
           Cats
         </Button>
         <Button
-          id='other'
-          color={selectedBtn === 4 ? 'secondary' : 'primary'}
-          name='other'
-          value={'other'}
+          id="other"
+          color={selectedBtn === 4 ? "secondary" : "primary"}
+          name="other"
+          value={"other"}
           onClick={() => {
-            setSelectedBtn(4)
-            formik.values.type = 'others'
+            setSelectedBtn(4);
+            formik.values.type = "others";
           }}
         >
           Others
         </Button>
       </ButtonGroup>
     </div>
-  )
+  );
 }
 
-function FilterElementAge ({ filterText, formik }) {
-  console.log('into FilterElementAge')
-  const ref = useRef()
+function FilterElementAge({ filterText, formik }) {
+  console.log("into FilterElementAge");
+  const ref = useRef();
 
   const toggleDropdown = () => {
-    const dropdown = document.getElementById('filterAge')
-    console.log('in toggleDropdown')
-    console.log('dropdown', dropdown)
+    const dropdown = document.getElementById("filterAge");
+    console.log("in toggleDropdown");
+    console.log("dropdown", dropdown);
 
     //change classes for visible and hide dropdown
-    if (dropdown.classList.contains('filter-dropdown-hidden')) {
-      dropdown.classList.remove('filter-dropdown-hidden')
-      console.log('open dropdown')
+    if (dropdown.classList.contains("filter-dropdown-hidden")) {
+      dropdown.classList.remove("filter-dropdown-hidden");
+      console.log("open dropdown");
     } else {
-      dropdown.classList.add('filter-dropdown-hidden')
-      console.log('close dropdown')
+      dropdown.classList.add("filter-dropdown-hidden");
+      console.log("close dropdown");
     }
-  }
+  };
 
   //   useEffect( () => {
   //     console.log( 'in UseEffect' )
@@ -289,42 +292,42 @@ function FilterElementAge ({ filterText, formik }) {
 
   const ageOptions = [
     {
-      label: 'Baby (0-6 months)',
-      value: 'baby'
+      label: "Baby (0-6 months)",
+      value: "baby",
     },
     {
-      label: 'Young (6-12 months)',
-      value: 'young'
+      label: "Young (6-12 months)",
+      value: "young",
     },
     {
-      label: 'Adult (1-7 years)',
-      value: 'adult'
+      label: "Adult (1-7 years)",
+      value: "adult",
     },
     {
-      label: 'Senior (7+ years)',
-      value: 'senior'
-    }
-  ]
+      label: "Senior (7+ years)",
+      value: "senior",
+    },
+  ];
 
-  console.log('render')
+  console.log("render");
   return (
-    <div className='filterElement' ref={ref}>
+    <div className="filterElement" ref={ref}>
       <span
         onClick={() => {
-          toggleDropdown()
+          toggleDropdown();
         }}
       >
-        <span className=''>{filterText}</span>
-        <i className='fas fa-chevron-down filtericon'></i>{' '}
+        <span className="">{filterText}</span>
+        <i className="fas fa-chevron-down filtericon"></i>{" "}
       </span>
-      <div id='filterAge' className='dropdown filter-dropdown-hidden'>
-        <FormControl component='fieldset'>
+      <div id="filterAge" className="dropdown filter-dropdown-hidden">
+        <FormControl component="fieldset">
           <FormGroup>
-            {ageOptions.map(opt => (
+            {ageOptions.map((opt) => (
               <FormControlLabel
                 id={opt.value}
                 value={opt.value}
-                control={<Checkbox name='age' />}
+                control={<Checkbox name="age" />}
                 label={opt.label}
                 onChange={formik.handleChange}
               />
@@ -333,26 +336,31 @@ function FilterElementAge ({ filterText, formik }) {
         </FormControl>
       </div>
     </div>
-  )
+  );
 }
 
-function FilterElementAll ({ filterText, filterData,toggleDropdown }) {
+function FilterElementAll({ filterText, filterData, toggleDropdown }) {
   return (
-    <div className='filterElement filterElement-white' onClick={()=>{toggleDropdown("filter","filter-dropdown-hidden")}}>
+    <div
+      className="filterElement filterElement-white"
+      onClick={() => {
+        toggleDropdown("filter", "filter-dropdown-hidden");
+      }}
+    >
       <span>
-        {filterText} <i class='fas fa-sliders-h filtericon'></i>{' '}
+        {filterText} <i class="fas fa-sliders-h filtericon"></i>{" "}
       </span>
     </div>
-  )
+  );
 }
 
-function FilterFavorites ({ filterText, formik }) {
+function FilterFavorites({ filterText, formik }) {
   console.log("in FilterFavorites");
-  const [likeIcon, setLikeIcon] = useState('black')
-  const { login, setLogin } = useContext(MyContext)
+  const [likeIcon, setLikeIcon] = useState("black");
+  const { login, setLogin } = useContext(MyContext);
   const [open, setOpen] = useState(false);
   const iconStyleFilled = "far fa-heart";
-	const iconStyleBorder = "fas fa-heart";
+  const iconStyleBorder = "fas fa-heart";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -362,33 +370,34 @@ function FilterFavorites ({ filterText, formik }) {
     setOpen(false);
   };
 
-  const toggle = status => {
-    console.log('toggle', status)
-    if (status) return false
-    if (!status) return true
-  }
+  const toggle = (status) => {
+    console.log("toggle", status);
+    if (status) return false;
+    if (!status) return true;
+  };
 
   const normalFunctionality = () => {
-    formik.values.favorites = toggle(formik.values.favorites)
+    formik.values.favorites = toggle(formik.values.favorites);
 
     formik.values.favorites === false
-      ? setLikeIcon('black')
-      : setLikeIcon('#f76c6c')
-  }
-
+      ? setLikeIcon("black")
+      : setLikeIcon("#f76c6c");
+  };
 
   return (
     <>
-    <div
-      onClick={login ? normalFunctionality : handleClickOpen}
-      className='filterElement'
-    >
-      <span className=''>{filterText}</span>
+      <div
+        onClick={login ? normalFunctionality : handleClickOpen}
+        className="filterElement"
+      >
+        <span className="">{filterText}</span>
 
-      <i className={ likeIcon === "black" ? iconStyleFilled : iconStyleBorder } style={ { color: likeIcon } }></i>
-
-          </div>
-          <Dialog
+        <i
+          className={likeIcon === "black" ? iconStyleFilled : iconStyleBorder}
+          style={{ color: likeIcon }}
+        ></i>
+      </div>
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -398,24 +407,32 @@ function FilterFavorites ({ filterText, formik }) {
           {"Join Pawfect to favorite pets"}
         </DialogTitle>
         <DialogContent>
-         <Button variant="contained" sx={{ margin: 3 }} color="primary" href="/registration" >Create new Account</Button>
-          
-             <DialogContentText id="alert-dialog-description">
+          <Button
+            variant="contained"
+            sx={{ margin: 3 }}
+            color="primary"
+            href="/registration"
+          >
+            Create new Account
+          </Button>
+
+          <DialogContentText id="alert-dialog-description">
             Already have an account?
           </DialogContentText>
-           <Button variant="outlined" color="primary" href="/login"  >Login</Button>
-          
+          <Button variant="outlined" color="primary" href="/login">
+            Login
+          </Button>
         </DialogContent>
         <DialogActions>
-          
-          <Button onClick={()=>{setOpen(false)}}>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
             Cancel
           </Button>
         </DialogActions>
       </Dialog>
-      
-</>
-   
-
-  )
+    </>
+  );
 }
