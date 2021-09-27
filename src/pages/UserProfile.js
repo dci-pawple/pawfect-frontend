@@ -182,7 +182,7 @@ const UserProfile = () => {
 
         const data = await response.json();
         console.log("data=>", data);
-        // setIsValidating(true);
+
 
         if (!data.success) {
           setError(data.message);
