@@ -52,7 +52,10 @@
 
   .rec-dot, .hXQwGq {
     background-color: $primary !important;
+    box-shadow: 0 0 1px 3px $primary-light !important;
+
   }
+  
   .jJKuoL:hover,
   .jJKuoL:focus,
   .gQIqMI:hover,
@@ -72,7 +75,7 @@
 
   .jJKuoL {
     background-color: $primary !important;
-    box-shadow: 0 0 1px 3px $primary-light;
+    box-shadow: 0 0 1px 3px $primary-light !important;
   }
   .rec-pagination {
     @media (max-width: 710px) {
