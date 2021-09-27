@@ -5,18 +5,37 @@ import { Button, TextField } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import "../style/pages/_myAds.scss";
 
-const SavedSearches = () => {
-  const [adsList, setAdsList] = useState([]);
-  const { userId } = useContext(MyContext);
-  const { pet, setPet } = useContext(MyContext);
+const MyAds = () => {
+  const [adsList, setAdsList] = useState([])
+  const { userId } = useContext(MyContext)
+  const { pet,setPet } = useContext(MyContext)
+
+
+     const deleteAd = () => {
+      fetch(`http://localhost:4000/pets/delete`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ petId: pet._id, userId: userId  })
+      })
+        .then(data => data.json())
+        .then(response => {
+          console.log('Delete pet', response.data)
+          setAdsList(response.data)
+        })
+        .catch(err => console.error('error while deleting ad =>', err))
+    }
+
 
   useEffect(() => {
-    const fetchFavourites = () => {
-      // process.env.REACT_APP_BACKEND_URL
+    const fetchAds = () => {
+       // process.env.REACT_APP_BACKEND_URL
       // http://localhost:4000/
       fetch(process.env.REACT_APP_BACKEND_URL + `pets/userads`, {
-        method: "POST",
-        mode: "cors",
+        method: 'POST',
+        mode: 'cors',
         headers: {
           "Content-Type": "application/json",
         },
@@ -30,8 +49,8 @@ const SavedSearches = () => {
         .catch((err) => console.error("error while fetching user-ads =>", err));
     };
 
-    fetchFavourites();
-  }, []);
+    fetchAds()
+  }, [])
 
   return (
     <div className="app-container container">
@@ -53,9 +72,15 @@ const SavedSearches = () => {
                   </Button>
                 </Link>
                 <Button
-                  variant="outlined"
-                  color="secondary"
-                  className="ad-btn-delete"
+                  variant='outlined'
+                  color='secondary'
+                  className='ad-btn-delete'
+                  onClick={
+                  
+
+    deleteAd
+                   
+                }
                 >
                   Delete
                 </Button>
@@ -67,4 +92,4 @@ const SavedSearches = () => {
   );
 };
 
-export default SavedSearches;
+export default MyAds

@@ -87,20 +87,21 @@ export default function CreateAd() {
       photos: "",
     },
 
-    onSubmit: async (values) => {
-      setError(null);
-      console.log("values=>", values.photos);
-      let fd = new FormData();
-      fd.append("name", values.name);
-      fd.append("age", values.age);
-      fd.append("typeOfPet", values.typeOfPet);
-      fd.append("gender", values.gender);
-      fd.append("likes", values.likes);
-      fd.append("dislikes", values.dislikes);
-      fd.append("habits", values.habits);
-      fd.append("size", values.size);
-      fd.append("extras", values.extras);
-      fd.append("userId", userId);
+    onSubmit: async values => {
+      //alert (JSON.stringify (values, null, 2));
+      setError(null)
+      console.log('values=>', values.photos)
+      let fd = new FormData()
+      fd.append('name', values.name)
+      fd.append('age', values.age)
+      fd.append('typeOfPet', values.typeOfPet)
+      fd.append('gender', values.gender)
+      fd.append('likes', values.likes)
+      fd.append('dislikes', values.dislikes)
+      fd.append('habits', values.habits)
+      fd.append('size', values.size)
+      fd.append('extras', values.extras)
+      fd.append('userId', userId)
 
       if (values.photos) {
         values.photos.forEach((file) => fd.append("photos", file));

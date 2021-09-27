@@ -74,9 +74,12 @@ export default function EditCreateAd() {
   const [error, setError] = useState(null);
   const { userId, setUserId } = useContext(MyContext);
   const { pet, setPet } = useContext(MyContext);
-  const { petId, setPetId } = useContext(MyContext);
+   const { petId, setPetId } = useContext(MyContext);
+   const [deletePhotos,setDeletePhotos] = useState([]);
 
-  useEffect(() => {});
+
+
+console.log("deletePhotos in edit",deletePhotos);
 
   const formik = useFormik({
     initialValues: {
@@ -91,28 +94,26 @@ export default function EditCreateAd() {
       size: pet.size || "",
       extras: pet.extras || "",
       photos: [],
-      deletePhoto: [],
+      deletePhotos: [],
     },
 
-    onSubmit: async (values) => {
-      console.log(
-        "JSON.stringify (values, null, 2)",
-        JSON.stringify(values, null, 2)
-      );
-      setError(null);
-      console.log("values=>", values.photos);
-      let fd = new FormData();
-      fd.append("name", values.name);
-      fd.append("age", values.age);
-      fd.append("typeOfPet", values.typeOfPet);
-      fd.append("gender", values.gender);
-      fd.append("likes", values.likes);
-      fd.append("dislikes", values.dislikes);
-      fd.append("habits", values.habits);
-      fd.append("size", values.size);
-      fd.append("extras", values.extras);
-      fd.append("userId", userId);
-      fd.append("deletePhoto", values.deletePhoto);
+    onSubmit: async values => {
+      console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
+      setError(null)
+      console.log('values=>', values.photos)
+       console.log('values.deletePhotos=>', values.deletePhotos)
+      let fd = new FormData()
+      fd.append('name', values.name)
+      fd.append('age', values.age)
+      fd.append('typeOfPet', values.typeOfPet)
+      fd.append('gender', values.gender)
+      fd.append('likes', values.likes)
+      fd.append('dislikes', values.dislikes)
+      fd.append('habits', values.habits)
+      fd.append('size', values.size)
+      fd.append('extras', values.extras)
+      fd.append('userId', userId)
+      fd.append('deletePhotos',JSON.stringify(values.deletePhotos))
 
       if (values.photos) {
         values.photos.forEach((file) => fd.append("photos", file));
@@ -151,18 +152,19 @@ export default function EditCreateAd() {
       } catch (err) {
         console.log("Error while uploadting data for new ad =>", err);
       }
-    },
-  });
+    }
+  })
 
-  const deleteImage = (e, formik) => {
-    const newArray = [];
-    console.log(e.target.alt);
-    formik.values.deletePhoto = newArray.push(e.target.id);
-    formik.handleChange();
-    const photo = document.getElementById(e.target.id);
-    console.log("photo", photo);
-    //delete element
-  };
+ 
+useEffect(()=>{
+
+formik.setFieldValue("deletePhotos", deletePhotos);
+console.log("deletePhotos in edit create render",deletePhotos)
+console.log("formik",formik)
+
+
+},[deletePhotos])
+
 
   return (
     <div className="app-container">
@@ -361,20 +363,31 @@ export default function EditCreateAd() {
                 <Thumb file={file} alt={file.path} />
               ))}
           </div>
-
-          <div className="image-preview">
-            {pet.photos &&
-              pet.photos.map((photo, i) => (
-                <img
-                  onClick={(e) => {
-                    deleteImage(e, formik);
-                  }}
-                  key={i}
-                  src={photo.url}
-                  id={photo.publicId}
-                  alt={i}
-                />
-              ))}
+     
+          <div className='image-preview'>
+           {pet.photos &&
+                   pet.photos.map((photo, i) => (
+                     <div className="image-preview" >
+                      <img  key={i} src={photo.url}  id={photo.publicId+"image"}  alt={i}/>
+                      
+                        <div className="delete-btn" id={photo.publicId} onClick={ async (e)=>{
+                        //deleteImage(e)
+                        const photoId=[e.target.id];
+                        console.log("photoId",photoId)
+                       
+                        setDeletePhotos(deletePhotos.concat(photoId));
+                       
+                        const photo= document.getElementById(e.target.id+"image")
+                        photo.style.border = "2px solid red";
+                        
+                       
+                        console.log("photo",photo);
+                        }}>x</div>
+                        {/* <i class="fas fa-trash-alt"></i> */}
+                        
+                       
+</div>
+                    ))}
           </div>
 
           {error ? <Alert severity="error">{error}</Alert> : null}
