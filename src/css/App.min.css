@@ -1257,6 +1257,12 @@ aside {
   }
 }
 
+.delete-btn {
+  position: absolute;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 .dropzone {
   border-radius: 3px;
   border: 1px solid #acabac;
@@ -1282,6 +1288,7 @@ aside {
 
 .image-preview img {
   width: 200px;
+  position: relative;
 }
 
 .img-container {

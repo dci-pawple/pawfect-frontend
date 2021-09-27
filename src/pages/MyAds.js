@@ -18,7 +18,7 @@ const MyAds = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ petId: pet._id })
+        body: JSON.stringify({ petId: pet._id, userId: userId  })
       })
         .then(data => data.json())
         .then(response => {
