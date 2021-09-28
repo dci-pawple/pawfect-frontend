@@ -25,6 +25,7 @@ import MyContext from "../context/MyContext";
 
 const ShareDialog = ({ open, setOpen, pet }) => {
 	const { petId } = useContext(MyContext);
+
 	const size = "32";
 	const shareUrl = `https://pawfect.netlify.app/pet/${petId}`;
 
@@ -45,7 +46,7 @@ const ShareDialog = ({ open, setOpen, pet }) => {
 			<DialogContent className="dialog__icons">
 				<FacebookShareButton
 					url={shareUrl}
-					quote={`This pet ${pet.name} is available for adoption`}>
+					quote={`This pet ${pet && pet.name} is available for adoption`}>
 					<FacebookIcon size={size} round={true} />
 				</FacebookShareButton>
 
@@ -64,11 +65,11 @@ const ShareDialog = ({ open, setOpen, pet }) => {
 
 				<WhatsappShareButton
 					url={shareUrl}
-					quote={`This pet ${pet.name} is available for adoption`}>
+					quote={`This pet ${pet && pet.name} is available for adoption`}>
 					<WhatsappIcon size={size} round={true} />
 				</WhatsappShareButton>
 
-				<TwitterShareButton url={shareUrl} title={`This pet ${pet.name} is available for adoption`}>
+				<TwitterShareButton url={shareUrl} title={`This pet ${pet && pet.name} is available for adoption`}>
 					<TwitterIcon size={size} round={true} />
 				</TwitterShareButton>
 
