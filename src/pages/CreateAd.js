@@ -11,6 +11,7 @@ import {
   FormControl,
   TextField,
   FormHelperText,
+  CircularProgress
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 import MyContext from "../context/MyContext";
@@ -69,6 +70,7 @@ export default function CreateAd() {
   const classes = useStyles();
   let history = useHistory();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { userId } = useContext(MyContext);
   const { setPet } = useContext(MyContext);
 
@@ -100,6 +102,7 @@ export default function CreateAd() {
     validate,
     onSubmit: async values => {
       //alert (JSON.stringify (values, null, 2));
+      setLoading(true);
       setError(null)
       console.log('values=>', values.photos)
       let fd = new FormData()
@@ -144,6 +147,7 @@ export default function CreateAd() {
           setError(data.message);
         } else {
           console.log("Upload completed successfully");
+          setLoading(true);
           history.push(`/pet/${data.data._id}`);
           setPet(data.data);
         }
@@ -370,14 +374,11 @@ export default function CreateAd() {
           {error ? <Alert severity="error">{error}</Alert> : null}
 
           {/* submit button */}
-          <Button
-            disableElevation
-            color="primary"
-            variant="contained"
-            type="submit"
-          >
-            Submit
-          </Button>
+          <Button variant="contained"  color="primary" type="submit" disabled={loading}>
+      {loading && <CircularProgress size={22} />}
+      {!loading ? 'Submit':"Save"}
+    </Button>
+          
         </form>
       </div>
     </div>

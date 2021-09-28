@@ -32,12 +32,14 @@ export default function GalleryFilter({ filter }) {
       favorites: false,
     },
     onSubmit: async (values) => {
-      //alert (JSON.stringify (values, null, 2));
+      console.log("!!!!!!!!!>>>>> onsubmit");
+      alert (JSON.stringify (values, null, 2));
       setError(null);
 
       //alert(JSON.stringify(values, null, 2))
       try {
         const userId = JSON.parse(localStorage.getItem("userId"));
+        console.log("formik.values.favorites==", formik.values.favorites);
         console.log("userId==", userId);
         // process.env.REACT_APP_BACKEND_URL
         // http://localhost:4000/
@@ -86,6 +88,7 @@ export default function GalleryFilter({ filter }) {
   };
 
   useEffect(() => {
+    console.log("!!!!!!!!!>>>>> useeffect");
     const getFirstGalleryData = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem("userId"));
@@ -170,7 +173,8 @@ export default function GalleryFilter({ filter }) {
               color="primary"
               variant="contained"
               type="submit"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault(); // because it refreshes the page and filter is not working anymore
                 formik.handleSubmit();
                 toggleDropdown("filter");
               }}
