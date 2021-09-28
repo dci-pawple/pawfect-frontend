@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import { Location } from "../icons/icons";
+import React, { useContext } from "react";
+
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
+import LikeButton from "./LikeButton";
 
 const PetCard = ({ pet }) => {
-  const [likeIcon, setLikeIcon] = useState("black");
-  const { petId, setPetId } = useContext(MyContext);
+  const { setPetId } = useContext(MyContext);
 
   return (
-    // <Link to='/pet' className='card'>
     <div className="card">
       <div className="card__image">
-        <img src={pet && pet.photos[0].url} alt="dog portrait" />
+      {/* I added a placeholder image if ther is no image in the database */}
+        <img src={pet && pet.photos.length===0?"https://i.stack.imgur.com/y9DpT.jpg":pet.photos[0].url} alt="dog portrait"/>
       </div>
       <div className="card__content">
         <div className="card__content--top">
@@ -25,41 +25,28 @@ const PetCard = ({ pet }) => {
               )}
             </div>
           </div>
-
-          <button
-            className="card__like--icon"
-            onClick={() => {
-              likeIcon === "black"
-                ? setLikeIcon("#f76c6c")
-                : setLikeIcon("black");
-            }}
-          >
-            <i className="fas fa-heart" style={{ color: likeIcon }}></i>
-          </button>
+          <LikeButton pet={pet} />
         </div>
+
         <div className="card__description">
           <p>
-            <strong>habits:</strong> {pet && pet.extras}
+            <strong>Age:</strong> {pet && pet.age}
           </p>
           <p>
-            <strong>likes:</strong> {pet && pet.likes}
+            <strong>{pet && pet.likes ? "Likes:" : ""}</strong>{" "}
+            {pet && pet.likes}
           </p>
           <p>
-            <strong>dislikes:</strong> {pet && pet.dislikes}
+            <strong>{pet && pet.dislikes ? "Dislikes:" : ""}</strong>{" "}
+            {pet && pet.dislikes}
           </p>
           <p>
-            <strong>age:</strong> {pet && pet.age}
+            <strong>{pet && pet.habits ? "Habits:" : ""}</strong>{" "}
+            {pet && pet.habits}
           </p>
+          
         </div>
-        <div className="card__location">
-          <div className="card__location--icon">
-            <Location />
-          </div>
-          <div className="card__location--name">
-            <p>Berlin, Germany (1,5km)</p>
-          </div>
-        </div>
-        <Link to="/pet">
+        <Link to={`/pet/${ pet._id}`}>
           <button
             data-petid={pet && pet._id}
             onClick={(e) => {
@@ -72,7 +59,6 @@ const PetCard = ({ pet }) => {
         </Link>
       </div>
     </div>
-    //* </Link>
   );
 };
 

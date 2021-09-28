@@ -15,15 +15,6 @@ const useStyles = makeStyles((theme) =>
     root: {
       "& > *": {
         margin: theme.spacing(2),
-        "font-size": "1.6rem",
-        palette: {
-          primary: {
-            light: "#464646",
-            main: "#1f1f1f",
-            dark: "#000000",
-            contrastText: "#fff",
-          },
-        },
       },
     },
   })
@@ -54,8 +45,9 @@ const validate = (values) => {
 
 export default function Login() {
   const [error, setError] = useState(null);
-  const { login, setLogin } = useContext(MyContext);
-  const { userId, setUserId } = useContext(MyContext);
+  const { setLogin } = useContext(MyContext);
+  const { setUserId } = useContext(MyContext);
+  const { setUser } = useContext(MyContext);
 
   const history = useHistory();
 
@@ -77,16 +69,21 @@ export default function Login() {
     validate,
     onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
-      try {
-        const response = await fetch("http://localhost:4000/users/login", {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        });
 
+      try {
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + "users/login",
+          {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          }
+        );
         const data = await response.json();
         console.log("data=>", data);
         if (!data.success) {
@@ -95,6 +92,9 @@ export default function Login() {
         } else {
           setLogin(true);
           setUserId(data.data._id);
+          setUser(data.data);
+          localStorage.setItem("user", JSON.stringify(data.data));
+          localStorage.setItem("userId", JSON.stringify(data.data._id));
           history.push("/");
         }
       } catch (err) {

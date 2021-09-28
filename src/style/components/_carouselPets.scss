@@ -1,23 +1,21 @@
 .carousel-container {
-  padding: 2rem;
-  margin: 3rem auto;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 40vh;
+  justify-content: space-around;
 
   .btn__see-all {
     outline: none;
     border: none;
     display: block;
-    width: 15%;
+    width: 100px;
     background: transparent;
     cursor: pointer;
     align-self: flex-end;
     font-family: $font-text;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-		padding: 0.3rem;
+    padding: 0.3rem;
 
     a {
       color: inherit;
@@ -25,35 +23,48 @@
       font-family: $font-text;
     }
   }
-  
 }
 
-.rec {
 
-    /// Carousel Arrow styling: 
-    .rec-arrow, 
-    .rec-arrow-right,
-    .rec-arrow-left {
-      background-color: $primary;
-      border-radius: 15%;
-    }
+.rec {
+  /// Carousel Arrow styling:
+  .rec-arrow,
+  .rec-arrow-right,
+  .rec-arrow-left {
+    background-color: $primary !important;
+    border-radius: 15%;
+  }
+
+  // .rec-swipable {
+  //   gap: 1rem;
+  // }
+
 
   /// Carousel Arrow styling:
   .rec-arrow,
   .rec-arrow-right,
   .rec-arrow-left {
-    background-color: $primary;
+    background-color: $primary !important;
     border-radius: 10px;
   }
 
-
   .khvUfi:hover:enabled,
   .khvUfi:focus:enabled {
-    background-color: $primary-light;
+    background-color: $primary-light !important;
   }
 
   //Pagination Styling (3 dots under the Carousel)
 
+  .rec-dot, .hXQwGq {
+    background-color: $primary !important;
+    box-shadow: 0 0 1px 3px $primary-light !important;
+
+    &:hover {
+      background-color: lighten($primary, 10%) !important;
+      box-shadow: 0 0 1px 3px lighten($primary, 10%);
+    }
+  }
+  
   .jJKuoL:hover,
   .jJKuoL:focus,
   .gQIqMI:hover,
@@ -62,18 +73,18 @@
   }
 
   .ejXxNI {
-    background-color: $primary;
+    background-color: $primary !important;
     box-shadow: 0 0 1px 3px $very-dark-grey;
 
     &:hover {
-      background-color: lighten($primary, 10%);
+      background-color: lighten($primary, 10%) !important;
       box-shadow: 0 0 1px 3px lighten($primary, 10%);
     }
   }
 
   .jJKuoL {
-    background-color: $primary;
-    box-shadow: 0 0 1px 3px $primary-light;
+    background-color: $primary !important;
+    box-shadow: 0 0 1px 3px $primary-light !important;
   }
   .rec-pagination {
     @media (max-width: 710px) {

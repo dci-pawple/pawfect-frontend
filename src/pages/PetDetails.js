@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
-import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
-
+import LikeButton from "../components/LikeButton";
+import ShareDialog from "../components/ShareDialog";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false },
@@ -13,27 +13,55 @@ const breakPoints = [
 ];
 
 const PetDetails = () => {
+  // const [buttonPopup, setButtonPopup] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [disable, setDisable] = useState(false);
 
-  const [buttonPopup, setButtonPopup] = useState(false);
-  const [likeIcon, setLikeIcon] = useState("black");
-  const [favourite, setFavourite] = useState("Add to favourites");
+  const { petOwner, setPetOwner } = useContext(MyContext);
   const { pet, setPet } = useContext(MyContext);
-  const { petId, setPetId } = useContext(MyContext);
+  const { petId } = useContext(MyContext);
+  const { setChatUsername } = useContext(MyContext);
+  const { user } = useContext(MyContext);
+
+  let { id } = useParams();
 
   let history = useHistory();
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = async () => {
       try {
-        fetch(`http://localhost:4000/pets/${petId}`)
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        await fetch(process.env.REACT_APP_BACKEND_URL + `pets/${id || petId}`)
           .then((data) => data.json())
-          .then((res) => setPet(res.data));
+          .then((res) => {
+            if (pet._id !== res.data._id) setPet(res.data);
+          });
+        console.log("pet =>", pet);
+        pet &&
+          fetch(process.env.REACT_APP_BACKEND_URL + `users/${pet.userId}`)
+            .then((data) => data.json())
+            .then((res) => setPetOwner(res.data));
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [petId, setPet]);
+  }, [petId, setPet, pet]);
+
+  useEffect(() => {
+    console.log(user, petOwner);
+    if (user && petOwner) {
+      if (user._id === petOwner._id) setDisable(true);
+      else setDisable(false);
+    }
+  }, [petOwner, user]);
+
+  console.log("petOwner", petOwner);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <div className="app-container container pet__container">
@@ -46,14 +74,12 @@ const PetDetails = () => {
         breakPoints={breakPoints}
         className="pet__gallery-container"
       >
-
-        {pet.photos && pet.photos.map((photo, index) => (
+        {pet.photos &&
+          pet.photos.map((photo, index) => (
             <div className="pet__image-container">
               <img src={photo.url} alt="a pet profile" key={index} />
             </div>
-
           ))}
-
       </Carousel>
 
       <div className="pet__content-container">
@@ -75,86 +101,90 @@ const PetDetails = () => {
             <p className="pet__info-data">Gender:</p>
             <p>{pet && pet.gender}</p>
           </div>
-          <div className="pet__info-data-container">
-            <p className="pet__info-data">Likes:</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">{pet && pet.likes ? "Likes:" : ""}</p>
             <p>{pet && pet.likes}</p>
           </div>
-          <div className="pet__info-data-container">
-            <p className="pet__info-data">Dislikes:</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.dislikes ? "Dislikes:" : ""}
+            </p>
             <p>{pet && pet.dislikes}</p>
           </div>
-          <div className="pet__info-data-container">
-            <p className="pet__info-data">Habits:</p>
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.habits ? "Habits:" : ""}
+            </p>
             <p>{pet && pet.habits}</p>
           </div>
-          <div className="pet__info-data-about">
-            <p className="pet__info-data">About:</p>
-            <p>
-              {pet && pet.name} enjoys playing in the yard and going for walks around the
-              neighborhood. Her foster is working on her leash training so an
-              adopter would need to be committed to continuing to work with her
-              to walk nicely on leash when she sees squirrels. {pet && pet.name} also must
-              be the only pet in the home, she cannot live with other dogs or
-              cats. {pet && pet.name} would love an adopter where she was the central pet in
-              their lives and would much prefer to be with her people than other
-              animals so she will not be a dog park or play date type dog but
-              will love you endlessly if you do the same!
+          <div
+            className={`pet__info-data-container ${
+              pet && pet.dislikes ? "" : "hidden"
+            }`}
+          >
+            <p className="pet__info-data">
+              {pet && pet.extras ? "About:" : ""}
             </p>
+            <p>{pet && pet.extras}</p>
           </div>
         </div>
 
         <div className="owner__container">
           <div className="owner__icons">
             <div className="owner__icon-container">
-              <button
-                className="owner__btn"
-                onClick={() => {
-                  likeIcon === "black"
-                    ? setLikeIcon("#f76c6c")
-                    : setLikeIcon("black");
-                  favourite === "Add to favourites"
-                    ? setFavourite("Remove from favourites")
-                    : setFavourite("Add to favourites");
-                }}
-              >
-                <i className="fas fa-heart" style={{ color: likeIcon }}></i>
-                <p className="hidden">{favourite}</p>
-              </button>
+              <LikeButton pet={pet} />
             </div>
 
             <div className="owner__icon-container">
-              <button
-                onClick={() => setButtonPopup(true)}
-                className="owner__btn"
-              >
+              <button onClick={handleClickOpen} className="owner__btn">
                 <i className="fas fa-share"></i>
-                <p className="hidden">Share this ad</p>
               </button>
-              <SharePopup
-                trigger={buttonPopup}
-                setTrigger={setButtonPopup}
-              ></SharePopup>
+
+              <ShareDialog setOpen={setOpen} open={open} />
             </div>
           </div>
 
           <div className="owner__data-container">
-            <div className="owner__image-container">
-              <img
-                src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                alt=""
-              />
+            <div>
+              {petOwner && petOwner.profilePhoto.length === 0 ? (
+                <i class="fas fa-user-circle"></i>
+              ) : (
+                <div className="owner__image-container">
+                  {petOwner &&
+                    petOwner.profilePhoto.map((photo, i) => (
+                      <img src={photo.url} alt="user " />
+                    ))}
+                </div>
+              )}
             </div>
             <div className="owner__info-container">
-              <p>Owner of {pet && pet.name}</p>
-              <h5>Mark</h5>
+              <p>Owner of {pet && pet.name}:</p>
+              <h3>{petOwner && petOwner.firstName}</h3>
             </div>
           </div>
 
           <div className="owner__btn-container">
-            <button className="btn__chat">
-              <Link to="/chat">Chat with Mark</Link>
-              <i class="fas fa-comment-alt"></i>
-            </button>
+            <Link
+              to="/messages"
+              onClick={() => petOwner && setChatUsername(petOwner.email)}
+            >
+              <button className="btn__chat" disabled={disable}>
+                Chat with {petOwner && petOwner.firstName}
+                <i class="fas fa-comment-alt"></i>
+              </button>
+            </Link>
           </div>
         </div>
       </div>

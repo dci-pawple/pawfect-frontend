@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../dummy/pawfect-pink.png";
-import profilepic from "../dummy/images/profile-example.png";
 import MyContext from "../context/MyContext";
 
 export default function Navbar() {
@@ -10,6 +9,7 @@ export default function Navbar() {
   const [active, setActive] = useState(false);
   const [display, setDisplay] = useState(false);
   const { login, setLogin } = useContext(MyContext);
+  const { user } = useContext(MyContext);
 
   const changeBackground = () => {
     // console.log(window.scrollY);
@@ -42,6 +42,8 @@ export default function Navbar() {
     });
   };
 
+  console.log("user", user);
+
   return (
     <div className="navigation">
       <header className={navbar ? "nav-active" : ""}>
@@ -60,11 +62,11 @@ export default function Navbar() {
           <ul className={click ? "nav-list active" : "nav-list"}>
             <li className="list-item">
               <Link
-                to="/community"
+                to="/gallery"
                 className="nav-link"
                 onClick={closeMobileMenu}
               >
-                Community
+                See all pets
               </Link>
             </li>
             <li className={`search list-item ${active ? "search-active" : ""}`}>
@@ -89,8 +91,23 @@ export default function Navbar() {
                 {!login ? (
                   <i class="fas fa-user-circle"></i>
                 ) : (
-                  // need to change this to users picture
-                  <img src={profilepic} alt="profile" className="profile-pic" />
+                  <div>
+                     {user &&
+                    user.profilePhoto &&
+                    user.profilePhoto.length > 0 ? (
+                      user.profilePhoto.map((photo, i) => (
+                        <div className="profile-pic-container">
+                          <img
+                            src={photo.url}
+                            alt="profile"
+                            className="profile-pic"
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <i class="fas fa-user-circle"></i>
+                    )}
+                  </div>
                 )}
               </button>
 
@@ -123,6 +140,13 @@ export default function Navbar() {
                     >
                       Go to profile
                     </Link>
+                     <Link
+                      to="/myAds"
+                      className="drop-link"
+                      onClick={closeMobileMenu}
+                    >
+                      My Ads
+                    </Link>
                     <Link
                       to="/createad"
                       className="drop-link"
@@ -138,17 +162,19 @@ export default function Navbar() {
                       Messages
                     </Link>
                     <Link
-                      to="/saved"
+                      to="/save"
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
-                      Saved searches
+                      My Favourites
                     </Link>
                     <Link
                       to="/"
                       className="drop-link"
                       onClick={() => {
                         closeMobileMenu();
+                        localStorage.removeItem("user");
+                        localStorage.removeItem("userId");
                         setLogin(false);
                       }}
                     >

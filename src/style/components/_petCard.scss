@@ -7,11 +7,12 @@
   text-decoration: none;
   color: inherit;
   transition: 0.1s ease-in-out;
-  margin: 0 1rem;
+  height: 160px;
+  max-width: 320px;
 
   a {
     text-decoration: none;
-    // display: flex;
+    
   .btn__call-to-action {
     outline: none;
     border: none;
@@ -27,6 +28,9 @@
     font-weight: bold;
     font-size: 1rem;
     font-family: $font-text;
+    cursor: pointer;
+    margin-top: 2rem;
+    align-self: flex-end;
     }
 }
 
@@ -36,6 +40,7 @@
     width:100%;
     
     img {
+      min-width: 107px;
       width: 100%;
       height: 100%;
       border-radius: 10px 0 0 10px;
@@ -58,17 +63,26 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items:center;
   }
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+
     line-height: 1.1;
+
+    @media (max-width: $bp-small) {
+      font-size: 1.3rem;
+		}
   }
 
   &__gender--icon, 
   &__like--icon {
     font-size: 2rem;
+
+    @media (max-width: $bp-small) {
+      font-size: 1.5rem;
+		}
   }
 
   &__gender--icon {
@@ -79,7 +93,19 @@
     outline: none;
     border: none;
     background-color: transparent;
-    
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__login-btn {
+
+    button {
+      outline: none;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
   
 
@@ -87,6 +113,10 @@
     font-size: 1rem;
     line-height: 1.5;
     font-weight: 500;
+
+    @media (max-width: $bp-small) {
+      font-size: .8rem;
+		}
   }
 
   &__name-with-gender {

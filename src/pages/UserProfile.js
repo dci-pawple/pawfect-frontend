@@ -2,57 +2,55 @@ import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
+
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
-
 import MyContext from "../context/MyContext";
 import Thumb from "../components/Thumb";
 
-//Form Valitation
+//Form Validation
 
 const validate = (values) => {
   const errors = {};
 
-  // if (values.firstName.length > 15) {
-  //   errors.firstName = "Must be 15 characters or less";
-  // }
+  if (values.firstName.length > 15) {
+    errors.firstName = "Must be 15 characters or less";
+  }
 
-  // if (values.lastName.length > 20) {
-  //   errors.lastName = "Must be 20 characters or less";
-  // }
+  if (values.lastName.length > 20) {
+    errors.lastName = "Must be 20 characters or less";
+  }
 
-  // if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-  //   errors.email = "Invalid email address";
-  // }
-  // if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)) {
-  //   errors.password = "Invalid Character";
-  // } else if (values.password.length < 6) {
-  //   errors.password = "Must be longer than 6 Characters";
-  // }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address";
+  }
 
-  // if (values.password !== values.passwordConfirm) {
-  //   errors.passwordConfirm = "Not the same Password";
-  // }
+  if (values.email !== values.emailConfirm) {
+    errors.emailConfirm = "Emails don't match";
+  }
+
+  if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.password)) {
+    errors.password = "Invalid Character";
+  } else if (values.password.length < 6) {
+    errors.password = "Must be longer than 6 Characters";
+  }
+
+  if (values.password !== values.passwordConfirm) {
+    errors.passwordConfirm = "Not the same Password";
+  }
 
   return errors;
 };
 
-// Material-ui styling:
-
+/**
+ * Styling the form (Material-ui)
+ */
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       "& > *": {
         margin: theme.spacing(2),
-        fontSize: "1.6rem",
-        palette: {
-          primary: {
-            light: "#464646",
-            main: "#1f1f1f",
-            dark: "#000000",
-            contrastText: "#fff",
-          },
-        },
       },
     },
   })
@@ -81,18 +79,25 @@ const UploadComponent = (props) => {
 const UserProfile = () => {
   const classes = useStyles();
 
+  const [isValidating, setIsValidating] = useState(false);
+  const [error, setError] = useState(null);
+
   const { user, setUser } = useContext(MyContext);
-  const { userId, setUserId } = useContext(MyContext);
+  const { userId } = useContext(MyContext);
 
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://localhost:4000/users/${userId}`)
+      // process.env.REACT_APP_BACKEND_URL
+      // http://localhost:4000/
+      fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`)
         .then((data) => data.json())
         .then((res) => {
+          console.log("res.data", res.data);
+          //   !user && setUser(res.data);
           setUser(res.data);
+          localStorage.setItem("user", JSON.stringify(res.data));
         });
     };
-
     fetchData();
   }, [setUser, userId]);
 
@@ -107,7 +112,7 @@ const UserProfile = () => {
     emailConfirm: "",
     password: "",
     passwordConfirm: "",
-    profilePhoto: "",
+    profilePhoto: [],
   });
 
   useEffect(() => {
@@ -119,10 +124,10 @@ const UserProfile = () => {
       postalCode: user.postalCode || "",
       street: user.street || "",
       email: user.email || "",
-      emailConfirm: "",
+      emailConfirm: user.email || "",
       password: user.password || "",
-      passwordConfirm: "",
-      profilePhoto: user.profilePhoto || "",
+      passwordConfirm: user.password || "",
+      profilePhoto: user.profilePhoto.length ? user.profilePhoto : [],
     });
   }, [user]);
 
@@ -131,23 +136,64 @@ const UserProfile = () => {
     enableReinitialize: true,
     validate,
     onSubmit: async (values) => {
+      //   alert(JSON.stringify(values, null, 2));
       const realValues = Object.keys(values)
-        .filter((item) => values[item] !== "")
+        .filter((item) => values[item] !== "" && values[item] !== [])
         .reduce((acc, item) => {
           return { ...acc, [item]: values[item] };
         }, {});
 
-      try {
-        const response = await fetch(`http://localhost:4000/users/${userId}`, {
-          method: "PATCH",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(realValues),
-        });
+      console.log("realValues", realValues);
+      let fd = new FormData();
+      realValues.firstName && fd.append("firstName", realValues.firstName);
+      realValues.lastName && fd.append("lastName", realValues.lastName);
+      realValues.phoneNumber &&
+        fd.append("phoneNumber", realValues.phoneNumber);
+      realValues.city && fd.append("city", realValues.city);
+      realValues.postalCode && fd.append("postalCode", realValues.postalCode);
+      realValues.street && fd.append("street", realValues.street);
+      realValues.email && fd.append("email", realValues.email);
+      realValues.emailConfirm &&
+        fd.append("emailConfirm", realValues.emailConfirm);
+      realValues.password && fd.append("password", realValues.password);
+      realValues.passwordConfirm &&
+        fd.append("passwordConfirm", realValues.passwordConfirm);
+      if (values.profilePhoto[0].path) {
+        // realValues.profilePhoto.forEach((file) =>
+        //   fd.append("profilePhoto", file)
+        // );
+        fd.append("profilePhoto", realValues.profilePhoto[0]);
+      }
+      console.log("fd=>", fd);
 
-        console.log(response.json());
+      setIsValidating(true);
+      setError(null);
+
+      try {
+        // process.env.REACT_APP_BACKEND_URL
+        // http://localhost:4000/
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}users/${userId}`,
+          {
+            method: "PATCH",
+            mode: "cors",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+
+            body: fd,
+          }
+        );
+
+        const data = await response.json();
+        console.log("data=>", data);
+
+
+        if (!data.success) {
+          setError(data.message);
+          setIsValidating(false);
+          console.log("error=>", error);
+        }
       } catch (err) {
         console.error(
           "Error while fetching data for user profile update =>",
@@ -160,34 +206,41 @@ const UserProfile = () => {
   return (
     <div className="app-container container">
       <div className="account__container">
-        <div className="profile-img-container">
-          <h1>Your profile</h1>
-          <div className="img-text-container">
-            <div className="img-container">
-              {formik.values.profilePhoto === "" ? (
-                <i class="fas fa-user-circle"></i>
-              ) : (
-                <div>
-                  {formik.values.profilePhoto &&
-                    formik.values.profilePhoto.map((photo, i) => (
-                      <Thumb key={i} file={photo} />
-                    ))}
-                </div>
-              )}
-            </div>
-            <UploadComponent
-              setFieldValue={formik.setFieldValue}
-              values={formik.values}
-            />
-          </div>
-        </div>
         <div className="user-form-container">
           <form
             className={classes.root}
             noValidate
-            autoComplete="off"
+            autoComplete="on"
             onSubmit={formik.handleSubmit}
           >
+            <div className="profile-img-container">
+              <h1>Your profile</h1>
+              <div className="img-text-container">
+                <div className="img-container">
+                  {formik.values.profilePhoto.length === 0 ? (
+                    <i class="fas fa-user-circle"></i>
+                  ) : (
+                    <div>
+                      {formik.values.profilePhoto &&
+                        formik.values.profilePhoto.map((photo, i) => (
+                          //   <Thumb key={i} file={photo.url} />
+                          <img
+                            key={i}
+                            src={photo.url}
+                            alt="avatar"
+                            className="img-thumbnail"
+                          />
+                        ))}
+                    </div>
+                  )}
+                </div>
+
+                <UploadComponent
+                  setFieldValue={formik.setFieldValue}
+                  values={formik.values}
+                />
+              </div>
+            </div>
             <div className="one-line">
               <TextField
                 id="firstName"
@@ -280,13 +333,9 @@ const UserProfile = () => {
                 fullWidth
                 color="secondary"
                 onChange={formik.handleChange}
-                value={formik.values.streetName}
-                error={
-                  formik.touched.streetName && Boolean(formik.errors.streetName)
-                }
-                helperText={
-                  formik.touched.streetName && formik.errors.streetName
-                }
+                value={formik.values.street}
+                error={formik.touched.street && Boolean(formik.errors.street)}
+                helperText={formik.touched.street && formik.errors.street}
               />
             </div>
             <div className="one-line">
@@ -313,8 +362,13 @@ const UserProfile = () => {
                 color="secondary"
                 onChange={formik.handleChange}
                 value={formik.values.emailConfirm}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                error={
+                  formik.touched.emailConfirm &&
+                  Boolean(formik.errors.emailConfirm)
+                }
+                helperText={
+                  formik.touched.emailConfirm && formik.errors.emailConfirm
+                }
               />
             </div>
             <div className="one-line">
@@ -362,18 +416,21 @@ const UserProfile = () => {
             >
               SAVE CHANGES
             </Button>
+
+            {isValidating ? (
+              <Alert severity="success">
+                Your changes have been successfully saved
+              </Alert>
+            ) : (
+              // <Alert severity='error'>error :{error}</Alert>
+              ""
+            )}
           </form>
 
-          {/* let's decide if we want this here */}
           <p>
             You may search our <Link to="/gallery">database of pets</Link>
             looking for homes.
           </p>
-
-          <button className="btn btn__post">
-            <Link to="/">POST AN AD</Link>
-            <i class="fas fa-plus-circle"></i>
-          </button>
         </div>
       </div>
     </div>

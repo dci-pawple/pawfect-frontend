@@ -1,37 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import GalleryFilter from "../components/GalleryFilter";
 import PetCard from "../components/PetCard";
+import MyContext from "../context/MyContext";
 
+const Gallery = ({ filter }) => {
+  const { filteredData } = useContext(MyContext);
 
-const Gallery = () => {
+  console.log("gallery filter:", filter);
 
-	const [petsList, setPetsList] = useState([]);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				await fetch(`http://localhost:4000/pets`)
-					.then(data => data.json())
-					.then(res => {
-						setPetsList(res.data);
-					});
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		fetchData();
-	}, []);
-
-	return (
-		<div className='app-container container'>
-			<h2>Pets available:</h2>
-			<div className='gallery__grid-container'>
-
-				{petsList.map((pet, index) => (
-					<PetCard pet={pet} key={pet._id} />
-				))}
-			</div>
-		</div>
-	);
+  return (
+    <div className="app-container container">
+      <h2>Pets available:</h2>
+      <GalleryFilter filter={filter} />
+      <div className="gallery__grid-container">
+        {filteredData &&
+          filteredData.map((pet, index) => (
+            <PetCard pet={pet} petData={pet} key={pet._id} />
+          ))}
+      </div>
+    </div>
+  );
 };
 
 export default Gallery;

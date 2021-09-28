@@ -1,0 +1,67 @@
+.filterElement{
+    display:inline-block;
+   
+    
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: $very-light-grey;
+    color:rgb(0, 0, 0);
+    //box-shadow: 0px 3px 10px rgba(71, 85, 106, 0.1);
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position:relative;
+
+    &-white{
+        background-color: white;
+    }
+}
+
+
+
+.filterContainer{
+    width:100%;
+}
+
+.filtericon{
+    padding-left:15px !important;
+}
+
+.dropdown{
+    position:absolute;
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    box-shadow: 0px 3px 10px rgba(71, 85, 106, 0.1);
+    border-radius: 12px;
+    padding: 10px 20px;
+    min-width: max-content;
+    margin-top:15px;
+    left:0px;
+}
+.filter-dropdown-hidden{
+    display:none;
+}
+
+.filter-dropdown-overlay{
+   
+    position:absolute;
+    background-color: white;
+    width:100%;
+    padding:20px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 30px rgba(71, 85, 106, 0.185);
+
+}
+
+.filter-button{
+    text-align: right;
+    margin-top: 20px;;
+    margin-right:20px;
+}
+
+.clear-btn{
+    margin-right:5px !important;
+}

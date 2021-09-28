@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import { useDropzone } from "react-dropzone";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import {
@@ -42,17 +42,20 @@ const useStyles = makeStyles((theme) =>
 // for uploading images
 const UploadComponent = (props) => {
   const { setFieldValue, values } = props;
+  let { petId } = useParams();
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedPhotos) => {
-      if (values.photos) {
+      if (values.photos.length !== 0) {
         setFieldValue("photos", values.photos.concat(acceptedPhotos));
+        console.log("values.photos in Uploadcomponent", values.photos);
       } else {
         setFieldValue("photos", acceptedPhotos);
       }
     },
   });
+
   return (
     <div>
       <div {...getRootProps({ className: "dropzone" })}>
@@ -65,32 +68,40 @@ const UploadComponent = (props) => {
   );
 };
 
-export default function CreateAd() {
+export default function EditCreateAd() {
   const classes = useStyles();
   let history = useHistory();
   const [error, setError] = useState(null);
-  const { userId } = useContext(MyContext);
-  const { setPet } = useContext(MyContext);
+  const { userId, setUserId } = useContext(MyContext);
+  const { pet, setPet } = useContext(MyContext);
+   const { petId, setPetId } = useContext(MyContext);
+   const [deletePhotos,setDeletePhotos] = useState([]);
+
+
+
+console.log("deletePhotos in edit",deletePhotos);
 
   const formik = useFormik({
     initialValues: {
-      typeOfPet: "",
-      age: "",
-      name: "",
-      gender: "",
+      typeOfPet: pet.typeOfPet || "",
+      age: pet.age || "",
+      name: pet.name || "",
+      gender: pet.gender || "",
       // breed: "",
-      likes: "",
-      dislikes: "",
-      habits: "",
-      size: "",
-      extras: "",
-      photos: "",
+      likes: pet.likes || "",
+      dislikes: pet.dislikes || "",
+      habits: pet.habits || "",
+      size: pet.size || "",
+      extras: pet.extras || "",
+      photos: [],
+      deletePhotos: [],
     },
 
     onSubmit: async values => {
-      //alert (JSON.stringify (values, null, 2));
+      console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
+       console.log('values.deletePhotos=>', values.deletePhotos)
       let fd = new FormData()
       fd.append('name', values.name)
       fd.append('age', values.age)
@@ -102,6 +113,7 @@ export default function CreateAd() {
       fd.append('size', values.size)
       fd.append('extras', values.extras)
       fd.append('userId', userId)
+      fd.append('deletePhotos',JSON.stringify(values.deletePhotos))
 
       if (values.photos) {
         values.photos.forEach((file) => fd.append("photos", file));
@@ -110,12 +122,13 @@ export default function CreateAd() {
       }
 
       try {
+        console.log("EditAd pedId", pet._id);
         // process.env.REACT_APP_BACKEND_URL
         // http://localhost:4000/
         const response = await fetch(
-          process.env.REACT_APP_BACKEND_URL + "pets/newpet",
+          process.env.REACT_APP_BACKEND_URL + `pets/updatepet/${pet._id}`,
           {
-            method: "POST",
+            method: "PATCH",
             mode: "cors",
             // headers: {
             //   "Content-Type": "multipart/form-data",
@@ -139,13 +152,24 @@ export default function CreateAd() {
       } catch (err) {
         console.log("Error while uploadting data for new ad =>", err);
       }
-    },
-  });
+    }
+  })
+
+ 
+useEffect(()=>{
+
+formik.setFieldValue("deletePhotos", deletePhotos);
+console.log("deletePhotos in edit create render",deletePhotos)
+console.log("formik",formik)
+
+
+},[deletePhotos])
+
 
   return (
     <div className="app-container">
       <div className="form-container">
-        <h1 className="text-center">Create an Ad</h1>
+        <h1 className="text-center">Update your Ad</h1>
 
         <form
           className={`form-style ${classes.root}`}
@@ -333,12 +357,37 @@ export default function CreateAd() {
             setFieldValue={formik.setFieldValue}
             values={formik.values}
           />
-
           <div className="image-preview">
             {formik.values.photos &&
-              formik.values.photos.map((photo, i) => (
-                <Thumb key={i} file={photo} />
+              formik.values.photos.map((file, i) => (
+                <Thumb file={file} alt={file.path} />
               ))}
+          </div>
+     
+          <div className='image-preview'>
+           {pet.photos &&
+                   pet.photos.map((photo, i) => (
+                     <div className="image-preview" >
+                      <img  key={i} src={photo.url}  id={photo.publicId+"image"}  alt={i}/>
+                      
+                        <div className="delete-btn" id={photo.publicId} onClick={ async (e)=>{
+                        //deleteImage(e)
+                        const photoId=[e.target.id];
+                        console.log("photoId",photoId)
+                       
+                        setDeletePhotos(deletePhotos.concat(photoId));
+                       
+                        const photo= document.getElementById(e.target.id+"image")
+                        photo.style.border = "2px solid red";
+                        
+                       
+                        console.log("photo",photo);
+                        }}>x</div>
+                        {/* <i class="fas fa-trash-alt"></i> */}
+                        
+                       
+</div>
+                    ))}
           </div>
 
           {error ? <Alert severity="error">{error}</Alert> : null}
@@ -350,7 +399,7 @@ export default function CreateAd() {
             variant="contained"
             type="submit"
           >
-            Submit
+            Save Changes
           </Button>
         </form>
       </div>
