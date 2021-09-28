@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
 	Button,
 	Dialog,
@@ -21,10 +21,12 @@ import {
 	TwitterIcon,
 	LinkedinIcon,
 } from "react-share";
+import MyContext from "../context/MyContext";
 
 const ShareDialog = ({ open, setOpen, pet }) => {
+	const { petId } = useContext(MyContext);
 	const size = "32";
-	const shareUrl = "http://localhost:3000/pet";
+	const shareUrl = `https://pawfect.netlify.app/pet/${petId}`;
 
 	const handleClose = () => {
 		setOpen(false);
