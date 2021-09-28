@@ -60,15 +60,15 @@ const PetDetails = () => {
 			<button onClick={() => history.goBack()} className='btn-go-back'>
 				Go Back
 			</button>
-			
+
 			<Carousel
 				itemsToShow={3}
 				breakPoints={breakPoints}
 				className='pet__gallery-container'>
 				{pet.photos &&
 					pet.photos.map((photo, index) => (
-						<div className='pet__image-container'>
-							<img src={photo.url} alt='a pet profile' key={index} />
+						<div className='pet__image-container' >
+							<img src={photo.url} alt='a pet profile' key={index} width={"100px"} />
 						</div>
 					))}
 			</Carousel>

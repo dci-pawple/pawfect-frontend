@@ -58,7 +58,7 @@ const MyAds = () => {
 			<div className='gallery__grid-container'>
 				{adsList &&
 					adsList.map((pet, index) => (
-						<div className='ad-card'>
+						<div className='pet-ad-card'>
 							<PetCard pet={pet} key={index} />
 							<div className='ad-actions'>
 								<Link to={`/edit-ad/${pet._id}`}>

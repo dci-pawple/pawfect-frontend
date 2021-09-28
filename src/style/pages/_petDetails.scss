@@ -1,6 +1,5 @@
-
-
 .pet {
+	
 	&__container {
 		p {
 			font-size: 1.1rem;
@@ -11,15 +10,15 @@
 			width: 90%;
 		}
 
-		// .hidden {
-		// 	display: none;
-		// }
+		.hidden {
+			display: none;
+		}
 
 		.btn-go-back {
 			outline: none;
 			border: none;
 			display: block;
-			width: 15%;
+			width: 80px;
 			background: transparent;
 			cursor: pointer;
 			font-family: $font-text;
@@ -36,7 +35,7 @@
 
 	&__image-container {
 		height: 40vh;
-		width: 90%;
+		max-width: 50vw;
 		border-radius: 10px;
 		object-fit: cover;
 		object-position: 50% 50%;
@@ -83,8 +82,9 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			// margin: 2rem 6rem;
-			// width: 100%;
+			margin: 2rem auto;
+			text-align: left;
+
 		}
 	}
 
@@ -98,7 +98,7 @@
 	&__info-data {
 		font-weight: bold;
 		margin-right: 1rem;
-        text-align: justify;
+        text-align: left;
 	}
 
 	&__info-data-about {
@@ -134,14 +134,11 @@
         margin: 0 auto;
 
 		@media (max-width: $bp-small) {
-			flex: 0;
-			justify-content: flex-start;
-			align-items: flex-start;
-			// margin: 0 auto;
+			justify-content: space-between;
+			align-items: center;
 			padding: 1rem 0;
-			height: 50vh;
-			// width: 80%;
-
+			width: 70%;
+			
 		}
 
 		.btn__chat {
@@ -154,7 +151,7 @@
 			padding: 0.5em;
 			display: block;
 			font-size: 1.5rem;
-			width: 65%;
+			width: 80%;
 			color: $very-light-grey;
 			text-decoration: none;
 			display: flex;
@@ -164,7 +161,7 @@
 			cursor: pointer;
 
 			@media (max-width: $bp-small) {
-				width: 40vw;
+				width: 100%;
 				font-size: 1rem;
 			}
 
@@ -191,14 +188,18 @@
 	}
 
     &__btn-container {
-        padding: 0 2rem;
+        padding: 0 3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
     }
 
 	&__icons {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items:center;
-		padding: 0 2rem;
+
+		width: 100%;
 		@media (max-width: $bp-small) {
 			
 		}
@@ -211,29 +212,18 @@
 		.fas {
 			font-size: 2rem;
 		}
-		p {
-			text-align: center;
-		}
 		
 	}
 
 	&__icon-container {
 		display: flex;
-		
-		
-		@media (max-width: $bp-small) {
-			// .hidden {
-			// 	visibility: hidden;
-			// }
-			i {
-				align-self: center;
-			}
-		}
+		justify-content: space-around;
 	}
 
 	&__data-container {
 		display: flex;
-		align-self: left;
+		justify-content: space-around;
+		align-items: center;
 		padding: 0 2rem;
 	}
 
