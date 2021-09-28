@@ -95,7 +95,7 @@ const PetDetails = () => {
           </div>
           <div className="pet__info-data-container">
             <p className="pet__info-data">Size:</p>
-            <p>Small</p>
+            <p>{pet && pet.size}</p>
           </div>
           <div className="pet__info-data-container">
             <p className="pet__info-data">Gender:</p>
