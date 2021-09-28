@@ -4,19 +4,7 @@ import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
 import LikeButton from "../components/LikeButton";
-import {
-  Button,
-  FormControl,
-  FormControlLabel,
-  Checkbox,
-  FormGroup,
-  ButtonGroup,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from "@material-ui/core";
+import ShareDialog from "../components/ShareDialog";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false },
@@ -72,13 +60,8 @@ const PetDetails = () => {
 
   console.log("petOwner", petOwner);
 
-  //Functions for share icon dialog:
   const handleClickOpen = () => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -166,53 +149,12 @@ const PetDetails = () => {
             </div>
 
             <div className="owner__icon-container">
-              {/* <button
-                onClick={() => setButtonPopup(true)}
-                className="owner__btn"
-              >
+              <button onClick={handleClickOpen} className="owner__btn">
                 <i className="fas fa-share"></i>
               </button>
-              <SharePopup
-                trigger={buttonPopup}
-                setTrigger={setButtonPopup}
-              ></SharePopup> */}
-            </div>
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">
-                {"Join Pawfect to favorite pets"}
-              </DialogTitle>
-              <DialogContent>
-                <Button
-                  variant="contained"
-                  sx={{ margin: 3 }}
-                  color="primary"
-                  href="/registration"
-                >
-                  Create new Account
-                </Button>
 
-                <DialogContentText id="alert-dialog-description">
-                  Already have an account?
-                </DialogContentText>
-                <Button variant="outlined" color="primary" href="/login">
-                  Login
-                </Button>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                >
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Dialog>
+              <ShareDialog setOpen={setOpen} open={open} />
+            </div>
           </div>
 
           <div className="owner__data-container">
@@ -238,7 +180,6 @@ const PetDetails = () => {
             <Link
               to="/messages"
               onClick={() => petOwner && setChatUsername(petOwner.email)}
-              //   disabled={disable}
             >
               <button className="btn__chat" disabled={disable}>
                 Chat with {petOwner && petOwner.firstName}
