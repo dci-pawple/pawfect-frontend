@@ -432,11 +432,6 @@ const UserProfile = () => {
             You may search our <Link to="/gallery">database of pets</Link>
             looking for homes.
           </p>
-
-          <button className="btn btn__post">
-            <Link to="/">POST AN AD</Link>
-            <i class="fas fa-plus-circle"></i>
-          </button>
         </div>
       </div>
     </div>

@@ -60,7 +60,7 @@ const PetDetails = () => {
 			<button onClick={() => history.goBack()} className='btn-go-back'>
 				Go Back
 			</button>
-
+			
 			<Carousel
 				itemsToShow={3}
 				breakPoints={breakPoints}
