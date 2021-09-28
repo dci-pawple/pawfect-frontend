@@ -29,7 +29,6 @@ const App = () => {
     <Theme>
       <BrowserRouter>
         <Navbar />
-        <div>test</div>
         <Switch>
           <Route exact path="/">
             <Home />
