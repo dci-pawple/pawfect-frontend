@@ -4,19 +4,8 @@ import Carousel from "react-elastic-carousel";
 import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
 import LikeButton from "../components/LikeButton";
-import {
-	Button,
-	FormControl,
-	FormControlLabel,
-	Checkbox,
-	FormGroup,
-	ButtonGroup,
-	Dialog,
-	DialogTitle,
-	DialogContent,
-	DialogContentText,
-	DialogActions,
-} from "@material-ui/core";
+import ShareDialog from "../components/ShareDialog";
+
 
 const breakPoints = [
 	{ width: 1, itemsToShow: 1, pagination: false },
@@ -27,7 +16,7 @@ const breakPoints = [
 
 const PetDetails = () => {
 	// const [buttonPopup, setButtonPopup] = useState(false);
-  const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	const { petOwner, setPetOwner } = useContext(MyContext);
 	const { pet, setPet } = useContext(MyContext);
@@ -62,15 +51,11 @@ const PetDetails = () => {
 
 	console.log("petOwner", petOwner);
 
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
 
-  //Functions for share icon dialog:
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+	
 
 	return (
 		<div className='app-container container pet__container'>
@@ -152,50 +137,18 @@ const PetDetails = () => {
 						</div>
 
 						<div className='owner__icon-container'>
-							{/* <button
-                onClick={() => setButtonPopup(true)}
-                className="owner__btn"
-              >
-                <i className="fas fa-share"></i>
-              </button>
-              <SharePopup
+							<button
+								// onClick={() => setButtonPopup(true)}
+								onClick={handleClickOpen}
+								className='owner__btn'>
+								<i className='fas fa-share'></i>
+							</button>
+							{/* <SharePopup
                 trigger={buttonPopup}
                 setTrigger={setButtonPopup}
               ></SharePopup> */}
+							<ShareDialog setOpen={setOpen} open={open}/>
 						</div>
-						<Dialog
-							open={open}
-							onClose={handleClose}
-							aria-labelledby='alert-dialog-title'
-							aria-describedby='alert-dialog-description'>
-							<DialogTitle id='alert-dialog-title'>
-								{"Join Pawfect to favorite pets"}
-							</DialogTitle>
-							<DialogContent>
-								<Button
-									variant='contained'
-									sx={{ margin: 3 }}
-									color='primary'
-									href='/registration'>
-									Create new Account
-								</Button>
-
-								<DialogContentText id='alert-dialog-description'>
-									Already have an account?
-								</DialogContentText>
-								<Button variant='outlined' color='primary' href='/login'>
-									Login
-								</Button>
-							</DialogContent>
-							<DialogActions>
-								<Button
-									onClick={() => {
-										setOpen(false);
-									}}>
-									Cancel
-								</Button>
-							</DialogActions>
-						</Dialog>
 					</div>
 
 					<div className='owner__data-container'>
