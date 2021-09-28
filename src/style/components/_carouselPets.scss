@@ -1,5 +1,4 @@
 .carousel-container {
-  padding: 1rem;
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
@@ -9,7 +8,7 @@
     outline: none;
     border: none;
     display: block;
-    width: 15%;
+    width: 100px;
     background: transparent;
     cursor: pointer;
     align-self: flex-end;
@@ -36,9 +35,10 @@
     border-radius: 15%;
   }
 
-  .rec-swipable {
-    gap: 1rem;
-  }
+  // .rec-swipable {
+  //   gap: 1rem;
+  // }
+
 
   /// Carousel Arrow styling:
   .rec-arrow,
