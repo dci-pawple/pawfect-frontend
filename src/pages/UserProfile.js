@@ -427,7 +427,6 @@ const UserProfile = () => {
             )}
           </form>
 
-          {/* let's decide if we want this here */}
           <p>
             You may search our <Link to="/gallery">database of pets</Link>
             looking for homes.
