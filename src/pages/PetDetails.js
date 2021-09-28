@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
-import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
 import LikeButton from "../components/LikeButton";
 import ShareDialog from "../components/ShareDialog";
