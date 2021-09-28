@@ -32,15 +32,12 @@ export default function GalleryFilter({ filter }) {
       favorites: false,
     },
     onSubmit: async (values) => {
-      console.log("!!!!!!!!!>>>>> onsubmit");
       alert (JSON.stringify (values, null, 2));
       setError(null);
 
       //alert(JSON.stringify(values, null, 2))
       try {
         const userId = JSON.parse(localStorage.getItem("userId"));
-        console.log("formik.values.favorites==", formik.values.favorites);
-        console.log("userId==", userId);
         // process.env.REACT_APP_BACKEND_URL
         // http://localhost:4000/
         const response = await fetch(
@@ -60,25 +57,20 @@ export default function GalleryFilter({ filter }) {
         );
 
         const data = await response.json();
-        console.log("requested filteredData", data.data);
+
         setFilteredData(data.data);
 
         if (!data.success) {
           setError(data.message);
-          console.log("error=>", error);
-        } else {
-          console.log("filtered successful");
         }
       } catch (err) {
-        console.log("Error while filtering =>", err);
       }
     },
   });
 
   const toggleDropdown = (filterType, className = "filter-dropdown-hidden") => {
     const dropdown = document.getElementById(filterType);
-    console.log("in toggleDropdown");
-    console.log("dropdown", dropdown);
+
     //change classes for visible and hide dropdown
     if (dropdown.classList.contains(className)) {
       dropdown.classList.remove(className);
@@ -88,12 +80,11 @@ export default function GalleryFilter({ filter }) {
   };
 
   useEffect(() => {
-    console.log("!!!!!!!!!>>>>> useeffect");
+
     const getFirstGalleryData = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem("userId"));
-        console.log("userId==", userId);
-        console.log("Filter:", filter);
+
         // process.env.REACT_APP_BACKEND_URL
         // http://localhost:4000/
         const response = await fetch(
@@ -111,17 +102,14 @@ export default function GalleryFilter({ filter }) {
         );
 
         const data = await response.json();
-        console.log("requested  filteredData in useeffect", data.data);
+
         setFilteredData(data.data);
 
         if (!data.success) {
           setError(data.message);
-          console.log("error=>", error);
-        } else {
-          console.log("filtered successful");
-        }
+        } 
+
       } catch (err) {
-        console.log("Error while filtering =>", err);
       }
     };
 
@@ -252,47 +240,21 @@ function FilterElementType({ filterText, toggleDropdown, formik }) {
 }
 
 function FilterElementAge({ filterText, formik }) {
-  console.log("into FilterElementAge");
+
   const ref = useRef();
 
   const toggleDropdown = () => {
     const dropdown = document.getElementById("filterAge");
-    console.log("in toggleDropdown");
-    console.log("dropdown", dropdown);
 
     //change classes for visible and hide dropdown
     if (dropdown.classList.contains("filter-dropdown-hidden")) {
       dropdown.classList.remove("filter-dropdown-hidden");
-      console.log("open dropdown");
+
     } else {
       dropdown.classList.add("filter-dropdown-hidden");
-      console.log("close dropdown");
+
     }
   };
-
-  //   useEffect( () => {
-  //     console.log( 'in UseEffect' )
-  //     let eventlistener = document.body.addEventListener( 'click', e => {
-  //       e.stopPropagation()
-  //       console.log( 'into eventhandler' )
-  //
-  //       // if the e.target is still the same like before than nothing should happen
-  //       if ( ref.current && ref.current.contains( e.target ) ) {
-  //         console.log( 'the same e target:', e.target )
-  //         return //do nothing
-  //       } else {
-  //         //close it, because u clicked on other element
-  //         console.log( 'not the same e target:', e.target )
-  //         const dropdown = document.querySelector( `#filterAge` )
-  //         dropdown && dropdown.classList.add( 'filter-dropdown-hidden' )
-  //       }
-  //     } )
-  //     //unmount remove eventlistener
-  //     return () => {
-  //       console.log( 'close eventhandler' )
-  //       document.body.removeEventListener( 'click', eventlistener )
-  //     }
-  //   }, [] )
 
   const ageOptions = [
     {
@@ -313,7 +275,7 @@ function FilterElementAge({ filterText, formik }) {
     },
   ];
 
-  console.log("render");
+
   return (
     <div className="filterElement" ref={ref}>
       <span
@@ -359,7 +321,6 @@ function FilterElementAll({ filterText, filterData, toggleDropdown }) {
 }
 
 function FilterFavorites({ filterText, formik }) {
-  console.log("in FilterFavorites");
   const [likeIcon, setLikeIcon] = useState("black");
   const { login, setLogin } = useContext(MyContext);
   const [open, setOpen] = useState(false);
@@ -375,7 +336,7 @@ function FilterFavorites({ filterText, formik }) {
   };
 
   const toggle = (status) => {
-    console.log("toggle", status);
+
     if (status) return false;
     if (!status) return true;
   };

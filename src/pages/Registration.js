@@ -96,17 +96,13 @@ export default function Registration() {
         );
 
         const data = await response.json();
-        console.log("data=>", data);
         if (!data.success) {
           setError(data.message);
-          console.log("error=>", error);
         } else {
           //redirect to login
           history.push("login");
-          console.log("redirect to login");
         }
       } catch (err) {
-        console.log("Error while fetching data for registration =>", err);
       }
     },
   });
