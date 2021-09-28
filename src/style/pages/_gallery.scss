@@ -1,9 +1,9 @@
 .gallery {
-    &__grid-container {
-        margin-top:2rem;
-        display: grid;
-        width: 100%;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-gap: 2rem 1rem;
-    }
+  &__grid-container {
+    margin-top: 2rem;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 2rem 1rem;
+  }
 }
