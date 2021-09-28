@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-// import { Location } from "../icons/icons";
+
 import { Link } from "react-router-dom";
 import MyContext from "../context/MyContext";
 import LikeButton from "./LikeButton";
@@ -10,8 +10,8 @@ const PetCard = ({ pet }) => {
   return (
     <div className="card">
       <div className="card__image">
-      {/* I added a placeholder image if ther is no immage ind the database */}
-        <img src={pet && pet.photos.length===0?"https://i.stack.imgur.com/y9DpT.jpg":pet.photos[0].url} alt="dog portrait" />
+      {/* I added a placeholder image if ther is no image in the database */}
+        <img src={pet && pet.photos.length===0?"https://i.stack.imgur.com/y9DpT.jpg":pet.photos[0].url} alt="dog portrait"/>
       </div>
       <div className="card__content">
         <div className="card__content--top">
@@ -30,8 +30,7 @@ const PetCard = ({ pet }) => {
 
         <div className="card__description">
           <p>
-            <strong>{pet && pet.habits ? "Habits:" : ""}</strong>{" "}
-            {pet && pet.extras}
+            <strong>Age:</strong> {pet && pet.age}
           </p>
           <p>
             <strong>{pet && pet.likes ? "Likes:" : ""}</strong>{" "}
@@ -42,18 +41,11 @@ const PetCard = ({ pet }) => {
             {pet && pet.dislikes}
           </p>
           <p>
-            <strong>Age category:</strong> {pet && pet.age}
+            <strong>{pet && pet.habits ? "Habits:" : ""}</strong>{" "}
+            {pet && pet.habits}
           </p>
+          
         </div>
-        {/* <div className="card__location">
-          <div className="card__location--icon">
-            <Location />
-          </div>
-          <div className="card__location--name">
-            <p>Berlin, Germany (1,5km)</p>
-          </div>
-
-      </div> */}
         <Link to={`/pet/${ pet._id}`}>
           <button
             data-petid={pet && pet._id}

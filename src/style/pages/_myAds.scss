@@ -1,20 +1,17 @@
-.ad-card{
-    width:max-content;
-   
+.pet-ad-card {
+	// width:max-content;
+	max-width: 320px;
 }
 
-.ad-actions{
-    text-align: right;
-    margin-top: 10px;
-    width:100%;
-   
+.ad-actions {
+	text-align: right;
+	margin-top: 10px;
+	width: 100%;
 }
 
-.ad-btn-edit{
- 
-    margin-bottom: 10px !important;
-  width:100%;
-   
+.ad-btn-edit {
+	margin-bottom: 10px !important;
+	width: 100%;
 }
 
 .ad-btn-delete{

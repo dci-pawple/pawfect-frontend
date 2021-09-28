@@ -1,6 +1,5 @@
-
-
 .pet {
+	
 	&__container {
 		p {
 			font-size: 1.1rem;
@@ -19,7 +18,7 @@
 			outline: none;
 			border: none;
 			display: block;
-			width: 15%;
+			width: 80px;
 			background: transparent;
 			cursor: pointer;
 			font-family: $font-text;
@@ -27,8 +26,6 @@
 			border-radius: 10px;
 			margin-bottom: 2rem;
 			padding: 0.3rem;
-
-
 			@media (max-width: $bp-small) {
 				margin: 1rem 4rem;
 			}
@@ -37,23 +34,15 @@
     
 
 	&__image-container {
-		height: 30vh;
-		width: 1500px;
+		height: 40vh;
+		width: 30vw;
+		// max-width: 50vw;
 		border-radius: 10px;
 		object-fit: cover;
 		object-position: 50% 50%;
 		background-size: cover;
 		background-position: center center;
 		margin: 0 .5rem;
-		position: relative;
-
-		.fas {
-			color: $primary;
-			position: absolute;
-			bottom: 10px;
-			left: 10px;
-			font-size: 3rem;
-		}
 
 		img {
 			width: 100%;
@@ -68,8 +57,8 @@
 
 	&__content-container {
 		display: flex;
-		justify-content: space-evenly;
-		max-width: 1050px;
+		justify-content: space-around;
+		max-width: 900px;
 		margin: 0 auto;
 
 		@media (max-width: $bp-small) {
@@ -78,27 +67,36 @@
 	}
 
 	&__info-container {
-		flex: 3;
+		flex: 4;
+		text-align: left;
+
 
 		@media (max-width: $bp-small) {
-			flex:1;
 			display: flex;
 			flex-direction: column;
-			align-items: flex-start;
-			margin: 1rem 4rem;
-			width: 100%;
+			flex: 1;
+			align-items: center;
+			margin: 2rem auto;
+			text-align: left;
+
+			h2 {
+				font-size:2rem;
+			}
 		}
+
 	}
 
 	&__info-data-container {
 		display: flex;
 		margin: 1rem 0;
+		text-align: left;
+
 	}
 
 	&__info-data {
 		font-weight: bold;
 		margin-right: 1rem;
-        text-align: justify;
+        text-align: left;
 	}
 
 	&__info-data-about {
@@ -122,26 +120,24 @@
 }
 
 .owner {
-   
 	&__container {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 		background-color: $primary-light;
-		flex: 1;
+		flex: 1.5;
 		border-radius: 10px;
-		height: 25vh;
-        margin: 5rem auto;
+		height: 20vh;
+        margin: 2rem;
+		padding: 1rem;
 
 		@media (max-width: $bp-small) {
-			flex: 0;
-			justify-content: flex-start;
-			align-items: flex-start;
-			margin: 0 auto;
+			justify-content: space-between;
+			align-items: center;
 			padding: 1rem 0;
-			height: 50vh;
+			max-width: 400px;
+			height: 80vh;
 			width: 80%;
-
 		}
 
 		.btn__chat {
@@ -153,8 +149,8 @@
 			transition: all 0.3s ease-in-out;
 			padding: 0.5em;
 			display: block;
-			font-size: 1.5rem;
-			width: 65%;
+			font-size: 1.2rem;
+			width: 80%;
 			color: $very-light-grey;
 			text-decoration: none;
 			display: flex;
@@ -164,7 +160,7 @@
 			cursor: pointer;
 
 			@media (max-width: $bp-small) {
-				width: 40vw;
+				width: 100%;
 				font-size: 1rem;
 			}
 
@@ -191,14 +187,18 @@
 	}
 
     &__btn-container {
-        padding: 0 2rem;
+        padding: 0 3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
     }
 
 	&__icons {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items:center;
-		padding: 0 2rem;
+
+		width: 100%;
 		@media (max-width: $bp-small) {
 			
 		}
@@ -211,29 +211,18 @@
 		.fas {
 			font-size: 2rem;
 		}
-		p {
-			text-align: center;
-		}
 		
 	}
 
 	&__icon-container {
 		display: flex;
-		
-		
-		@media (max-width: $bp-small) {
-			// .hidden {
-			// 	visibility: hidden;
-			// }
-			i {
-				align-self: center;
-			}
-		}
+		justify-content: space-around;
 	}
 
 	&__data-container {
 		display: flex;
-		align-self: left;
+		justify-content: space-around;
+		align-items: center;
 		padding: 0 2rem;
 	}
 
@@ -243,5 +232,13 @@
 		border-radius: 10px;
 		object-fit: cover;
 		margin-right: 0.3em;
+	}
+
+	&__info-container {
+		h3 {
+			@media (max-width: $bp-small) {
+				font-size: 1.3rem;
+			}
+		}
 	}
 }

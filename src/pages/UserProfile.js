@@ -182,7 +182,7 @@ const UserProfile = () => {
 
         const data = await response.json();
         console.log("data=>", data);
-        // setIsValidating(true);
+
 
         if (!data.success) {
           setError(data.message);
@@ -422,16 +422,10 @@ const UserProfile = () => {
             )}
           </form>
 
-          {/* let's decide if we want this here */}
           <p>
             You may search our <Link to="/gallery">database of pets</Link>
             looking for homes.
           </p>
-
-          <button className="btn btn__post">
-            <Link to="/">POST AN AD</Link>
-            <i class="fas fa-plus-circle"></i>
-          </button>
         </div>
       </div>
     </div>
