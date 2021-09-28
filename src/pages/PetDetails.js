@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
-import SharePopup from "../components/SharePopup";
 import MyContext from "../context/MyContext";
 import LikeButton from "../components/LikeButton";
 import ShareDialog from "../components/ShareDialog";
@@ -15,7 +14,6 @@ const breakPoints = [
 ];
 
 const PetDetails = () => {
-	// const [buttonPopup, setButtonPopup] = useState(false);
 	const [open, setOpen] = useState(false);
 
 	const { petOwner, setPetOwner } = useContext(MyContext);
@@ -138,15 +136,12 @@ const PetDetails = () => {
 
 						<div className='owner__icon-container'>
 							<button
-								// onClick={() => setButtonPopup(true)}
+
 								onClick={handleClickOpen}
 								className='owner__btn'>
 								<i className='fas fa-share'></i>
 							</button>
-							{/* <SharePopup
-                trigger={buttonPopup}
-                setTrigger={setButtonPopup}
-              ></SharePopup> */}
+
 							<ShareDialog setOpen={setOpen} open={open}/>
 						</div>
 					</div>

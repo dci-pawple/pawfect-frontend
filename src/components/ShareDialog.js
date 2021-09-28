@@ -1,61 +1,88 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import {
 	Button,
-	// FormControl,
-	// FormControlLabel,
-	// Checkbox,
-	// FormGroup,
-	// ButtonGroup,
 	Dialog,
 	DialogTitle,
 	DialogContent,
-	DialogContentText,
 	DialogActions,
 } from "@material-ui/core";
 
-const ShareDialog = ({open, setOpen}) => {
+import {
+	FacebookShareButton,
+	FacebookMessengerShareButton,
+	WhatsappShareButton,
+	EmailShareButton,
+	TwitterShareButton,
+	LinkedinShareButton,
+	WhatsappIcon,
+	FacebookIcon,
+	FacebookMessengerIcon,
+	EmailIcon,
+	TwitterIcon,
+	LinkedinIcon,
+} from "react-share";
 
-	
+const ShareDialog = ({ open, setOpen }) => {
+	const size = "32";
+	const shareUrl = "http://localhost:3000/pet";
 
 	const handleClose = () => {
 		setOpen(false);
 	};
-    
-    return (
-			<Dialog
-				open={open}
-				onClose={handleClose}
-				aria-labelledby='alert-dialog-title'
-				aria-describedby='alert-dialog-description'>
-				<DialogTitle id='alert-dialog-title'>
-					{"Join Pawfect to favorite pets"}
-				</DialogTitle>
-				<DialogContent>
-					<Button
-						variant='contained'
-						sx={{ margin: 3 }}
-						color='primary'
-						href='/registration'>
-						Create new Account
-					</Button>
 
-					<DialogContentText id='alert-dialog-description'>
-						Already have an account?
-					</DialogContentText>
-					<Button variant='outlined' color='primary' href='/login'>
-						Login
-					</Button>
-				</DialogContent>
-				<DialogActions>
-					<Button
-						onClick={() => {
-							setOpen(false);
-						}}>
-						Cancel
-					</Button>
-				</DialogActions>
-			</Dialog>
-		);
-}
+	return (
+		<Dialog
+			open={open}
+			onClose={handleClose}
+			aria-labelledby='alert-dialog-title'
+			aria-describedby='alert-dialog-description'>
+			<DialogTitle id='alert-dialog-title'>
+				{"Join Pawfect to favorite pets"}
+			</DialogTitle>
+			<DialogContent className="dialog__container">
+				<FacebookShareButton
+					url={shareUrl}
+					quote={"This pet is ready to be adopted"}>
+					<FacebookIcon size={size} round={true} />
+				</FacebookShareButton>
 
-export default ShareDialog
+				<FacebookMessengerShareButton
+					url={shareUrl}
+					appId={"https://www.facebook.com/magda.sokolovic"}>
+					<FacebookMessengerIcon size={size} round={true} />
+				</FacebookMessengerShareButton>
+
+				<LinkedinShareButton
+					url={shareUrl}
+					title={"Adopt this pet"}
+					source={"http://localhost:3000/pet"}>
+					<LinkedinIcon size={size} round={true} />
+				</LinkedinShareButton>
+
+				<WhatsappShareButton
+					url={shareUrl}
+					quote={"This pet is available for adoption"}>
+					<WhatsappIcon size={size} round={true} />
+				</WhatsappShareButton>
+
+				<TwitterShareButton url={shareUrl} title={"Adopt me!"}>
+					<TwitterIcon size={size} round={true} />
+				</TwitterShareButton>
+
+				<EmailShareButton url={shareUrl} subject={"Check out this pet ad"}>
+					<EmailIcon size={size} round={true} />
+				</EmailShareButton>
+			</DialogContent>
+			<DialogActions>
+				<Button
+					onClick={() => {
+						setOpen(false);
+					}}>
+					Close
+				</Button>
+			</DialogActions>
+		</Dialog>
+	);
+};
+
+export default ShareDialog;
