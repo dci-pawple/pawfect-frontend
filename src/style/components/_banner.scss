@@ -10,3 +10,50 @@
   background-position: center;
   background-size: cover;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 3rem;
+  position: fixed;
+  right: 0;
+}
+
+h1 {
+  font-weight: 1000;
+  margin: 0.4rem;
+  font-size: 5rem;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-family: $font-text;
+}
+
+/*@media (min-width: 1000px) {
+  h1 {
+    font-size: 5rem;
+  }
+}*/
+
+@media (max-width: 800px) {
+  .container {
+    padding: 10rem;
+    position: fixed;
+    right: 0;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 10rem;
+    position: fixed;
+    right: 0;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+}
