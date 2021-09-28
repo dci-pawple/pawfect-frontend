@@ -21,7 +21,7 @@ export default function Chat() {
 
       const {
         data: { data },
-      } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users`);
+      } = await axios.get(`http://localhost:4000/users`);
 
       const people = data.map((person) => {
         return {

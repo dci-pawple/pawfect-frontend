@@ -11,6 +11,7 @@ import {
   FormControl,
   TextField,
   FormHelperText,
+  CircularProgress
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 import MyContext from "../context/MyContext";
@@ -58,9 +59,9 @@ const UploadComponent = (props) => {
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
 
-        <p>Drop some photos here or click to select photos</p>
+        <p>Drop some photos here or click to select photos *</p>
       </div>
-      <FormHelperText>Optional</FormHelperText>
+     
     </div>
   );
 };
@@ -69,8 +70,20 @@ export default function CreateAd() {
   const classes = useStyles();
   let history = useHistory();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { userId } = useContext(MyContext);
   const { setPet } = useContext(MyContext);
+
+  const validate = (values) => {
+  const errors = {};
+  if (!values.photos) {
+    errors.photos = "Please upload an image";
+  }
+
+  
+
+  return errors;
+}
 
   const formik = useFormik({
     initialValues: {
@@ -86,9 +99,10 @@ export default function CreateAd() {
       extras: "",
       photos: "",
     },
-
+    validate,
     onSubmit: async values => {
       //alert (JSON.stringify (values, null, 2));
+      setLoading(true);
       setError(null)
       console.log('values=>', values.photos)
       let fd = new FormData()
@@ -133,6 +147,7 @@ export default function CreateAd() {
           setError(data.message);
         } else {
           console.log("Upload completed successfully");
+          setLoading(true);
           history.push(`/pet/${data.data._id}`);
           setPet(data.data);
         }
@@ -175,7 +190,7 @@ export default function CreateAd() {
               <option value={"cat"}>Cat</option>
               <option value={"other"}>Other</option>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+ 
           </FormControl>
 
           {/* Age */}
@@ -202,7 +217,7 @@ export default function CreateAd() {
               <option value={"adult"}>Adult (1-7 years)</option>
               <option value={"senior"}>Senior (7+ years)</option>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+
           </FormControl>
 
           {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
@@ -231,7 +246,7 @@ export default function CreateAd() {
                 <option value={"medium"}>medium (until 50cm)</option>
                 <option value={"large"}>large (above 50cm)</option>
               </Select>
-              <FormHelperText>Required</FormHelperText>
+  
             </FormControl>
           )}
 
@@ -241,13 +256,16 @@ export default function CreateAd() {
             variant="outlined"
             fullWidth
             required
+            
           >
             <InputLabel htmlFor="gender-native-simple">Gender</InputLabel>
             <Select
               label="Gender"
               native
+              
               value={formik.values.gender}
               onChange={formik.handleChange}
+                
               inputProps={{
                 name: "gender",
                 id: "gender-native-simple",
@@ -257,7 +275,7 @@ export default function CreateAd() {
               <option value={"female"}>Female</option>
               <option value={"male"}>Male</option>
             </Select>
-            <FormHelperText>Required</FormHelperText>
+           
           </FormControl>
 
           {/* Name */}
@@ -270,9 +288,9 @@ export default function CreateAd() {
               variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.name}
+              
             />
-            <FormHelperText>Required</FormHelperText>
-          </FormControl>
+           </FormControl>
 
           {/* Likes */}
           <FormControl fullWidth>
@@ -284,7 +302,7 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.likes}
             />
-            <FormHelperText>Optional</FormHelperText>
+
           </FormControl>
 
           {/* Dislikes */}
@@ -297,7 +315,7 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.dislikes}
             />
-            <FormHelperText>Optional</FormHelperText>
+
           </FormControl>
 
           {/* Habits */}
@@ -310,7 +328,7 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.habits}
             />
-            <FormHelperText>Optional</FormHelperText>
+   
           </FormControl>
 
           {/* Extras */}
@@ -325,15 +343,27 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.extras}
             />
-            <FormHelperText>Optional</FormHelperText>
+            
           </FormControl>
 
           {/* image upload */}
+          <FormControl
+            fullWidth
+            required
+            error={
+                formik.touched.photos && Boolean(formik.errors.photos)
+              }
+            helperText={formik.touched.photos && formik.errors.photos}
+          >
           <UploadComponent
             setFieldValue={formik.setFieldValue}
             values={formik.values}
+            
+            
           />
-
+{formik.errors.photos ? <p style={{color:"red"}}>{formik.errors.photos}</p>: null}
+           </FormControl>
+          
           <div className="image-preview">
             {formik.values.photos &&
               formik.values.photos.map((photo, i) => (
@@ -344,14 +374,11 @@ export default function CreateAd() {
           {error ? <Alert severity="error">{error}</Alert> : null}
 
           {/* submit button */}
-          <Button
-            disableElevation
-            color="primary"
-            variant="contained"
-            type="submit"
-          >
-            Submit
-          </Button>
+          <Button variant="contained"  color="primary" type="submit" disabled={loading}>
+      {loading && <CircularProgress size={22} />}
+      {!loading ? 'Submit':"Save"}
+    </Button>
+          
         </form>
       </div>
     </div>

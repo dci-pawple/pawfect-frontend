@@ -170,20 +170,15 @@ const UserProfile = () => {
       setError(null);
 
       try {
-        // process.env.REACT_APP_BACKEND_URL
-        // http://localhost:4000/
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}users/${userId}`,
-          {
-            method: "PATCH",
-            mode: "cors",
-            //   headers: {
-            //     "Content-Type": "application/json",
-            //   },
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`, {
+          method: "PATCH",
+          mode: "cors",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
 
-            body: fd,
-          }
-        );
+          body: fd,
+        });
 
         const data = await response.json();
         console.log("data=>", data);
