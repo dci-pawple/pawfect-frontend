@@ -68,7 +68,7 @@ const PetDetails = () => {
 				{pet.photos &&
 					pet.photos.map((photo, index) => (
 						<div className='pet__image-container' >
-							<img src={photo.url} alt='a pet profile' key={index} className='pet__image'/>
+							<img src={photo.url} alt='a pet profile' key={index}/>
 						</div>
 					))}
 			</Carousel>
