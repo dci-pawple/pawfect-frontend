@@ -12,7 +12,7 @@ const MyAds = () => {
 
 
      const deleteAd = () => {
-      fetch(`http://localhost:4000/pets/delete`, {
+      fetch(process.env.REACT_APP_BACKEND_URL + `pets/delete`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -56,7 +56,7 @@ const MyAds = () => {
     <div className="app-container container">
       <h2>Your Ads</h2>
       <div className="gallery__grid-container">
-        {adsList &&
+        {adsList && adsList.length!==0?
           adsList.map((pet, index) => (
             <div className="ad-card">
               <PetCard pet={pet} key={index} />
@@ -86,7 +86,7 @@ const MyAds = () => {
                 </Button>
               </div>
             </div>
-          ))}
+          )):<div className="opacity50"><h3>No created ad's here yet.</h3><Link to="/createad"><p>Create your first ad</p></Link></div>}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import PetCard from "./PetCard";
 import MyContext from "../context/MyContext";
+import {Link} from "react-router-dom"
 
 const SavedSearches = () => {
   const [favouritesList, setFavouritesList] = useState([]);
@@ -31,14 +32,16 @@ const SavedSearches = () => {
     <div className="app-container container">
       <h2>My Favourites</h2>
       <div className="gallery__grid-container">
-        {favouritesList &&
+        {favouritesList && favouritesList.length!==0?
           favouritesList.map((favouritePet, index) => (
             <PetCard
               favouritesList={favouritesList}
               pet={favouritePet}
               key={index}
             />
-          ))}
+          )):<div className="opacity50"><h2>No favorites here yet</h2><h3>When you find a pet you love, add it to your favorites list by tapping the favorite button <i className="far fa-heart"></i>
+
+</h3><Link to="/gallery"><p>Find your pet</p></Link></div>}
       </div>
     </div>
   );

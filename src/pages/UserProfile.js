@@ -170,7 +170,7 @@ const UserProfile = () => {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:4000/users/${userId}`, {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`, {
           method: "PATCH",
           mode: "cors",
           //   headers: {

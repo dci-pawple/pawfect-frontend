@@ -126,7 +126,7 @@ export default function GalleryFilter({ filter }) {
   }, []);
 
   return (
-    <div>
+    <div className="dusan">
       <FilterElementAll
         filterText={"All Filters"}
         toggleDropdown={toggleDropdown}
