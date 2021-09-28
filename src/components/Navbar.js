@@ -69,7 +69,8 @@ export default function Navbar() {
                 See all pets
               </Link>
             </li>
-            <li className={`search list-item ${active ? "search-active" : ""}`}>
+            {/* search bar not used for now */}
+            {/* <li className={`search list-item ${active ? "search-active" : ""}`}>
               <div
                 onClick={toggleClass}
                 className={active ? "icon" : "icon icon-active"}
@@ -84,7 +85,7 @@ export default function Navbar() {
                   <i class="fas fa-arrow-right"></i>
                 </button>
               </form>
-            </li>
+            </li> */}
             <li className="user list-item" onClick={toggleDisplay}>
               <button className="user-btn">
                 <i className="fas fa-bars" />
@@ -92,7 +93,7 @@ export default function Navbar() {
                   <i class="fas fa-user-circle"></i>
                 ) : (
                   <div>
-                     {user &&
+                    {user &&
                     user.profilePhoto &&
                     user.profilePhoto.length > 0 ? (
                       user.profilePhoto.map((photo, i) => (
@@ -140,7 +141,7 @@ export default function Navbar() {
                     >
                       Go to profile
                     </Link>
-                     <Link
+                    <Link
                       to="/myAds"
                       className="drop-link"
                       onClick={closeMobileMenu}
