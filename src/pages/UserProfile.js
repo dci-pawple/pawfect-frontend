@@ -65,6 +65,7 @@ const UploadComponent = (props) => {
       setFieldValue("profilePhoto", acceptedPhotos);
     },
   });
+  console.log("values.profilePhoto", values.profilePhoto);
   return (
     <div>
       <div {...getRootProps({ className: "upload-text" })}>
@@ -170,19 +171,21 @@ const UserProfile = () => {
       setError(null);
 
       try {
-        const response = await fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`, {
-          method: "PATCH",
-          mode: "cors",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + `users/${userId}`,
+          {
+            method: "PATCH",
+            mode: "cors",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
 
-          body: fd,
-        });
+            body: fd,
+          }
+        );
 
         const data = await response.json();
         console.log("data=>", data);
-
 
         if (!data.success) {
           setError(data.message);
@@ -216,7 +219,7 @@ const UserProfile = () => {
                     <i class="fas fa-user-circle"></i>
                   ) : (
                     <div>
-                      {formik.values.profilePhoto &&
+                      {/* {formik.values.profilePhoto &&
                         formik.values.profilePhoto.map((photo, i) => (
                           //   <Thumb key={i} file={photo.url} />
                           <img
@@ -225,7 +228,27 @@ const UserProfile = () => {
                             alt="avatar"
                             className="img-thumbnail"
                           />
-                        ))}
+                        ))} */}
+                      {formik.values.profilePhoto &&
+                        formik.values.profilePhoto.map(
+                          (photo, i) =>
+                            photo.url ? (
+                              <img
+                                key={i}
+                                src={photo.url}
+                                alt="avatar"
+                                className="img-thumbnail"
+                              />
+                            ) : (
+                              <Thumb key={i} file={photo} />
+                            )
+                          //   <img
+                          //     key={i}
+                          //     src={photo.url}
+                          //     alt="avatar"
+                          //     className="img-thumbnail"
+                          //   />
+                        )}
                     </div>
                   )}
                 </div>
