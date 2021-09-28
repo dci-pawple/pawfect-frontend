@@ -170,19 +170,21 @@ const UserProfile = () => {
       setError(null);
 
       try {
-        const response = await fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`, {
-          method: "PATCH",
-          mode: "cors",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + `users/${userId}`,
+          {
+            method: "PATCH",
+            mode: "cors",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
 
-          body: fd,
-        });
+            body: fd,
+          }
+        );
 
         const data = await response.json();
         console.log("data=>", data);
-
 
         if (!data.success) {
           setError(data.message);
@@ -223,7 +225,7 @@ const UserProfile = () => {
                             key={i}
                             src={photo.url}
                             alt="avatar"
-                            className="img-thumbnail"
+                            className="img-thumbnail center-avatar"
                           />
                         ))}
                     </div>
