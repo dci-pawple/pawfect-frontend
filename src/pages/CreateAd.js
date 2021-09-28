@@ -11,7 +11,7 @@ import {
   FormControl,
   TextField,
   FormHelperText,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 import MyContext from "../context/MyContext";
@@ -61,7 +61,6 @@ const UploadComponent = (props) => {
 
         <p>Drop some photos here or click to select photos *</p>
       </div>
-     
     </div>
   );
 };
@@ -75,15 +74,13 @@ export default function CreateAd() {
   const { setPet } = useContext(MyContext);
 
   const validate = (values) => {
-  const errors = {};
-  if (!values.photos) {
-    errors.photos = "Please upload an image";
-  }
+    const errors = {};
+    if (!values.photos) {
+      errors.photos = "Please upload an image";
+    }
 
-  
-
-  return errors;
-}
+    return errors;
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -100,22 +97,22 @@ export default function CreateAd() {
       photos: "",
     },
     validate,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       //alert (JSON.stringify (values, null, 2));
       setLoading(true);
-      setError(null)
-      console.log('values=>', values.photos)
-      let fd = new FormData()
-      fd.append('name', values.name)
-      fd.append('age', values.age)
-      fd.append('typeOfPet', values.typeOfPet)
-      fd.append('gender', values.gender)
-      fd.append('likes', values.likes)
-      fd.append('dislikes', values.dislikes)
-      fd.append('habits', values.habits)
-      fd.append('size', values.size)
-      fd.append('extras', values.extras)
-      fd.append('userId', userId)
+      setError(null);
+      console.log("values=>", values.photos);
+      let fd = new FormData();
+      fd.append("name", values.name);
+      fd.append("age", values.age);
+      fd.append("typeOfPet", values.typeOfPet);
+      fd.append("gender", values.gender);
+      fd.append("likes", values.likes);
+      fd.append("dislikes", values.dislikes);
+      fd.append("habits", values.habits);
+      fd.append("size", values.size);
+      fd.append("extras", values.extras);
+      fd.append("userId", userId);
 
       if (values.photos) {
         values.photos.forEach((file) => fd.append("photos", file));
@@ -158,7 +155,7 @@ export default function CreateAd() {
   });
 
   return (
-    <div className="app-container">
+    <div className="app-container container">
       <div className="form-container">
         <h1 className="text-center">Create an Ad</h1>
 
@@ -190,7 +187,6 @@ export default function CreateAd() {
               <option value={"cat"}>Cat</option>
               <option value={"other"}>Other</option>
             </Select>
- 
           </FormControl>
 
           {/* Age */}
@@ -217,7 +213,6 @@ export default function CreateAd() {
               <option value={"adult"}>Adult (1-7 years)</option>
               <option value={"senior"}>Senior (7+ years)</option>
             </Select>
-
           </FormControl>
 
           {/* Size should only be shown when DOG is selected !!!!!!!!!!!!!!!!! */}
@@ -246,7 +241,6 @@ export default function CreateAd() {
                 <option value={"medium"}>medium (until 50cm)</option>
                 <option value={"large"}>large (above 50cm)</option>
               </Select>
-  
             </FormControl>
           )}
 
@@ -256,16 +250,13 @@ export default function CreateAd() {
             variant="outlined"
             fullWidth
             required
-            
           >
             <InputLabel htmlFor="gender-native-simple">Gender</InputLabel>
             <Select
               label="Gender"
               native
-              
               value={formik.values.gender}
               onChange={formik.handleChange}
-                
               inputProps={{
                 name: "gender",
                 id: "gender-native-simple",
@@ -275,7 +266,6 @@ export default function CreateAd() {
               <option value={"female"}>Female</option>
               <option value={"male"}>Male</option>
             </Select>
-           
           </FormControl>
 
           {/* Name */}
@@ -288,9 +278,8 @@ export default function CreateAd() {
               variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.name}
-              
             />
-           </FormControl>
+          </FormControl>
 
           {/* Likes */}
           <FormControl fullWidth>
@@ -302,7 +291,6 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.likes}
             />
-
           </FormControl>
 
           {/* Dislikes */}
@@ -315,7 +303,6 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.dislikes}
             />
-
           </FormControl>
 
           {/* Habits */}
@@ -328,7 +315,6 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.habits}
             />
-   
           </FormControl>
 
           {/* Extras */}
@@ -343,27 +329,24 @@ export default function CreateAd() {
               onChange={formik.handleChange}
               value={formik.values.extras}
             />
-            
           </FormControl>
 
           {/* image upload */}
           <FormControl
             fullWidth
             required
-            error={
-                formik.touched.photos && Boolean(formik.errors.photos)
-              }
+            error={formik.touched.photos && Boolean(formik.errors.photos)}
             helperText={formik.touched.photos && formik.errors.photos}
           >
-          <UploadComponent
-            setFieldValue={formik.setFieldValue}
-            values={formik.values}
-            
-            
-          />
-{formik.errors.photos ? <p style={{color:"red"}}>{formik.errors.photos}</p>: null}
-           </FormControl>
-          
+            <UploadComponent
+              setFieldValue={formik.setFieldValue}
+              values={formik.values}
+            />
+            {formik.errors.photos ? (
+              <p style={{ color: "red" }}>{formik.errors.photos}</p>
+            ) : null}
+          </FormControl>
+
           <div className="image-preview">
             {formik.values.photos &&
               formik.values.photos.map((photo, i) => (
@@ -374,11 +357,15 @@ export default function CreateAd() {
           {error ? <Alert severity="error">{error}</Alert> : null}
 
           {/* submit button */}
-          <Button variant="contained"  color="primary" type="submit" disabled={loading}>
-      {loading && <CircularProgress size={22} />}
-      {!loading ? 'Submit':"Save"}
-    </Button>
-          
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disabled={loading}
+          >
+            {loading && <CircularProgress size={22} />}
+            {!loading ? "Submit" : "Save"}
+          </Button>
         </form>
       </div>
     </div>
