@@ -11,6 +11,7 @@ import {
   FormControl,
   TextField,
   FormHelperText,
+  CircularProgress
 } from "@material-ui/core";
 import Thumb from "../components/Thumb";
 import MyContext from "../context/MyContext";
@@ -76,7 +77,7 @@ export default function EditCreateAd() {
   const { pet, setPet } = useContext(MyContext);
    const { petId, setPetId } = useContext(MyContext);
    const [deletePhotos,setDeletePhotos] = useState([]);
-
+  const [loading, setLoading] = useState(false);
 
 
 console.log("deletePhotos in edit",deletePhotos);
@@ -98,6 +99,7 @@ console.log("deletePhotos in edit",deletePhotos);
     },
 
     onSubmit: async values => {
+      setLoading(true);
       console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
       setError(null)
       console.log('values=>', values.photos)
@@ -146,6 +148,7 @@ console.log("deletePhotos in edit",deletePhotos);
           setError(data.message);
         } else {
           console.log("Upload completed successfully");
+          setLoading(false);
           history.push(`/pet/${data.data._id}`);
           setPet(data.data);
         }
@@ -393,14 +396,12 @@ console.log("formik",formik)
           {error ? <Alert severity="error">{error}</Alert> : null}
 
           {/* submit button */}
-          <Button
-            disableElevation
-            color="primary"
-            variant="contained"
-            type="submit"
-          >
-            Save Changes
-          </Button>
+         <Button variant="contained"  color="primary" type="submit" disabled={loading}>
+      {loading && <CircularProgress size={22} />}
+      Save Changes
+    </Button>
+            
+    
         </form>
       </div>
     </div>
