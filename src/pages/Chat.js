@@ -5,7 +5,8 @@ import { getUsers } from "../chat/getUser";
 import MyContext from "../context/MyContext";
 import axios from "axios";
 import { getOrCreateChat } from "../chat/getOrCreateChat";
-
+// julia-projectID: b095d165-217e-4a79-b190-6fb4706e857a
+// dusan-projectID: 73e0289d-aaf1-435d-b416-9d91e0a886c5
 export default function Chat() {
   const { setUsers, user, chatUsername, petOwner } = useContext(MyContext);
   const [chat, setChat] = useState(null);
@@ -21,7 +22,7 @@ export default function Chat() {
 
       const {
         data: { data },
-      } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users`);
+      } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}users`);
 
       const people = data.map((person) => {
         return {
