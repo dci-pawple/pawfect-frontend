@@ -142,7 +142,7 @@ const PetDetails = () => {
 								<i className='fas fa-share'></i>
 							</button>
 
-							<ShareDialog setOpen={setOpen} open={open}/>
+							<ShareDialog setOpen={setOpen} open={open} pet={pet}/>
 						</div>
 					</div>
 

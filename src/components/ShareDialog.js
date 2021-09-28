@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	Button,
 	Dialog,
@@ -22,7 +22,7 @@ import {
 	LinkedinIcon,
 } from "react-share";
 
-const ShareDialog = ({ open, setOpen }) => {
+const ShareDialog = ({ open, setOpen, pet }) => {
 	const size = "32";
 	const shareUrl = "http://localhost:3000/pet";
 
@@ -35,14 +35,15 @@ const ShareDialog = ({ open, setOpen }) => {
 			open={open}
 			onClose={handleClose}
 			aria-labelledby='alert-dialog-title'
-			aria-describedby='alert-dialog-description'>
+			aria-describedby='alert-dialog-description'
+			className="dialog__container">
 			<DialogTitle id='alert-dialog-title'>
-				{"Join Pawfect to favorite pets"}
+				{`Share ${pet && pet.name}`}
 			</DialogTitle>
-			<DialogContent className="dialog__container">
+			<DialogContent className="dialog__icons">
 				<FacebookShareButton
 					url={shareUrl}
-					quote={"This pet is ready to be adopted"}>
+					quote={`This pet ${pet.name} is available for adoption`}>
 					<FacebookIcon size={size} round={true} />
 				</FacebookShareButton>
 
@@ -61,11 +62,11 @@ const ShareDialog = ({ open, setOpen }) => {
 
 				<WhatsappShareButton
 					url={shareUrl}
-					quote={"This pet is available for adoption"}>
+					quote={`This pet ${pet.name} is available for adoption`}>
 					<WhatsappIcon size={size} round={true} />
 				</WhatsappShareButton>
 
-				<TwitterShareButton url={shareUrl} title={"Adopt me!"}>
+				<TwitterShareButton url={shareUrl} title={`This pet ${pet.name} is available for adoption`}>
 					<TwitterIcon size={size} round={true} />
 				</TwitterShareButton>
 

@@ -1,5 +1,8 @@
 .dialog {
     &__container {
+        width: 100%;
+    }
+    &__icons {
         display: flex;
         justify-content: space-between;
     }
