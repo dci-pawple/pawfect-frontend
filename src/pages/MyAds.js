@@ -12,7 +12,7 @@ const MyAds = () => {
 
 
      const deleteAd = () => {
-      fetch(`http://localhost:4000/pets/delete`, {
+      fetch(process.env.REACT_APP_BACKEND_URL + `pets/delete`, {
         method: 'POST',
         mode: 'cors',
         headers: {
