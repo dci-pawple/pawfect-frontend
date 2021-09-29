@@ -6,7 +6,6 @@ import MyContext from "../context/MyContext";
 const Gallery = ({ filter }) => {
   const { filteredData } = useContext(MyContext);
 
-  console.log("gallery filter:", filter);
 
   return (
     <div className="app-container container">

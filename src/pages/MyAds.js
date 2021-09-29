@@ -22,7 +22,6 @@ const MyAds = () => {
       })
         .then(data => data.json())
         .then(response => {
-          console.log('Delete pet', response.data)
           setAdsList(response.data)
         })
         .catch(err => console.error('error while deleting ad =>', err))
@@ -43,7 +42,6 @@ const MyAds = () => {
 			})
 				.then(data => data.json())
 				.then(response => {
-					console.log("MyAds response.data", response.data);
 					setAdsList(response.data);
 				})
 				.catch(err => console.error("error while fetching user-ads =>", err));

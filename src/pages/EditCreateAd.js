@@ -50,7 +50,6 @@ const UploadComponent = (props) => {
     onDrop: (acceptedPhotos) => {
       if (values.photos.length !== 0) {
         setFieldValue("photos", values.photos.concat(acceptedPhotos));
-        console.log("values.photos in Uploadcomponent", values.photos);
       } else {
         setFieldValue("photos", acceptedPhotos);
       }
@@ -80,7 +79,6 @@ export default function EditCreateAd() {
   const [loading, setLoading] = useState(false);
 
 
-console.log("deletePhotos in edit",deletePhotos);
 
   const formik = useFormik({
     initialValues: {
@@ -100,10 +98,9 @@ console.log("deletePhotos in edit",deletePhotos);
 
     onSubmit: async values => {
       setLoading(true);
-      console.log("JSON.stringify (values, null, 2)",JSON.stringify (values, null, 2));
+
       setError(null)
-      console.log('values=>', values.photos)
-       console.log('values.deletePhotos=>', values.deletePhotos)
+
       let fd = new FormData()
       fd.append('name', values.name)
       fd.append('age', values.age)
@@ -119,12 +116,11 @@ console.log("deletePhotos in edit",deletePhotos);
 
       if (values.photos) {
         values.photos.forEach((file) => fd.append("photos", file));
-        console.log("fd=>", fd);
         fd.append("photos", values.photos);
       }
 
       try {
-        console.log("EditAd pedId", pet._id);
+
         // process.env.REACT_APP_BACKEND_URL
         // http://localhost:4000/
         const response = await fetch(
@@ -141,19 +137,19 @@ console.log("deletePhotos in edit",deletePhotos);
         );
 
         const data = await response.json();
-        console.log("data=>", data);
+
 
         if (!data.success) {
-          console.log("Error with uploading");
+
           setError(data.message);
         } else {
-          console.log("Upload completed successfully");
+
           setLoading(false);
           history.push(`/pet/${data.data._id}`);
           setPet(data.data);
         }
       } catch (err) {
-        console.log("Error while uploadting data for new ad =>", err);
+
       }
     }
   })
@@ -162,8 +158,6 @@ console.log("deletePhotos in edit",deletePhotos);
 useEffect(()=>{
 
 formik.setFieldValue("deletePhotos", deletePhotos);
-console.log("deletePhotos in edit create render",deletePhotos)
-console.log("formik",formik)
 
 
 },[deletePhotos])
@@ -376,15 +370,12 @@ console.log("formik",formik)
                         <div className="delete-btn" id={photo.publicId} onClick={ async (e)=>{
                         //deleteImage(e)
                         const photoId=[e.target.id];
-                        console.log("photoId",photoId)
+
                        
                         setDeletePhotos(deletePhotos.concat(photoId));
                        
                         const photo= document.getElementById(e.target.id+"image")
                         photo.style.border = "2px solid red";
-                        
-                       
-                        console.log("photo",photo);
                         }}>x</div>
                         {/* <i class="fas fa-trash-alt"></i> */}
                         

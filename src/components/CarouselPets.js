@@ -26,7 +26,6 @@ const CarouselPets = () => {
             setPetsList(res.data);
           });
       } catch (err) {
-        console.log(err);
       }
     };
     fetchData();

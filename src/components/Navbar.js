@@ -12,7 +12,7 @@ export default function Navbar() {
   const { user } = useContext(MyContext);
 
   const changeBackground = () => {
-    // console.log(window.scrollY);
+
     if (window.scrollY >= 40) {
       setNavbar(true);
     } else {
@@ -42,7 +42,7 @@ export default function Navbar() {
     });
   };
 
-  console.log("user", user);
+
 
   return (
     <div className="navigation">

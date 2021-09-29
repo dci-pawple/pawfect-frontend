@@ -6,7 +6,7 @@ const Banner = () => {
 
   return (
     <div className="banner">
-      <div className="banner-container">
+      <div className="banner-container container">
         <h1 className="banner-h1">Adopt New Pet </h1>
         <h1 className="banner-h1">
           <TypeWriterEffect

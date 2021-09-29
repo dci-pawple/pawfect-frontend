@@ -6,7 +6,6 @@ export const getOrCreateChat = (headers, data, successFunc) => {
 
     .then((response) => {
       successFunc(response.data);
-      console.log(response.data);
     })
 
     .catch((error) => {
