@@ -6,6 +6,7 @@ import LikeButton from "./LikeButton";
 
 const PetCard = ({ pet }) => {
   const { setPetId } = useContext(MyContext);
+ 
 
   return (
     <div className="card">
@@ -34,15 +35,15 @@ const PetCard = ({ pet }) => {
           </p>
           <p>
             <strong>{pet && pet.likes ? "Likes:" : ""}</strong>{" "}
-            {pet && pet.likes}
+            {pet && pet.likes.length > 15 ? pet.likes.slice(0, 15) + " ..." : pet.likes}
           </p>
           <p>
             <strong>{pet && pet.dislikes ? "Dislikes:" : ""}</strong>{" "}
-            {pet && pet.dislikes}
+            {pet && pet.dislikes.length > 15 ? pet.dislikes.slice(0, 15) + " ..." : pet.dislikes}
           </p>
           <p>
             <strong>{pet && pet.habits ? "Habits:" : ""}</strong>{" "}
-            {pet && pet.habits}
+            {pet && pet.habits.length > 15 ? pet.habits.slice(0, 15) + " ..." : pet.habits}
           </p>
           
         </div>
