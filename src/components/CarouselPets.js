@@ -20,6 +20,8 @@ const CarouselPets = () => {
         // http://localhost:4000/
         await fetch(
           process.env.REACT_APP_BACKEND_URL + "pets/"
+          
+          // `${process.env.REACT_APP_BACKEND_URL}pets/`.slice(0, 10)
         )
           .then((data) => data.json())
           .then((res) => {

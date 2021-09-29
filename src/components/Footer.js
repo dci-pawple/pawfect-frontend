@@ -13,16 +13,13 @@ export default function Footer() {
         <a
           href="https://www.facebook.com/Pawfect-100884952347295/"
           target="blank"
-          className=""
         >
           <i className="footerstyle fa fa-lg fa-facebook"></i>
         </a>
 
         <a
           href="https://www.instagram.com/pawfect.7/"
-          target="blank"
-          className=""
-        >
+          target="blank"        >
           <i className="footerstyle fa fa-lg fa-instagram"></i>
         </a>
 
@@ -32,9 +29,7 @@ export default function Footer() {
 
         <a
           href="https://www.linkedin.com/in/paw-fect-07a739220/"
-          target="blank"
-          className=""
-        >
+          target="blank"        >
           <i className="footerstyle fa fa-lg fa-linkedin-square"></i>
         </a>
       </aside>
