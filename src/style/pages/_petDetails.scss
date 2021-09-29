@@ -155,7 +155,7 @@
 			padding: 0.5em;
 			display: block;
 			font-size: 1.2rem;
-			width: 80%;
+			width: 100%;
 			color: $very-light-grey;
 			text-decoration: none;
 			display: flex;
@@ -167,10 +167,12 @@
 			@media (max-width: $bp-small) {
 				width: 100%;
 				font-size: 1rem;
+				margin-top: 1rem;
 			}
 
 			i {
 				align-self: center;
+				margin-left: 1rem;
 			}
 
 			a {
