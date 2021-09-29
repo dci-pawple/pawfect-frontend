@@ -5,9 +5,7 @@ footer {
   background-color: #f6cccc;
   height: 10%;
   width: 100%;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-top: 5rem;
+  padding: 40px 20px;
 }
 
 aside {
@@ -18,7 +16,7 @@ aside {
 .copy p {
   color: #1f1f1f;
   text-decoration: none;
-  padding-left: 20px;
+  text-align: center;
 }
 .social .footerstyle {
   margin-left: 10px;
@@ -31,8 +29,10 @@ aside {
 
 .help ul {
   display: flex;
+  justify-content: center;
   padding-right: 20px;
   text-decoration: none;
+  flex-wrap: wrap;
 }
 .help ul li {
   list-style: none;
@@ -42,6 +42,7 @@ aside {
   font-size: 1.3rem;
   color: #1f1f1f;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 @media only screen and (max-width: 1000px) {

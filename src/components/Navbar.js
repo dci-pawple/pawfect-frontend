@@ -12,7 +12,6 @@ export default function Navbar() {
   const { user } = useContext(MyContext);
 
   const changeBackground = () => {
-
     if (window.scrollY >= 40) {
       setNavbar(true);
     } else {
@@ -42,8 +41,6 @@ export default function Navbar() {
     });
   };
 
-
-
   return (
     <div className="navigation">
       <header className={navbar ? "nav-active" : ""}>
@@ -69,7 +66,7 @@ export default function Navbar() {
                 See all pets
               </Link>
             </li>
-            <li className={`search list-item ${active ? "search-active" : ""}`}>
+            {/* <li className={`search list-item ${active ? "search-active" : ""}`}>
               <div
                 onClick={toggleClass}
                 className={active ? "icon" : "icon icon-active"}
@@ -84,7 +81,7 @@ export default function Navbar() {
                   <i className="fas fa-arrow-right"></i>
                 </button>
               </form>
-            </li>
+            </li> */}
             <li className="user list-item" onClick={toggleDisplay}>
               <button className="user-btn">
                 <i className="fas fa-bars" />

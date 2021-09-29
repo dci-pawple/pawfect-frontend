@@ -17,6 +17,17 @@
   height: 100%;
   padding: 0 3rem;
   right: 0;
+
+  .primary-button {
+    margin: 0;
+    width: fit-content;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    }
+  }
 }
 
 .banner-h1 {

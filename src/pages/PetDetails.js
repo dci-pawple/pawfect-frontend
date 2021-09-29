@@ -6,7 +6,7 @@ import LikeButton from "../components/LikeButton";
 import ShareDialog from "../components/ShareDialog";
 
 const breakPoints = [
-  { width: 1, itemsToShow: 1, pagination: false },
+  { width: 1, itemsToShow: 1, pagination: false, showArrows: false },
   { width: 550, itemsToShow: 2, itemsToScroll: 2 },
   { width: 768, itemsToShow: 3 },
   { width: 1200, itemsToShow: 4 },
@@ -41,22 +41,17 @@ const PetDetails = () => {
           fetch(process.env.REACT_APP_BACKEND_URL + `users/${pet.userId}`)
             .then((data) => data.json())
             .then((res) => setPetOwner(res.data));
-      } catch (err) {
-
-      }
+      } catch (err) {}
     };
     fetchData();
   }, [petId, setPet, pet]);
 
   useEffect(() => {
-
     if (user && petOwner) {
       if (user._id === petOwner._id) setDisable(true);
       else setDisable(false);
     }
   }, [petOwner, user]);
-
-
 
   const handleClickOpen = () => {
     setOpen(true);
