@@ -102,8 +102,7 @@ export default function Registration() {
           //redirect to login
           history.push("login");
         }
-      } catch (err) {
-      }
+      } catch (err) {}
     },
   });
 
@@ -219,6 +218,7 @@ export default function Registration() {
             color="primary"
             variant="contained"
             type="submit"
+            size="large"
           >
             Register
           </Button>

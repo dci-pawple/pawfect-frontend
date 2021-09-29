@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import TypeWriterEffect from "react-typewriter-effect";
 
 const Banner = () => {
@@ -18,6 +19,9 @@ const Banner = () => {
             hideCursorAfterText="0"
           />
         </h1>
+        <Link to="/gallery">
+          <button className="primary-button">Explore pets</button>
+        </Link>
       </div>
     </div>
   );

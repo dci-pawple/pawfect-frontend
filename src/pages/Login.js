@@ -88,7 +88,6 @@ export default function Login() {
 
         if (!data.success) {
           setError(data.message);
-
         } else {
           setLogin(true);
           setUserId(data.data._id);
@@ -97,9 +96,7 @@ export default function Login() {
           localStorage.setItem("userId", JSON.stringify(data.data._id));
           history.push("/");
         }
-      } catch (err) {
-
-      }
+      } catch (err) {}
     },
   });
 
@@ -158,6 +155,7 @@ export default function Login() {
             color="primary"
             variant="contained"
             type="submit"
+            size="large"
           >
             Login
           </Button>

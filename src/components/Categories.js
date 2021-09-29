@@ -1,15 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-const iconNames = ["dog", "cat", "dragon"];
+const iconNames = [
+  { type: "dog", text: "DOGS" },
+  { type: "cat", text: "CATS" },
+  { type: "dragon", text: "OTHERS" },
+];
 
 const Categories = () => {
   const renderButtons = iconNames.map((item) => {
     return (
-      <Link className="categories-btn" key={item} to={`/gallery/${item==="dragon"? "others":item}`}>
-        <i className={`fas fa-${item} fa-3x`}></i>
-      </Link>
+      <div>
+        <Link
+          className="categories-btn"
+          key={item.type}
+          to={`/gallery/${item.type === "dragon" ? "others" : item.type}`}
+        >
+          <i className={`fas fa-${item.type} fa-3x`}></i>
+        </Link>
+        <p>{item.text}</p>
+      </div>
     );
   });
 
