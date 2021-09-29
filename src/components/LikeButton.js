@@ -51,7 +51,7 @@ const LikeButton = ({ pet }) => {
 
   useEffect(() => {
     setLikeIcon(pet.usersFavorite === true ? "#f76c6c" : "black");
-  }, [pet]);
+  }, []);
 
   return (
     <>
