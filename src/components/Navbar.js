@@ -81,7 +81,7 @@ export default function Navbar() {
                   <input type="text" name="search" placeholder="Search" />
                 </div>
                 <button className={active ? "submit" : ""}>
-                  <i class="fas fa-arrow-right"></i>
+                  <i className="fas fa-arrow-right"></i>
                 </button>
               </form>
             </li>
@@ -89,10 +89,10 @@ export default function Navbar() {
               <button className="user-btn">
                 <i className="fas fa-bars" />
                 {!login ? (
-                  <i class="fas fa-user-circle"></i>
+                  <i className="fas fa-user-circle"></i>
                 ) : (
                   <div>
-                     {user &&
+                    {user &&
                     user.profilePhoto &&
                     user.profilePhoto.length > 0 ? (
                       user.profilePhoto.map((photo, i) => (
@@ -140,7 +140,7 @@ export default function Navbar() {
                     >
                       Go to profile
                     </Link>
-                     <Link
+                    <Link
                       to="/myAds"
                       className="drop-link"
                       onClick={closeMobileMenu}

@@ -97,6 +97,10 @@
     }
   }
 }
+.center-avatar {
+  width: 100%;
+  // background-size: contain;
+}
 
 @media screen and (max-width: $bp-small) {
   .account__container {

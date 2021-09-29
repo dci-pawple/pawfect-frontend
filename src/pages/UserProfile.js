@@ -163,27 +163,30 @@ const UserProfile = () => {
         fd.append("profilePhoto", realValues.profilePhoto[0]);
       }
 
-
       setIsValidating(true);
       setError(null);
 
       try {
-        const response = await fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`, {
-          method: "PATCH",
-          mode: "cors",
-          body: fd,
-        });
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_URL + `users/${userId}`,
+          {
+            method: "PATCH",
+            mode: "cors",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+
+            body: fd,
+          }
+        );
 
         const data = await response.json();
-
-
 
         if (!data.success) {
           setError(data.message);
           setIsValidating(false);
         }
-      } catch (err) {
-      }
+      } catch (err) {}
     },
   });
 
@@ -212,7 +215,7 @@ const UserProfile = () => {
                             key={i}
                             src={photo.url}
                             alt="avatar"
-                            className="img-thumbnail"
+                            className="img-thumbnail center-avatar"
                           />
                         ))}
                     </div>

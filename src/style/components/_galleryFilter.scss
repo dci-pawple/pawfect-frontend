@@ -5,8 +5,6 @@
 
 .filterElement{
     display:inline-block;
-   
-    
     font-family: inherit;
     font-size: 1.8rem;
     font-weight: 500;
@@ -19,6 +17,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
     position:relative;
+
+   
 
     &-white{
         background-color: white;
@@ -45,6 +45,7 @@
     min-width: max-content;
     margin-top:15px;
     left:0px;
+    z-index:100000;
 }
 .filter-dropdown-hidden{
     display:none;
