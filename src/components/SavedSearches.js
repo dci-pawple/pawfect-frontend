@@ -10,7 +10,7 @@ const SavedSearches = () => {
 
   useEffect(() => {
     const fetchFavourites = () => {
-      console.log({ userId });
+
       // process.env.REACT_APP_BACKEND_URL
       // http://localhost:4000/
       fetch(
@@ -19,7 +19,7 @@ const SavedSearches = () => {
       )
         .then((data) => data.json())
         .then((response) => {
-          console.log("response.data", response.data);
+
           setFavouritesList(response.data);
         })
         .catch((err) => console.error("error in favourites =>", err));

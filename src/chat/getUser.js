@@ -11,6 +11,6 @@ export const getUsers = (successFunc) => {
     })
 
     .catch((error) => {
-      console.log("Create chat user", error.response);
+
     });
 };

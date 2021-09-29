@@ -44,7 +44,7 @@ const LikeButton = ({ pet }) => {
       const data = await result.json();
       return data;
     } catch (err) {
-      console.log(err.response);
+
       return;
     }
   };
@@ -64,11 +64,8 @@ const LikeButton = ({ pet }) => {
               ? setLikeIcon("#f76c6c")
               : setLikeIcon("black");
             const { savedFavorites } = await savePet(pet);
-
-            console.log("savedFavorites", savedFavorites);
             setFavouritePetsIds(savedFavorites);
-            console.log("petId: => ", pet._id);
-            console.log("userId: => ", userId);
+
           }}
         >
           <i

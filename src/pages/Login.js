@@ -85,10 +85,10 @@ export default function Login() {
           }
         );
         const data = await response.json();
-        console.log("data=>", data);
+
         if (!data.success) {
           setError(data.message);
-          console.log("error=>", error);
+
         } else {
           setLogin(true);
           setUserId(data.data._id);
@@ -98,8 +98,7 @@ export default function Login() {
           history.push("/");
         }
       } catch (err) {
-        //console.error('Error while fetching data for login =>', err)
-        console.log(err.message);
+
       }
     },
   });
