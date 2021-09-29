@@ -55,7 +55,7 @@ const MyAds = () => {
 			<h2>Your Ads</h2>
 			<div className='gallery__grid-container'>
 				{adsList &&
-					adsList.map((pet, index) => (
+					adsList.length!==0? adsList.map((pet, index) => (
 						<div className='pet-ad-card'>
 							<PetCard pet={pet} key={index} />
 							<div className='ad-actions'>
@@ -77,10 +77,16 @@ const MyAds = () => {
 								</Button>
 							</div>
 						</div>
-					))}
+					)):<div className="opacity50"><h2>No Ads here yet</h2><h3>When you find a pet you love, add it to your favorites list by tapping the favorite button 
+
+</h3><Link to="/gallery"><p>Find your pet</p></Link></div>
+					
+					}
 			</div>
 		</div>
 	);
 };
 
 export default MyAds
+
+
