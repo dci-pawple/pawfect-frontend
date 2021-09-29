@@ -104,7 +104,7 @@ export default function CreateAd() {
       //alert (JSON.stringify (values, null, 2));
       setLoading(true);
       setError(null)
-      console.log('values=>', values.photos)
+
       let fd = new FormData()
       fd.append('name', values.name)
       fd.append('age', values.age)
@@ -119,7 +119,6 @@ export default function CreateAd() {
 
       if (values.photos) {
         values.photos.forEach((file) => fd.append("photos", file));
-        console.log("fd=>", fd);
         fd.append("photos", values.photos);
       }
 
@@ -140,19 +139,16 @@ export default function CreateAd() {
         );
 
         const data = await response.json();
-        console.log("data=>", data);
 
         if (!data.success) {
-          console.log("Error with uploading");
           setError(data.message);
         } else {
-          console.log("Upload completed successfully");
+
           setLoading(true);
           history.push(`/pet/${data.data._id}`);
           setPet(data.data);
         }
       } catch (err) {
-        console.log("Error while uploadting data for new ad =>", err);
       }
     },
   });

@@ -18,7 +18,6 @@ export default function Chat() {
 
   function syncUsers() {
     getUsers(async (users) => {
-      // console.log("Fetched users", users);
 
       const {
         data: { data },
@@ -32,7 +31,6 @@ export default function Chat() {
           last_name: person.lastName,
         };
       });
-      console.log("people", people);
       people.map((person) => {
         if (!users.find((user) => person.username === user.username)) {
           createUser(person);
@@ -64,8 +62,6 @@ export default function Chat() {
       is_direct_chat: true,
     };
     getOrCreateChat(headers, data, (chatArg) => {
-      console.log("this is chat", chat);
-      console.log("this is chatArg", chatArg);
 
       if (chat.id !== chatArg.id) setChat(chatArg);
     });
@@ -75,7 +71,7 @@ export default function Chat() {
 
   // const userLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-  console.log("chat user", chatUser);
+
 
   // change title of chat
   // useEffect(() => {
@@ -85,7 +81,6 @@ export default function Chat() {
   //   } else {
   //     const authObject = headers;
   //     const chatID = chat && chat.id;
-  //     console.log("chatid", chatID);
   //     const chatObject = { title: petOwner && petOwner.firstName };
   //     // const callback = (data) => console.log(data);
   //     // editChat(authObject, chatID, chatObject);

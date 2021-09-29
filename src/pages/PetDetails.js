@@ -37,27 +37,26 @@ const PetDetails = () => {
           .then((res) => {
             if (pet._id !== res.data._id) setPet(res.data);
           });
-        console.log("pet =>", pet);
         pet &&
           fetch(process.env.REACT_APP_BACKEND_URL + `users/${pet.userId}`)
             .then((data) => data.json())
             .then((res) => setPetOwner(res.data));
       } catch (err) {
-        console.log(err);
+
       }
     };
     fetchData();
   }, [petId, setPet, pet]);
 
   useEffect(() => {
-    console.log(user, petOwner);
+
     if (user && petOwner) {
       if (user._id === petOwner._id) setDisable(true);
       else setDisable(false);
     }
   }, [petOwner, user]);
 
-  console.log("petOwner", petOwner);
+
 
   const handleClickOpen = () => {
     setOpen(true);

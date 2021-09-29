@@ -24,10 +24,9 @@ export const createUser = async (data, successFunc) => {
     })
     .then((response) => {
       successFunc(response.data);
-      console.log(response.data);
+
     })
     .catch((error) => {
-      console.log("Create chat user", error.response);
     });
 };
 

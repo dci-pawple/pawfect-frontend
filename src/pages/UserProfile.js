@@ -92,7 +92,6 @@ const UserProfile = () => {
       fetch(process.env.REACT_APP_BACKEND_URL + `users/${userId}`)
         .then((data) => data.json())
         .then((res) => {
-          console.log("res.data", res.data);
           //   !user && setUser(res.data);
           setUser(res.data);
           localStorage.setItem("user", JSON.stringify(res.data));
@@ -143,7 +142,6 @@ const UserProfile = () => {
           return { ...acc, [item]: values[item] };
         }, {});
 
-      console.log("realValues", realValues);
       let fd = new FormData();
       realValues.firstName && fd.append("firstName", realValues.firstName);
       realValues.lastName && fd.append("lastName", realValues.lastName);
@@ -164,7 +162,6 @@ const UserProfile = () => {
         // );
         fd.append("profilePhoto", realValues.profilePhoto[0]);
       }
-      console.log("fd=>", fd);
 
       setIsValidating(true);
       setError(null);
@@ -184,19 +181,12 @@ const UserProfile = () => {
         );
 
         const data = await response.json();
-        console.log("data=>", data);
 
         if (!data.success) {
           setError(data.message);
           setIsValidating(false);
-          console.log("error=>", error);
         }
-      } catch (err) {
-        console.error(
-          "Error while fetching data for user profile update =>",
-          err
-        );
-      }
+      } catch (err) {}
     },
   });
 
