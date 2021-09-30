@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
 import PetCard from "./PetCard";
+import {Button} from '@material-ui/core'
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false },
@@ -29,21 +30,29 @@ const CarouselPets = () => {
   }, []);
 
   return (
-    <div className="carousel-container">
-      <h2 className="heading-carousel">Newest Pets</h2>
-      <Carousel itemsToShow={3} breakPoints={breakPoints}>
-        {petsList
-          .filter((item, i) => i < 5)
-          .map((pet) => (
-            <PetCard pet={pet} key={pet._id} />
-          ))}
-      </Carousel>
+		<div className='carousel-container'>
+			<h2 className='heading-carousel'>Newest Pets</h2>
+			<Carousel itemsToShow={3} breakPoints={breakPoints}>
+				{petsList
+					.filter((item, i) => i < 5)
+					.map(pet => (
+						<PetCard pet={pet} key={pet._id} />
+					))}
+			</Carousel>
 
-      <button className="btn__see-all">
-        <Link to="/gallery">See all</Link>
-      </button>
-    </div>
-  );
+			{/* <button className='btn__see-all'>
+				<Link to='/gallery'>See all</Link>
+			</button> */}
+			<Button
+				className='clear-btn btn__see-all'
+				disableElevation
+				color='gray'
+				variant='contained'
+				type='submit'>
+				<Link to='/gallery'>See all</Link>
+			</Button>
+		</div>
+	);
 };
 
 export default CarouselPets;
