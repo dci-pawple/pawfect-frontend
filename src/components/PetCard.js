@@ -53,9 +53,9 @@ const PetCard = ({ pet }) => {
             onClick={(e) => {
               setPetId(pet && pet._id);
             }}
-            className="btn__call-to-action"
+            className="primary-button btn__call-to-action"
           >
-            Adopt me!
+            See more
           </button>
         </Link>
       </div>
