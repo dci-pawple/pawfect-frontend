@@ -6,6 +6,7 @@ import LikeButton from "./LikeButton";
 
 const PetCard = ({ pet }) => {
   const { setPetId } = useContext(MyContext);
+  const { setPet } = useContext(MyContext);
  
 
   return (
@@ -52,6 +53,7 @@ const PetCard = ({ pet }) => {
             data-petid={pet && pet._id}
             onClick={(e) => {
               setPetId(pet && pet._id);
+              setPet(pet);
             }}
             className="primary-button btn__call-to-action"
           >
