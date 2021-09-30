@@ -150,7 +150,7 @@ export default function Navbar() {
                       className="drop-link"
                       onClick={closeMobileMenu}
                     >
-                      Place an ad
+                      Create ad
                     </Link>
                     <Link
                       to="/messages"
