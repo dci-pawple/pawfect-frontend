@@ -1,8 +1,9 @@
 .pet {
   &__container {
-    // margin-top: 10rem;
+    padding-bottom: 3rem;
+    width: 90%;
     p {
-      font-size: 1.1rem;
+      font-size: 1.6rem;
     }
 
     @media (max-width: $bp-small) {
@@ -84,10 +85,6 @@
       // align-items: center;
       // margin: 2rem auto;
       text-align: left;
-
-      h2 {
-        font-size: 2rem;
-      }
     }
   }
 
@@ -131,18 +128,20 @@
     background-color: $primary-light;
     // flex: 1.5;
     border-radius: 10px;
-    // height: 20vh;
+    width: 24rem;
+    height: 16rem;
     margin: 2rem;
-    padding: 1rem;
+    padding: 2rem 1.5rem;
+    align-self: center;
 
     @media (max-width: $bp-small) {
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
+      // justify-content: space-between;
+      // align-items: center;
+      // padding: 1rem 0;
       //   max-width: 400px;
       //   height: 80vh;
       //   width: 50%;
-      margin: 0 auto;
+      // margin: 0 auto;
     }
 
     .btn__chat {
@@ -154,8 +153,8 @@
       transition: all 0.3s ease-in-out;
       padding: 0.5em;
       display: block;
-      font-size: 1.2rem;
-      width: 100%;
+      // font-size: 1.2rem;
+      // width: 100%;
       ////////////////////////////!!!!!!!!!!!!!!!!!!!!!!
       // width: 80%;
       color: $very-light-grey;
@@ -165,12 +164,6 @@
       align-self: center;
       font-family: $font-text;
       cursor: pointer;
-
-      @media (max-width: $bp-small) {
-        width: 100%;
-        font-size: 1rem;
-        margin-top: 1rem;
-      }
 
       i {
         align-self: center;
@@ -239,13 +232,5 @@
     border-radius: 10px;
     object-fit: cover;
     margin-right: 0.3em;
-  }
-
-  &__info-container {
-    h3 {
-      @media (max-width: $bp-small) {
-        font-size: 1.3rem;
-      }
-    }
   }
 }

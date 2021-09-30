@@ -8,12 +8,17 @@ const Banner = () => {
   return (
     <div className="banner">
       <div className="banner-container container">
-        <h1 className="banner-h1">Find your <strong>pawfect</strong> friend:</h1>
+        <h1 className="banner-h1">Find a new friend</h1>
         <h1 className="banner-h1">
           <TypeWriterEffect
-            startDelay={2000}
+            startDelay={0}
             cursorColor="#3F3D56"
-            multiText={["Dogs", "and", "Cats", "Get a new friend"]}
+            multiText={[
+              "Dogs",
+              "Cats",
+              // "Find a new friend",
+              "Find your pawfect friend",
+            ]}
             multiTextDelay={1000}
             typeSpeed={200}
             hideCursorAfterText="0"

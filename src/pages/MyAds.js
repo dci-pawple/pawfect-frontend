@@ -50,7 +50,7 @@ const MyAds = () => {
 
   return (
     <div className="app-container container my-pet-ads">
-      <h2>Your Ads</h2>
+      <h2>My Ads</h2>
       <div className="gallery__grid-container">
         {adsList &&
           adsList.map((pet, index) => (

@@ -102,7 +102,10 @@ export default function Login() {
 
   return (
     <div className="app-container container">
-      <div className="form-container">
+      <div
+        className="form-container"
+        // style={{ minWidth: "maxContent" }}
+      >
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

@@ -18,7 +18,6 @@ export default function Chat() {
 
   function syncUsers() {
     getUsers(async (users) => {
-
       const {
         data: { data },
       } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}users`);
@@ -62,7 +61,6 @@ export default function Chat() {
       is_direct_chat: true,
     };
     getOrCreateChat(headers, data, (chatArg) => {
-
       if (chat.id !== chatArg.id) setChat(chatArg);
     });
 
@@ -70,8 +68,6 @@ export default function Chat() {
   }, [chat, chatUsername, petOwner]);
 
   // const userLocalStorage = JSON.parse(localStorage.getItem("user"));
-
-
 
   // change title of chat
   // useEffect(() => {

@@ -15,11 +15,11 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  padding: 0 3rem;
+  padding: 0 4rem;
   right: 0;
 
   .primary-button {
-    margin: 0;
+    margin: 2rem 0 0 0;
     width: fit-content;
     cursor: pointer;
     transition: 0.2s;
@@ -33,9 +33,11 @@
 .banner-h1 {
   font-weight: 1000;
   margin: 0.4rem;
-  font-size: 5rem;
+  font-size: 4rem;
   color: white;
-  text-shadow: 2px 2px black;
+  // text-shadow: 2px 2px black;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+
   font-family: $font-text;
 }
 
@@ -47,7 +49,7 @@
 
 @media (max-width: 800px) {
   .banner-container {
-    padding: 10rem;
+    padding: 4rem;
     right: 0;
   }
 
@@ -58,7 +60,7 @@
 
 @media (max-width: 500px) {
   .banner-container {
-    padding: 10rem;
+    padding: 4rem;
     right: 0;
   }
   .banner-h1 {
