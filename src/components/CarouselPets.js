@@ -18,28 +18,25 @@ const CarouselPets = () => {
       try {
         // process.env.REACT_APP_BACKEND_URL
         // http://localhost:4000/
-        await fetch(
-          process.env.REACT_APP_BACKEND_URL + "pets/"
-          
-          // `${process.env.REACT_APP_BACKEND_URL}pets/`.slice(0, 10)
-        )
+        await fetch(process.env.REACT_APP_BACKEND_URL + "pets/")
           .then((data) => data.json())
           .then((res) => {
             setPetsList(res.data);
           });
-      } catch (err) {
-      }
+      } catch (err) {}
     };
     fetchData();
   }, []);
 
   return (
-    <div className="carousel-container container">
-      <h2>Pets Available for adoption</h2>
+    <div className="carousel-container">
+      <h2 className="heading-carousel">Newest Pets</h2>
       <Carousel itemsToShow={3} breakPoints={breakPoints}>
-        {petsList.map((pet) => (
-          <PetCard pet={pet} key={pet._id} />
-        ))}
+        {petsList
+          .filter((item, i) => i < 5)
+          .map((pet) => (
+            <PetCard pet={pet} key={pet._id} />
+          ))}
       </Carousel>
 
       <button className="btn__see-all">

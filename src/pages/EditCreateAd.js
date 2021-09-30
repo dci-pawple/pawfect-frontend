@@ -375,8 +375,8 @@ formik.setFieldValue("deletePhotos", deletePhotos);
                         setDeletePhotos(deletePhotos.concat(photoId));
                        
                         const photo= document.getElementById(e.target.id+"image")
-                        photo.style.border = "2px solid red";
-                        }}>x</div>
+                        photo.style.opacity = "30%";
+                        }}>Delete</div>
                         {/* <i class="fas fa-trash-alt"></i> */}
                         
                        

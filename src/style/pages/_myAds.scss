@@ -1,28 +1,31 @@
+.my-pet-ads {
+  width: 100%;
+}
+
 .pet-ad-card {
-	// width:max-content;
-	max-width: 320px;
+  // width:max-content;
+  max-width: 320px;
 }
 
 .ad-actions {
-	text-align: right;
-	margin-top: 10px;
-	width: 100%;
+  text-align: right;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .ad-btn-edit {
-	margin-bottom: 10px !important;
-	width: 100%;
+  margin-bottom: 10px !important;
+  width: 100%;
 }
 
-.ad-btn-delete{
-
-width:100%;
+.ad-btn-delete {
+  width: 100%;
 }
 
-.opacity50{
-    opacity: 50%;
-    background-color: white;
-    width:100%;
-    padding:100px;
-    text-align:center;
+.opacity50 {
+  opacity: 50%;
+  background-color: white;
+  width: 100%;
+  padding: 100px;
+  text-align: center;
 }

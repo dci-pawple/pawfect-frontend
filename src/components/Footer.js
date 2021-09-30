@@ -37,19 +37,29 @@ export default function Footer() {
       <aside className="help">
         <ul>
           <li>
-            <a href="/">Contact</a>
+            <a href="/" className="help-link">
+              Contact
+            </a>
           </li>
           <li>
-            <a href="/">About us</a>
+            <a href="/" className="help-link">
+              About us
+            </a>
           </li>
           <li>
-            <a href="/">FAQ</a>
+            <a href="/" className="help-link">
+              FAQ
+            </a>
           </li>
           <li>
-            <a href="/">Terms</a>
+            <a href="/" className="help-link">
+              Terms
+            </a>
           </li>
           <li>
-            <a href="/">Privacy</a>
+            <a href="/" className="help-link">
+              Privacy
+            </a>
           </li>
         </ul>
       </aside>
