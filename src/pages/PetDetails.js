@@ -64,7 +64,7 @@ const PetDetails = () => {
         disableElevation
         color="gray"
         variant="contained"
-        onClick={() => history.goBack()}
+        // onClick={() => history.goBack()}
       >
         <Link to="/gallery">Go Back</Link>
       </Button>
