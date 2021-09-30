@@ -17,14 +17,15 @@
       outline: none;
       border: none;
       display: block;
-      width: 80px;
       background: transparent;
       cursor: pointer;
       font-family: $font-text;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
       margin-bottom: 2rem;
-      padding: 0.3rem;
+      margin-bottom: 1rem;
+      a {
+        color: inherit;
+      }
       @media (max-width: $bp-small) {
         margin: 1rem 4rem;
       }
