@@ -11,7 +11,7 @@ const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false, showArrows: false },
   { width: 550, itemsToShow: 2, itemsToScroll: 2 },
   { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 4 },
+  { width: 1200, itemsToShow: 4, showArrows: true },
 ];
 
 const PetDetails = () => {
@@ -65,7 +65,7 @@ const PetDetails = () => {
 				disableElevation
 				color='gray'
 				variant='contained'
-        onClick={() => history.goBack()}
+        // onClick={() => history.goBack()}
         >
 				<Link to='/gallery'>Go Back</Link>
 			</Button>
