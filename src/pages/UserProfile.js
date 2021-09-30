@@ -65,6 +65,7 @@ const UploadComponent = (props) => {
       setFieldValue("profilePhoto", acceptedPhotos);
     },
   });
+  console.log("values.profilePhoto", values.profilePhoto);
   return (
     <div>
       <div {...getRootProps({ className: "upload-text" })}>
@@ -208,7 +209,7 @@ const UserProfile = () => {
                     <i class="fas fa-user-circle"></i>
                   ) : (
                     <div>
-                      {formik.values.profilePhoto &&
+                      {/* {formik.values.profilePhoto &&
                         formik.values.profilePhoto.map((photo, i) => (
                           //   <Thumb key={i} file={photo.url} />
                           <img
@@ -217,7 +218,27 @@ const UserProfile = () => {
                             alt="avatar"
                             className="img-thumbnail center-avatar"
                           />
-                        ))}
+                        ))} */}
+                      {formik.values.profilePhoto &&
+                        formik.values.profilePhoto.map(
+                          (photo, i) =>
+                            photo.url ? (
+                              <img
+                                key={i}
+                                src={photo.url}
+                                alt="avatar"
+                                className="img-thumbnail"
+                              />
+                            ) : (
+                              <Thumb key={i} file={photo} />
+                            )
+                          //   <img
+                          //     key={i}
+                          //     src={photo.url}
+                          //     alt="avatar"
+                          //     className="img-thumbnail"
+                          //   />
+                        )}
                     </div>
                   )}
                 </div>

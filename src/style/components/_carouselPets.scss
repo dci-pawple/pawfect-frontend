@@ -19,14 +19,8 @@
     outline: none;
     border: none;
     display: block;
-    width: 100px;
-    background: transparent;
-    cursor: pointer;
+
     align-self: flex-end;
-    font-family: $font-text;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 0.3rem;
 
     a {
       color: inherit;
@@ -45,17 +39,6 @@
     border-radius: 15%;
   }
 
-  // .rec-swipable {
-  //   gap: 1rem;
-  // }
-
-  /// Carousel Arrow styling:
-  .rec-arrow,
-  .rec-arrow-right,
-  .rec-arrow-left {
-    background-color: $primary !important;
-    border-radius: 10px;
-  }
 
   .khvUfi:hover:enabled,
   .khvUfi:focus:enabled {

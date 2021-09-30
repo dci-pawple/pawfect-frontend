@@ -1,5 +1,6 @@
 .pet {
   &__container {
+    // margin-top: 10rem;
     p {
       font-size: 1.1rem;
     }
@@ -17,14 +18,15 @@
       outline: none;
       border: none;
       display: block;
-      width: 80px;
       background: transparent;
       cursor: pointer;
       font-family: $font-text;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
       margin-bottom: 2rem;
-      padding: 0.3rem;
+      margin-bottom: 1rem;
+      a {
+        color: inherit;
+      }
       @media (max-width: $bp-small) {
         margin: 1rem 4rem;
       }
@@ -78,6 +80,9 @@
       align-items: flex-start;
       margin: 2rem auto;
       width: 80%;
+      /////////////////////////////////// check this!!!!!!!!
+      // align-items: center;
+      // margin: 2rem auto;
       text-align: left;
 
       h2 {
@@ -151,6 +156,8 @@
       display: block;
       font-size: 1.2rem;
       width: 100%;
+      ////////////////////////////!!!!!!!!!!!!!!!!!!!!!!
+      // width: 80%;
       color: $very-light-grey;
       text-decoration: none;
       display: flex;

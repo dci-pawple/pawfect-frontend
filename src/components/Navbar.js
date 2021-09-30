@@ -66,6 +66,7 @@ export default function Navbar() {
                 See all pets
               </Link>
             </li>
+            {/* search bar not used for now */}
             {/* <li className={`search list-item ${active ? "search-active" : ""}`}>
               <div
                 onClick={toggleClass}

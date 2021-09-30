@@ -4,6 +4,8 @@ import Carousel from "react-elastic-carousel";
 import MyContext from "../context/MyContext";
 import LikeButton from "../components/LikeButton";
 import ShareDialog from "../components/ShareDialog";
+import {Button} from '@material-ui/core'
+
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, pagination: false, showArrows: false },
@@ -13,7 +15,6 @@ const breakPoints = [
 ];
 
 const PetDetails = () => {
-  // const [buttonPopup, setButtonPopup] = useState(false);
   const [open, setOpen] = useState(false);
   const [disable, setDisable] = useState(false);
 
@@ -59,9 +60,15 @@ const PetDetails = () => {
 
   return (
     <div className="app-container container pet__container">
-      <button onClick={() => history.goBack()} className="btn-go-back">
-        Go Back
-      </button>
+      <Button
+				className='btn-go-back'
+				disableElevation
+				color='gray'
+				variant='contained'
+        onClick={() => history.goBack()}
+        >
+				<Link to='/gallery'>Go Back</Link>
+			</Button>
 
       <Carousel
         itemsToShow={3}
@@ -89,7 +96,7 @@ const PetDetails = () => {
           </div>
           <div className="pet__info-data-container">
             <p className="pet__info-data">Size:</p>
-            <p>Small</p>
+            <p>{pet && pet.size}</p>
           </div>
           <div className="pet__info-data-container">
             <p className="pet__info-data">Gender:</p>

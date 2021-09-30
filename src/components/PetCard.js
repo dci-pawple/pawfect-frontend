@@ -55,9 +55,9 @@ const PetCard = ({ pet }) => {
               setPetId(pet && pet._id);
               setPet(pet);
             }}
-            className="btn__call-to-action"
+            className="primary-button btn__call-to-action"
           >
-            Adopt me!
+            See more
           </button>
         </Link>
       </div>
