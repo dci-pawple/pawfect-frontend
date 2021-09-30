@@ -10,7 +10,7 @@
   justify-content: space-around;
   // will delete this margin-top after merging with Julia
   max-width: 50vw;
-  margin: 12rem auto;
+  margin: 1rem auto;
 
   .one-line {
     display: flex;
@@ -84,6 +84,9 @@
       border-radius: 50%;
       .fa-user-circle {
         font-size: 12rem;
+      }
+      .img-thumbnail {
+        height: 180px;
       }
     }
     .upload-text {
