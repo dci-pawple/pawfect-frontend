@@ -101,7 +101,6 @@ export default function CreateAd() {
       //alert (JSON.stringify (values, null, 2));
       setLoading(true);
       setError(null);
-
       let fd = new FormData();
       fd.append("name", values.name);
       fd.append("age", values.age);
@@ -149,7 +148,7 @@ export default function CreateAd() {
   });
 
   return (
-    <div className="app-container">
+    <div className="app-container container">
       <div className="form-container">
         <h1 className="text-center">Create an Ad</h1>
 
