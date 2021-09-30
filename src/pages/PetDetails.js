@@ -93,7 +93,9 @@ const PetDetails = () => {
             <p className="pet__info-data">Age:</p>
             <p>{pet && pet.age}</p>
           </div>
-          <div className="pet__info-data-container">
+          <div className={`pet__info-data-container ${
+              pet && pet.size ? "" : "hidden"
+            }`}>
             <p className="pet__info-data">Size:</p>
             <p>{pet && pet.size}</p>
           </div>
@@ -103,7 +105,7 @@ const PetDetails = () => {
           </div>
           <div
             className={`pet__info-data-container ${
-              pet && pet.dislikes ? "" : "hidden"
+              pet && pet.likes ? "" : "hidden"
             }`}
           >
             <p className="pet__info-data">{pet && pet.likes ? "Likes:" : ""}</p>
@@ -121,7 +123,7 @@ const PetDetails = () => {
           </div>
           <div
             className={`pet__info-data-container ${
-              pet && pet.dislikes ? "" : "hidden"
+              pet && pet.habbits ? "" : "hidden"
             }`}
           >
             <p className="pet__info-data">
@@ -131,7 +133,7 @@ const PetDetails = () => {
           </div>
           <div
             className={`pet__info-data-container ${
-              pet && pet.dislikes ? "" : "hidden"
+              pet && pet.extras ? "" : "hidden"
             }`}
           >
             <p className="pet__info-data">
