@@ -1,6 +1,11 @@
-# Full-stack pet adoption platform. 
+# Full-stack pet adoption platform \<frontend\> 
 
-This is a few-week group project of five DCI students. We created a platform where people offering animals for adoption can connect with people who are interested in adoption without any intermediary, smooth, easy and fast. User can register, create an ad to offer a pet, browse the pet gallery, contact owners of pets and chat with them real-time.  It is a full-stack project consisting of two parts: pawfect-frontend(this one) and [pawfect-backend](https://github.com/dci-pawple/pawfect-backend). Both parts are written in JavaScript(React resp. Node.js). 
+
+This is a few-week group project of five DCI students. We created a platform where people offering animals for adoption can connect with people who are interested in adoption without any intermediary, smooth, easy and fast. User can register, create an ad to offer a pet, browse the pet gallery, contact owners of pets and chat with them real-time.  This is a full-stack project consisting of two parts:  
+- pawfect-frontend (this one)
+- [pawfect-backend](https://github.com/dci-pawple/pawfect-backend)
+     
+Both parts are written in JavaScript (React resp. Node.js). 
 
 ## Frontend
 
@@ -17,3 +22,4 @@ The server is built with Node.js, using the Express.js. Database is being taken 
 
 
 -----------------------------------------------------------
+
