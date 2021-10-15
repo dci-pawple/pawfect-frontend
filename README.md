@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+#Full-stack pet adoption platform. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a few-week group project of five DCI students. We created a platform where people offering animals for adoption can connect with people who are interested in adoption without any intermediary, smooth, easy and fast. User can register, create an ad to offer a pet, browse the pet gallery, contact owners of pets and chat with them real-time.  It is a full-stack project consisting of two parts: pawfect-frontend(this one) and [pawfect-backend](https://github.com/dci-pawple/pawfect-backend). Both parts are written in JavaScript(React resp. Node.js). 
 
-## Available Scripts
+## Frontend
 
-In the project directory, you can run:
+The UI is build with React, making use of Context API for state management. For styling we used SCSS and Material UI, Formik for form proccessing and Chat-Engine to create the chat. It is deployed on Netlify.
 
-### `npm start`
+React, Context API, SCSS, Material UI, Formik, Chat-Engine
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Backend
 
-### `npm test`
+The server is built with Node.js, using the Express.js. Database is being taken care of with help of MongoDB and Mongoose, safely stored on MongoDB Atlas. Images are saved on Cloudinary and the server is deplyed on Heroku.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Node.js, Express.js, MongoDB, Mongoose, MongoDB Atlas, Cloudinary
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-----------------------------------------------------------
